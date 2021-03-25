@@ -50,32 +50,37 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
+		   <groupId>javax.servlet</groupId>
+		   <artifactId>jstl</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-jasper</artifactId>
+		   <groupId>org.apache.tomcat.embed</groupId>
+		   <artifactId>tomcat-embed-jasper</artifactId>
 		</dependency>
-		
 		<dependency>
-		    <groupId>net.sargue</groupId>
-		    <artifactId>java-time-jsptags</artifactId>
-		    <version>1.1.4</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>org.imgscalr</groupId>
-		    <artifactId>imgscalr-lib</artifactId>
-		    <version>4.2</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>commons-io</groupId>
-		    <artifactId>commons-io</artifactId>
-		    <version>2.6</version>
+          <groupId>net.sargue</groupId>
+          <artifactId>java-time-jsptags</artifactId>
+          <version>1.1.4</version>
+      </dependency>
+      
+      <dependency>
+          <groupId>org.imgscalr</groupId>
+          <artifactId>imgscalr-lib</artifactId>
+          <version>4.2</version>
+      </dependency>
+      
+      <dependency>
+          <groupId>commons-io</groupId>
+          <artifactId>commons-io</artifactId>
+          <version>2.6</version>
+      </dependency>
+      
+      <dependency>
+			<groupId>com.oracle.database.jdbc</groupId>
+			<artifactId>ojdbc8</artifactId>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ojdbc8.jar</systemPath>
 		</dependency>
 	</dependencies>
 
