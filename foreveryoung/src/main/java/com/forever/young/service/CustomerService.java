@@ -1,0 +1,7 @@
+package com.forever.young.service;
+
+import com.forever.young.entity.Customer;
+
+public interface CustomerService {
+	public void regist(Customer customer) throws Exception;
+}
