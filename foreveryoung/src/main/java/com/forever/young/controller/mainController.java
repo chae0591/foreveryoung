@@ -10,4 +10,6 @@ public class mainController {
 	public String main() {
 		return "main";
 	}
+
+	
 }
