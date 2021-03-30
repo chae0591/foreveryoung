@@ -6,16 +6,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
  <link href="style.css" rel="stylesheet" type="text/css" />
- <style type="text/css">
+ <style>
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    background-color: #fff;
-    border-top: 1px solid #dddddd;
-    border-bottom: 2px solid #555;
-    height: 47px;
-    min-width: 1020px;
     width: 100%;
     position: relative;
 }
@@ -37,6 +32,16 @@ li a {
     font-size: 16px;
     font-weight: 700;
 }
+.menubar{
+	width: 100%;
+	min-width: 1020px;
+	height: 47px;
+	background-color: #fff;
+    border-top: 1px solid #dddddd;
+    border-bottom: 2px solid #555;
+    height: 47px;
+    min-width: 1020px;
+}
 .search {
     position: relative;
     text-align: center;
@@ -54,11 +59,14 @@ li a {
 }
 .sch-btn {
 	position: absolute;
-	top: 7px;
-    right: 18px;
+	top: 22px;
+    right: 300px;
     width: 21px;
     height: 21px;
     background: url(https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_search21x212.png) no-repeat 50% 50%;
+	text-indent: -9999px;
+	border: 0;
+	outline: 0;
 }
 
 .banner {
@@ -83,8 +91,8 @@ li a {
 	<button>관리자</button>
 </div>
 
-<div>
-	<ul class="menubar">
+<div class="menubar">
+	<ul>
 		<li><a href="">스킨케어</a></li>
 		<li><a href="">메이크업</a></li>
 		<li><a href="">바디케어</a></li>
