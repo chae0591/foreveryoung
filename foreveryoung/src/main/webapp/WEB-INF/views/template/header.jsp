@@ -7,42 +7,18 @@
 <title>Insert title here</title>
  <link href="style.css" rel="stylesheet" type="text/css" />
  <style>
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    position: relative;
-}
-ul:after{
-    content:'';
-    display: block;
-    clear:both;
-}
-li {
-    float: left;
-}
-li a {
-    display: block;
-    color: #000;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    ling-height: 44px;
-    font-size: 16px;
-    font-weight: 700;
-}
-.menubar{
+.top-box {
 	width: 100%;
 	min-width: 1020px;
-	height: 47px;
-	background-color: #fff;
-    border-top: 1px solid #dddddd;
-    border-bottom: 2px solid #555;
-    height: 47px;
-    min-width: 1020px;
 }
-.search {
+.log-box {
+	float: left;
+	width: 33%;
+
+}
+.search-box {
+	float: center;
+	width: 33%;
     position: relative;
     text-align: center;
     margin: 0 auto;
@@ -68,7 +44,61 @@ li a {
 	border: 0;
 	outline: 0;
 }
-
+.login-box{
+	float:right;
+	width: 33%;
+}
+.login-box ul{
+	float: left;
+	text-align:center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+.login-box li {
+    display: inline-block;
+    text-align:center;
+    margin: 0 0 0 20px;
+}
+.login-box li a {
+    color: #000;
+    padding: 20px;
+    text-decoration: none;
+    ling-height: 44px;
+    font-size: 16px;
+    font-weight: 700;
+}
+.nav{
+	width: 100%;
+	min-width: 1020px;
+	height: 47px;
+	background-color: #fff;
+    border-top: 1px solid #dddddd;
+    border-bottom: 2px solid #555;
+    margin: 0 auto;
+}
+.nav ul {
+	float: left;
+	text-align:center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    position: relative;
+}
+.nav li {
+    display: inline-block;
+    text-align:center;
+}
+.nav li a {
+    color: #000;
+    padding: 20px;
+    text-decoration: none;
+    ling-height: 44px;
+    font-size: 16px;
+    font-weight: 700;
+}
 .banner {
 	height: 300px;
     min-width: 1020px;
@@ -80,18 +110,23 @@ li a {
  </style>
 </head>
 <body>
-<div>logo</div>
-<div class="search">
+
+<div class="top-box">
+	<div class="logo-box">logo</div>
+	<div class="search-box">
       <input type="text" class="search-input">
       <button type="sumbit" class="sch-btn">검색</button>
-</div>
-<div>
-	<button>로그인</button>
-	<button>회원가입</button>
-	<button>관리자</button>
+	</div>
+	<div class="login-box">
+		<ul>
+			<li>로그인</li>
+			<li>회원가입</li>
+			<li>관리자</li>
+		</ul>
+	</div>
 </div>
 
-<div class="menubar">
+<div class="nav">
 	<ul>
 		<li><a href="">스킨케어</a></li>
 		<li><a href="">메이크업</a></li>
@@ -102,8 +137,10 @@ li a {
 		<li><a href="">고객센터</a></li>
 	</ul>
 </div>
+
 <div class="banner">
 	<h1>배너</h1>
 </div>
+
 </body>
 </html>

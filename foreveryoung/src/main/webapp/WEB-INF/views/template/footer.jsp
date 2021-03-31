@@ -10,18 +10,42 @@
  .footer{
 	width: 100%
  	min-width: 1020px;
-	margin:40px 0 0;
-	border-top: 3px solid #e5e5e5; 
+ 	height: 250px;
+	border-top: 2px solid #e5e5e5;
+	margin: 0 auto; 
+	background: #f9f9f9;
  }
- 
- li > p {
+.foo-conts {
+ 	width: 100%
+ 	min-width: 1020px;
+ 	height: 80%;
+ }
+ .footer ul {
+    list-style-type: none;
+    float: left;
+	text-align:center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    position: relative;
+}
+.footer li {
+    display: inline-block;
+    text-align:left;
+    margin: 0 0 0 20px;
+}
+.footer li > p {
  	color: #777;
     font-size: 12px;
     line-height: 20px;
  }
  .copyright{
  	border-top: 1px solid #e5e5e5;
- 	background: #f9f9f9; 
+ 	text-align: center;
+ 	width: 100%
+ 	min-width: 1020px;
+ 	height: 20%;
  }
  .copyright > p {
  	color: #777;
@@ -33,7 +57,7 @@
 </head>
 <body>
 	<div class="footer">
-		<div>
+		<div class="foo-conts">
 		<ul>
 			<li>
 				<h4>포레버영 주식회사</h4>
