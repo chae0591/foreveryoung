@@ -3,75 +3,75 @@ package com.forever.young.entity;
 import java.sql.Date;
 
 public class Customer {
-	private int userNum;
-	private String userId;
-	private String userPw;
-	private String userName;
-	private String userPhone;
-	private String userGender;
-	private Date userBirth;
-	private Date userRegDate;
-	private int addressNo;
-	public int getUserNum() {
-		return userNum;
-	}
+	private int user_num;
+	private String user_id;
+	private String user_pw;
+	private String user_name;
+	private String user_phone;
+	private String user_gender;
+	private Date user_birth;
+	private Date user_regDate;
+	private int address_no;
 	
-	public void setUserNum(int userNum) {
-		this.userNum = userNum;
+	public int getUser_num() {
+		return user_num;
 	}
-	public String getUserId() {
-		return userId;
+	public void setUser_num(int user_num) {
+		this.user_num = user_num;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public String getUser_id() {
+		return user_id;
 	}
-	public String getUserPw() {
-		return userPw;
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
-	public void setUserPw(String userPw) {
-		this.userPw = userPw;
+	public String getUser_pw() {
+		return user_pw;
 	}
-	public String getUserName() {
-		return userName;
+	public void setUser_pw(String user_pw) {
+		this.user_pw = user_pw;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public String getUser_name() {
+		return user_name;
 	}
-	public String getUserPhone() {
-		return userPhone;
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
 	}
-	public void setUserPhone(String userPhone) {
-		this.userPhone = userPhone;
+	public String getUser_phone() {
+		return user_phone;
 	}
-	public String getUserGender() {
-		return userGender;
+	public void setUser_phone(String user_phone) {
+		this.user_phone = user_phone;
 	}
-	public void setUserGender(String userGender) {
-		this.userGender = userGender;
+	public String getUser_gender() {
+		return user_gender;
 	}
-	public Date getUserBirth() {
-		return userBirth;
+	public void setUser_gender(String user_gender) {
+		this.user_gender = user_gender;
 	}
-	public void setUserBirth(Date userBirth) {
-		this.userBirth = userBirth;
+	public Date getUser_birth() {
+		return user_birth;
 	}
-	public Date getUserRegDate() {
-		return userRegDate;
+	public void setUser_birth(Date user_birth) {
+		this.user_birth = user_birth;
 	}
-	public void setUserRegDate(Date userRegDate) {
-		this.userRegDate = userRegDate;
+	public Date getUser_regDate() {
+		return user_regDate;
 	}
-	public int getAddressNo() {
-		return addressNo;
+	public void setUser_regDate(Date user_regDate) {
+		this.user_regDate = user_regDate;
 	}
-	public void setAddressNo(int addressNo) {
-		this.addressNo = addressNo;
+	public int getAddress_no() {
+		return address_no;
+	}
+	public void setAddress_no(int address_no) {
+		this.address_no = address_no;
 	}
 	
 	@Override
 	public String toString() {
-		return "Customer [userNum=" + userNum + ", userId=" + userId + ", userPw=" + userPw + ", userName=" + userName
-				+ ", userPhone=" + userPhone + ", userGender=" + userGender + ", userBirth=" + userBirth
-				+ ", userRegDate=" + userRegDate + ", addressNo=" + addressNo + "]";
+		return "Customer [user_num=" + user_num + ", user_id=" + user_id + ", user_pw=" + user_pw + ", user_name="
+				+ user_name + ", user_phone=" + user_phone + ", user_gender=" + user_gender + ", user_birth="
+				+ user_birth + ", user_regDate=" + user_regDate + ", address_no=" + address_no + "]";
 	}
 }
