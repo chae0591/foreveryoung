@@ -1,5 +1,7 @@
 package com.forever.young.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,26 +37,33 @@ public class CustomerController {
 	public String postJoin(@ModelAttribute Customer customer) throws Exception {
 		log.info("postJoin()");
 		
-		System.out.println(customer.toString());
-		
 		service.regist(customer);
 		
 		return "member/success";
 	}
 	
-	@GetMapping("/sample")
+	@GetMapping("/login_test")
 	public String getLogin() {
 		log.info("getLogin()");
 		
-		return "member/sample";
+		return "member/login_test";
 	}
 	
-	@PostMapping("/sample")
-	public String postLogin() {
-		log.info("postLogin()");
+	@PostMapping("/login_customer")
+	public String postLoginCustomer(@ModelAttribute Customer customer, HttpSession session) throws Exception {
+		log.info("postLoginCustomer()");
 		
-		return "redirect:success";
+		boolean checkLogin = service.login(customer);
+		
+		if(checkLogin) {
+			session.setAttribute("check", customer.getUser_num());
+			session.setAttribute("auth", "customer");
+			log.info("loginSuccess");
+			return "member/success";
+		}
+		else {
+			log.info("loginFail");
+			return "member/login_test";
+		}
 	}
-	
-
 }
