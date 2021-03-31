@@ -8,4 +8,5 @@ import com.forever.young.entity.Customer;
 public interface CustomerRepository {
 	
 	public void regist(Customer customer) throws Exception;
+	public Customer login(Customer customer) throws Exception;
 }
