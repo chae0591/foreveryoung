@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
 <style>
+body, button, input, select, table, textarea {
+    font-size: 12px;
+    line-height: 16px;
+    font-family: 'Noto Sans KR',sans-serif,NanumGothic,'나눔고딕',Dotum,'돋움',Helvetica,"Apple SD Gothic Neo";
+}
 hr {
 	width: 1020px;
 }
@@ -71,6 +76,41 @@ table {
     font-size: 16px;
     font-weight: 700;
 }
+.item-name{
+    display: block;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    letter-spacing: -.21px;
+    color: #222;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    cursor: pointer;
+}
+.item-explanation {
+	display: block;
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 100;
+    letter-spacing: -.18px;
+    color: #222;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.item-price {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    letter-spacing: -.21px;
+    color: #222;
+    vertical-align: middle;
+}
 
 </style>
 </head>
@@ -84,33 +124,33 @@ table {
 			<td>
 				<a href="#">
 				<img src="https://placeimg.com/200/200/people">
-				<p>제품명</p>
-				<p>제품설명</p>
-				<p>0,000원</p>
+				<p class="item-name">제품명</p>
+				<p class="item-explanation">제품설명</p>
+				<p class="item-price">0,000원</p>
 				</a>
 			</td>
 			<td>
 				<a href="#">
 				<img src="https://placeimg.com/200/200/people">
-				<p>제품명</p>
-				<p>제품설명</p>
-				<p>0,000원</p>
+				<p class="item-name">제품명</p>
+				<p class="item-explanation">제품설명</p>
+				<p class="item-price">0,000원</p>
 				</a>
 			</td>
 			<td>
 				<a href="#">
 				<img src="https://placeimg.com/200/200/people">
-				<p>제품명</p>
-				<p>제품설명</p>
-				<p>0,000원</p>
+				<p class="item-name">제품명</p>
+				<p class="item-explanation">제품설명</p>
+				<p class="item-price">0,000원</p>
 				</a>
 			</td>
 			<td>
 				<a href="#">
 				<img src="https://placeimg.com/200/200/people">
-				<p>제품명</p>
-				<p>제품설명</p>
-				<p>0,000원</p>
+				<p class="item-name">제품명</p>
+				<p class="item-explanation">제품설명</p>
+				<p class="item-price">0,000원</p>
 				</a>
 			</td>
 		</tr>
