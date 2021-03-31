@@ -10,9 +10,15 @@
  .footer{
 	width: 100%
  	min-width: 1020px;
-	margin:40px 0 0;
-	border-top: 3px solid #e5e5e5;
+ 	height: 250px;
+	border-top: 2px solid #e5e5e5;
 	margin: 0 auto; 
+	background: #f9f9f9;
+ }
+.foo-conts {
+ 	width: 100%
+ 	min-width: 1020px;
+ 	height: 80%;
  }
  .footer ul {
     list-style-type: none;
@@ -27,6 +33,7 @@
 .footer li {
     display: inline-block;
     text-align:left;
+    margin: 0 0 0 20px;
 }
 .footer li > p {
  	color: #777;
@@ -35,8 +42,10 @@
  }
  .copyright{
  	border-top: 1px solid #e5e5e5;
- 	background: #f9f9f9;
- 	text-align: center; 
+ 	text-align: center;
+ 	width: 100%
+ 	min-width: 1020px;
+ 	height: 20%;
  }
  .copyright > p {
  	color: #777;
@@ -48,7 +57,7 @@
 </head>
 <body>
 	<div class="footer">
-		<div>
+		<div class="foo-conts">
 		<ul>
 			<li>
 				<h4>포레버영 주식회사</h4>
