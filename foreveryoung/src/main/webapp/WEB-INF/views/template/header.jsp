@@ -3,26 +3,55 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
  <link href="style.css" rel="stylesheet" type="text/css" />
  <style>
+ .login-box {
+	width: 1020px;
+	height: 40px;
+	margin: 0 auto;
+}
+.login-box ul{
+	padding-top: 10px;
+	float: right;
+	text-align:center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+.login-box li {
+    display: inline-block;
+    text-align:center;  
+	padding-right: 15px;
+}
+.login-box li a {
+    color: #000;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 200;
+}
 .top-box {
 	width: 1020px;
-	height: 150px;
+	height: 80px;
 	text-align: center;
 	margin: 0 auto;
 }
 .logo-box {
 	float: left;
-	width: 40%;
+	width: 100px;
 	margin: 0;
-	padding-top: 60px;
+	padding-top: 10px;
 }
 .search-box {
-	width: 20%;
+	width: 300px;
 	display: inline-block;
-	padding-top: 50px;
+	padding-top: 10px;
+	text-align: center;
 }
 .search-input{
  	width: 100%;
@@ -58,32 +87,10 @@
     border-radius: 0;
     background-position: 100% center;
 }
-
-.login-box{
-	margin: 0;
+.icons {
+	padding-top: 14px;
 	float: right;
-	width: 40%;
-	padding-top: 60px;
-}
-.login-box ul{
-	float: right;
-	text-align:center;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    position: relative;
-}
-.login-box li {
-    display: inline-block;
-    text-align:center;
-}
-.login-box li a {
-    color: #000;
-    padding: 10px;
-    text-decoration: none;
-    font-size: 14px;
-    line-height: 20px;
-    font-weight: 200;
+	width: 100px;
 }
 .nav {
 	min-width: 1020px;
@@ -125,19 +132,22 @@
 </style>
 </head>
 <body>
-
-<div class="top-box">
-	<div class="logo-box">logo</div>
-	<div class="search-box">
-    	<input class="search-input" type="text" placeholder="Search">
-    </div>
-    <div class="login-box">
+<div class="login-box">
 		<ul>
 			<li><a href="#">로그인</a></li>
 			<li><a href="#">회원가입</a></li>
 			<li><a href="#">관리자</a></li>
 		</ul>
-	</div>
+</div>
+<div class="top-box">
+	<div class="logo-box">logo</div>
+	<div class="search-box">
+    	<input class="search-input" type="text" placeholder="Search">
+    </div>
+    <div class="icons">
+    	<i class="fas fa-user fa-2x"></i>
+    	<i class="fas fa-shopping-cart fa-2x"></i>
+    </div>
 </div>
 	
 <div class="nav">

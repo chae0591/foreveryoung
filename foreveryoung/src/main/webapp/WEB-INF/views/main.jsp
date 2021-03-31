@@ -30,20 +30,13 @@ hr {
 	text-align: center;
 	margin: 0 auto;
 }
+table {
+	width: 1020px;
+	margin: 0;
+	padding: 0;
+}
 
-.first-box ul {
-	float: left;
-	text-align:center;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-}
-.first-box li {
-    display: inline-block;
-    text-align:center;
-}
-.first-box li a {
+.first-box a {
     color: #000;
     padding: 20px;
     text-decoration: none;
@@ -86,40 +79,42 @@ hr {
 	
 <div class="first-box">
 	<h2>이 상품 어때요?</h2>
-	<ul>
-		<li>
-			<div class="content-box">
+	<table>
+		<tr>
+			<td>
+				<a href="#">
 				<img src="https://placeimg.com/200/200/people">
-				<p><a href="#">제품명</a></p>
-				<p><a href="#">제품설명</a></p>
-				<p><a href="#">0,000원</a></p>
-			</div>
-		</li>
-		<li>
-			<div class="content-box">
+				<p>제품명</p>
+				<p>제품설명</p>
+				<p>0,000원</p>
+				</a>
+			</td>
+			<td>
+				<a href="#">
 				<img src="https://placeimg.com/200/200/people">
-				<p><a href="#">제품명</a></p>
-				<p><a href="#">제품설명</a></p>
-				<p><a href="#">0,000원</a></p>
-			</div>
-		</li>
-		<li>
-			<div class="content-box">
+				<p>제품명</p>
+				<p>제품설명</p>
+				<p>0,000원</p>
+				</a>
+			</td>
+			<td>
+				<a href="#">
 				<img src="https://placeimg.com/200/200/people">
-				<p><a href="#">제품명</a></p>
-				<p><a href="#">제품설명</a></p>
-				<p><a href="#">0,000원</a></p>
-			</div>
-		</li>
-		<li>
-			<div class="content-box">
+				<p>제품명</p>
+				<p>제품설명</p>
+				<p>0,000원</p>
+				</a>
+			</td>
+			<td>
+				<a href="#">
 				<img src="https://placeimg.com/200/200/people">
-				<p><a href="#">제품명</a></p>
-				<p><a href="#">제품설명</a></p>
-				<p><a href="#">0,000원</a></p>
-			</div>
-		</li>
-	</ul>
+				<p>제품명</p>
+				<p>제품설명</p>
+				<p>0,000원</p>
+				</a>
+			</td>
+		</tr>
+	</table>
 	<button>더보기</button>
 </div>
 
