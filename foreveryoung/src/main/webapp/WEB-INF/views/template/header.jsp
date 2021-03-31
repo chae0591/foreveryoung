@@ -8,48 +8,65 @@
  <link href="style.css" rel="stylesheet" type="text/css" />
  <style>
 .top-box {
-	width: 100%;
-	min-width: 1020px;
+	width: 1020px;
+	height: 150px;
+	text-align: center;
+	margin: 0 auto;
 }
-.log-box {
+.logo-box {
 	float: left;
-	width: 33%;
-
+	width: 40%;
+	margin: 0;
+	padding-top: 60px;
 }
 .search-box {
-	float: center;
-	width: 33%;
-    position: relative;
-    text-align: center;
-    margin: 0 auto;
+	width: 20%;
+	display: inline-block;
+	padding-top: 50px;
 }
-.search-input {
-	position: relative;
-    width: 340px;
-    height: 20px;
-    border-radius: 20px;
-    border: 2px solid #bbb;
-    background: #fff;
-    margin: 10px 0;
-    padding: 10px 12px;
+.search-input{
+ 	width: 100%;
+    padding: 12px 24px;
+    background-color: transparent;
+    transition: transform 250ms ease-in-out;
+    font-size: 14px;
+    line-height: 18px; 
+    color: #575756;
+    background-color: transparent;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 18px 18px;
+    background-position: 95% center;
+    border-radius: 50px;
+    border: 1px solid #575756;
+    transition: all 250ms ease-in-out;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}      
+.search-input::placeholder {
+    color: color(#575756 a(0.8));
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    }
+      
+.search-input:hover,
+.search-input:focus {
+    padding: 12px 0;
+    outline: 0;
+    border: 1px solid transparent;
+    border-bottom: 1px solid #575756;
+    border-radius: 0;
+    background-position: 100% center;
 }
-.sch-btn {
-	position: absolute;
-	top: 22px;
-    right: 300px;
-    width: 21px;
-    height: 21px;
-    background: url(https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_search21x212.png) no-repeat 50% 50%;
-	text-indent: -9999px;
-	border: 0;
-	outline: 0;
-}
+
 .login-box{
-	float:right;
-	width: 33%;
+	margin: 0;
+	float: right;
+	width: 40%;
+	padding-top: 60px;
 }
 .login-box ul{
-	float: left;
+	float: right;
 	text-align:center;
     list-style-type: none;
     margin: 0;
@@ -59,18 +76,16 @@
 .login-box li {
     display: inline-block;
     text-align:center;
-    margin: 0 0 0 20px;
 }
 .login-box li a {
     color: #000;
-    padding: 20px;
+    padding: 10px;
     text-decoration: none;
-    ling-height: 44px;
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 200;
 }
-.nav{
-	width: 100%;
+.nav {
 	min-width: 1020px;
 	height: 47px;
 	background-color: #fff;
@@ -90,12 +105,12 @@
 .nav li {
     display: inline-block;
     text-align:center;
+    padding-top: 13px;
 }
 .nav li a {
     color: #000;
-    padding: 20px;
+    padding: 40px;
     text-decoration: none;
-    ling-height: 44px;
     font-size: 16px;
     font-weight: 700;
 }
@@ -107,25 +122,24 @@
     border-bottom: 2px solid #555;
 }
  
- </style>
+</style>
 </head>
 <body>
 
 <div class="top-box">
 	<div class="logo-box">logo</div>
 	<div class="search-box">
-      <input type="text" class="search-input">
-      <button type="sumbit" class="sch-btn">검색</button>
-	</div>
-	<div class="login-box">
+    	<input class="search-input" type="text" placeholder="Search">
+    </div>
+    <div class="login-box">
 		<ul>
-			<li>로그인</li>
-			<li>회원가입</li>
-			<li>관리자</li>
+			<li><a href="#">로그인</a></li>
+			<li><a href="#">회원가입</a></li>
+			<li><a href="#">관리자</a></li>
 		</ul>
 	</div>
 </div>
-
+	
 <div class="nav">
 	<ul>
 		<li><a href="">스킨케어</a></li>
