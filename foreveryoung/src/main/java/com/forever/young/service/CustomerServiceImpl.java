@@ -16,4 +16,12 @@ public class CustomerServiceImpl implements CustomerService{
 	public void regist(Customer customer) throws Exception {
 		repository.regist(customer);
 	}
+	
+	@Override
+	public boolean login(Customer customer) throws Exception {
+		System.out.println("checkService : " + customer.getUser_id());
+		System.out.println("checkService : " + customer.getUser_pw());
+		System.out.println("checkService : " + repository.login(customer));
+		return repository.login(customer) != null;
+	}
 }
