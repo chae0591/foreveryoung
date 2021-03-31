@@ -8,11 +8,21 @@
 	<insert id="regist">
 		insert into customer
 		values ( customer_seq.nextval, 
+		#{user_id}, #{user_pw}, #{user_name}, #{user_phone}, #{user_gender, jdbcType=CHAR}, #{user_birth, jdbcType=DATE}, sysdate, null )
+	</insert>
+	
+	<insert id="regist2">
+		insert into customer
+		values (customer_seq.nextval, 
 		#{user_id}, #{user_pw}, #{user_name}, #{user_phone}, #{user_gender}, #{user_birth}, sysdate, null )
 	</insert>
 	
 	<select id="login" resultType="Customer">
-		select user_num from customer where user_id = #{user_id} and user_pw = #{user_pw}
+		select * from customer where user_id = #{user_id} and user_pw = #{user_pw}
+	</select>
+	
+	<select id="findId" resultType="Customer">
+		select * from customer where user_id = #{user_id}
 	</select>
 
 </mapper>

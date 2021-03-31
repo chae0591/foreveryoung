@@ -8,7 +8,7 @@
 	<insert id="regist">
 		insert into brand 
 		values ( customer_seq.nextval, 
-		#{brand_id}, #{brand_pw}, #{brand_name}, #{brand_phone}, sysdate, null, null )
+		#{brand_id}, #{brand_pw}, #{brand_name}, #{brand_phone}, sysdate, 'F', null )
 	</insert>
 	
 	<select id="login" resultType="Brand">

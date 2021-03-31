@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.forever.young.entity.Customer;
 import com.forever.young.service.CustomerService;
@@ -64,6 +66,20 @@ public class CustomerController {
 		else {
 			log.info("loginFail");
 			return "member/login_test";
+		}
+	}
+	
+	@GetMapping("/id_check")
+	@ResponseBody
+	public String idDuplicate(@RequestParam String user_id) throws Exception {
+		log.info("idDuplicate()");
+		Customer customer = service.findId(user_id);
+		
+		if(customer == null) {
+			return "Y";
+		}
+		else {
+			return "N";
 		}
 	}
 }
