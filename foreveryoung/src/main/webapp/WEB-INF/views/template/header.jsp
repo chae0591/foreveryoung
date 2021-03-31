@@ -3,72 +3,124 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
  <link href="style.css" rel="stylesheet" type="text/css" />
  <style>
-ul {
+ .login-box {
+	width: 1020px;
+	height: 40px;
+	margin: 0 auto;
+}
+.login-box ul{
+	padding-top: 10px;
+	float: right;
+	text-align:center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+.login-box li {
+    display: inline-block;
+    text-align:center;  
+	padding-right: 15px;
+}
+.login-box li a {
+    color: #000;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 200;
+}
+.top-box {
+	width: 1020px;
+	height: 80px;
+	text-align: center;
+	margin: 0 auto;
+}
+.logo-box {
+	float: left;
+	width: 100px;
+	margin: 0;
+	padding-top: 10px;
+}
+.search-box {
+	width: 300px;
+	display: inline-block;
+	padding-top: 10px;
+	text-align: center;
+}
+.search-input{
+ 	width: 100%;
+    padding: 12px 24px;
+    background-color: transparent;
+    transition: transform 250ms ease-in-out;
+    font-size: 14px;
+    line-height: 18px; 
+    color: #575756;
+    background-color: transparent;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 18px 18px;
+    background-position: 95% center;
+    border-radius: 50px;
+    border: 1px solid #575756;
+    transition: all 250ms ease-in-out;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}      
+.search-input::placeholder {
+    color: color(#575756 a(0.8));
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    }
+      
+.search-input:hover,
+.search-input:focus {
+    padding: 12px 0;
+    outline: 0;
+    border: 1px solid transparent;
+    border-bottom: 1px solid #575756;
+    border-radius: 0;
+    background-position: 100% center;
+}
+.icons {
+	padding-top: 14px;
+	float: right;
+	width: 100px;
+}
+.nav {
+	min-width: 1020px;
+	height: 47px;
+	background-color: #fff;
+    border-top: 1px solid #dddddd;
+    border-bottom: 2px solid #555;
+    margin: 0 auto;
+}
+.nav ul {
+	float: left;
+	text-align:center;
     list-style-type: none;
     margin: 0;
     padding: 0;
     width: 100%;
     position: relative;
 }
-ul:after{
-    content:'';
-    display: block;
-    clear:both;
+.nav li {
+    display: inline-block;
+    text-align:center;
+    padding-top: 13px;
 }
-li {
-    float: left;
-}
-li a {
-    display: block;
+.nav li a {
     color: #000;
-    text-align: center;
-    padding: 14px 16px;
+    padding: 40px;
     text-decoration: none;
-    ling-height: 44px;
     font-size: 16px;
     font-weight: 700;
 }
-.menubar{
-	width: 100%;
-	min-width: 1020px;
-	height: 47px;
-	background-color: #fff;
-    border-top: 1px solid #dddddd;
-    border-bottom: 2px solid #555;
-    height: 47px;
-    min-width: 1020px;
-}
-.search {
-    position: relative;
-    text-align: center;
-    margin: 0 auto;
-}
-.search-input {
-	position: relative;
-    width: 340px;
-    height: 20px;
-    border-radius: 20px;
-    border: 2px solid #bbb;
-    background: #fff;
-    margin: 10px 0;
-    padding: 10px 12px;
-}
-.sch-btn {
-	position: absolute;
-	top: 22px;
-    right: 300px;
-    width: 21px;
-    height: 21px;
-    background: url(https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_search21x212.png) no-repeat 50% 50%;
-	text-indent: -9999px;
-	border: 0;
-	outline: 0;
-}
-
 .banner {
 	height: 300px;
     min-width: 1020px;
@@ -77,21 +129,28 @@ li a {
     border-bottom: 2px solid #555;
 }
  
- </style>
+</style>
 </head>
 <body>
-<div>logo</div>
-<div class="search">
-      <input type="text" class="search-input">
-      <button type="sumbit" class="sch-btn">검색</button>
+<div class="login-box">
+		<ul>
+			<li><a href="#">로그인</a></li>
+			<li><a href="#">회원가입</a></li>
+			<li><a href="#">관리자</a></li>
+		</ul>
 </div>
-<div>
-	<button>로그인</button>
-	<button>회원가입</button>
-	<button>관리자</button>
+<div class="top-box">
+	<div class="logo-box">logo</div>
+	<div class="search-box">
+    	<input class="search-input" type="text" placeholder="Search">
+    </div>
+    <div class="icons">
+    	<i class="fas fa-user fa-2x"></i>
+    	<i class="fas fa-shopping-cart fa-2x"></i>
+    </div>
 </div>
-
-<div class="menubar">
+	
+<div class="nav">
 	<ul>
 		<li><a href="">스킨케어</a></li>
 		<li><a href="">메이크업</a></li>
@@ -102,8 +161,10 @@ li a {
 		<li><a href="">고객센터</a></li>
 	</ul>
 </div>
+
 <div class="banner">
 	<h1>배너</h1>
 </div>
+
 </body>
 </html>
