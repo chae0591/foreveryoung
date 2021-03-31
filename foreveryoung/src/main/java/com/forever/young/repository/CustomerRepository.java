@@ -9,4 +9,5 @@ public interface CustomerRepository {
 	
 	public void regist(Customer customer) throws Exception;
 	public Customer login(Customer customer) throws Exception;
+	public Customer findId(String user_id) throws Exception;
 }

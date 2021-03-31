@@ -24,4 +24,9 @@ public class CustomerServiceImpl implements CustomerService{
 		System.out.println("checkService : " + repository.login(customer));
 		return repository.login(customer) != null;
 	}
+	
+	@Override
+	public Customer findId(String user_id) throws Exception {
+		return repository.findId(user_id);
+	}
 }
