@@ -11,17 +11,32 @@
 	width: 100%
  	min-width: 1020px;
 	margin:40px 0 0;
-	border-top: 3px solid #e5e5e5; 
+	border-top: 3px solid #e5e5e5;
+	margin: 0 auto; 
  }
- 
- li > p {
+ .footer ul {
+    list-style-type: none;
+    float: left;
+	text-align:center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    position: relative;
+}
+.footer li {
+    display: inline-block;
+    text-align:left;
+}
+.footer li > p {
  	color: #777;
     font-size: 12px;
     line-height: 20px;
  }
  .copyright{
  	border-top: 1px solid #e5e5e5;
- 	background: #f9f9f9; 
+ 	background: #f9f9f9;
+ 	text-align: center; 
  }
  .copyright > p {
  	color: #777;
