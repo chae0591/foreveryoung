@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.forever.young.repository.ProductRepository">
+	
+	<insert id="registProduct">
+		insert into product_table 
+		values ( product_table_sequence.nextval, 
+		#{product_category}, #{product_name}, #{product_img}, #{product_price}, #{product_stock}, sysdate, null, null, null, null)
+	</insert>
+
+	<select id="selectBoardList" parameterType="hashMap" resultType="hashmap">
+		<![CDATA[
+			select 
+				product_category, 
+				product_name, 
+				product_img, 
+				product_price, 
+				product_stock,
+				product_regDate
+			from product_table order by product_regDate DESC
+		]]>
+	</select>
+</mapper>
