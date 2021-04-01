@@ -37,14 +37,8 @@
 						<td align="center">${customerList.user_id}</td>
 						<td align="center">${customerList.user_name}</td>
 						<td align="center">${customerList.user_phone}</td>
-						<td align="center">
-							<!--<javatime:format value="${customerList.user_birth}"
-								pattern="yyyy-MM-dd"/>-->
-						</td>
-						<td align="center">
-							<!--<javatime:format value="${customerList.user_regDate}"
-								pattern="yyyy-MM-dd"/>-->
-						</td>
+						<td align="center">${customerList.user_birth}</td>
+						<td align="center">${customerList.user_regDate}</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>

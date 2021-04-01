@@ -11,5 +11,7 @@ import com.forever.young.entity.Product;
 public interface ProductRepository {
 	public void registProduct(Product product) throws Exception;
 
-	public List<Map<String, Object>> selectBoardList(Map<String, Object> map); 
+	public List<Map<String, Object>> selectBoardList(Map<String, Object> map);
+	
+	public List<Product> categoryList(String category);
 }
