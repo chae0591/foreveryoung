@@ -37,9 +37,7 @@
 						<td align="center">${brandList.brand_id}</td>
 						<td align="center">${brandList.brand_name}</td>
 						<td align="center">${brandList.brand_phone}</td>
-						<td align="center">
-							<!--<javatime:format value="${brandList.brand_regDate}"
-								pattern="yyyy-MM-dd"/>--></td>
+						<td align="center">${brandList.brand_regDate}</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>
