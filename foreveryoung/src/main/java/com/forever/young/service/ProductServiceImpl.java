@@ -25,4 +25,10 @@ public class ProductServiceImpl implements ProductService{
 		return productRepository.selectBoardList(map);
 	}
 
+	// 카테고리별 리스트
+	@Override
+	public List<Product> productList(String category) {
+		return productRepository.categoryList(category);
+	}
+
 }
