@@ -6,13 +6,11 @@ public class Product {
 	private int product_id;
 	private String product_category;
 	private String product_name; 
-	private String product_img; 
 	private int product_price;
 	private int product_stock;
 	private Date product_regDate;
-	private int product_seller_num;
-	private String product_user;
-	private int type_no;
+	private int product_brand;
+	private String product_skintype;
 	private int event_no;
 	
 	public int getProduct_id() {
@@ -33,12 +31,7 @@ public class Product {
 	public void setProduct_name(String product_name) {
 		this.product_name = product_name;
 	}
-	public String getProduct_img() {
-		return product_img;
-	}
-	public void setProduct_img(String product_img) {
-		this.product_img = product_img;
-	}
+	
 	public int getProduct_price() {
 		return product_price;
 	}
@@ -58,22 +51,17 @@ public class Product {
 		this.product_regDate = product_regDate;
 	}
 	public int getProduct_seller_num() {
-		return product_seller_num;
+		return product_brand;
 	}
 	public void setProduct_seller_num(int product_seller_num) {
-		this.product_seller_num = product_seller_num;
+		this.product_brand = product_seller_num;
 	}
-	public String getProduct_user() {
-		return product_user;
+	
+	public String getType_no() {
+		return product_skintype;
 	}
-	public void setProduct_user(String product_user) {
-		this.product_user = product_user;
-	}
-	public int getType_no() {
-		return type_no;
-	}
-	public void setType_no(int type_no) {
-		this.type_no = type_no;
+	public void setType_no(String type_no) {
+		this.product_skintype = type_no;
 	}
 	public int getEvent_no() {
 		return event_no;
@@ -84,12 +72,9 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [product_id=" + product_id + ", product_category=" + product_category + ", product_name="
-				+ product_name + ", product_img=" + product_img + ", product_price=" + product_price
-				+ ", product_stock=" + product_stock + ", product_regDate=" + product_regDate + ", product_seller_num="
-				+ product_seller_num + ", product_user=" + product_user + ", type_no=" + type_no + ", event_no="
+				+ product_name + ", product_price=" + product_price
+				+ ", product_stock=" + product_stock + ", product_regDate=" + product_regDate + ", product_brand="
+				+ product_brand + ", product_skintype=" + product_skintype + ", event_no="
 				+ event_no + "]";
 	}
-	
-	
-	
 }

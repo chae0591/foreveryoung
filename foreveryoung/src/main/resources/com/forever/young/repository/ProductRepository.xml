@@ -20,4 +20,23 @@
 			from product_table order by product_regDate DESC
 		]]>
 	</select>
+	
+	<select id="categoryList" resultType="com.forever.young.entity.Product">
+			select
+				product_id,
+				product_category,
+				product_name,
+				product_price,
+				product_stock,
+				product_regdate,
+				product_brand,
+				product_skintype,
+				event_no
+			from
+				product_table
+			where
+				product_category = #{category}
+			order by
+				product_regdate desc
+	</select>
 </mapper>

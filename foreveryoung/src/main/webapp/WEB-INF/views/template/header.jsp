@@ -93,12 +93,12 @@ li a {
 
 <div class="menubar">
 	<ul>
-		<li><a href="">스킨케어</a></li>
-		<li><a href="">메이크업</a></li>
-		<li><a href="">바디케어</a></li>
-		<li><a href="">헤어케어</a></li>
-		<li><a href="">향수/디퓨저</a></li>
-		<li><a href="">남성케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList/skincare">스킨케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList/makeup">메이크업</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList/bodycare">바디케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList/haircare">헤어케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList/perfume">향수/디퓨저</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList/manscare">남성케어</a></li>
 		<li><a href="">고객센터</a></li>
 	</ul>
 </div>
