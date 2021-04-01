@@ -91,4 +91,4 @@ public class ProductController {
 		
 		return "product/categoryList";
 	}
-}
+} 
