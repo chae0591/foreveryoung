@@ -14,5 +14,9 @@
 	<select id="login" resultType="Brand">
 		select * from brand where user_id = #{brand_id} and user_pw = #{brand_pw}
 	</select>
+	
+	<select id="findId" resultType="Brand">
+		select * from Brand where user_id = #{brand_id}
+	</select>
 
 </mapper>
