@@ -10,18 +10,48 @@
  .footer{
 	width: 100%
  	min-width: 1020px;
-	margin:40px 0 0;
-	border-top: 3px solid #e5e5e5; 
+ 	height: 250px;
+	border-top: 2px solid #e5e5e5;
+	margin: 0; 
+	background: #f9f9f9;
+	position:relative;
+	bottom: 0px;
  }
- 
- li > p {
+.foo-conts {
+ 	width: 100%
+ 	min-width: 1020px;
+ 	height: 80%;
+ }
+ .footer ul {
+    list-style-type: none;
+    float: left;
+	text-align:center;
+    list-style-type: none;
+    margin: 15px 0px;
+    padding: 0;
+    width: 100%;
+    position: relative;
+}
+.footer li {
+    display: inline-block;
+    text-align:left;
+    margin: 0 0 0 20px;
+}
+.footer li > p {
  	color: #777;
     font-size: 12px;
     line-height: 20px;
  }
+ .second-conts {
+ 	border-left: 1px solid #e5e5e5;
+ 	padding-left: 20px;
+ }
  .copyright{
  	border-top: 1px solid #e5e5e5;
- 	background: #f9f9f9; 
+ 	text-align: center;
+ 	width: 100%
+ 	min-width: 1020px;
+ 	height: 20%;
  }
  .copyright > p {
  	color: #777;
@@ -33,15 +63,15 @@
 </head>
 <body>
 	<div class="footer">
-		<div>
+		<div class="foo-conts">
 		<ul>
-			<li>
+			<li class="first-conts">
 				<h4>포레버영 주식회사</h4>
 				<p>대표이사 : 김채은 | 사업자등록번호 : 888-81-88100</p>
 				<p>주소 : (06234) 서울 강남구 테헤란로14길 6 남도빌딩</p>
 				<p>통신판매업신고번호 : 2021-서울강남-0321</p>
 			</li>
-			<li>
+			<li class="second-conts">
 				<p>이용약관 · 법적고지</p>
 				<p>개인정보처리방침</p>
 				<p>청소년보호방침</p>

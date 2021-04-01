@@ -2,6 +2,8 @@ package com.forever.young.entity;
 
 import java.sql.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Customer {
 	private int user_num;
 	private String user_id;
@@ -9,7 +11,9 @@ public class Customer {
 	private String user_name;
 	private String user_phone;
 	private String user_gender;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date user_birth;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date user_regDate;
 	private int address_no;
 	
