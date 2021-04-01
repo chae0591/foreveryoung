@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.forever.young.entity.Customer;
 import com.forever.young.service.CustomerService;
@@ -36,36 +37,36 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/join")
-	public String postJoin(@ModelAttribute Customer customer) throws Exception {
+	public RedirectView postJoin(@ModelAttribute Customer customer) throws Exception {
 		log.info("postJoin()");
 		
 		service.regist(customer);
 		
-		return "member/success";
+		return new RedirectView("success?test=1");
 	}
 	
-	@GetMapping("/login_test")
+	@GetMapping("/login")
 	public String getLogin() {
 		log.info("getLogin()");
 		
-		return "member/login_test";
+		return "member/login";
 	}
 	
 	@PostMapping("/login_customer")
-	public String postLoginCustomer(@ModelAttribute Customer customer, HttpSession session) throws Exception {
+	public RedirectView postLoginCustomer(@ModelAttribute Customer customer, HttpSession session) throws Exception {
 		log.info("postLoginCustomer()");
 		
-		boolean checkLogin = service.login(customer);
+		Customer checkLogin = service.login(customer);
 		
-		if(checkLogin) {
-			session.setAttribute("check", customer.getUser_num());
+		if(checkLogin != null) {
+			session.setAttribute("check", checkLogin.getUser_num());
 			session.setAttribute("auth", "customer");
 			log.info("loginSuccess");
-			return "member/success";
+			return new RedirectView("success?test=3");
 		}
 		else {
 			log.info("loginFail");
-			return "member/login_test";
+			return new RedirectView("login?error");
 		}
 	}
 	
@@ -81,5 +82,12 @@ public class CustomerController {
 		else {
 			return "N";
 		}
+	}
+	
+	@GetMapping("/success")
+	public String successTest() {
+		log.info("testPage()");
+		
+		return "member/success";
 	}
 }
