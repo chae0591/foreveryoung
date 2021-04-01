@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class DetailBoardContorller {
-	@RequestMapping(value="/detail_board/main")
+	@RequestMapping(value="/detail_board/detail_main")
 	public String detailmain() {
 		return null;
 	}

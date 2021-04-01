@@ -35,42 +35,64 @@
       width : 380px;
    }
    .btn_pay{
-      background-color: #DAO641;
+      background-color: #FF4500;
       color:white;
-         font-size: 18px;
+      font-size: 38px;
+      border :none;
    }
    .btn_bucket{
       background-color: #DAO641;
-      color:white;
-         font-size: 18px;
+      color:black;
+         font-size: 38px;
+   }
+   .first_s{
+      margin-left : 10%;
+      margin-right: 10%;
+      font-size : 25px;
+   }
+   .recommend{
+   	height : 300px;
    }
 </style>
 <!--  -->
 <body>
 <script>
+var sell_price;
+var amount;
 
-function numcheck(val,jaego){
-                      if (val>jaego-1){
-                              alert("재고량이 없습니다")
-                              document.frm.ea.value=jaego}
-                      else if (val<2){
-                              document.frm.ea.value=1        }
-      }
-function up(val,jaego){
-                      if (val>jaego-1){
-                              alert("재고량이 없습니다")
-                              document.frm.ea.value=jaego}
-                      else{
-                              document.frm.ea.value=(val/1)+1}
-}
-                                                       
-function down(val){
-                      if (val<2){
-                              document.frm.ea.value=1}
-                      else{
-                              document.frm.ea.value=val-1}
+function init () {
+	sell_price = document.form.sell_price.value;
+	amount = document.form.amount.value;
+	document.form.sum.value = sell_price;
+	change();
 }
 
+function add () {
+	hm = document.form.amount;
+	sum = document.form.sum;
+	hm.value ++ ;
+
+	sum.value = parseInt(hm.value) * sell_price;
+}
+
+function del () {
+	hm = document.form.amount;
+	sum = document.form.sum;
+		if (hm.value > 1) {
+			hm.value -- ;
+			sum.value = parseInt(hm.value) * sell_price;
+		}
+}
+
+function change () {
+	hm = document.form.amount;
+	sum = document.form.sum;
+
+		if (hm.value < 0) {
+			hm.value = 0;
+		}
+	sum.value = parseInt(hm.value) * sell_price;
+}  
 </script>
    <div>
       <div class=test>
@@ -114,30 +136,22 @@ function down(val){
                   <hr>
                   
                   <!-- 구매수량 합계금액 -->
-                  <table class="table_first" >
-                     <tr>
-                        <th align="left" width="100px;">구매 수량</th>
-                        
-                        <td>
-                        <input type="text" name="ea" class="form" size="2" value="1" 
-                        maxlength="2" onblur="numcheck(this.form.ea.value,10)" 
-                        onkeyup="if(isNaN(this.value)) {alert('숫자만 입력해 주세요.');this.value=''};">
-                        </td>      
-                        <td valign="middle"height="25">
-                           <input type="button" value="▲" onclick="up(this.form.ea.value,10)" 
-                           style="background-color:white;border:0; height:10px;;font-size:12px" name="plus">
-                           <br>
-                           <input type="button" value="▼" onclick="down(this.form.ea.value)" 
-                           style="background-color:white;border:0; height:10px;font-size:12px" name="minus">                  
-                        </td>                  
-                     </tr>
-                     
-                     <tr>
-                        <th align="left" width="100px;">합계 금액</th>
-                        <td align="center">1</td>
-                     </tr>
-                                          
-                  </table>
+                  <div class="first_s">
+					<form name="form" method="get">
+						<div>수량 </div>
+						<div>
+							<input type=hidden name="sell_price" value="5500">
+							<input type="text" name="amount" value="1" size="3" onchange="change();">
+							<input type="button" value=" + " onclick="add();"><input type="button" value=" - " onclick="del();">
+						</div>
+						
+						<div>금액</div>
+						
+						<div>
+							<input type="text" name="sum" size="11" readonly>원
+						</div>
+					</form>
+                  </div>
                   
                   <hr>
                   
@@ -156,10 +170,33 @@ function down(val){
          </div>
       </div>
       
-      <div>
-         <h1>추천상품</h1>
-      <!-- 중단 추천상품목록 -->
+      <div align="center" class="recommend">
+         <h1 align="left">추천상품</h1>
+         	<div class="swiper-slide">
+				<input type="radio" name="pos" id="pos1" checked>
+			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
+			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
+			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
+			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
+		      	<input type="radio" name="pos" id="pos2">
+			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
+			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
+			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
+			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
+		      	<input type="radio" name="pos" id="pos3">
+			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
+			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
+			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
+			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
+		      	<input type="radio" name="pos" id="pos4">
+			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
+			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
+			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
+			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
+		     </div>
       </div>
+      
+      <hr>
       
       <div>
          <h1>상품내용</h1>
