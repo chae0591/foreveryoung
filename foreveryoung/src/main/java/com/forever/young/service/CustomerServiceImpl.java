@@ -19,14 +19,17 @@ public class CustomerServiceImpl implements CustomerService{
 	
 	@Override
 	public Customer login(Customer customer) throws Exception {
-		System.out.println("checkService : " + customer.getUser_id());
-		System.out.println("checkService : " + customer.getUser_pw());
-		System.out.println("checkService : " + repository.login(customer));
+		
 		return repository.login(customer);
 	}
 	
 	@Override
 	public Customer findId(String user_id) throws Exception {
 		return repository.findId(user_id);
+	}
+	
+	@Override
+	public Customer findNum(int user_num) throws Exception {
+		return repository.findNum(user_num);
 	}
 }
