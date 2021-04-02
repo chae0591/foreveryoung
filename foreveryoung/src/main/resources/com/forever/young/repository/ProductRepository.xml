@@ -3,9 +3,13 @@
 <mapper namespace="com.forever.young.repository.ProductRepository">
 	
 	<insert id="registProduct">
+	<selectKey keyProperty="product_id" order="BEFORE" resultType="int">
+			select product_table_sequence.nextval from dual			
+	</selectKey>
 		insert into product_table 
-		values ( product_table_sequence.nextval, 
-		#{product_category}, #{product_name}, #{product_img}, #{product_price}, #{product_stock}, sysdate, null, null, null, null)
+		(product_id, product_category, product_name, product_price, product_stock, product_regDate, product_brand, event_no)
+		values ( #{product_id},
+		#{product_category}, #{product_name}, #{product_price}, #{product_stock}, sysdate, 1, 1)
 	</insert>
 
 	<select id="selectBoardList" parameterType="hashMap" resultType="hashmap">
