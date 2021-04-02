@@ -17,7 +17,12 @@ public class BrandRegistServiceImpl implements BrandRegistService{
 	}
 	
 	@Override
-	public boolean login(Brand brand) throws Exception {
-		return repository.login(brand) != null;
+	public Brand login(Brand brand) throws Exception {
+		return repository.login(brand);
+	}
+	
+	@Override
+	public Brand findId(String brand_id) throws Exception {
+		return repository.findId(brand_id);
 	}
 }

@@ -107,8 +107,38 @@ public class AdminController {
 		
 	}
 	
+	//상품리스트
+	@GetMapping("/product/productList")
+	public void productList(Model model) throws Exception{
+		log.info("productList()");
+		
+		model.addAttribute("productList", service.productList());
+	}
 	
 	
+	//이벤트리스트
+	@GetMapping("/event/eventList")
+	public void eventList(Model model) throws Exception{
+		log.info("eventList()");
+		
+		model.addAttribute("eventList", service.eventList());
+	}
+	
+	//공지사항리스트
+	@GetMapping("/notice/noticeList")
+	public void noticeList(Model model) throws Exception{
+		log.info("noticeList()");
+		
+		model.addAttribute("noticeList", service.noticeList());
+	}
+	
+	//1:1문의 리스트
+	@GetMapping("/inquiry/inquiryList")
+	public void inquiryList(Model model) throws Exception{
+		log.info("inquiryList()");
+		
+		model.addAttribute("inquiryList", service.inquiryList());
+	}
 	
 	
 }
