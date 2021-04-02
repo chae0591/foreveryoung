@@ -21,9 +21,10 @@ public class AdminServiceImpl implements AdminService{
 	private AdminRepository repository;
 
 	@Override
-	public boolean login(Admin admin) throws Exception {
-		
-		return repository.login(admin) != null ;
+	public Admin login(Admin admin) throws Exception {
+		System.out.println("checkService : " + admin.getAdmin_id());
+		System.out.println("checkService : " + admin.getAdmin_pw());
+		return repository.login(admin) ;
 	}
 	
 	@Override
@@ -64,6 +65,16 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public List<Inquiry> inquiryList() throws Exception {
 		return repository.inquiryList();
+	}
+
+	@Override
+	public void eventRegister(Event event) throws Exception {
+		 repository.eventRegister(event);
+	}
+
+	@Override
+	public void noticeRegister(Notice notice) throws Exception {
+		repository.noticeRegister(notice);
 	}
 
 

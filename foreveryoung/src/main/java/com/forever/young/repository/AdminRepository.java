@@ -33,5 +33,9 @@ public interface AdminRepository {
 	
 	public List<Inquiry> inquiryList() throws Exception;
 	
+	public void eventRegister(Event event) throws Exception;
+	
+	public void noticeRegister(Notice notice) throws Exception;
+	
 	
 }
