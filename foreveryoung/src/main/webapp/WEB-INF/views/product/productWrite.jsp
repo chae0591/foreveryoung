@@ -6,6 +6,206 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+	.uploadResult ul {
+		display:flex;
+		flex-flow: row;
+		justify-center : center;
+		align-items : center;
+	}
+	
+	.uploadResult ul li {
+		list-style:none;
+		padding:10px;
+	}
+	
+	.uploadReulst ul li img {
+		width:20px;
+	}
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script>
+
+	// 등록된 이미지 클릭 시 새창으로 이미지 열기
+	function showImage(fileCallPath) {
+		window.open("/viewImg?fileName=" + fileCallPath, "image", "width=700px, height=600px");
+	}
+	
+	
+	$(document).ready(function(){
+		
+		// 비어있는 form 복사
+		var formObj = $("form");
+		
+		// form submit 시 실행
+		$("input[type='submit']").on("click", function(e){
+			e.preventDefault();
+			
+			console.log("파일등록");
+			
+			var str = "";
+			
+			$(".uploadResult ul li").each(function(i, obj){
+				var jobj = $(obj);
+				console.dir(jobj);
+				
+				str += "<input type='hidden' name='uploadFileList["+i+"].image_name' value='"+jobj.data("image_name")+"'>";
+				str += "<input type='hidden' name='uploadFileList["+i+"].image_save_name' value='"+jobj.data("image_save_name") + "'>";
+				str += "<input type='hidden' name='uploadFileList["+i+"].file_type' value='"+jobj.data("file_type") + "'>";
+				str += "<input type='hidden' name='uploadFileList["+i+"].file_size' value='"+jobj.data("file_size") + "'>";
+			});
+			formObj.append(str).submit();
+		});
+		
+		
+		// 이미지 파일만 업로드할 수 있게 처리
+		var regex = new RegExp("(.*?)\.(jpg|jepg|png)");
+		var maxSize = 5242880; //5MB
+		
+		// 파일 확장자, 파일 크기 검사하는 함수
+		function fileCheck(fileName, fileSize) {
+			if(fileSize >= maxSize) {
+				alert("파일 사이즈 초과");
+				return false;
+			}
+			
+			if(!regex.test(fileName)) {
+				alert("이미지 파일만 등록 가능합니다.");
+				return false;
+			}
+			return true;
+		}
+		
+		
+		
+		// 상품업로드 빈 DIV 복사
+		var cloneObj = $(".upload").clone();
+		$("#uploadImage").on("click", function(e){
+			
+			// 빈 form 생성
+			var formData = new FormData();
+			// 사용자가 선택한 파일 변수 생성
+			var inputFile = $("input[name='upload_file']");
+			var files = inputFile[0].files;
+			
+			console.log(files);
+			
+			// fileCheck 함수로 업로드 된 이미지 검사
+			for(var i = 0; i < files.length; i++) {
+				if(!fileCheck(files[i].name, files[i].size)) {
+					return false;
+				}
+				formData.append("uploadFile", files[i]);
+			}
+			
+			// 사용자가 업로드한 파일이 담긴 formData ajax 로 전송
+			$.ajax({
+				url : '/productImg',
+					processData : false,
+					contentType : false,
+					data : formData,
+					type : 'POST',
+					dataType : 'json',
+					success : function(result) {
+						console.log(result);
+						// showUploadFile 변수
+						showUploadedFile(result);
+						$(".upload").html(cloneObj.html());
+					}
+			});
+		});
+		
+		
+		// 태그 변수 생성
+		var uploadResult = $(".uploadResult ul");
+		
+		// ul 태그에 파일 정보 담긴 li append
+		function showUploadedFile(uploadResultArr) {
+			var str = "";
+			 
+			$(uploadResultArr).each(function(i, obj){
+				var fileCallPath = encodeURIComponent("s_" + obj.image_save_name);
+				var originPath = "/" + obj.image_save_name;
+				
+				str += "<li data-image_save_name='" + obj.image_save_name + "' data-image_name='" + obj.image_name + "' data-file_type='" + obj.file_type + "' data-file_size='" + obj.file_size + "'><div>"
+					+ "<span> " + obj.image_name + "</span>"
+				 	+ "<a href=\"javascript:showImage(\'" + originPath + "\')\"><img src='/viewImg?fileName=" + fileCallPath + "'></a>"+
+						"<button type='button' data-file=\'"+ fileCallPath + "\' data-type='image'>삭제</button></div></li>";
+			});
+			uploadResult.append(str);
+		}
+		
+		// 삭제 버튼
+		$(".uploadResult").on("click","button", function(e){
+			// li 에 생성했던 data-*** 변수에 담기
+			var targetFile = $(this).data("file");
+			var type = $(this).data("type");
+			var targetLi = $(this).closest("li");
+			console.log(targetFile);
+			
+			$.ajax({
+				url : '/deleteImg',
+				data : {fileName:targetFile, type:type},
+				dataType : 'text',
+				type : 'POST',
+				success : function(result) {
+					alert(result);
+					
+					targetLi.remove();
+				}
+			});
+		});
+		
+		// 파일삭제 또는 main 페이지 이동 처리
+		function deleteImgLocation() {
+			if((".uploadResult ul li")) {
+					deleteImg();
+			} else {
+					window.location.href="/main";
+				}
+		};
+		
+		// 취소버튼 클릭 시 파일 delete
+		$(".cancelBtn").on("click", function(e){
+			deleteImgLocation();
+			
+		});
+		
+		
+		
+		
+		// 폴더 내 이미지 삭제 필요 시 호출되는 함수
+		function deleteImg() {
+			var targetFile = $(".uploadResult ul li button").data("file");
+			var type = $(".uploadResult ul li button").data("type");
+			var targetLi = $(".uploadResult ul li button").closest("li");
+			console.log(targetFile);
+			$.ajax({
+				url : '/deleteImg',
+				data : {fileName:targetFile, type:type},
+				dataType : 'text',
+				type : 'POST',
+				success : function(result) {
+							alert(result);
+							targetLi.remove();
+							// main 페이지로 이동
+							location.href="/main";		
+						}
+				})
+		}
+		
+		// 상품 등록하지 않고 새로고침, 뒤로가기 등 페이지 이동 발생 시 폴더 내 이미지 삭제 
+		$(window).on("beforeunload", function(){
+			deleteImgLocation();
+		});
+		
+		// 단, submit 시에는 위 작업이 수행되지 않고 submit 이 된다.
+		$(document).on("submit", "form", function(event){
+	        $(window).off('beforeunload');
+	    });
+		
+	});
+</script>
 <body>
 
 	<form action="productWrite" method="post">
@@ -14,22 +214,17 @@
 		</div>
 		<div>
 			<label>상품 카테고리</label>
-			<input type="radio" name="product_category" class="input" value="skin"> 스킨케어
-			<input type="radio" name="product_category" class="input" value="makeUp"> 메이크업
-			<input type="radio" name="product_category" class="input" value="bodyCare"> 바디케어
-			<input type="radio" name="product_category" class="input" value="hairCare"> 헤어케어
-			<input type="radio" name="product_category" class="input" value="scent"> 향수/디퓨
-			<input type="radio" name="product_category" class="input" value="menCare"> 남성케어
+			<input type="radio" name="product_category" class="input" value="skincare"> 스킨케어
+			<input type="radio" name="product_category" class="input" value="makeup"> 메이크업
+			<input type="radio" name="product_category" class="input" value="bodycare"> 바디케어
+			<input type="radio" name="product_category" class="input" value="haircare"> 헤어케어
+			<input type="radio" name="product_category" class="input" value="perfume"> 향수/디퓨
+			<input type="radio" name="product_category" class="input" value="manscare"> 남성케어
 		</div>
 		
 		<div>
 			<label>상품 이름</label>
 			<input type="text" name="product_name" required placeholder="상품 이름을 입력하시오.">
-		</div>
-		
-		<div>
-			<label>상품 이미지 / 설명</label>
-			<input type="text" name="product_img" required placeholder="상품 설명 / 이미지를 넣으시오. ">
 		</div>
 		
 		<div>
@@ -41,12 +236,25 @@
 			<label>상품 재고</label>
 			<input type="text" name="product_stock" required placeholder="삼품 재고 입력하시오.">
 		</div>
-		
 	
 		<div>
 			<input type="submit" value="상품 등록">
+			<input type="button" class="cancelBtn" value="등록 취소">
 		</div>
 	</form>
 	
+	<div class="outbox">
+			<div class="upload">
+				<label>상품 이미지</label>
+				<input type="file" name="upload_file" required placeholder="상품 설명 / 이미지를 넣으시오. " multiple>
+			</div>
+			
+			<div class="uploadResult">
+				<ul>
+				
+				</ul>
+			</div>
+		<button id="uploadImage">이미지 등록</button>
+	</div>
 </body>
 </html>
