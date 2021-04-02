@@ -156,17 +156,23 @@
 			});
 		});
 		
+		// 파일삭제 또는 main 페이지 이동 처리
+		function deleteImgLocation() {
+			if((".uploadResult ul li")) {
+					deleteImg();
+			} else {
+					window.location.href="/main";
+				}
+		};
 		
 		// 취소버튼 클릭 시 파일 delete
 		$(".cancelBtn").on("click", function(e){
-			if(!(".uploadResult ul li")) {
-				deleteImg();
-			}
-			else {
-				window.location.href="/main";
-			}
+			deleteImgLocation();
 			
 		});
+		
+		
+		
 		
 		// 폴더 내 이미지 삭제 필요 시 호출되는 함수
 		function deleteImg() {
@@ -190,7 +196,7 @@
 		
 		// 상품 등록하지 않고 새로고침, 뒤로가기 등 페이지 이동 발생 시 폴더 내 이미지 삭제 
 		$(window).on("beforeunload", function(){
-			deleteImg();
+			deleteImgLocation();
 		});
 		
 		// 단, submit 시에는 위 작업이 수행되지 않고 submit 이 된다.

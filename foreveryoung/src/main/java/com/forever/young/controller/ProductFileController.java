@@ -3,6 +3,8 @@ package com.forever.young.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -110,15 +112,20 @@ public class ProductFileController {
 		
 		File file;
 		
+		try {
 			// **경로 수정**
 			// 파일명에 특수문자가 있을 수 있으니 디코더 처리
-			file = new File("/Users/yujin/Documents/upload/" + fileName);
+			file = new File("/Users/yujin/Documents/upload/" + URLDecoder.decode(fileName, "UTF-8"));
 			file.delete();
 				
 			// 썸네일 이미지 삭제
 			String thumbnail = file.getAbsolutePath().replace("s_", "");
 			file = new File(thumbnail);
 			file.delete();
+		} catch(UnsupportedEncodingException e) { // URLDecoder 의 예외처리
+			e.printStackTrace();
+			return new ResponseEntity<> (HttpStatus.NOT_FOUND);
+		}
 		return new ResponseEntity<String>("delete", HttpStatus.OK);
 	}
 }
