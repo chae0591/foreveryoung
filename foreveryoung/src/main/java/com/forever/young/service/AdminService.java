@@ -12,7 +12,7 @@ import com.forever.young.entity.ProductVO;
 
 public interface AdminService {
 	
-	public boolean login(Admin admin) throws Exception;
+	public Admin login(Admin admin) throws Exception;
 	
 	public void join(Admin amdin) throws Exception;
 
@@ -29,5 +29,9 @@ public interface AdminService {
 	public List<Notice> noticeList() throws Exception;
 	
 	public List<Inquiry> inquiryList() throws Exception;
+	
+	public void eventRegister(Event event) throws Exception;
+	
+	public void noticeRegister(Notice notice) throws Exception;
  	
 }
