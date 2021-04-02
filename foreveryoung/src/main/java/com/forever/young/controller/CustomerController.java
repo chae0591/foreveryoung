@@ -6,12 +6,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.forever.young.entity.Customer;
@@ -66,7 +68,7 @@ public class CustomerController {
 		}
 		else {
 			log.info("loginFail");
-			return new RedirectView("login?error");
+			return new RedirectView("login?error=0");
 		}
 	}
 	
@@ -84,10 +86,24 @@ public class CustomerController {
 		}
 	}
 	
+	@GetMapping("/mypage_c")
+	public String getMyPage(HttpSession session, Model model) throws Exception {
+		log.info("getMypage()");
+		
+		//번호로 쿼리 찾아서 model에 attr 시켜서 보냄
+		
+		
+		model.addAttribute("user_info", service.findNum((int)session.getAttribute("check")));
+		
+		return "member/mypage_c";
+	}
+	
 	@GetMapping("/success")
 	public String successTest() {
 		log.info("testPage()");
 		
 		return "member/success";
 	}
+	
+	
 }
