@@ -9,9 +9,9 @@
 		</selectKey>
 		insert into
 			product_img
-				(image_no, product_id, image_name, image_save_name, file_size, file_type)
+				(image_no, product_no, image_name, image_save_name, file_size, file_type, image_type)
 			values
-				(#{image_no}, #{product_id}, #{image_name}, #{image_save_name}, #{file_size}, #{file_type})
+				(#{image_no}, #{product_no}, #{image_name}, #{image_save_name}, #{file_size}, #{file_type}, #{image_type})
 	</insert>
 	
 	<delete id="delete">
@@ -27,7 +27,7 @@
 			from
 				product_img
 			where
-				product_id = #{product_id}
+				product_no = #{product_no}
 	</select>
 
 
