@@ -18,7 +18,7 @@ html, body {
     color: #666;
     font-size: 14px;
     line-height: 20px;
-    font-family: '나눔고딕', sans-serif;
+    font-family: ''dotum', '돋움', sans-serif;
     letter-spacing: -0.04em;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
@@ -41,9 +41,9 @@ input[type="submit"], button {
 	width: 1020px;
 	height: 40px;
 	margin: 0 auto;
-	padding-top: 13px;
 }
 .login-box ul{
+	padding-top: 10px;
 	float: right;
 	text-align:center;
     margin: 0;
@@ -73,58 +73,39 @@ input[type="submit"], button {
 	float: left;
 	width: 100px;
 	margin: 0;
-	margin-top: 20px;
+	padding-top: 10px;
 }
 .search-box {
 	width: 300px;
-	height: 40px;
-	margin-top: 20px;
+	display: inline-block;
+	padding-top: 10px;
 	text-align: center;
 	float: left;
 }
 .search-input {
-	width: 75%;
-    height: 100%;
-    border: 2px solid #e5e5e5;
+	width: 100%;
+    height: 44px;
+    border: 1px solid #e5e5e5;
     font-size: 14px;
     line-height: 22px;
     background-color: #fff;
     color: #888;
     border-radius: 20px;
-}
-.search-input > .into-btn{
-	width: 25%;
-	height: 100%;
+}   
+.search-input:hover,
+.search-input:focus {
+    outline: 0;
+    border: 1px solid transparent;
+    border-bottom: 1px solid #575756;
+    border-radius: 0;
+    background-position: 100% center;
 }
 .icons {
+	padding-top: 14px;
 	float: right;
 	width: 100px;
-	height:30px;
-	margin: 0 auto;
-	margin-top: 20px;
+	color: black;
 }
-.icons > input {
-	display: inline-block;
-	float: left;
-	margin-left: 20px;
-}
-.icons > .func-my {
-	 background: url( "/resources/img/func_my.png" ) no-repeat;
-	 background-size: 30px 30px;
-     border: none;
-     width: 30px;
-     height: 100%;
-     cursor: pointer;
-}
-.icons > .func-cart {
-	 background: url( "/resources/img/func_cart.png" ) no-repeat;
-	  background-size: 30px 30px;
-     border: none;
-     width: 30px;
-     height: 100%;
-     cursor: pointer;
-}
-
 .nav {
 	min-width: 1020px;
 	height: 47px;
@@ -144,7 +125,7 @@ input[type="submit"], button {
 .nav li {
     display: inline-block;
     text-align:center;
-    padding-top: 8px;
+    padding-top: 13px;
 }
 .nav li a {
     padding: 40px;
@@ -173,9 +154,9 @@ input[type="submit"], button {
 <body>
 <div class="login-box">
 		<ul>
-			<li><a href="/member/sample">로그인</a></li>
-			<li><a href="/member/join">회원가입</a></li>
-			<li><a href="/admin/login">관리자</a></li>
+			<li><a href="#">로그인</a></li>
+			<li><a href="#">회원가입</a></li>
+			<li><a href="#">관리자</a></li>
 		</ul>
 </div>
 <div class="top-box">
@@ -188,8 +169,8 @@ input[type="submit"], button {
     </form>
     
     <div class="icons">
-    	<input type="button" class="func-my" >
-    	<input type="button"  class="func-cart">
+    	<a href="#"><i class="fas fa-user fa-2x"></i></a>
+    	<a href="#"><i class="fas fa-shopping-cart fa-2x"></i></a>
     </div>
     
 </div>
