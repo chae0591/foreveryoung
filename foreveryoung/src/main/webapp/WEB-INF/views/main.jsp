@@ -139,6 +139,7 @@ table {
     border:none;display:inline-block;
     background:#fff;font-size:0;
     transition:0.5s;cursor:pointer;
+    margin-left: 10px;
     }
     /* 슬라이드 조작 */
     #pos1:checked ~ ul li:nth-child(1),
