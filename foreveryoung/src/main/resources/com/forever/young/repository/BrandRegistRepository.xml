@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.forever.young.repository.BrandRegistRepository">
+
+	<insert id="regist">
+		insert into brand 
+		values ( customer_seq.nextval, 
+		#{brand_id}, #{brand_pw}, #{brand_name}, #{brand_phone}, sysdate, 'F', null )
+	</insert>
+	
+	<select id="login" resultType="Brand">
+		select * from brand where user_id = #{brand_id} and user_pw = #{brand_pw}
+	</select>
+	
+	<select id="findId" resultType="Brand">
+		select * from Brand where user_id = #{brand_id}
+	</select>
+
+</mapper>

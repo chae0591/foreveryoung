@@ -1,0 +1,44 @@
+.login-wrapper{
+	width: 400px;
+	margin: 0 auto;
+	}
+        
+.login-wrapper .login-title{
+	text-align: center;
+	font-size: 50px;
+	}
+.login-wrapper .login-id{
+	width: 100%;
+	font-size: 25px;
+	margin: 10px 0px; /* 좌우 마진은 폭에 영향을 미친다 */
+	padding: 10px;
+	            
+	/* background 속성으로 이미지 설정 */
+	padding-left: 45px;
+	background-image: url("/img/member/login_id.png");
+	background-size: 30px;
+	background-repeat: no-repeat;
+	background-position: 7.5px;
+	}
+.login-wrapper .login-pw{
+	width: 100%;
+	font-size: 25px;
+	margin: 10px 0px;
+	padding: 10px;
+	           
+	/* background 속성으로 이미지 설정 */
+	padding-left: 45px;
+	background-image: url("/img/member/login_pw.png");
+	background-size: 30px;
+	background-repeat: no-repeat;
+	background-position: 7.5px;
+	}
+.login-wrapper .login-btn{
+	width: 100%;
+	font-size: 25px;
+	margin: 10px 0px;
+	padding: 10px;
+	background-color: olive;
+	color: white;
+	border: none;
+	}

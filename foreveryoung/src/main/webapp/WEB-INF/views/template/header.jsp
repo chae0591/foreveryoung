@@ -203,6 +203,7 @@ input[type="submit"], button {
 		<li><a href="${pageContext.request.contextPath}/product/categoryList/perfume">향수/디퓨저</a></li>
 		<li><a href="${pageContext.request.contextPath}/product/categoryList/manscare">남성케어</a></li>
 		<li><a href="/category/service_center">고객센터</a></li>
+
 	</ul>
 </div>
 
