@@ -122,7 +122,7 @@
 		});// uploadImage
 		
 		$("#uploadImageDetail").on("click", function(e){
-			e.preventDefault();
+			e.preventDefault(); 
 			// 빈 form 생성
 			var formData = new FormData();
 			// 사용자가 선택한 파일 변수 생성
