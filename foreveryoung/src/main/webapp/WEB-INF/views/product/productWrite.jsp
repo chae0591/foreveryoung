@@ -85,7 +85,7 @@
 		var cloneObj = $(".upload").clone();
 		// 상품이미지 업로드 버튼 클릭
 		$("#uploadImage").on("click", function(e){
-			
+			e.preventDefault();
 			// 빈 form 생성
 			var formData = new FormData();
 			// 사용자가 선택한 파일 변수 생성
@@ -122,6 +122,7 @@
 		});// uploadImage
 		
 		$("#uploadImageDetail").on("click", function(e){
+			e.preventDefault();
 			// 빈 form 생성
 			var formData = new FormData();
 			// 사용자가 선택한 파일 변수 생성
@@ -156,8 +157,6 @@
 					}
 		}); // ajax
 		});// uploadImageDetail
-		
-		
 		
 		
 		
@@ -209,20 +208,17 @@
 		
 		// 파일삭제 또는 main 페이지 이동 처리
 		function deleteImgLocation() {
-			if((".uploadResult ul li")) {
-					deleteImg();
+			if($(".uploadResult ul li").length) {
+				deleteImg();
 			} else {
-					window.location.href="/main";
-				}
+				window.location.href="/main";
+			}
 		};
 		
 		// 취소버튼 클릭 시 파일 delete
 		$(".cancelBtn").on("click", function(e){
 			deleteImgLocation();
-			
 		});
-		
-		
 		
 		
 		// 폴더 내 이미지 삭제 필요 시 호출되는 함수
@@ -306,14 +302,38 @@
 				<label>민감성 </label><input type="radio" name="product_skintype" value="민감성">
 			</div>
 			<br>
+			<div class="outbox">
+				<div class="upload">
+					<label style="font-weight:bold">상품 이미지</label>
+					<input type="file" name="upload_file" required multiple>
+				</div>
+				
+				<button id="uploadImage">이미지 등록</button>
+				<br>
+				
+				<div>
+					<label style="font-weight:bold">상품 상세설명 이미지</label>
+					<input type="file" name="upload_file_detail" required multiple>
+				</div>
+				<button id="uploadImageDetail">이미지 등록</button>
+				<div class="uploadResult">
+					<ul>
+					
+					</ul>
+				</div>
+				
+			</div> <!-- outbox -->
+			<br>
+				
 			
 			<div>
 				<label style="font-weight:bold">상품 등록자(브랜드)</label>
 				<input type="text" name="product_brand" placeholder=" 판매자(브랜드)명이 들어감" size="50">
 			</div>
 			<br>
-	
-	
+			
+			
+			
 			<div>
 				<input type="submit" value="상품 등록">
 				<input type="button" class="cancelBtn" value="등록 취소">
@@ -322,28 +342,7 @@
 
 	</form>
 	
-	<div class="outbox">
-			<div class="upload">
-				<label style="font-weight:bold">상품 이미지</label>
-				<input type="file" name="upload_file" required multiple>
-			</div>
-			
-			<button id="uploadImage">이미지 등록</button>
-			<br>
-			
-			<div>
-				<label style="font-weight:bold">상품 상세설명 이미지</label>
-				<input type="file" name="upload_file_detail" required multiple>
-			</div>
-			
-			<div class="uploadResult">
-				<ul>
-				
-				</ul>
-			</div>
-			<button id="uploadImageDetail">이미지 등록</button>
-	</div> <!-- outbox -->
-	<br>
+	
 	
 </body>
 </html>
