@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>상품 등록 페이지</title>
 </head>
 <style>
 	.uploadResult ul {
@@ -24,6 +24,8 @@
 	}
 </style>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/product/productCommon.css">
+
 <script>
 
 	// 등록된 이미지 클릭 시 새창으로 이미지 열기
@@ -207,54 +209,84 @@
 	});
 </script>
 <body>
-
-	<form action="productWrite" method="post">
-		<div>
-			<h2>제품 입력창</h2>
-		</div>
-		<div>
-			<label>상품 카테고리</label>
-			<input type="radio" name="product_category" class="input" value="skincare"> 스킨케어
-			<input type="radio" name="product_category" class="input" value="makeup"> 메이크업
-			<input type="radio" name="product_category" class="input" value="bodycare"> 바디케어
-			<input type="radio" name="product_category" class="input" value="haircare"> 헤어케어
-			<input type="radio" name="product_category" class="input" value="perfume"> 향수/디퓨
-			<input type="radio" name="product_category" class="input" value="manscare"> 남성케어
-		</div>
-		
-		<div>
-			<label>상품 이름</label>
-			<input type="text" name="product_name" required placeholder="상품 이름을 입력하시오.">
-		</div>
-		
-		<div>
-			<label>상품 가격</label>
-			<input type="text" name="product_price" required>
-		</div>
-		
-		<div>
-			<label>상품 재고</label>
-			<input type="text" name="product_stock" required placeholder="삼품 재고 입력하시오.">
-		</div>
 	
+	<form action="productWrite" method="post" class="center">
 		<div>
-			<input type="submit" value="상품 등록">
-			<input type="button" class="cancelBtn" value="등록 취소">
+			<h2 style=font:bold>상품 등록 페이지</h2>
 		</div>
+		
+			<div>
+				<p style="font-weight:bold">상품 카테고리</p>
+				<label>스킨케어 </label><input type="radio" name="product_category" value="skincare"> 
+				<label>메이크업</label><input type="radio" name="product_category" value="makeup">
+				<label>바디케어</label><input type="radio" name="product_category" value="bodycare">
+				<label>헤어케어</label><input type="radio" name="product_category" value="haircare">
+				<label>향수 / 디퓨져</label><input type="radio" name="product_category" value="perfume"> 
+				<label>남성케어</label><input type="radio" name="product_category" value="manscare">
+			</div>
+			<br>
+		
+		
+		
+			<div>
+				<label style="font-weight:bold">상품 이름</label>
+				<input type="text" name="product_name" required placeholder="상품 이름을 입력하시오." size="50">
+			</div>
+			<br>
+		
+		
+			<div>
+				<label style="font-weight:bold">상품 가격</label>
+				<input type="text" name="product_price" required placeholder="상품 가격을 입력하시오. 숫자만" size="50">
+			</div>
+			<br>
+			
+			<div>
+				<label style="font-weight:bold">상품 재고</label>
+				<input type="text" name="product_stock" required placeholder="삼품 재고 입력하시오." size="50">
+			</div>
+			<br>
+		
+	
+			<div class="outbox">
+					<div class="upload">
+						<label style="font-weight:bold">상품 썸네일</label>
+						<input type="file" name="upload_file" required placeholder="상품 설명 / 이미지를 넣으시오. " multiple>
+					</div>
+					
+					<div class="uploadResult">
+						<ul>
+						
+						</ul>
+					</div>
+				<button id="uploadImage">이미지 등록</button>
+			</div>
+			<br>
+		
+			
+			<div>
+				<p style="font-weight:bold">  피부 타입 (선택)</p>
+				<label>건성</label><input type="radio" name="product_skintype" value="'건성">
+				<label>지성 </label><input type="radio" name="product_skintype" value="지성"> 
+				<label>복합성 </label><input type="radio" name="product_skintype" value="복합성">
+				<label>민감성 </label><input type="radio" name="product_skintype" value="민감성">
+			</div>
+			<br>
+			
+			<div>
+				<label style="font-weight:bold">상품 등록자(브랜드)</label>
+				<input type="text" name="product_brand" placeholder=" 판매자(브랜드)명이 들어감" size="50">
+			</div>
+			<br>
+	
+	
+			<div>
+				<input type="submit" value="상품 등록">
+				<input type="button" class="cancelBtn" value="등록 취소">
+			</div>
+			<br>
+
 	</form>
 	
-	<div class="outbox">
-			<div class="upload">
-				<label>상품 이미지</label>
-				<input type="file" name="upload_file" required placeholder="상품 설명 / 이미지를 넣으시오. " multiple>
-			</div>
-			
-			<div class="uploadResult">
-				<ul>
-				
-				</ul>
-			</div>
-		<button id="uploadImage">이미지 등록</button>
-	</div>
 </body>
 </html>
