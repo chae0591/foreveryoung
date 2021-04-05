@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
 
 <!DOCTYPE html>
@@ -27,8 +26,27 @@
 </script> 
 
 </head>
+
+
+
 <body>
+
+		<!-- 관리자 모드 메뉴 -->
+			<a href="/admin/login">로그인</a>
+			<a href="/admin/dashBoard">대시보드</a>
+			<a href="/admin/adminList">관리자페이지</a>
+			<a href="/admin/brandList">판매자관리</a>
+			<a href="/admin/customerList">고객관리</a>
+			<a href="/admin/productList">상품관리</a>
+			<a href="/admin/eventList">이벤트관리</a>
+			<a href="/admin/noticeList">공지사항관리</a>
+			<a href="/admin/inquiryList">1:1문의관리</a>
+			<a href="#">리뷰신고관리</a>
+			<a href="/admin/staticCustomer">통계관리(회원분석)</a> 
+			<a href="/admin/staticSales">통계관리(매출분석)</a> 
+
 	<h2>관리자 리스트</h2>
+	
 	
 	<div>
 		<input type="button" id="admin_join" value="관리자 등록">
@@ -58,8 +76,8 @@
 						<td align="center">${adminList.admin_no}</td>
 						<td align="center">${adminList.admin_id}</td>
 						<td align="center">${adminList.admin_name}</td>
-						<td align="center">${adminList.admin_regDate}</td>
 						<td align="center">${adminList.admin_phone}</td>
+						<td align="center">${adminList.admin_regDate}</td>
 						<td align="center">
 							<input type="button" id="admin_modify" value="수정">
 							<input type="button" id="admin_delete" value="삭제">

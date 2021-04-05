@@ -16,7 +16,7 @@
 			self.location = "/admin/noticeRegister"
 		})
 		$("#notice_detail").click(function(){
-			//self.location = "/admin/join"
+			self.location = "/admin/noticeDetail"
 		})
 	})
 
