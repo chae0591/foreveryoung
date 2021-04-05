@@ -53,8 +53,72 @@
    .recommend{
    	height : 300px;
    }
-</style>
-<!--  -->
+   
+       *{margin:0;padding:0;}
+		    ul,li{list-style:none;}
+		    .slide{height:155px;overflow:hidden;position:relative;}
+		    .slide ul{width:calc(100% * 4);display:flex;transition:1s;}
+		    .slide li{width:calc(100% / 4);height:300px;}
+		    .slide input{display:none;}
+		    .slide .bullet{position:absolute;bottom:20px;left:0;right:0;text-align:center;z-index:10;}
+		    .slide .bullet label{width:10px;height:10px;border-radius:10px;border:2px solid #666;display:inline-block;background:#fff;font-size:0;transition:0.5s;cursor:pointer;}
+		    /* 슬라이드 조작 */
+		    #pos1:checked ~ ul{margin-left:0;}
+		    #pos2:checked ~ ul{margin-left:-100%;}
+		    #pos3:checked ~ ul{margin-left:-200%;}
+		    #pos4:checked ~ ul{margin-left:-300%;}
+		    /* bullet 조작 */
+		    #pos1:checked ~ .bullet label:nth-child(1),
+		    #pos2:checked ~ .bullet label:nth-child(2),
+		    #pos3:checked ~ .bullet label:nth-child(3),
+		    #pos4:checked ~ .bullet label:nth-child(4){background:#666;}
+	        .menu,
+        .menu ul {
+            list-style: none;
+            margin:0;
+            padding:0;
+        }
+        /* 메뉴 테두리 */
+        .menu {
+            border:1px solid black;
+        }
+        /* 1차 메뉴 항목 */
+        .menu > li {
+            width:150px;
+            display:inline-block;
+            position:relative;/*relative로 내부의 absolute를 가둔다*/
+            padding:1rem;
+        }
+        /* 2차 이상 메뉴 */
+        .menu ul {
+            display:none;
+            position:absolute;
+            top:55px;
+            left:0;
+        }
+        .menu ul > li {
+            background-color:gray;
+            width:150px;
+            padding:1rem;            
+        }
+        .menu ul > li:hover {
+            background-color:black;
+        }
+        .menu ul > li:hover > a {
+            color:white;
+        }
+        
+        /* 전체 메뉴에 마우스가 올라간 경우의 하위 메뉴 */
+        .menu li:hover > ul {
+            display:block;
+        }
+        /* 메뉴에 있는 링크 전체 */
+        .menu a {
+            text-decoration: none;
+            color:black;
+        }
+  </style>
+  
 <body>
 <script>
 var sell_price;
@@ -171,37 +235,82 @@ function change () {
       </div>
       
       <div align="center" class="recommend">
-         <h1 align="left">추천상품</h1>
-         	<div class="swiper-slide">
-				<input type="radio" name="pos" id="pos1" checked>
-			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
-			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
-			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
-			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
-		      	<input type="radio" name="pos" id="pos2">
-			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
-			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
-			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
-			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
-		      	<input type="radio" name="pos" id="pos3">
-			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
-			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
-			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
-			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
-		      	<input type="radio" name="pos" id="pos4">
-			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
-			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
-			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
-			      <img class="swiper-slide" src="https://placeimg.com/350/200/tech">
-		     </div>
-      </div>
+         <h3 align="center">추천상품</h3>
+         
+			<div class="slide">
+			    <input type="radio" name="pos" id="pos1" checked>
+			    <input type="radio" name="pos" id="pos2">
+			    <input type="radio" name="pos" id="pos3">
+			    <input type="radio" name="pos" id="pos4">
+			    <ul>
+			      <li>
+			      <a href="#">
+			      	<img class="swiper-slide" src="https://placeimg.com/150/100/tech">
+			      </a>
+			      <img class="swiper-slide" src="https://placeimg.com/150/100/tech">
+			      <img class="swiper-slide" src="https://placeimg.com/150/100/tech">
+			      </li>
+			      <li>
+			      <img class="swiper-slide" src="https://placeimg.com/150/100/animals">
+			      <img class="swiper-slide" src="https://placeimg.com/150/100/animals">
+			      <img class="swiper-slide" src="https://placeimg.com/150/100/animals">
+			      </li>
+			      <li>
+			      <img class="swiper-slide" src="https://placeimg.com/150/100/tech">
+			      <img class="swiper-slide" src="https://placeimg.com/150/100/tech">
+			      <img class="swiper-slide" src="https://placeimg.com/150/100/tech">
+			      </li>
+			      <li>
+			      <img class="swiper-slide" src="https://placeimg.com/150/100/animals">
+			      <img class="swiper-slide" src="https://placeimg.com/150/100/animals">
+			      <img class="swiper-slide" src="https://placeimg.com/150/100/animals">
+			      </li>
+			    </ul>
+			    <p class="bullet">
+			      <label for="pos1">1</label>
+			      <label for="pos2">2</label>
+			      <label for="pos3">3</label>
+			      <label for="pos4">4</label>
+			    </p>
+			</div>
+      
       
       <hr>
       
       <div>
          <h1>상품내용</h1>
-      <!-- 상품내용/구성/배송/qna 메뉴 -->
+         
+      		<div>
+      		    <ul class="menu">
+			        <li>
+			            <a href="#">상세정보</a>
+			            <ul>
+			                <li><a href="#"><img src="https://placeimg.com/1100/480/animals"></a></li>
+			            </ul>
+			        </li>
+			        <li>
+			            <a href="#">구매정보</a>
+			            <ul>
+			                <li><a href="#"><img src="https://placeimg.com/150/100/animals"></a></li>
+			            </ul>
+			        </li>
+			        <li>
+			            <a href="#">리뷰</a>
+			            <ul>
+			                <li><a href="#"><img src="https://placeimg.com/150/100/animals"></a></li>
+			            </ul>
+			        </li>
+			        <li>
+			            <a href="#">QnA</a>
+			            <ul>
+			                <li><a href="#"><img src="https://placeimg.com/150/100/animals"></a></li>
+			            </ul>
+			        </li>
+			    </ul>
+      		</div>
+      
       </div>
+   </div>
    </div>
 </body>
 </html>
