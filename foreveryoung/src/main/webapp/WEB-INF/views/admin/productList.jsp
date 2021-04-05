@@ -38,7 +38,7 @@
 						<td align="center">${productList.product_name}</td>
 						<td align="center">${productList.product_category}</td>
 						<td align="center">${productList.brand_name}</td>
-						<td align="center">할인적용 체크박스</td>
+						<td align="center"><input type="checkbox"></td>
 						<td align="center">${productList.product_price}/
 						 					할인가격</td>
 						<td align="center">${productList.product_regDate}</td>
@@ -49,5 +49,20 @@
 			</c:otherwise>
 		</c:choose>
 	</table>
+	
+	
+
+
+
+		<div>
+			<p>이벤트 할인적용</p>	
+			<select>
+				<option>이벤트 선택</option>
+			</select>
+			
+			<input type="button" value="적용">
+			<input type="button" value="미적용"> 
+		</div>
+	
 </body>
 </html>

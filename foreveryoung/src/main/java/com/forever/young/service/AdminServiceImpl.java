@@ -22,8 +22,6 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public Admin login(Admin admin) throws Exception {
-		System.out.println("checkService : " + admin.getAdmin_id());
-		System.out.println("checkService : " + admin.getAdmin_pw());
 		return repository.login(admin) ;
 	}
 	

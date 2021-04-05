@@ -28,7 +28,7 @@
   			select * from admin
   		]]>
 	</select>
-
+	
 	<!-- 브랜드 리스트 -->
 	<select id="brandList" resultType="Brand">
   		<![CDATA[
@@ -42,7 +42,7 @@
   			select * from customer
   		]]>
 	</select>
-
+	
 	<!-- 상품 리스트 -->
 	<select id="productList" resultType="ProductVO">
   		  		<![CDATA[
@@ -85,6 +85,22 @@
 		insert into notice values(notice_seq.nextval,
 		 #{notice_type} , #{notice_title}, #{notice_content},  null)
 	</insert>
+	
+	<!-- 총 고객수 -->
+	<select id="customerCount" resultType="int">
+		select count(*) from customer
+	</select>
+	
+	<!-- 총 브랜드수 -->
+	<select id="brandCount" resultType="int">
+		select count(*) from brand
+	</select>
+	
+	<!-- 총 상품수 -->
+	<select id="productCount" resultType="int">
+		select count(*) from product_table
+	</select>		
+
 
 
 </mapper>

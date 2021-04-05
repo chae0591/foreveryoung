@@ -33,5 +33,6 @@ public interface AdminService {
 	public void eventRegister(Event event) throws Exception;
 	
 	public void noticeRegister(Notice notice) throws Exception;
+	
  	
 }
