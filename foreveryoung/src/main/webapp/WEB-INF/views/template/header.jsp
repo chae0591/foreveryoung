@@ -206,6 +206,5 @@ input[type="submit"], button {
 	</ul>
 </div>
 
-<h2>테스트</h2>
 </body>
 </html>
