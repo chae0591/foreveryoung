@@ -1,13 +1,13 @@
 package com.forever.young.entity;
 
-import java.time.LocalDateTime;
+import java.sql.Date;
 
 public class Admin {
 	private int admin_no;
 	private String admin_id;
 	private String admin_pw;
 	private String admin_name;
-	private LocalDateTime admin_regDate;
+	private Date admin_regDate;
 	private String admin_phone;
 	public int getAdmin_no() {
 		return admin_no;
@@ -34,10 +34,10 @@ public class Admin {
 		this.admin_name = admin_name;
 	}
 
-	public LocalDateTime getAdmin_regDate() {
+	public Date getAdmin_regDate() {
 		return admin_regDate;
 	}
-	public void setAdmin_regDate(LocalDateTime admin_regDate) {
+	public void setAdmin_regDate(Date admin_regDate) {
 		this.admin_regDate = admin_regDate;
 	}
 	public String getAdmin_phone() {
