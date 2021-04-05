@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 public class Product {
-	private int product_id;
+	private int product_no;
 	private String product_category;
 	private String product_name; 
 	private int product_price;
@@ -15,18 +15,17 @@ public class Product {
 	private int event_no;
 	
 	private List<ProductFileUpload> uploadFileList;
-	
 
 	public Product() {
 		super();
 	}
 
-	public int getProduct_id() {
-		return product_id;
+	public int getProduct_no() {
+		return product_no;
 	}
 
-	public void setProduct_id(int product_id) {
-		this.product_id = product_id;
+	public void setProduct_no(int product_no) {
+		this.product_no = product_no;
 	}
 
 	public String getProduct_category() {
@@ -103,12 +102,12 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [product_id=" + product_id + ", product_category=" + product_category + ", product_name="
+		return "Product [product_no=" + product_no + ", product_category=" + product_category + ", product_name="
 				+ product_name + ", product_price=" + product_price + ", product_stock=" + product_stock
 				+ ", product_regDate=" + product_regDate + ", product_brand=" + product_brand + ", product_skintype="
 				+ product_skintype + ", event_no=" + event_no + ", uploadFileList=" + uploadFileList + "]";
 	}
 	
-	
 
+	
 }

@@ -2,21 +2,23 @@ package com.forever.young.entity;
 
 public class ProductFile {
 	
-	private int product_id;
+	private int product_no;
 	private String image_name;
 	private String image_save_name;
 	private int file_size;
 	private String file_type;
+	private String image_type;
+	private String save_path;
 	
 	
 	public ProductFile() {
 		super();
 	}
-	public int getProduct_id() {
-		return product_id;
+	public int getProduct_no() {
+		return product_no;
 	}
-	public void setProduct_id(int product_id) {
-		this.product_id = product_id;
+	public void setProduct_no(int product_no) {
+		this.product_no = product_no;
 	}
 	public String getImage_name() {
 		return image_name;
@@ -42,6 +44,19 @@ public class ProductFile {
 	public void setFile_type(String file_type) {
 		this.file_type = file_type;
 	}
+	public String getImage_type() {
+		return image_type;
+	}
+	public void setImage_type(String image_type) {
+		this.image_type = image_type;
+	}
+	public String getSave_path() {
+		return save_path;
+	}
+	public void setSave_path(String save_path) {
+		this.save_path = save_path;
+	}
+	
 	
 	
 	

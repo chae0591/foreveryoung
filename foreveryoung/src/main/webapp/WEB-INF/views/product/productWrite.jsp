@@ -29,8 +29,8 @@
 <script>
 
 	// 등록된 이미지 클릭 시 새창으로 이미지 열기
-	function showImage(fileCallPath) {
-		window.open("/viewImg?fileName=" + fileCallPath, "image", "width=700px, height=600px");
+	function showImage(fileCallPath, imageType) {
+		window.open("/viewImg?fileName=" + fileCallPath + "&imageType="+imageType, "image", "width=700px, height=600px");
 	}
 	
 	
@@ -55,6 +55,7 @@
 				str += "<input type='hidden' name='uploadFileList["+i+"].image_save_name' value='"+jobj.data("image_save_name") + "'>";
 				str += "<input type='hidden' name='uploadFileList["+i+"].file_type' value='"+jobj.data("file_type") + "'>";
 				str += "<input type='hidden' name='uploadFileList["+i+"].file_size' value='"+jobj.data("file_size") + "'>";
+				str += "<input type='hidden' name='uploadFileList["+i+"].image_type' value='"+jobj.data("image_type") + "'>";
 			});
 			formObj.append(str).submit();
 		});
@@ -82,6 +83,7 @@
 		
 		// 상품업로드 빈 DIV 복사
 		var cloneObj = $(".upload").clone();
+		// 상품이미지 업로드 버튼 클릭
 		$("#uploadImage").on("click", function(e){
 			
 			// 빈 form 생성
@@ -99,6 +101,7 @@
 				}
 				formData.append("uploadFile", files[i]);
 			}
+			formData.append("image_type", "N");
 			
 			// 사용자가 업로드한 파일이 담긴 formData ajax 로 전송
 			$.ajax({
@@ -114,8 +117,49 @@
 						showUploadedFile(result);
 						$(".upload").html(cloneObj.html());
 					}
-			});
-		});
+			}); 
+			
+		});// uploadImage
+		
+		$("#uploadImageDetail").on("click", function(e){
+			// 빈 form 생성
+			var formData = new FormData();
+			// 사용자가 선택한 파일 변수 생성
+			var inputFile = $("input[name='upload_file_detail']");
+			var files = inputFile[0].files;
+			
+			console.log(files);
+			
+			// fileCheck 함수로 업로드 된 이미지 검사
+			for(var i = 0; i < files.length; i++) {
+				if(!fileCheck(files[i].name, files[i].size)) {
+					return false;
+				}
+				formData.append("uploadFile", files[i]);
+			}
+			formData.append("image_type", "D");
+			
+			
+			// 사용자가 업로드한 파일이 담긴 formData ajax 로 전송
+			$.ajax({
+				url : '/productImg',
+					processData : false,
+					contentType : false,
+					data : formData,
+					type : 'POST',
+					dataType : 'json',
+					success : function(result) {
+						console.log(result);
+						// showUploadFile 변수
+						showUploadedFile(result);
+						$(".upload").html(cloneObj.html());
+					}
+		}); // ajax
+		});// uploadImageDetail
+		
+		
+		
+		
 		
 		
 		// 태그 변수 생성
@@ -124,18 +168,22 @@
 		// ul 태그에 파일 정보 담긴 li append
 		function showUploadedFile(uploadResultArr) {
 			var str = "";
-			 
+			// image_type = "N" 또는 image_type="D"
+			
 			$(uploadResultArr).each(function(i, obj){
-				var fileCallPath = encodeURIComponent("s_" + obj.image_save_name);
-				var originPath = "/" + obj.image_save_name;
-				
-				str += "<li data-image_save_name='" + obj.image_save_name + "' data-image_name='" + obj.image_name + "' data-file_type='" + obj.file_type + "' data-file_size='" + obj.file_size + "'><div>"
-					+ "<span> " + obj.image_name + "</span>"
-				 	+ "<a href=\"javascript:showImage(\'" + originPath + "\')\"><img src='/viewImg?fileName=" + fileCallPath + "'></a>"+
-						"<button type='button' data-file=\'"+ fileCallPath + "\' data-type='image'>삭제</button></div></li>";
+					var fileCallPath = encodeURIComponent("s_" + obj.image_save_name);
+					var originPath = "/" + obj.image_save_name;
+					console.log(fileCallPath);
+					console.log(originPath);
+					str += "<li data-image_save_name='" + obj.image_save_name + "' data-image_name='" + obj.image_name + "' data-file_type='" + obj.file_type + "' data-file_size='" + obj.file_size + "' data-image_type='" + obj.image_type + "'><div>"
+						+ "<span> " + obj.image_name + "</span>"
+					 	+ "<a href=\"javascript:showImage(\'" + originPath + "\', \'" + obj.image_type + "\')\"><img src='/viewImg?fileName=" + fileCallPath + "&imageType="+obj.image_type + "'></a>"
+					 	+ "<button type='button' data-file=\'"+ fileCallPath + "\' data-type='image' data-image_type='" + obj.image_type + "'>삭제</button></div></li>";
 			});
 			uploadResult.append(str);
+		
 		}
+		
 		
 		// 삭제 버튼
 		$(".uploadResult").on("click","button", function(e){
@@ -143,11 +191,12 @@
 			var targetFile = $(this).data("file");
 			var type = $(this).data("type");
 			var targetLi = $(this).closest("li");
-			console.log(targetFile);
+			var imageType = $(this).data("image_type");
+			console.log($(this).data("image_type"));
 			
 			$.ajax({
 				url : '/deleteImg',
-				data : {fileName:targetFile, type:type},
+				data : {fileName:targetFile, type:type, imageType:imageType},
 				dataType : 'text',
 				type : 'POST',
 				success : function(result) {
@@ -180,11 +229,12 @@
 		function deleteImg() {
 			var targetFile = $(".uploadResult ul li button").data("file");
 			var type = $(".uploadResult ul li button").data("type");
+			var imageType = $(".uploadResult ul li button").data("image_type");
 			var targetLi = $(".uploadResult ul li button").closest("li");
 			console.log(targetFile);
 			$.ajax({
 				url : '/deleteImg',
-				data : {fileName:targetFile, type:type},
+				data : {fileName:targetFile, type:type, imageType:imageType},
 				dataType : 'text',
 				type : 'POST',
 				success : function(result) {
@@ -247,26 +297,10 @@
 			</div>
 			<br>
 		
-	
-			<div class="outbox">
-					<div class="upload">
-						<label style="font-weight:bold">상품 썸네일</label>
-						<input type="file" name="upload_file" required placeholder="상품 설명 / 이미지를 넣으시오. " multiple>
-					</div>
-					
-					<div class="uploadResult">
-						<ul>
-						
-						</ul>
-					</div>
-				<button id="uploadImage">이미지 등록</button>
-			</div>
-			<br>
-		
 			
 			<div>
 				<p style="font-weight:bold">  피부 타입 (선택)</p>
-				<label>건성</label><input type="radio" name="product_skintype" value="'건성">
+				<label>건성</label><input type="radio" name="product_skintype" value="건성">
 				<label>지성 </label><input type="radio" name="product_skintype" value="지성"> 
 				<label>복합성 </label><input type="radio" name="product_skintype" value="복합성">
 				<label>민감성 </label><input type="radio" name="product_skintype" value="민감성">
@@ -287,6 +321,29 @@
 			<br>
 
 	</form>
+	
+	<div class="outbox">
+			<div class="upload">
+				<label style="font-weight:bold">상품 이미지</label>
+				<input type="file" name="upload_file" required multiple>
+			</div>
+			
+			<button id="uploadImage">이미지 등록</button>
+			<br>
+			
+			<div>
+				<label style="font-weight:bold">상품 상세설명 이미지</label>
+				<input type="file" name="upload_file_detail" required multiple>
+			</div>
+			
+			<div class="uploadResult">
+				<ul>
+				
+				</ul>
+			</div>
+			<button id="uploadImageDetail">이미지 등록</button>
+	</div> <!-- outbox -->
+	<br>
 	
 </body>
 </html>

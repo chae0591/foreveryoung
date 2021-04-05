@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.forever.young.entity.Product;
-import com.forever.young.entity.ProductFileUpload;
 import com.forever.young.repository.ProductFileUploadRepository;
 import com.forever.young.repository.ProductRepository;
 
@@ -22,7 +21,6 @@ public class ProductServiceImpl implements ProductService{
 	private ProductFileUploadRepository productUploadRepo;
 	
 	
-	@Transactional
 	@Override
 	public void registProduct(Product product) throws Exception {
 		productRepository.registProduct(product);
@@ -30,8 +28,9 @@ public class ProductServiceImpl implements ProductService{
 		if(product.getUploadFileList() == null || product.getUploadFileList().size() <= 0) {
 			return;
 		}
+		
 		product.getUploadFileList().forEach(upload -> {
-			upload.setProduct_id(product.getProduct_id());
+			upload.setProduct_no((product.getProduct_no()));
 			productUploadRepo.insert(upload);
 		});
 	}
