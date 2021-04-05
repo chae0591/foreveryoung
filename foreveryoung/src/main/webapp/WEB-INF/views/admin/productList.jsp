@@ -34,7 +34,7 @@
 			<c:otherwise>
 				<c:forEach items="${productList}" var="productList">
 					<tr>
-						<td align="center">${productList.product_id}</td>
+						<td align="center">${productList.product_no}</td>
 						<td align="center">${productList.product_name}</td>
 						<td align="center">${productList.product_category}</td>
 						<td align="center">${productList.brand_name}</td>
