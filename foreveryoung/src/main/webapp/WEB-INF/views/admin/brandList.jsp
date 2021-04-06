@@ -9,6 +9,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script>
+	$(document).ready(function(){
+		$("#brand_product").click(function(){
+			//self.location = ""
+		})
+
+	})
+
+</script> 
+
 </head>
 <body>
 		<h2>브랜드 리스트</h2>
@@ -38,6 +51,9 @@
 						<td align="center">${brandList.brand_name}</td>
 						<td align="center">${brandList.brand_phone}</td>
 						<td align="center">${brandList.brand_regDate}</td>
+						<td align="center">
+							<input type="button" id="brand_product" value="상품목록">
+						</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>

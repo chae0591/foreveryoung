@@ -9,9 +9,33 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script>
+	$(document).ready(function(){
+		$("#event_register").click(function(){
+			self.location = "/admin/eventRegister"
+		})
+		$("#event_modify").click(function(){
+			//self.location = "/admin/join"
+		})
+		$("#event_delete").click(function(){
+			//self.location = "/admin/join"
+		})
+	})
+
+</script> 
+
 </head>
 <body>
 	<h2>이벤트 리스트</h2>
+	
+	<div>
+		<input type="button" id="event_register" value="이벤트 등록">
+	</div>
+	
+	
 	<table border="1">
 		<tr>
 			<th align="center" width="100">이벤트 번호</th>
@@ -36,14 +60,16 @@
 					<tr>
 						<td align="center">${eventList.event_no}</td>
 						<td align="center">${eventList.event_name}</td>
-						<td align="center">
-							<javatime:format value="${eventList.event_start}"
-								pattern="yyyy-MM-dd"/> ~
-							<javatime:format value="${eventList.event_end}"
-								pattern="yyyy-MM-dd"/>
+						<td align="center">${eventList.event_start}~
+											${eventList.event_end } 
 						</td>
 						<td align="center">${eventList.event_discount}</td>						
 						<td align="center">${eventList.event_target}</td>
+						<td align="center">진행상황</td>
+						<td align="center">
+							<input type="button" id="event_modify" value="수정">
+							<input type="button" id="event_delete" value="삭제">
+						</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>

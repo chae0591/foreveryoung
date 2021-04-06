@@ -7,9 +7,30 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script>
+	$(document).ready(function(){
+		$("#notice_register").click(function(){
+			self.location = "/admin/noticeRegister"
+		})
+		$("#notice_detail").click(function(){
+			self.location = "/admin/noticeDetail"
+		})
+	})
+
+</script> 
+
+
 </head>
 <body>
 	<h2>공지사항 리스트</h2>
+	
+	<div>
+		<input type="button" id="notice_register" value="공지사항 등록">
+	</div>
+	
 	<table border="1">
 		<tr>
 			<th align="center" width="100">공지글 번호</th>
@@ -33,7 +54,9 @@
 						<td align="center">${noticeList.notice_no}</td>
 						<td align="center">${noticeList.notice_type}</td>
 						<td align="center">${noticeList.notice_title}</td>						
-						<td align="center">상세보기</td>
+						<td align="center">
+							<input type="button" id="notice_detail" value="상세보기">
+						</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>

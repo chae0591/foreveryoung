@@ -3,9 +3,30 @@
 <mapper namespace="com.forever.young.repository.ProductRepository">
 	
 	<insert id="registProduct">
+	<selectKey keyProperty="product_no" order="BEFORE" resultType="int">
+			select product_table_seq.nextval from dual			
+	</selectKey>
 		insert into product_table 
-		values ( product_table_sequence.nextval, 
-		#{product_category}, #{product_name}, #{product_img}, #{product_price}, #{product_stock}, sysdate, null, null, null, null)
+			(product_no,
+			product_category,
+			product_name,
+			product_price,
+			product_stock,
+			product_regDate,
+			product_brand,
+			product_skintype,
+			event_no)
+			
+		values
+			(#{product_no},
+			#{product_category},
+			#{product_name},
+			#{product_price},
+			#{product_stock},
+			sysdate, 
+			1,
+			#{product_skintype},
+		 	1)
 	</insert>
 
 	<select id="selectBoardList" parameterType="hashMap" resultType="hashmap">
@@ -23,7 +44,7 @@
 	
 	<select id="categoryList" resultType="com.forever.young.entity.Product">
 			select
-				product_id,
+				product_no,
 				product_category,
 				product_name,
 				product_price,

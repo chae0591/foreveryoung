@@ -45,7 +45,6 @@ public class ProductController {
 		System.out.println(product.toString());
 		
 		service.registProduct(product);
-		
 		return "product/success"; 
 		
 	}

@@ -33,7 +33,9 @@
 						<td align="center">${inquiryList.inquiry_title}</td>
 						<td align="center">${inquiryList.user_id}</td>
 						<td align="center">${inquiryList.inquiry_regDate}</td>
-						<td align="center">${inquiryList.inquiry_status}</td>
+						<td align="center">
+							<a href="#">${inquiryList.inquiry_status}</a> 
+						</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>
