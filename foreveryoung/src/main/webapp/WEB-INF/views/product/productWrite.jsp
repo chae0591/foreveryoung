@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>상품 등록 페이지</title>
+
 <!--  부트스트랩 css-->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/product/css/bootstrap.css">
 
@@ -304,7 +305,6 @@
 
 
 
-
 	<!-- 시작 -->
 		<div>	
 			<h2 class="bold center">상품 등록 페이지</h2>
@@ -338,19 +338,6 @@
 				</div>	
 			
 			<hr>
-				
-		
-	
-		
-		
-			<!-- 	<div class="mb-3">
-					<label for="title">제목</label>
-					<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력해 주세요">
-				</div>
-
-
- -->
-		
 		
 			<div class="form-group">
 				<label class="bold">상품 이름</label>
@@ -401,17 +388,8 @@
 				</div>
 				
 			</div> <!-- outbox -->
-						
-						
-	
-			
-			
 		</fieldset>
 		<br>
-		
-		
-		
-		
 			
 			<fieldset>
 			<legend class="bold">선택 입력 항목</legend>
@@ -445,8 +423,8 @@
 
 	</form>
 	
-<!—부트스트랩을 사용하기위한 제이쿼리와 js설정 입력   —>
-
+	<!-- 부트스트랩을 사용하기위한 js설정 입력 -->
+	<!-- 이미지 파일 등록 오류로 제이쿼리 설정은 위로 올림 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/css/product/js/bootstrap.js"></script>
 </body>
 </html>
