@@ -105,5 +105,23 @@ public class CustomerController {
 		return "member/success";
 	}
 	
+	@GetMapping("/mypage_c_edit")
+	public String getMypage_c_edit(HttpSession session, Model model) throws Exception {
+		log.info("getMypage_c_edit()");
+		
+		model.addAttribute("user_info", service.findNum((int)session.getAttribute("check")));
+		
+		return "member/mypage_c_edit";
+	}
+	
+	@PostMapping("/mypage_c_edit")
+	public String PostMypage_c_edit(@ModelAttribute Customer customer) throws Exception {
+		log.info("PostMypage_c_edit()");
+		
+		log.info(customer.toString());
+		service.editInfo(customer);
+		
+		return "member/success";
+	}
 	
 }

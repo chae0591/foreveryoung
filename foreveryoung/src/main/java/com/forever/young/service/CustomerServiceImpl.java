@@ -32,4 +32,9 @@ public class CustomerServiceImpl implements CustomerService{
 	public Customer findNum(int user_num) throws Exception {
 		return repository.findNum(user_num);
 	}
+	
+	@Override
+	public void editInfo(Customer customer) throws Exception {
+		repository.editInfo(customer);		
+	}
 }

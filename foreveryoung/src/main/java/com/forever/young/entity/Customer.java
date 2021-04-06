@@ -1,6 +1,6 @@
 package com.forever.young.entity;
 
-import java.sql.Date;
+import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
