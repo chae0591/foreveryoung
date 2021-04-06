@@ -147,49 +147,49 @@ background-color: #555;
 .category-btns > .notice1 {
 	 background: url( "/resources/img/notice1.png" ) no-repeat;
 	 background-size: 65px 65px;
-	 background-position: center;
+	 background-position: 50% 40%;
 	 width: 145.7px;
      height: 100%;
 }
 .category-btns > .notice2 {
 	 background: url( "/resources/img/notice2.png" ) no-repeat;
 	 background-size: 65px 65px;
-	 background-position: center;
+	 background-position: 50% 40%;
 	 width: 145.7px;
      height: 100%;
 }
 .category-btns > .notice3 {
 	 background: url( "/resources/img/notice3.png" ) no-repeat;
 	 background-size: 65px 65px;
-	 background-position: center;
+	 background-position: 50% 40%;
 	 width: 145.7px;
      height: 100%;
 }
 .category-btns > .notice4 {
 	 background: url( "/resources/img/notice4.png" ) no-repeat;
 	 background-size: 65px 65px;
-	 background-position: center;
+	 background-position: 50% 40%;
 	 width: 145.7px;
      height: 100%;
 }
 .category-btns > .notice5 {
 	 background: url( "/resources/img/notice5.png" ) no-repeat;
 	 background-size: 65px 65px;
-	 background-position: center;
+	 background-position: 50% 40%;
 	 width: 145.7px;
      height: 100%;
 }
 .category-btns > .notice6 {
 	 background: url( "/resources/img/notice6.png" ) no-repeat;
 	 background-size: 65px 65px;
-	 background-position: center;
+	  background-position: 50% 40%;
 	 width: 145.7px;
      height: 100%;
 }
 .category-btns > .notice7 {
 	 background: url( "/resources/img/notice7.png" ) no-repeat;
 	 background-size: 65px 65px;
-	 background-position: center;
+	 background-position: 50% 40%;
 	 width: 145.7px;
      height: 100%;
 }
