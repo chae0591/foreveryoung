@@ -7,18 +7,21 @@
 <title>Insert title here</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
 <style>
-
 .banner {
 	text-align: center;
 	min-width: 1020px;
 	height: 100px;
 	background-color: #dddddd;
-	padding-left: 130px;
-	padding-top: 20px;
 }
-.banner  h2, p{
+.banner-title {
+	width: 1020px;
+	height: 100%;
+	margin: 0 auto;
+}
+.banner-title  h2, p{
 	float: left;
 	position: inline-box;
+	padding-top: 20px;
 	margin-right: 10px;
 }
 
@@ -29,9 +32,11 @@
 	text-align: center;
 	margin:0 auto;
 	margin-bottom:20px;
-		margin-top: 20px;
+	margin-top: 20px;
 }
-
+.service-btns a {
+text-decoration: none;
+}
 .service-btns button{
     width: 50%;
 	height:100%;
@@ -42,61 +47,94 @@
 	font-weight: 500;
 	border-radius: 5px;
 }
-.servicesearch-box  {
-	width: 1020px;
-	height: 50px;
-	margin: 0 auto;
-	border: 1px solid black;
-	text-align: center;
-	margin-top: 20px;
+.notice-btn {
+background-color: #555;
+	color: #fff;
 }
-.servicesearch-box > label {
+.service-btns button:hover, :focus{
+    width: 50%;
+	height:100%;
+	text-align: center;
+	float: left;
+	position: relative;
+	font-size: 20px;
+	font-weight: 500;
+	border-radius: 5px;
+	background-color: #555;
+	color: #fff;
+}
+.serviceSrh-box  {
+	width: 1020px;
+	height: 100px;
+	margin: 0 auto;
+	padding: 0;
+	margin-top: 20px;
+	background-color: #dddddd;
+	position: relative;
+}
+.serviceSrh-box > label {
 	color: #666;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 400px;
     float: left;
-    width: 30%;
-    height: 100%;
+
+    position: absolute;
+    top: 40%;
+    left: 25%;
+    
 }
-.servicesearch-box > .searchInp {
+.srh-box {
+	width: 350px;
+	height: 40px;
+	text-align: center;
 	float: left;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	border: 2px solid #e5e5e5;
+	background-color: #fff;
+    border-radius: 20px;
+     position: absolute;
+    top: 30%;
+    left: 40%;
+}
+.serviceSrh-box > input {
+	display: inline-block;
+	float: left;
+}
+.srh-box > .searchInp {
+    float: left;
     position: relative;
-	width: 50%;
+	width: 80%;
     height: 100%;
     font-size: 14px;
     line-height: 22px;
     color: #888;
     border: 0px;
 	margin-left: 20px;
+	background-color: #fff;
 }
-.servicesearch-box > .searchBtn {
-	float: left;
-    width: 20%;
-    height: 50px;
-    margin: 10px 19px 0 0;
-    font-size: 0;
-    text-indent: -99999px;
-    line-height: 0;
-    height: 100%;
+.srh-box > .searchBtn {
+    background: url( "/resources/img/search.png" ) no-repeat;
+	 background-size: 20px 20px;
+	 background-position: center;
+     border: none;
+     cursor: pointer;
+     font-size: 0px;
+     width: 10%;
+     height: 100%;
+     float: right;
+     margin-right: 10px;
 } 
 .category-btns {
 	width: 1020px;
 	height: 118px;
 	margin: 0 auto;
-}
-.catogory-btns ul {
-	width: 100%;
-	position: realative;
-}
-.category-btns li {
-	width: 14%;
-	height: 100%;
-	float: left;
-	position: realative;
+	margin-top: 20px;
 }
 .category-btns button {
-	width: 100%;
-    height: 120px;
+	width: 145.7px;
+    height: 100%;
     color: #666;
     background: #fff;
     box-sizing: border-box;
@@ -104,40 +142,94 @@
     padding-top: 60px;
     font-weight: 400;
  	border: 1px solid #e5e5e5;
+ 	float: left;
+}
+.category-btns > .notice1 {
+	 background: url( "/resources/img/notice1.png" ) no-repeat;
+	 background-size: 65px 65px;
+	 background-position: center;
+	 width: 145.7px;
+     height: 100%;
+}
+.category-btns > .notice2 {
+	 background: url( "/resources/img/notice2.png" ) no-repeat;
+	 background-size: 65px 65px;
+	 background-position: center;
+	 width: 145.7px;
+     height: 100%;
+}
+.category-btns > .notice3 {
+	 background: url( "/resources/img/notice3.png" ) no-repeat;
+	 background-size: 65px 65px;
+	 background-position: center;
+	 width: 145.7px;
+     height: 100%;
+}
+.category-btns > .notice4 {
+	 background: url( "/resources/img/notice4.png" ) no-repeat;
+	 background-size: 65px 65px;
+	 background-position: center;
+	 width: 145.7px;
+     height: 100%;
+}
+.category-btns > .notice5 {
+	 background: url( "/resources/img/notice5.png" ) no-repeat;
+	 background-size: 65px 65px;
+	 background-position: center;
+	 width: 145.7px;
+     height: 100%;
+}
+.category-btns > .notice6 {
+	 background: url( "/resources/img/notice6.png" ) no-repeat;
+	 background-size: 65px 65px;
+	 background-position: center;
+	 width: 145.7px;
+     height: 100%;
+}
+.category-btns > .notice7 {
+	 background: url( "/resources/img/notice7.png" ) no-repeat;
+	 background-size: 65px 65px;
+	 background-position: center;
+	 width: 145.7px;
+     height: 100%;
 }
 </style>
+
+</script>
 </head>
 <body>
 
 <jsp:include page="../template/header.jsp"></jsp:include>
 	<div class="banner">
-		<h2>고객센터</h2>
-		<p>무엇을 도와드릴까요?</p>
+		<div class="banner-title">
+			<h2>고객센터</h2>
+			<p>무엇을 도와드릴까요?</p>
+		</div>
 	</div>
 		
 	<div class="service-btns">
-		<button><a href="#">공지사항</a></button>
-		<button><a href="#">1:1 문의</a></button>
+		<a href="/service_center/notice"><button class="notice-btn">공지사항</button></a>
+		<a href="/service_center/inquiry"><button class="inquiry-btn">1:1 문의</button></a>
 	</div>
 	
-	<div class="servicesearch-box">
+	<div class="serviceSrh-box">
 		<label>공지사항 검색</label>
 		<form class="form-inline" action="#" method="post">
-			<input class="searchInp" type="text" placeholder="질문을 검색하세요.">
-			<input class="searchBtn" type="submit" value="검색">
+			<div class="srh-box">
+				<input class="searchInp" type="text" placeholder="질문을 검색하세요.">
+				<input class="searchBtn" type="submit" value="검색">
+			</div>
 		</form>
 	</div>
 	
 	<div class="category-btns">
-		<ul>
-			<li><button>회원</button></li>
-			<li><button>주문/결제</button></li>
-			<li><button>배송</button></li>
-			<li><button>교환/환불/반품</button></li>
-			<li><button>이벤트/쿠폰</button></li>
-			<li><button>판매자</button></li>
-			<li><button>기타</button></li>
-		</ul>
+			<button class="notice1">회원</button>
+			<button class="notice2">주문/결제</button>
+			<button class="notice3">배송</button>
+			<button class="notice4">교환/환불/반품</button>
+			<button class="notice5">이벤트/쿠폰</button>
+			<button class="notice6">판매자</button>
+			<button class="notice7">기타</button>
 	</div>
 	
 	<div class="service-list">
