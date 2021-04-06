@@ -3,6 +3,7 @@ package com.forever.young.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.forever.young.entity.ChangePwVO;
 import com.forever.young.entity.Customer;
 import com.forever.young.repository.CustomerRepository;
 
@@ -36,5 +37,10 @@ public class CustomerServiceImpl implements CustomerService{
 	@Override
 	public void editInfo(Customer customer) throws Exception {
 		repository.editInfo(customer);		
+	}
+	
+	@Override
+	public void editPw(ChangePwVO changePwVO) throws Exception {
+		repository.editPw(changePwVO);
 	}
 }

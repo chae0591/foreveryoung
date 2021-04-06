@@ -11,7 +11,6 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member/common.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member/mypage.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"></script>
 <script>
 $(document).ready(function () {
 	$(".input[name=user_name]").blur(function(){
@@ -73,9 +72,9 @@ $(document).ready(function () {
 		$("#xradio").attr("checked", "checked");
 	}
 	
-	console.log('<c:out value="${user_info.user_birth}"/>');
-	var date = '<c:out value="${user_info.user_birth}"/>';
-	console.log(moment(date).format('YYYY-MM-DD'));
+	$("#editPw-btn").click(function(){
+		self.location = "mypage_edit_pw";
+	});
 	
 });
 </script>
@@ -121,9 +120,9 @@ $(document).ready(function () {
 			</ul>
 		</div>
 		<div class="contentbox">
-			<form id="edit_form" action="mypage_c_edit" method="post">
+			<form id="edit_form" action="mypage_edit" method="post">
 			
-			<input type="hidden" value="${user_info.user_num}">
+			<input type="hidden" name="user_num" value="${user_info.user_num}">
 			<div class="outbox" style="width: 500px">
 				<div class="row center">
 					<h2>회원 정보 수정</h2>
@@ -148,7 +147,7 @@ $(document).ready(function () {
 	                </div>
 	                <div class="row">
 	                    <label>Password</label>
-	                    <input type="button" class="input input-inline" value="비밀번호 변경">
+	                    <input type="button" id="eidtPw-btn" class="input input-inline" value="비밀번호 변경">
 	                    <span>&nbsp;</span>
 	                </div>
 	                <div class="row">
@@ -174,7 +173,7 @@ $(document).ready(function () {
 	                </div>
 	                <div class="row">
 	                    <label>Birth</label>
-	                    <input type="date" id="dateinput" name="user_birth" class="input">
+	                    <input type="date" id="dateinput" name="user_birth" class="input" value="${user_birth_date}">
 	                </div>
 				</fieldset>
 				<div class="row">

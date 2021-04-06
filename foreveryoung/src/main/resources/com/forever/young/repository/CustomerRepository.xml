@@ -32,8 +32,14 @@
 	<update id="editInfo">
 		update customer set 
 		user_name = #{user_name}, user_phone = #{user_phone}, 
-		user_gender = #{user_gender, jdbcType=CHAR}, user_birth = #{user_birth, jdbcType=DATE} 
+		user_gender = #{user_gender, jdbcType=CHAR}, user_birth = #{user_birth} 
 		where user_num = #{user_num}
+	</update>
+	
+	<update id="editPw">
+		update customer set 
+		user_pw = #{change_pw} 
+		where user_num = #{user_num} and user_pw = #{current_pw}
 	</update>
 
 </mapper>

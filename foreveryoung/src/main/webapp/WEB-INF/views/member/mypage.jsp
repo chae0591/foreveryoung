@@ -44,9 +44,9 @@
                 </li>
                 
                 <li>
-                    <a href="mypage_c_edit">내 설정</a>
+                    <a href="mypage_edit">내 설정</a>
                     <ul>
-                        <li><a href="mypage_c_edit">회원 정보 변경</a></li>
+                        <li><a href="mypage_edit">회원 정보 변경</a></li>
                         <li><a href="">주소록 변경</a></li>
                     </ul>
                 </li>
