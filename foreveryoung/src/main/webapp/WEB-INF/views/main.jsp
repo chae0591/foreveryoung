@@ -248,7 +248,7 @@ table {
 	<h2 class="event-title">주목해야 할 신상</h2>
 	<button class="more-btn">더보기</button>
 </div>
-
+<h1>test</h1>
 <jsp:include page="template/footer.jsp"></jsp:include>
 
 </body>
