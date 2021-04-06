@@ -4,11 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/category")
+@RequestMapping("/service_center")
 public class ServiceCenterController {
 	
-	@RequestMapping(value="/service_center")
+	@RequestMapping(value="/notice")
 	public String serviceCenter() {
-		return "category/service_center";
+		return "service_center/notice";
 	}
 }
