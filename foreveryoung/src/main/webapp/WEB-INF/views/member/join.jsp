@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+<jsp:include page="../template/header.jsp"></jsp:include>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -109,7 +110,7 @@
 			}
 		});
 		
-		$("#join-form").submit(function(e){
+		$("#join_form").submit(function(e){
 	        e.preventDefault();
 	        
 	        $("input[id=duplicate]").click();
@@ -135,7 +136,7 @@
 </script>
 </head>
 <body>
-    <form id="join-form" action="join" method="post">
+    <form id="join_form" action="join" method="post">
 		<div class="outbox" style="width: 500px">
 			<div class="row center">
 				<h2>회원 정보 입력</h2>
@@ -185,8 +186,9 @@
 			    <div class="row">
                     <label>Gender</label>
                     <div>
-                        <input type="radio" name="user_gender" class="input input-inline" value="M"> M
-                        <input type="radio" name="user_gender" class="input input-inline" value="F"> F
+                    	<input type="radio" name="user_gender" class="input input-inline" value="" checked> 선택안함
+                        <input type="radio" name="user_gender" class="input input-inline" value="M"> 남성
+                        <input type="radio" name="user_gender" class="input input-inline" value="F"> 여성
                     </div>
                 </div>
                 <div class="row">
@@ -200,4 +202,5 @@
 		</div>
 	</form>
 </body>
+<jsp:include page="../template/footer.jsp"></jsp:include>
 </html>

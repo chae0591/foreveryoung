@@ -3,14 +3,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
- <link href="style.css" rel="stylesheet" type="text/css" />
+<link href="style.css" rel="stylesheet" type="text/css" />
  <style>
  .footer{
 	width: 100%
  	min-width: 1020px;
- 	height: 250px;
+ 	height: 200px;
 	border-top: 2px solid #e5e5e5;
 	margin: 0; 
 	background: #f9f9f9;

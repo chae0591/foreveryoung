@@ -7,13 +7,11 @@
 <title>Insert title here</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
 <style>
-body, button, input, select, table, textarea {
-    font-size: 12px;
-    line-height: 16px;
-    font-family: 'Noto Sans KR',sans-serif,NanumGothic,'나눔고딕',Dotum,'돋움',Helvetica,"Apple SD Gothic Neo";
-}
+
 hr {
 	width: 1020px;
+	text-align: center;
+	margin: 0 auto;
 }
 .first-box {
 	width: 1020px;
@@ -41,13 +39,18 @@ table {
 	padding: 0;
 }
 
+.event-title {
+   padding-top: 20px;
+   padding-bottom: 20px;
+   color: #222;
+}
 .first-box a {
     color: #000;
     padding: 20px;
-    text-decoration: none;
     ling-height: 44px;
     font-size: 16px;
     font-weight: 700;
+    font-style: normal;
 }
 .category-box {
 	width: 100%;
@@ -57,9 +60,8 @@ table {
 }
 .category-box ul {
 	float: left;
-	text-align:center;
-    list-style-type: none;
-    margin: 0;
+	text-align: center;
+	margin: 0 auto;
     padding: 0;
     width: 100%;
 }
@@ -67,14 +69,19 @@ table {
  	padding-top: 13px;
     display: inline-block;
     text-align:center;
+    width: 14%;
+    height: 100%;
+    position: relative;
+    float: left;
 }
 .category-box li a {
-    color: #000;
     padding: 20px;
-    text-decoration: none;
-    ling-height: 44px;
+    font-style: normal;
     font-size: 16px;
-    font-weight: 700;
+    line-height: 24px;
+    font-weight: 600;
+    letter-spacing: -.24px;
+    color: #222;
 }
 .item-name{
     display: block;
@@ -111,14 +118,70 @@ table {
     color: #222;
     vertical-align: middle;
 }
-
+.slide {
+	height: 300px;
+    min-width: 1020px;
+    width: 100%;
+    position: relative;
+    background-color: #ffc948;
+}
+   .slide{height:300px;overflow:hidden;position:relative;}
+    .slide li{position:absolute;left:0;right:0;top:0;bottom:0;opacity:0;transition:1s;}
+    .slide li:nth-child(1){background:#ffa;}
+    .slide li:nth-child(2){background:#faa;}
+    .slide li:nth-child(3){background:#afa;}
+    .slide li:nth-child(4){background:#aaf;}
+    .slide input{display:none;}
+    .slide .bullet{position:absolute;bottom:20px;left:0;right:0;text-align:center;z-index:10;}
+    .slide .bullet label{
+    width:15px;height:15px;
+    border-radius:10px;
+    border:none;display:inline-block;
+    background:#fff;font-size:0;
+    transition:0.5s;cursor:pointer;
+    margin-left: 10px;
+    }
+    /* 슬라이드 조작 */
+    #pos1:checked ~ ul li:nth-child(1),
+    #pos2:checked ~ ul li:nth-child(2),
+    #pos3:checked ~ ul li:nth-child(3),
+    #pos4:checked ~ ul li:nth-child(4){opacity:1;}
+    /* bullet 조작 */
+    #pos1:checked ~ .bullet label:nth-child(1),
+    #pos2:checked ~ .bullet label:nth-child(2),
+    #pos3:checked ~ .bullet label:nth-child(3),
+    #pos4:checked ~ .bullet label:nth-child(4){background:#666;}
+    
+.more-btn {
+	width: 100px;
+	heigh: 50px;
+}
 </style>
 </head>
 <body>
 <jsp:include page="template/header.jsp"></jsp:include>
-	
+
+<div class="slide">
+  	<input type="radio" name="pos" id="pos1" checked>
+    <input type="radio" name="pos" id="pos2">
+    <input type="radio" name="pos" id="pos3">
+    <input type="radio" name="pos" id="pos4">
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <p class="bullet">
+      <label for="pos1">1</label>
+      <label for="pos2">2</label>
+      <label for="pos3">3</label>
+      <label for="pos4">4</label>
+    </p>
+</div>
+
 <div class="first-box">
-	<h2>이 상품 어때요?</h2>
+	<h2 class="event-title">이 상품 어때요?</h2>
 	<table>
 		<tr>
 			<td>
@@ -155,13 +218,15 @@ table {
 			</td>
 		</tr>
 	</table>
-	<button>더보기</button>
+	
+	<button class="more-btn">더보기</button>
+	
 </div>
 
 <hr>
 
 <div class="second-box">
-	<h2>이번주 BEST</h2>
+	<h2 class="event-title">이번주 BEST</h2>
 	<div class="category-box">
 	<ul>
 		<li><a href="#">전체</a></li>
@@ -173,15 +238,15 @@ table {
 		<li><a href="#">남성케어</a></li>
 	</ul>
 	</div>
-	<button>더보기</button>
+	<button class="more-btn">더보기</button>
 	
 </div>
 
 <hr>
 
 <div class="third-box">
-	<h2>주목해야 할 신상</h2>
-	<button>더보기</button>
+	<h2 class="event-title">주목해야 할 신상</h2>
+	<button class="more-btn">더보기</button>
 </div>
 
 <jsp:include page="template/footer.jsp"></jsp:include>

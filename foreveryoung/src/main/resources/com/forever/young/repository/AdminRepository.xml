@@ -2,44 +2,131 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-  <mapper namespace="com.forever.young.repository.AdminRepository">
-  	
-  	
-  	<!-- 관리자 로그인 -->
-  	<select id="login" resultType="Admin">
-  	select admin_id, admin_pw
-  	 from admin
-  	  where admin_id = #{admin_id}
-  	   and admin_pw = #{admin_pw}
-  	</select>
-  	
-  	<!-- 관리자 등록 -->
-  	<insert id="join">
-  		insert into admin 
-  			values(admin_seq.nextval, #{admin_id}, #{admin_pw},
-  					#{admin_name},sysdate,#{admin_phone})
-  	</insert>
-  	
-  	<!-- 관리자 리스트 -->
-  	<select id="adminList" resultType="Admin">
+
+<mapper namespace="com.forever.young.repository.AdminRepository">
+
+
+	<!-- 관리자 로그인 -->
+	<select id="login" resultType="Admin">
+		select *from admin
+		where admin_id =
+		#{admin_id}
+		and admin_pw = #{admin_pw}
+	</select>
+
+	<!-- 관리자 등록 -->
+	<insert id="join">
+		insert into admin
+		values(admin_seq.nextval,
+		#{admin_id}, #{admin_pw},
+		#{admin_name},sysdate,#{admin_phone})
+	</insert>
+
+	<!-- 관리자 리스트 -->
+	<select id="adminList" resultType="Admin">
   		<![CDATA[
   			select * from admin
   		]]>
-  	</select>
-  	
-  	  	<!-- 브랜드 리스트 -->
-  	<select id="brandList" resultType="Brand">
+	</select>
+	
+	<!-- 브랜드 리스트 -->
+	<select id="brandList" resultType="Brand">
   		<![CDATA[
   			select * from brand
   		]]>
-  	</select>
-  	
-  	  	<!-- 고객 리스트 -->
-  	<select id="customerList" resultType="Customer">
+	</select>
+
+	<!-- 고객 리스트 -->
+	<select id="customerList" resultType="Customer">
   		<![CDATA[
   			select * from customer
   		]]>
-  	</select>
-  	
-  </mapper>
+	</select>
+	
+	<!-- 상품 리스트 -->
+	<select id="productList" resultType="ProductVO">
+  		  		<![CDATA[
+  			select p.* , b.brand_name from product_table p
+    			left outer join brand b on p.product_seller_num = b.brand_num
+  		]]>
+	</select>
+
+	<!-- 이벤트 리스트 -->
+	<select id="eventList" resultType="Event">
+  		<![CDATA[
+  			select * from event
+  		]]>
+	</select>
+
+	<!-- 공지사항 리스트 -->
+	<select id="noticeList" resultType="Notice">
+  		<![CDATA[
+  			select * from notice
+  		]]>
+	</select>
+
+	<!-- 1:1문의 리스트 -->
+	<select id="inquiryList" resultType="Inquiry">
+  		<![CDATA[
+  			  	select I.* , C.user_id from inquiry I
+ 				left outer join customer C on C.user_num = I.user_num
+  		]]>
+	</select>
+
+	<!-- 이벤트  등록 -->
+	<insert id="eventRegister">
+		insert into event
+		 values (event_seq.nextval, #{event_name}, #{event_start}, #{event_end}, 
+		 #{event_discount}, #{event_target})
+	</insert>
+
+	<!-- 공지사항  등록 -->
+	<insert id="noticeRegister">
+		insert into notice values(notice_seq.nextval,
+		 #{notice_type} , #{notice_title}, #{notice_content},  null)
+	</insert>
+	
+	<!-- 총 고객수 -->
+	<select id="customerCount" resultType="int">
+		select count(*) from customer
+	</select>
+	
+	<!-- 총 브랜드수 -->
+	<select id="brandCount" resultType="int">
+		select count(*) from brand
+	</select>
+	
+	<!-- 총 상품수 -->
+	<select id="productCount" resultType="int">
+		select count(*) from product_table
+	</select>	
+	
+	<!-- 공지사항 상세보기 -->	
+	<select id="noticeDetail" resultType="Notice">
+		select * from notice where notice_no = #{notice_no}
+	</select>
+
+	<!-- 1:1문의 상세보기 -->
+	<select id="inquiryDetail" resultType="Inquiry">
+	
+		select I.* , C.user_id from inquiry I
+		 	left outer join customer C on C.user_num = I.user_num
+		 	where inquiry_no = #{inquiry_no}
+	</select>
+
+</mapper>
+ 
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

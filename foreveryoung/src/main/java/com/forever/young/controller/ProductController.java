@@ -7,8 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -43,7 +45,6 @@ public class ProductController {
 		System.out.println(product.toString());
 		
 		service.registProduct(product);
-		
 		return "product/success"; 
 		
 	}
@@ -58,4 +59,35 @@ public class ProductController {
 		return mv; 
 	}
 	
-}
+	
+	@GetMapping("categoryList/{category}")
+	public String categoryList(@PathVariable("category") String category, Model model) throws Exception {
+		List<Product> list = service.productList(category);
+		model.addAttribute("list", list);
+		
+		switch(category) {
+		case "skincare" :
+			category = "스킨케어";
+			break;
+		case "makeup" :
+			category = "메이크업";
+			break;
+		case "bodycare" :
+			category = "바디케어";
+			break;
+		case "haircare" :
+			category = "헤어케어";
+			break;
+		case "perfume" :
+			category = "향수디퓨저";
+			break;
+		case "manscare" :
+			category = "남성케어";
+			break;
+		}
+		
+		model.addAttribute("category", category);
+		
+		return "product/categoryList";
+	}
+} 
