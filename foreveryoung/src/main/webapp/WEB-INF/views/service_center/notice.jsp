@@ -7,40 +7,19 @@
 <title>Insert title here</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-html, body {
-    word-spacing: -1px;
-    color: #666;
-    font-size: 14px;
-    line-height: 20px;
-    font-family: 'dotum', '돋움', sans-serif;
-    letter-spacing: -0.04em;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-}
-ol, ul {
-    list-style: none;
-}
-a {
-	text-decoration: none;
-}
-label, input.button, input.submit, input.image, button {
-    cursor: pointer;
-}
-input[type="submit"], button {
-    border: 0;
-    padding: 0;
-    box-shadow: none;
-}
+
 .banner {
 	text-align: center;
 	min-width: 1020px;
 	height: 100px;
 	background-color: #dddddd;
+	padding-left: 130px;
+	padding-top: 20px;
+}
+.banner  h2, p{
+	float: left;
+	position: inline-box;
+	margin-right: 10px;
 }
 
 .service-btns {
@@ -49,6 +28,8 @@ input[type="submit"], button {
     height:55px;
 	text-align: center;
 	margin:0 auto;
+	margin-bottom:20px;
+		margin-top: 20px;
 }
 
 .service-btns button{
@@ -57,40 +38,46 @@ input[type="submit"], button {
 	text-align: center;
 	float: left;
 	position: relative;
-	margin-top: 20px;
+	font-size: 20px;
+	font-weight: 500;
+	border-radius: 5px;
 }
-.servicesearch-box {
+.servicesearch-box  {
 	width: 1020px;
-	height: 150px;
+	height: 50px;
 	margin: 0 auto;
+	border: 1px solid black;
 	text-align: center;
+	margin-top: 20px;
 }
 .servicesearch-box > label {
 	color: #666;
-    font-size: 16px;
+    font-size: 25px;
     font-weight: 400px;
-    text-align: left;
+    float: left;
+    width: 30%;
+    height: 100%;
 }
 .servicesearch-box > .searchInp {
 	float: left;
-    width: 50%;
-    height: 44px;
-    border: 1px solid #e5e5e5;
+    position: relative;
+	width: 50%;
+    height: 100%;
     font-size: 14px;
     line-height: 22px;
-    background-color: #fff;
     color: #888;
-    border-radius: 20px;
+    border: 0px;
+	margin-left: 20px;
 }
 .servicesearch-box > .searchBtn {
-	float: right;
-    width: 25px;
-    height: 27px;
+	float: left;
+    width: 20%;
+    height: 50px;
     margin: 10px 19px 0 0;
-    background: url(https://image.oliveyoung.co.kr/pc-static-root/image/comm/ico_search25x27.png) no-repeat 0 0;
     font-size: 0;
     text-indent: -99999px;
     line-height: 0;
+    height: 100%;
 } 
 .category-btns {
 	width: 1020px;
@@ -135,7 +122,7 @@ input[type="submit"], button {
 	
 	<div class="servicesearch-box">
 		<label>공지사항 검색</label>
-		<form>
+		<form class="form-inline" action="#" method="post">
 			<input class="searchInp" type="text" placeholder="질문을 검색하세요.">
 			<input class="searchBtn" type="submit" value="검색">
 		</form>
