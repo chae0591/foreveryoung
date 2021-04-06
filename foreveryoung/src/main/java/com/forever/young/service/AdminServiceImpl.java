@@ -22,6 +22,8 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public Admin login(Admin admin) throws Exception {
+		System.out.println("checkService : " + admin.getAdmin_id());
+		System.out.println("checkService : " + admin.getAdmin_pw());
 		return repository.login(admin) ;
 	}
 	
@@ -74,18 +76,6 @@ public class AdminServiceImpl implements AdminService{
 	public void noticeRegister(Notice notice) throws Exception {
 		repository.noticeRegister(notice);
 	}
-
-	@Override
-	public Notice noticeDetail(Integer notice_no) throws Exception {
-		return repository.noticeDetail(notice_no);
-	}
-
-	@Override
-	public Inquiry inquiryDetail(Integer inquiry_no) throws Exception {
-		return repository.inquiryDetail(inquiry_no);
-	}
-
-
 
 
 	

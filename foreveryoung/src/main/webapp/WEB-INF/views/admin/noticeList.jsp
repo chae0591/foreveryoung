@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>     
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +14,9 @@
 	$(document).ready(function(){
 		$("#notice_register").click(function(){
 			self.location = "/admin/noticeRegister"
+		})
+		$("#notice_detail").click(function(){
+			//self.location = "/admin/join"
 		})
 	})
 
@@ -37,9 +37,10 @@
 			<th align="center" width="100">분류</th>
 			<th align="center" width="100">제목</th>
 			<th align="center" width="100"></th>
+
 		</tr>
 		
-		<c:choose>
+				<c:choose>
 			<c:when test="${empty noticeList}">
 				<tr>
 					<td colspan="4">
@@ -54,7 +55,7 @@
 						<td align="center">${noticeList.notice_type}</td>
 						<td align="center">${noticeList.notice_title}</td>						
 						<td align="center">
-							<a href="/admin/noticeDetail?notice_no=${noticeList.notice_no}">상세보기</a>
+							<input type="button" id="notice_detail" value="상세보기">
 						</td>
 					</tr>
 				</c:forEach>

@@ -37,15 +37,5 @@ public interface AdminRepository {
 	
 	public void noticeRegister(Notice notice) throws Exception;
 	
-	public int customerCount() throws Exception;
-	
-	public int brandCount() throws Exception;
-	
-	public int productCount() throws Exception;
-	
-	public Notice noticeDetail(Integer notice_no) throws Exception;
-	
-	public Inquiry inquiryDetail(Integer inquiry_no) throws Exception;
-	
 	
 }

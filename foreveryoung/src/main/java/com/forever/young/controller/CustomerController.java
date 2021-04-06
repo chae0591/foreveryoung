@@ -1,7 +1,5 @@
 package com.forever.young.controller;
 
-import java.text.SimpleDateFormat;
-
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -15,9 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.forever.young.entity.ChangePwVO;
 import com.forever.young.entity.Customer;
 import com.forever.young.service.CustomerService;
 
@@ -88,7 +86,7 @@ public class CustomerController {
 		}
 	}
 	
-	@GetMapping("/mypage")
+	@GetMapping("/mypage_c")
 	public String getMyPage(HttpSession session, Model model) throws Exception {
 		log.info("getMypage()");
 		
@@ -97,7 +95,7 @@ public class CustomerController {
 		
 		model.addAttribute("user_info", service.findNum((int)session.getAttribute("check")));
 		
-		return "member/mypage";
+		return "member/mypage_c";
 	}
 	
 	@GetMapping("/success")
@@ -107,50 +105,5 @@ public class CustomerController {
 		return "member/success";
 	}
 	
-	@GetMapping("/mypage_edit")
-	public String getMypage_edit(HttpSession session, Model model) throws Exception {
-		log.info("getMypage_edit()");
-		
-		Customer customer = service.findNum((int)session.getAttribute("check"));
-		
-		if(customer.getUser_birth() != null) {
-			SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
-			String user_birth_fomatting = f.format(customer.getUser_birth());
-			model.addAttribute("user_birth_date", user_birth_fomatting);
-		}
-		
-		model.addAttribute("user_info", customer);
-		
-		return "member/mypage_edit";
-	}
 	
-	@PostMapping("/mypage_edit")
-	public String PostMypage_edit(@ModelAttribute Customer customer) throws Exception {
-		log.info("PostMypage_edit()");
-		
-		log.info(customer.toString());
-		service.editInfo(customer);
-		
-		return "member/success";
-	}
-	
-	@GetMapping("/mypage_edit_pw")
-	public String getMypage_edit_pw(HttpSession session, Model model) throws Exception {
-		log.info("getMypage_edit_pw()");
-		
-		Customer customer = service.findNum((int)session.getAttribute("check"));
-		
-		model.addAttribute("user_info", customer);
-		
-		return "member/mypage_edit_pw";
-	}
-	
-	@PostMapping("/mypage_edit_pw")
-	public String PostMypage_edit_pw(@ModelAttribute ChangePwVO changePwVO) throws Exception {
-		log.info("PostMypage_edit_pw()");
-		
-		service.editPw(changePwVO);
-		
-		return "member/success";
-	}
 }

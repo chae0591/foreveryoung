@@ -10,12 +10,12 @@
  .footer{
 	width: 100%
  	min-width: 1020px;
- 	height: 200px;
+ 	height: 250px;
 	border-top: 2px solid #e5e5e5;
 	margin: 0; 
 	background: #f9f9f9;
 	position:relative;
-	bottom: 0;
+	bottom: 0px;
  }
 .foo-conts {
  	width: 100%

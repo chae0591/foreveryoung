@@ -1,5 +1,6 @@
 package com.forever.young.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,9 +14,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.forever.young.entity.Product;
+import com.forever.young.service.BrandRegistService;
 import com.forever.young.service.ProductService;
 
 import lombok.extern.java.Log;
@@ -26,7 +29,7 @@ import lombok.extern.java.Log;
 public class ProductController {
 	
 	@Autowired
-	private ProductService service; 
+	private ProductService service;
 	
 	private final Logger log = LoggerFactory.getLogger(ProductController.class);
 	
@@ -60,7 +63,7 @@ public class ProductController {
 	}
 	
 	
-	@GetMapping("categoryList/{category}")
+	@GetMapping("category/{category}")
 	public String categoryList(@PathVariable("category") String category, Model model) throws Exception {
 		List<Product> list = service.productList(category);
 		model.addAttribute("list", list);
@@ -90,4 +93,5 @@ public class ProductController {
 		
 		return "product/categoryList";
 	}
+	
 } 

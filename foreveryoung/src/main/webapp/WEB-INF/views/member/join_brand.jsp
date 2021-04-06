@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<jsp:include page="../template/header.jsp"></jsp:include>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -183,5 +182,4 @@ $(document).ready(function () {
 		</div>
 	</form>
 </body>
-<jsp:include page="../template/footer.jsp"></jsp:include>
 </html>

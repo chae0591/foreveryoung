@@ -33,10 +33,7 @@
 						<td align="center">${inquiryList.inquiry_title}</td>
 						<td align="center">${inquiryList.user_id}</td>
 						<td align="center">${inquiryList.inquiry_regDate}</td>
-						<td align="center">
-							<a href="/admin/inquiryDetail?inquiry_no=${inquiryList.inquiry_no}">
-							${inquiryList.inquiry_status}</a> 
-						</td>
+						<td align="center">${inquiryList.inquiry_status}</td>
 					</tr>
 				</c:forEach>
 			</c:otherwise>
