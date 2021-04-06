@@ -48,7 +48,7 @@ text-decoration: none;
 	border-radius: 5px;
 }
 .notice-btn {
-background-color: #555;
+	background-color: #555;
 	color: #fff;
 }
 .service-btns button:hover, :focus{
