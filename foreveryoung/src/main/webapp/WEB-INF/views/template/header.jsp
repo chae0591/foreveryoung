@@ -6,7 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
  <style>
  * {
     margin: 0;
@@ -27,6 +26,9 @@ ol, ul {
     list-style: none;
 }
 a {
+	text-decoration: none;
+}
+a:link, a:visited, a:hover {
 	text-decoration: none;
 }
 label, input.button, input.submit, input.image, button {
@@ -102,6 +104,7 @@ input[type="submit"], button {
     color: #888;
     border: 0px;
 	margin-left: 20px;
+	background-color: #fff;
 }
 .search-box > .into-btn {
 	 background: url( "/resources/img/search.png" ) no-repeat;
@@ -221,7 +224,7 @@ input[type="submit"], button {
 		<li><a href="${pageContext.request.contextPath}/product/categoryList/haircare">헤어케어</a></li>
 		<li><a href="${pageContext.request.contextPath}/product/categoryList/perfume">향수/디퓨저</a></li>
 		<li><a href="${pageContext.request.contextPath}/product/categoryList/manscare">남성케어</a></li>
-		<li><a href="/category/service_center">고객센터</a></li>
+		<li><a href="/service_center/notice">고객센터</a></li>
 	</ul>
 </div>
 
