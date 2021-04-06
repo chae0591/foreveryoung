@@ -99,9 +99,20 @@
 	<!-- 총 상품수 -->
 	<select id="productCount" resultType="int">
 		select count(*) from product_table
-	</select>		
+	</select>	
+	
+	<!-- 공지사항 상세보기 -->	
+	<select id="noticeDetail" resultType="Notice">
+		select * from notice where notice_no = #{notice_no}
+	</select>
 
-
+	<!-- 1:1문의 상세보기 -->
+	<select id="inquiryDetail" resultType="Inquiry">
+	
+		select I.* , C.user_id from inquiry I
+		 	left outer join customer C on C.user_num = I.user_num
+		 	where inquiry_no = #{inquiry_no}
+	</select>
 
 </mapper>
  

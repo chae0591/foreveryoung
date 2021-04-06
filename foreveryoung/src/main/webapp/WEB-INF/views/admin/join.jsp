@@ -34,7 +34,7 @@
        			
        		<div>
             	<label>PHONE</label><br><br>
-            	<input type="text" name="admin_phone" id="phone" placeholder="이릅을 입력해주세요"><br><br>
+            	<input type="text" name="admin_phone" id="phone" placeholder="전화번호를 입력해주세요"><br><br>
             </div>
             	
             	

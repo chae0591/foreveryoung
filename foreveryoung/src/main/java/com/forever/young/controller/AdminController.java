@@ -208,7 +208,7 @@ public class AdminController {
 		return "admin/staticCustomer";
 	}
 	
-	//통계(회원분석) 화면
+	//통계(매출분석) 화면
 	@GetMapping("/staticSales")
 	public String getStaticSales() {
 		log.info("getStaticSales()");
@@ -218,12 +218,19 @@ public class AdminController {
 	
 	//공지사항 상세보기
 	@GetMapping("/noticeDetail")
-	public String getNoticeDetail() {
+	public void getNoticeDetail(int notice_no, Model model) throws Exception {
 		log.info("getNoticeDetail()");
 		
-		return "admin/noticeDetail";
+		model.addAttribute("noticeDetail",service.noticeDetail(notice_no));
 	}
 	
+	//1:1문의 상세보기
+	@GetMapping("/inquiryDetail")
+	public void getInquiryDetail(int inquiry_no, Model model) throws Exception{
+		log.info("getInquiryDetail()");
+		
+		model.addAttribute("inquiryDetail" , service.inquiryDetail(inquiry_no));
+	}
 	
 	
 }

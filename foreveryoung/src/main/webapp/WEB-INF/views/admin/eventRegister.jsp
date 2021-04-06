@@ -30,7 +30,7 @@
             	
             <div>
             	<label>이벤트명</label><br><br>
-                <input type="text"  name="event_name" id="event_name" placeholder="아이디를 입력해주세요."><br><br>
+                <input type="text"  name="event_name" id="event_name" placeholder="이벤트명을 입력해주세요."><br><br>
 			</div>
 				
            	<div>

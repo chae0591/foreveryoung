@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+   
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,20 +27,28 @@
 
 		<h2>공지사항 상세보기</h2>
 		
-		<table border="1">
-			<tr>
-				<th align="center" width="100">분류</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th align="center" width="100">제목</th>
-				<td></td>
-			</tr>
-			<tr>
-				<th align="center" width="100">공지글 내용</th>
-				<td></td>			
-			</tr>
-		</table>
+		<form:form modelAttribute="noticeDetail">
+			<form:hidden path="notice_no"/>
+			
+				<table border="1">
+					<tr>
+						<th align="center" width="100">분류</th>
+						<td><form:input path="notice_type" readonly="true"/></td>
+					</tr>
+					<tr>
+						<th align="center" width="100">제목</th>
+						<td><form:input path="notice_title" readonly="true"/></td>
+					</tr>
+					<tr>
+						<th align="center" width="100">공지글 내용</th>
+						<td><form:input path="notice_content" readonly="true"/></td>			
+					</tr>
+				</table>			
+			<form:hidden path="admin_no"/>
+			
+			
+		</form:form>
+
 		
 		<button id="notice_modify">수정</button>
 		<button id="notice_delete">삭제</button>
