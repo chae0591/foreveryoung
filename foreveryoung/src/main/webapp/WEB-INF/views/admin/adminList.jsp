@@ -10,24 +10,63 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
+    <style>
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%; /* Could be more or less, depending on screen size */                          
+        }
+ 
+</style>
+
+
+
+
+
+
 <script>
 	$(document).ready(function(){
 		$("#admin_join").click(function(){
 			self.location = "/admin/join"
 		})
 		$("#admin_modify").click(function(){
-			//self.location = "/admin/join"
+			//self.location = "/admin/"
 		})
 		$("#admin_delete").click(function(){
-			//self.location = "/admin/join"
+			//self.location = "/admin/"
 		})
+		
+		$(".modal_on").click(function(){
+			  $('#myModal').show();
+		})
+		
+		$(".modal_off").click(function(){
+			$('#myModal').hide();
+		})
+		
+		
 	})
 
 </script> 
 
 </head>
-
-
 
 <body>
 
@@ -79,7 +118,7 @@
 						<td align="center">${adminList.admin_phone}</td>
 						<td align="center">${adminList.admin_regDate}</td>
 						<td align="center">
-							<input type="button" id="admin_modify" value="수정">
+							<input type="button" class="modal_on" value="수정">
 							<input type="button" id="admin_delete" value="삭제">
 						</td>
 					</tr>
@@ -87,5 +126,39 @@
 			</c:otherwise>
 		</c:choose>
 	</table>
+	
+
+   <!-- The Modal -->
+    <div id="myModal" class="modal">
+ 
+      <!-- Modal content -->
+      <div class="modal-content">
+                <p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 24pt;">관리자 정보수정</span></b></span></p>
+                <p style="text-align: center; line-height: 1.5;"><br />ID </p>
+                <p style="text-align: center; line-height: 1.5;"><br />PASSWORD
+					  	<input type="password" name="admin_pw" placeholder="비밀번호를 입력해주세요">                
+               	</p>
+                <p style="text-align: center; line-height: 1.5;"><br />NAME
+                	<input type="text" name="admin_name" placeholder="이릅을 입력해주세요">
+                </p>
+                <p style="text-align: center; line-height: 1.5;"><br />PHONE NUMBER
+                	<input type="text" name="admin_phone" id="phone" placeholder="전화번호를 입력해주세요">
+                </p>
+                <p><br /></p>
+            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="close_pop();">
+				<button id="admin_modify">수정하기</button>
+				<button class="modal_off">취소하기</button>
+            </div>
+      </div>
+ 
+    </div>
+
+
+
+
+
+
+
+
 </body>
 </html>
