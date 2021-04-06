@@ -15,7 +15,7 @@
 	margin: 0; 
 	background: #f9f9f9;
 	position:relative;
-	bottom: 0px;
+	bottom: 0;
  }
 .foo-conts {
  	width: 100%

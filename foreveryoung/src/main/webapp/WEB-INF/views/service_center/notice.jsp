@@ -24,7 +24,6 @@
 	padding-top: 20px;
 	margin-right: 10px;
 }
-
 .service-btns {
     padding: 0;
     width: 1020px;
@@ -33,9 +32,6 @@
 	margin:0 auto;
 	margin-bottom:20px;
 	margin-top: 20px;
-}
-.service-btns a {
-text-decoration: none;
 }
 .service-btns button{
     width: 50%;
@@ -51,15 +47,7 @@ text-decoration: none;
 	background-color: #555;
 	color: #fff;
 }
-.service-btns button:hover, :focus{
-    width: 50%;
-	height:100%;
-	text-align: center;
-	float: left;
-	position: relative;
-	font-size: 20px;
-	font-weight: 500;
-	border-radius: 5px;
+.service-btns button:hover {
 	background-color: #555;
 	color: #fff;
 }
@@ -182,7 +170,7 @@ text-decoration: none;
 .category-btns > .notice6 {
 	 background: url( "/resources/img/notice6.png" ) no-repeat;
 	 background-size: 65px 65px;
-	  background-position: 50% 40%;
+	 background-position: 50% 40%;
 	 width: 145.7px;
      height: 100%;
 }
@@ -193,9 +181,48 @@ text-decoration: none;
 	 width: 145.7px;
      height: 100%;
 }
+.service-list {
+	width: 1020px;
+	margin: 0 auto;
+	display: block;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border-top: 2px solid #666;
+	border-bottom: 2px solid #666;
+}
+.service-list ul li{
+	width: 100%;
+}
+.service-list a {
+	cursor: pointer;
+}
+.open {
+	width: 100%;
+	height: 60px;
+	border-bottom: 1px solid #e6e6e6;
+}
+.hide {
+	width: 100%;
+	background: #fafafa;
+    border: 0;
+    color: #222;
+    font-size: 0;
+    line-height: 0;
+    padding: 10px;
+}
+
 </style>
 
-</script>
+<!-- <script>
+  function openClose() {
+    if(document.getElementById('hide').style.display === 'block') {
+      document.getElementById('hide').style.display = 'none';
+    } else {
+      document.getElementById('hide').style.display = 'block';
+    }
+  }
+</script> -->
+
 </head>
 <body>
 
@@ -234,11 +261,11 @@ text-decoration: none;
 	
 	<div class="service-list">
 		<ul>
-			<li>
-				<p>배송비가 궁금해요</p>
-				<div>
-					<p>배송비 2,500</p>
-				</div>
+			<li class="open" onclick="openClose()">
+				<a>클릭하세요</a>
+				<ul>
+					<li class="hide">답변</li>
+				</ul>
 			</li>
 		</ul>
 	</div>
