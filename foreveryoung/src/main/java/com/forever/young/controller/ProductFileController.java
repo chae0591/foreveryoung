@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.forever.young.entity.ProductFile;
+import com.forever.young.entity.ProductFileUpload;
 
 import net.coobird.thumbnailator.Thumbnailator;
 
@@ -146,4 +147,5 @@ public class ProductFileController {
 		}
 		return new ResponseEntity<String>("delete", HttpStatus.OK);
 	}
+	
 }

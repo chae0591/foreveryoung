@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>상품 등록 페이지</title>
+<!--  부트스트랩 css-->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/product/css/bootstrap.css">
+
 </head>
 <style>
 	.uploadResult ul {
@@ -22,12 +25,55 @@
 	.uploadReulst ul li img {
 		width:20px;
 	}
+	
+	
+		/* set font bold */
+	.bold 
+	{
+		font-weight:bold; 
+	}
+	
+	/* filedset center */
+	fieldset{
+	    border: solid 1px #DDD !important;
+	     padding: 0 10px 10px 10px;
+	    border-bottom: none;
+	    width: 800px;
+      margin:auto;
+	    
+	}
+	
+
+	legend{
+	    width: auto !important;
+	    border: none;
+	    font-size: 20px;
+	    
+	    
+	}
+	
+	.category {
+		margin:auto; 
+	}
+	
+	.checkboxes {
+      text-align:center;
+     }
+
+    .checkboxes input{
+      margin: 0px 0px 0px 0px;
+     }
+
+     .checkboxes label{
+       margin: 0px 20px 0px 3px;
+     }
+	
+	
+	
 </style>
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/product/productCommon.css">
-
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script>
-
 	// 등록된 이미지 클릭 시 새창으로 이미지 열기
 	function showImage(fileCallPath, imageType) {
 		window.open("/viewImg?fileName=" + fileCallPath + "&imageType="+imageType, "image", "width=700px, height=600px");
@@ -255,67 +301,99 @@
 	});
 </script>
 <body>
-	
-	<form action="productWrite" method="post" class="center">
-		<div>
-			<h2 style=font:bold>상품 등록 페이지</h2>
+
+
+
+
+	<!-- 시작 -->
+		<div>	
+			<h2 class="bold center">상품 등록 페이지</h2>
 		</div>
+	
+	<form action="productWrite" method="post" >
 		
-			<div>
-				<p style="font-weight:bold">상품 카테고리</p>
-				<label>스킨케어 </label><input type="radio" name="product_category" value="skincare"> 
-				<label>메이크업</label><input type="radio" name="product_category" value="makeup">
-				<label>바디케어</label><input type="radio" name="product_category" value="bodycare">
-				<label>헤어케어</label><input type="radio" name="product_category" value="haircare">
-				<label>향수 / 디퓨져</label><input type="radio" name="product_category" value="perfume"> 
-				<label>남성케어</label><input type="radio" name="product_category" value="manscare">
+					
+		<fieldset>
+			<legend class="bold" style="align:center font-size: 25px"> 필수 입력 항목</legend>
+				
+				<div class="form-check checkboxes">
+					<p class="bold" style="align:left">상품 카테고리</p>
+					<input type="checkbox" class="form-check_input category" name="product_category" value="skincare">
+					<label class="form-check-label">스킨케어</label>
+					
+					<input type="checkbox" class="form-check_input category" name="product_category" value="makeup">
+					<label class="form-check-label">메이크업</label>
+					
+					<input type="checkbox" class="form-check_input category" name="product_category" value="bodycare">
+					<label class="form-check-label">바디케어</label>
+					
+					<input type="checkbox" class="form-check_input category" name="product_category" value="haircare">
+					<label class="form-check-label">헤어케어</label>
+					
+					<input type="checkbox" class="form-check_input category" name="product_category" value="perfume">
+					<label class="form-check-label">향수 / 디퓨져</label>
+					
+					<input type="checkbox" class="form-check_input category" name="product_category" value="manscare">
+					<label class="form-check-label">남성케어</label>
+				</div>	
+			
+			<hr>
+				
+		
+	
+		
+		
+			<!-- 	<div class="mb-3">
+					<label for="title">제목</label>
+					<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력해 주세요">
+				</div>
+
+
+ -->
+		
+		
+			<div class="form-group">
+				<label class="bold">상품 이름</label>
+				<input class="form-control" type="text" name="product_name" required placeholder="상품 이름을 입력하시오.">
 			</div>
 			<br>
 		
 		
-		
 			<div>
-				<label style="font-weight:bold">상품 이름</label>
-				<input type="text" name="product_name" required placeholder="상품 이름을 입력하시오." size="50">
-			</div>
-			<br>
-		
-		
-			<div>
-				<label style="font-weight:bold">상품 가격</label>
-				<input type="text" name="product_price" required placeholder="상품 가격을 입력하시오. 숫자만" size="50">
+				<label class="bold">상품 등록자(브랜드)</label>
+				<input class="form-control" type="text" name="product_brand" placeholder=" 판매자(브랜드)명이 들어감">
 			</div>
 			<br>
 			
 			<div>
-				<label style="font-weight:bold">상품 재고</label>
-				<input type="text" name="product_stock" required placeholder="삼품 재고 입력하시오." size="50">
+				<label class="bold">상품 가격</label>
+				<input class="form-control" type="text" name="product_price" required placeholder="상품 가격을 입력하시오. 숫자만" size="50">
+			</div>
+			<br>
+			
+			<div>
+				<label class="bold">상품 재고</label>
+				<input class="form-control" type="text" name="product_stock" required placeholder="삼품 재고 입력하시오." size="50">
 			</div>
 			<br>
 		
-			
-			<div>
-				<p style="font-weight:bold">  피부 타입 (선택)</p>
-				<label>건성</label><input type="radio" name="product_skintype" value="건성">
-				<label>지성 </label><input type="radio" name="product_skintype" value="지성"> 
-				<label>복합성 </label><input type="radio" name="product_skintype" value="복합성">
-				<label>민감성 </label><input type="radio" name="product_skintype" value="민감성">
-			</div>
-			<br>
+		
+						
+						
 			<div class="outbox">
 				<div class="upload">
 					<label style="font-weight:bold">상품 이미지</label>
 					<input type="file" name="upload_file" required multiple>
 				</div>
 				
-				<button id="uploadImage">이미지 등록</button>
+				<input type="button" id="uploadImage" value="이미지 등록">
 				<br>
 				
 				<div>
 					<label style="font-weight:bold">상품 상세설명 이미지</label>
 					<input type="file" name="upload_file_detail" required multiple>
 				</div>
-				<button id="uploadImageDetail">이미지 등록</button>
+				<input type="button" id="uploadImageDetail" value="이미지 등록">
 				<div class="uploadResult">
 					<ul>
 					
@@ -323,26 +401,52 @@
 				</div>
 				
 			</div> <!-- outbox -->
+						
+						
+	
+			
+			
+		</fieldset>
+		<br>
+		
+		
+		
+		
+			
+			<fieldset>
+			<legend class="bold">선택 입력 항목</legend>
+				<div class="checkboxes">
+					<p class="center" style="font-weight:bold">  피부 타입 (선택)</p>
+					
+					
+					
+					<input type="checkbox" name="product_skintype" value="건성">
+					<label>건성</label>
+					
+					<input type="checkbox" name="product_skintype" value="지성">
+					<label>지성 </label> 
+					
+					<input type="checkbox" name="product_skintype" value="복합성">
+					<label>복합성 </label>
+					
+					<input type="checkbox" name="product_skintype" value="민감성">
+					<label>민감성 </label>
+					
+				</div>
+				<br>
+			</fieldset>
 			<br>
-				
-			
-			<div>
-				<label style="font-weight:bold">상품 등록자(브랜드)</label>
-				<input type="text" name="product_brand" placeholder=" 판매자(브랜드)명이 들어감" size="50">
-			</div>
-			<br>
-			
-			
-			
-			<div>
-				<input type="submit" value="상품 등록">
-				<input type="button" class="cancelBtn" value="등록 취소">
+	
+			<div class="center">
+				<input type="submit" class="btn btn-primary btn-lg" value="상품 등록">
+				<input type="button" class="cancelBtn btn btn-primary btn-lg" value="등록 취소">
 			</div>
 			<br>
 
 	</form>
 	
-	
-	
+<!—부트스트랩을 사용하기위한 제이쿼리와 js설정 입력   —>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/css/product/js/bootstrap.js"></script>
 </body>
 </html>
