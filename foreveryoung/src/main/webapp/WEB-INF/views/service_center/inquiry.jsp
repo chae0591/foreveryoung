@@ -24,7 +24,6 @@
 	padding-top: 20px;
 	margin-right: 10px;
 }
-
 .service-btns {
     padding: 0;
     width: 1020px;
@@ -33,9 +32,6 @@
 	margin:0 auto;
 	margin-bottom:20px;
 	margin-top: 20px;
-}
-.service-btns a {
-text-decoration: none;
 }
 .service-btns button{
     width: 50%;
@@ -48,18 +44,10 @@ text-decoration: none;
 	border-radius: 5px;
 }
 .inquiry-btn {
-background-color: #555;
+	background-color: #555;
 	color: #fff;
 }
-.service-btns button:hover, :focus{
-    width: 50%;
-	height:100%;
-	text-align: center;
-	float: left;
-	position: relative;
-	font-size: 20px;
-	font-weight: 500;
-	border-radius: 5px;
+.service-btns button:hover {
 	background-color: #555;
 	color: #fff;
 }
