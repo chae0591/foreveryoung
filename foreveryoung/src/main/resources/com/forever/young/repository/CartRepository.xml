@@ -5,8 +5,12 @@
   
 <mapper namespace="com.forever.young.repository.CartRepository">
 	
-	<select id="login" resultType="Customer">
-		select * from cart where user_num = #{user_num}
+	<select id="searchListUser" resultType="CartListVO">
+		select c.cart_no, pb.product_no, pb.product_name, pb.product_category, pb.product_price, 
+		pb.brand_name, pb.product_skintype, c.cart_count, c.cart_regDate 
+		from cart c join (select p.*, b.* from product_table P join brand B on p.product_brand = b.brand_num) pb 
+		on c.product_no = pb.product_no 
+		where c.user_num = #{user_num}
 	</select>
 	
 </mapper>

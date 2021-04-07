@@ -61,7 +61,7 @@
 		
 		$(".input[name=user_pw]").blur(function(){
 			var pw = $(this).val();
-			var regex = /^[a-zA-Z0-9!@#$]{5,11}$/;
+			var regex = /^[a-zA-Z0-9!@#$]{6,12}$/;
 			if(regex.test(pw)){
 				$(this).next().text("올바른 비밀번호 형식입니다");
 				$(this).next().removeClass("bad");
