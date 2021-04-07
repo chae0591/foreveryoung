@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.forever.young.entity.Admin;
 import com.forever.young.entity.Event;
@@ -31,13 +32,6 @@ public class AdminController {
 	
 	private final Logger log = LoggerFactory.getLogger(AdminController.class);
 	
-	//관리자 로그인Get
-	@GetMapping("/login")
-	public String getLogin() {
-		log.info("getLogin()");
-		
-		return "admin/login";
-	}
 	
 	@GetMapping("/success")
 	public String getsuccess() {
@@ -46,21 +40,38 @@ public class AdminController {
 		return "admin/success";
 	}
 	
+	//대시보드 화면
+	@GetMapping("/dashBoard")
+	public String getDashBoard() {
+		log.info("getDashBoard()");
+		
+		return "admin/dashBoard";
+	}
+	
+	//관리자 로그인Get
+	@GetMapping("/login")
+	public String getLogin() {
+		log.info("getLogin()");
+		
+		return "admin/login";
+	}
+	
 	//관리자 로그인post
 	@PostMapping("/login")
-	public  String postLogin(@ModelAttribute Admin admin , HttpSession session) throws Exception{
+	public  RedirectView postLogin(@ModelAttribute Admin admin , HttpSession session) throws Exception{
 		log.info("postLogin()");
 		
 		Admin adminLogin = service.login(admin);
 		
 		if(adminLogin != null) {
 			session.setAttribute("check", adminLogin.getAdmin_no());
+			session.setAttribute("auth", "admin");
 			log.info("login Success");
-			return "admin/success";
+			return new RedirectView("dashBoard");
 			
 		}else {
 			log.info("login Failure");
-			return "admin/login";
+			return new RedirectView("login");
 			
 		}
 	}
@@ -88,8 +99,6 @@ public class AdminController {
 		
 		return "admin/success";
 	}
-	
-	
 	
 	//관리자리스트
 	@GetMapping("/adminList")
@@ -191,7 +200,37 @@ public class AdminController {
 		return "admin/success";
 	}
 	
+	//통계(회원분석) 화면
+	@GetMapping("/staticCustomer")
+	public String getStaticCustomer() {
+		log.info("getStaticCustomer()");
+		
+		return "admin/staticCustomer";
+	}
 	
+	//통계(매출분석) 화면
+	@GetMapping("/staticSales")
+	public String getStaticSales() {
+		log.info("getStaticSales()");
+		
+		return "admin/staticSales";
+	}
+	
+	//공지사항 상세보기
+	@GetMapping("/noticeDetail")
+	public void getNoticeDetail(int notice_no, Model model) throws Exception {
+		log.info("getNoticeDetail()");
+		
+		model.addAttribute("noticeDetail",service.noticeDetail(notice_no));
+	}
+	
+	//1:1문의 상세보기
+	@GetMapping("/inquiryDetail")
+	public void getInquiryDetail(int inquiry_no, Model model) throws Exception{
+		log.info("getInquiryDetail()");
+		
+		model.addAttribute("inquiryDetail" , service.inquiryDetail(inquiry_no));
+	}
 	
 	
 }

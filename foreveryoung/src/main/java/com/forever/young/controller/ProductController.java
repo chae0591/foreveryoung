@@ -1,6 +1,5 @@
 package com.forever.young.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,14 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.forever.young.entity.Product;
-import com.forever.young.service.BrandRegistService;
 import com.forever.young.service.ProductService;
 
 import lombok.extern.java.Log;
@@ -63,35 +61,42 @@ public class ProductController {
 	}
 	
 	
-	@GetMapping("category/{category}")
-	public String categoryList(@PathVariable("category") String category, Model model) throws Exception {
+	@GetMapping("categoryList")
+	public String categoryList(@RequestParam String category, @RequestParam(value="type[]", required=false) List<String> type, Model model) throws Exception {
 		List<Product> list = service.productList(category);
 		model.addAttribute("list", list);
 		
-		switch(category) {
-		case "skincare" :
-			category = "스킨케어";
-			break;
-		case "makeup" :
-			category = "메이크업";
-			break;
-		case "bodycare" :
-			category = "바디케어";
-			break;
-		case "haircare" :
-			category = "헤어케어";
-			break;
-		case "perfume" :
-			category = "향수디퓨저";
-			break;
-		case "manscare" :
-			category = "남성케어";
-			break;
-		}
+		System.out.println(type);
+		
+//		switch(category) {
+//		case "skincare" :
+//			category = "스킨케어";
+//			break;
+//		case "makeup" :
+//			category = "메이크업";
+//			break;
+//		case "bodycare" :
+//			category = "바디케어";
+//			break;
+//		case "haircare" :
+//			category = "헤어케어";
+//			break;
+//		case "perfume" :
+//			category = "향수디퓨저";
+//			break;
+//		case "manscare" :
+//			category = "남성케어";
+//			break;
+//		}
 		
 		model.addAttribute("category", category);
 		
 		return "product/categoryList";
 	}
 	
+	@PostMapping("search")
+	public String search(@RequestParam(value="type[]", required=false) List<String> type) throws Exception {
+		System.out.println(type);
+		return "product/categoryList";
+	}
 } 
