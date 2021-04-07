@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <style>
 .banner {
 	text-align: center;
@@ -183,45 +185,62 @@
 }
 .service-list {
 	width: 1020px;
+	height: auto;
 	margin: 0 auto;
 	display: block;
 	margin-top: 20px;
 	margin-bottom: 20px;
 	border-top: 2px solid #666;
 	border-bottom: 2px solid #666;
+	position: relative;
 }
-.service-list ul li{
+.service-list ul li {
 	width: 100%;
 }
-.service-list a {
-	cursor: pointer;
+.service-list p {
+	padding: 10px;
 }
-.open {
+.service-list > .open {
 	width: 100%;
 	height: 60px;
-	border-bottom: 1px solid #e6e6e6;
+	border-bottom: 1px solid #e5e5e5;
+	background: url( "/resources/img/list.png" ) no-repeat;
+	 background-size: 1020px 60px;
+	 background-position: 0% 0%;
+	 padding-left: 60px;
+	 padding-top: 10px;
 }
-.hide {
+.service-list > .open > li {
 	width: 100%;
-	background: #fafafa;
-    border: 0;
-    color: #222;
-    font-size: 0;
-    line-height: 0;
-    padding: 10px;
+	height: 100%;
+	float: left;
+	display: inline-block;
 }
-
+.service-list > .hide {
+	width: 100%;
+	min-height: 60px;
+	background-color: #e6e6e6;
+	padding-left: 60px;
+}
+.service-list > .hide > li {
+	width: 100%;
+	height: 100%;
+}
 </style>
 
-<!-- <script>
-  function openClose() {
-    if(document.getElementById('hide').style.display === 'block') {
-      document.getElementById('hide').style.display = 'none';
-    } else {
-      document.getElementById('hide').style.display = 'block';
+<script>
+$(function(){
+	$(".hide").hide();
+	
+	$(".open").click(function(dis){
+        if($(this).next().css('display') == 'none'){
+        	$(this).next().show();
+    }else{
+        $(".hide").hide();
     }
-  }
-</script> -->
+	});
+});
+</script>
 
 </head>
 <body>
@@ -260,14 +279,23 @@
 	</div>
 	
 	<div class="service-list">
-		<ul>
-			<li class="open" onclick="openClose()">
-				<a>클릭하세요</a>
-				<ul>
-					<li class="hide">답변</li>
-				</ul>
-			</li>
-		</ul>
+		<c:forEach var="i" begin = "1" end="10" step="1">
+		 		<div class="open" onclick="dis()">
+		 			<ul>
+		 				<li>
+		 					<p>회원<p><p>제목<p>
+		 				</li>
+		 			</ul>
+		 		</div>
+		 	
+		 		<div class="hide" >
+		 			<ul>
+		 				<li>
+		 					<p>내용<p>
+		 				</li>
+		 			</ul>
+		 		</div>
+		</c:forEach>
 	</div>
 <jsp:include page="../template/footer.jsp"></jsp:include>
 
