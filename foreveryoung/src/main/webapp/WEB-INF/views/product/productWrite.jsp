@@ -109,7 +109,7 @@
 		
 		
 		// 이미지 파일만 업로드할 수 있게 처리
-		var regex = new RegExp("(.*?)\.(jpg|jepg|png)");
+		var regex = new RegExp("(.*?)\.(jpg|jpeg|png)"); // 유진 수정
 		var maxSize = 5242880; //5MB
 		
 		// 파일 확장자, 파일 크기 검사하는 함수

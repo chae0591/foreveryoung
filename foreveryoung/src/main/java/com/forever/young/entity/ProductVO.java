@@ -3,7 +3,7 @@ package com.forever.young.entity;
 import java.sql.Date;
 
 public class ProductVO {
-	private int product_no;
+	private int product_id;
 	private String product_category;
 	private String product_name; 
 	private String product_img; 
@@ -17,11 +17,11 @@ public class ProductVO {
 	private int brand_num;
 	private String brand_id;
 	private String brand_name;
-	public int getProduct_no() {
-		return product_no;
+	public int getProduct_id() {
+		return product_id;
 	}
-	public void setProduct_no(int product_no) {
-		this.product_no = product_no;
+	public void setProduct_id(int product_id) {
+		this.product_id = product_id;
 	}
 	public String getProduct_category() {
 		return product_category;
@@ -103,7 +103,7 @@ public class ProductVO {
 	}
 	@Override
 	public String toString() {
-		return "productVO [product_no=" + product_no + ", product_category=" + product_category + ", product_name="
+		return "productVO [product_id=" + product_id + ", product_category=" + product_category + ", product_name="
 				+ product_name + ", product_img=" + product_img + ", product_price=" + product_price
 				+ ", product_stock=" + product_stock + ", product_regDate=" + product_regDate + ", product_seller_num="
 				+ product_seller_num + ", product_user=" + product_user + ", type_no=" + type_no + ", event_no="

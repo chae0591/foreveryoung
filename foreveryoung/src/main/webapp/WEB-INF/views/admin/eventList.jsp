@@ -12,17 +12,61 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
+<!-- 모달 기본스타일 -->
+  <style>
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%; /* Could be more or less, depending on screen size */                          
+        }
+ 
+</style>
+
+
+
+
+
+
+
 <script>
 	$(document).ready(function(){
 		$("#event_register").click(function(){
 			self.location = "/admin/eventRegister"
 		})
 		$("#event_modify").click(function(){
-			//self.location = "/admin/join"
+			//self.location = "/admin/"
 		})
 		$("#event_delete").click(function(){
-			//self.location = "/admin/join"
+			//self.location = "/admin/"
 		})
+		$(".modal_on").click(function(){
+			  $('#myModal').show();
+		})
+		
+		$(".modal_off").click(function(){
+			$('#myModal').hide();
+		})		
+		
+		
+		
+		
 	})
 
 </script> 
@@ -67,7 +111,7 @@
 						<td align="center">${eventList.event_target}</td>
 						<td align="center">진행상황</td>
 						<td align="center">
-							<input type="button" id="event_modify" value="수정">
+							<input type="button"  class="modal_on"  value="수정">
 							<input type="button" id="event_delete" value="삭제">
 						</td>
 					</tr>
@@ -75,5 +119,50 @@
 			</c:otherwise>
 		</c:choose>
 	</table>
+	
+	
+	
+   <!-- The Modal -->
+    <div id="myModal" class="modal">
+ 
+      <!-- Modal content -->
+      <div class="modal-content">
+                <p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 24pt;">이벤트 수정</span></b></span></p>
+                <p style="text-align: center; line-height: 1.5;"><br />
+                	<label>이벤트명</label>
+                	<input type="text"  name="event_name" id="event_name" placeholder="이벤트명을 입력해주세요.">
+                 </p>
+                <p style="text-align: center; line-height: 1.5;"><br />
+                	 <label>이벤트기간</label>
+					<input type="date" name="event_start" id="event_start"> ~
+            		<input type="date" name="event_end" id="event_end">              
+               	</p>
+                <p style="text-align: center; line-height: 1.5;"><br />
+                	<label>이벤트 할인율</label>
+                	<input type="text" name="event_discount" id="event_discount" >%
+                </p>
+                <p style="text-align: center; line-height: 1.5;"><br />
+                	<label>이벤트 적용대상</label>
+                	<input type="text" name="event_target" id="event_target">
+                </p>
+                <p><br /></p>
+            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="close_pop();">
+				<button id="event_modify">수정하기</button>
+				<button class="modal_off">취소하기</button>
+            </div>
+      </div>
+ 
+    </div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </body>
 </html>

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+<jsp:include page="../template/header.jsp"></jsp:include>
 <head>
     <meta charset="UTF-8">
     <title>로그인</title>
@@ -72,4 +73,5 @@
 	    </div>
 	</div>
 </body>
+<jsp:include page="../template/footer.jsp"></jsp:include>
 </html>

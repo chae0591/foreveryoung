@@ -6,7 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
  <style>
  * {
     margin: 0;
@@ -27,6 +26,9 @@ ol, ul {
     list-style: none;
 }
 a {
+	text-decoration: none;
+}
+a:link, a:visited, a:hover {
 	text-decoration: none;
 }
 label, input.button, input.submit, input.image, button {
@@ -76,25 +78,45 @@ input[type="submit"], button {
 	margin-top: 20px;
 }
 .search-box {
-	width: 300px;
+	width: 350px;
 	height: 40px;
-	margin-top: 20px;
 	text-align: center;
 	float: left;
-}
-.search-input {
-	width: 75%;
-    height: 100%;
-    border: 2px solid #e5e5e5;
-    font-size: 14px;
-    line-height: 22px;
-    background-color: #fff;
-    color: #888;
+	margin: 0;
+	margin-top: 18px;
+	padding: 0;
+	position: relative;
+	border: 2px solid #e5e5e5;
+	background-color: #fff;
     border-radius: 20px;
 }
-.search-input > .into-btn{
-	width: 25%;
-	height: 100%;
+.search-box > input {
+	display: inline-block;
+	float: left;
+}
+.search-box > .search-input {
+    float: left;
+    position: relative;
+	width: 80%;
+    height: 100%;
+    font-size: 14px;
+    line-height: 22px;
+    color: #888;
+    border: 0px;
+	margin-left: 20px;
+	background-color: #fff;
+}
+.search-box > .into-btn {
+	 background: url( "/resources/img/search.png" ) no-repeat;
+	 background-size: 20px 20px;
+	 background-position: center;
+     border: none;
+     cursor: pointer;
+     font-size: 0px;
+     width: 10%;
+     height: 100%;
+     float: right;
+     margin-right: 10px;
 }
 .icons {
 	float: right;
@@ -173,7 +195,7 @@ input[type="submit"], button {
 <body>
 <div class="login-box">
 		<ul>
-			<li><a href="/member/sample">로그인</a></li>
+			<li><a href="/member/login">로그인</a></li>
 			<li><a href="/member/join">회원가입</a></li>
 			<li><a href="/admin/login">관리자</a></li>
 		</ul>
@@ -182,8 +204,8 @@ input[type="submit"], button {
 	<div class="logo-box">logo</div>
 	<form class="form-inline" action="<%=request.getContextPath()%>/search/list" method="post">
 		<div class="search-box">
-    		<input class="search-input" type="text" placeholder="Search">
-    	 	<input type="submit" value="검색" class="into-btn">
+    		<input type="text" class="search-input"  placeholder="Search">
+    	 	<input type="submit" class="into-btn">
     	</div>
     </form>
     
@@ -202,8 +224,7 @@ input[type="submit"], button {
 		<li><a href="${pageContext.request.contextPath}/product/categoryList/haircare">헤어케어</a></li>
 		<li><a href="${pageContext.request.contextPath}/product/categoryList/perfume">향수/디퓨저</a></li>
 		<li><a href="${pageContext.request.contextPath}/product/categoryList/manscare">남성케어</a></li>
-		<li><a href="/category/service_center">고객센터</a></li>
-
+		<li><a href="/service_center/notice">고객센터</a></li>
 	</ul>
 </div>
 

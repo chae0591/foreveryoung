@@ -139,6 +139,7 @@ table {
     border:none;display:inline-block;
     background:#fff;font-size:0;
     transition:0.5s;cursor:pointer;
+    margin-left: 10px;
     }
     /* 슬라이드 조작 */
     #pos1:checked ~ ul li:nth-child(1),
@@ -229,7 +230,7 @@ table {
 	<div class="category-box">
 	<ul>
 		<li><a href="#">전체</a></li>
-		<li><a href="#">스킨케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=skincare&type=">스킨케어</a></li>
 		<li><a href="#">메이크업</a></li>
 		<li><a href="#">바디케어</a></li>
 		<li><a href="#">헤어케어</a></li>

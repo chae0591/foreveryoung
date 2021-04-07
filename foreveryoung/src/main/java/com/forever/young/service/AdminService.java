@@ -33,5 +33,9 @@ public interface AdminService {
 	public void eventRegister(Event event) throws Exception;
 	
 	public void noticeRegister(Notice notice) throws Exception;
+	
+ 	public Notice noticeDetail(Integer notice_no) throws Exception;
  	
+ 	public Inquiry inquiryDetail(Integer inquiry_no) throws Exception;
+	
 }
