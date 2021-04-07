@@ -153,4 +153,14 @@ public class CustomerController {
 		
 		return "member/success";
 	}
+	
+	@GetMapping("/logout")
+	public String getLogout(HttpSession session) throws Exception {
+		log.info("getLogout()");
+		
+		session.removeAttribute("check");
+		session.removeAttribute("auth");
+		
+		return "main";
+	}
 }
