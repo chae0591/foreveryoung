@@ -42,12 +42,21 @@
 			});
 			console.log(type);
 			//var type = $("input[type='checkbox']:checked").val();
-			$.ajax({
-				url : '/product/serach',
-				data : {type:type},
-				type : 'POST',
-				traditional:true
+			for(var i = 0; i < type.length; i ++) {
+				
+				
+			}
+			type.each(function(index, obj) {
+				if(type.length == 1) {
+					$.ajax({
+						url : '/product/categoryList?category=${category}',
+						data : {type:type},
+						type : 'POST',
+						traditional:true
+					});
+				}
 			});
+			
 		});
 	});
 </script>
