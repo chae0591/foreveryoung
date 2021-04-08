@@ -6,8 +6,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css">
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
 <style>
 .banner {
 	text-align: center;
@@ -67,11 +68,9 @@
     font-size: 20px;
     font-weight: 400px;
     float: left;
-
     position: absolute;
     top: 40%;
     left: 25%;
-    
 }
 .srh-box {
 	width: 350px;
@@ -183,7 +182,7 @@
 	 width: 145.7px;
      height: 100%;
 }
-.service-list {
+.notice-list {
 	width: 1020px;
 	height: auto;
 	margin: 0 auto;
@@ -194,13 +193,13 @@
 	border-bottom: 2px solid #666;
 	position: relative;
 }
-.service-list ul li {
+.notice-list ul li {
 	width: 100%;
 }
-.service-list p {
+.notice-list p {
 	padding: 10px;
 }
-.service-list > .open {
+.notice-list > .open {
 	width: 100%;
 	height: 60px;
 	border-bottom: 1px solid #e5e5e5;
@@ -210,19 +209,19 @@
 	 padding-left: 60px;
 	 padding-top: 10px;
 }
-.service-list > .open > li {
+.notice-list > .open > li {
 	width: 100%;
 	height: 100%;
 	float: left;
 	display: inline-block;
 }
-.service-list > .hide {
+.notice-list > .hide {
 	width: 100%;
 	min-height: 60px;
 	background-color: #e6e6e6;
 	padding-left: 60px;
 }
-.service-list > .hide > li {
+.notice-list > .hide > li {
 	width: 100%;
 	height: 100%;
 }
@@ -232,12 +231,12 @@
 $(function(){
 	$(".hide").hide();
 	
-	$(".open").click(function(dis){
+	$(".open").click(function(){
         if($(this).next().css('display') == 'none'){
         	$(this).next().show();
-    }else{
-        $(".hide").hide();
-    }
+   		 }else{
+       		$(".hide").hide();
+    	}
 	});
 });
 </script>
@@ -278,9 +277,9 @@ $(function(){
 			<button class="notice7">기타</button>
 	</div>
 	
-	<div class="service-list">
+	<div class="notice-list">
 		<c:forEach var="i" begin = "1" end="10" step="1">
-		 		<div class="open" onclick="dis()">
+		 		<div class="open">
 		 			<ul>
 		 				<li>
 		 					<p>회원<p><p>제목<p>
@@ -297,6 +296,7 @@ $(function(){
 		 		</div>
 		</c:forEach>
 	</div>
+	
 <jsp:include page="../template/footer.jsp"></jsp:include>
 
 </body>
