@@ -17,19 +17,63 @@
 		
 		$(".del-cart-item").click(function(){
 			if(confirm("정말로 삭제하시겠습니까?")) {
-								
-				<!--$.ajax({
+				var cart_no = $(this).prev().text();
+				var del_row = $(this).parent().parent();
+				
+				$.ajax({
 					url : "cart_item_del",
 					type : "get",
 					data : {
-						cart_no : 
+						cart_no : cart_no
 					},
 					success : function(resp) {
-						
+						del_row.remove();
 					}
-				});-->
+				});
 			}
 		});
+		
+		$(".del-cart-btn").click(function(){
+			if(confirm("정말로 삭제하시겠습니까?")) {
+				var cart_no_array = [];
+				
+				$('input[class="cartitemcheck"]:checked').each(function(){
+					cart_no_array.push($(this).val());
+				});
+				
+				if(cart_no_array.length == 0) {
+					alert("삭제할 상품을 1개 이상 선택해주세요");
+					return;
+				}
+				
+				$.ajax({
+					url : "cart_item_del",
+					type : "post",
+					traditional : true,
+					data : {
+						cartArr : cart_no_array
+					},
+					success : function(resp) {
+						$('input[class="cartitemcheck"]:checked').each(function(){
+							$(this).parent().parent().remove();
+						});
+					}
+				});
+			}
+		});
+		
+		<!-- 합계 구하기 -->
+		var checkCountval = 0;
+		var sum_price = 0;
+		var sale_price = 0;
+		var total_price = 0;
+		
+		$("input[class=cartitemcheck]").change(function(){
+			checkCountval = $('input[class="cartitemcheck"]:checked').length;
+			sum_price = 
+			total_price = sum_price - sale_price;
+		});
+		
 	});
 </script>
 </head>
@@ -43,13 +87,16 @@
 			</c:when>
 			<c:otherwise>
 				<input type="checkbox" id="totalcheck"><label for="totalcheck">전체 선택</label>
-				<input type="button" class="input input-inline del-cart-btn" value="전체 삭제">
+				<input type="button" class="input input-inline del-cart-btn" value="선택 삭제">
 				<table>
 					<tbody>
 						<c:forEach var="cartItem" items="${userCartList}">
 							<tr>
-								<td><span class="hidden-cart-no">${cartItem.cart_no}</span><input type="checkbox" class="cartitemcheck"></td>
-								<td>상품 정보 : ${cartItem} </td>
+								<td><input type="checkbox" class="cartitemcheck" value="${cartItem.cart_no}"></td>
+								<td>상품 정보 : ${cartItem} 
+									<div>${cartItem.product_name}</div>
+									<div>${cartItem.product_name}</div>
+								</td>
 								<td><span class="hidden-cart-no">${cartItem.cart_no}</span><input type="button" class="del-cart-item" value="X"></td>
 							</tr>
 						</c:forEach>
@@ -58,9 +105,11 @@
 						<tr>
 							<td>
 								체크된 항목 계산 (얼마인지)
-								
-								구매 버튼 -> 구매화면으로 이동
 							</td>
+							<td>선택 수 : <span id="checkCount">0</span></td>
+							<td>선택 가격 합 : <span id="sumPrice">0</span></td>
+							<td>세일 (지금은 0)<span id="salePrice">0</span></td>
+							<td>토탈 가격 : <span id="totalPrice">0</span></td>
 						</tr>
 					</tfoot>
 				</table>
