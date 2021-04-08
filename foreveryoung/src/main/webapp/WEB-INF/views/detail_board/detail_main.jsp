@@ -220,7 +220,7 @@
 		      </li>
 		      <li>
 		      	<a href="#">
-		      		<img src="https://placeimg.com/720/125/tech">
+		      		<img src="https://placeimg.com/270/125/tech">
 		      	</a>
 		      	<a href="#">
 		      		<img src="https://placeimg.com/270/125/tech">
@@ -267,17 +267,30 @@
 			<a href="#">
 				상품설명
 			</a>
+			<ul>
+				<li>
+					<img src="https://placeimg.com/700/1100/tech">
+				</li>
+			</ul>
 		</li>
+		
 		<li style="display:inline">
 			<a href="#">
 				구매정보
 			</a>
+			<ul>
+				<li>
+					1
+				</li>
+			</ul>
 		</li>
+		
 		<li style="display:inline">
 			<a href="#">
 				리뷰
 			</a>
 		</li>
+		
 		<li style="display:inline">
 			<a href="#">
 				Q&A
