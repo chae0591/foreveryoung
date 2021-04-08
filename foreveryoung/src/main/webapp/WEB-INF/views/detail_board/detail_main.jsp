@@ -307,19 +307,19 @@
 	</ul>	
    </div>
    
-   <div class="product-detail" id="list">
+   <div class="product-detail">
    1
    </div>
    
-   <div class="purchas-detail" id="list">
+   <div class="purchas-detail">
    2
    </div>
    
-   <div class="review" id="list">
+   <div class="review">
    3
    </div>
    
-   <div class="qna" id="list">
+   <div class="qna">
    4
    </div>
 <script>	
@@ -367,20 +367,20 @@
 	
 	$(function(){
 		$(".menu-list").eq(0).click(function(){
-			$("#list").hide();
+			$(".purchas-detial",".review",".qna").hide();
 			$(".product-detail").show();
 		});
 		$(".menu-list").eq(1).click(function(){
-			$("#list").hide();
-			$(".purchas-detail").eq(1).show();
+			$(".product-detail",".review",".qna").hide();
+			$(".purchas-detail").show();
 		});
 		$(".menu-list").eq(2).click(function(){
-			$("#list").hide();
+			$(".product-detail",".product-detail",".qna").hide();
 			$(".review").show();
 		});
 		$(".menu-list").eq(3).click(function(){
-			$("#list").hide();
-			$(".qna").show();
+			$(".product-detail",".product-detail",".qna").hide();
+			$("qna").show();
 		});
 	});
 </script>
