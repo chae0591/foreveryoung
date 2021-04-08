@@ -95,17 +95,37 @@
 	margin: 0 auto;
 	display: block;
 	margin-top: 20px;
-	margin-bottom: 20px;
+	margin-bottom: 40px;
 	border-top: 2px solid #666;
 	border-bottom: 2px solid #666;
 	position: relative;
+}
+.inquiry-list > .no-inquiry {
+	width: 100%;
+	height: 400px;
+}
+.inquiry-list > .no-inquiry ul {
+	width: 100%;
+	height: 100%;
+}
+.inquiry-list .no-inquiry ul > .img-cover {
+	 background: url( "/resources/img/no_inquiry.png" ) no-repeat center 100px;
+	 background-size: 150px 150px;
+	 width: 100%;
+     height: 100%;
+     text-align: center;
+     color: #888;
+     font-size: 16px;
+     text-align: center;
+     line-height: 20px;
+     padding-top: 280px;
 }
 .last-box {
 	width: 1020px;
 	margin: 0 auto;
 	text-align: center;
 	height: auto;
-	margin-bottom: 20px;
+	margin-bottom: 40px;
 }
 .inquiry-btn {
 	width: 150px;
@@ -149,12 +169,17 @@
 	</div>
 	
 	<div class="inquiry-list">
-		<div>게시글이 없습니다</div>
+		<div class="no-inquiry">
+			<ul>
+				<li class="img-cover">등록하신 1:1문의가 없습니다</li>
+			</ul>
+		</div>
 	</div>
 	
 	<div class="last-box">
 		<button class="inquiry-btn">1:1 문의하기</button>
 	</div>
+	
 <jsp:include page="../template/footer.jsp"></jsp:include>
 </body>
 </html>
