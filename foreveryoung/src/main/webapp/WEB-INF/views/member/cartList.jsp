@@ -64,14 +64,23 @@
 		
 		<!-- 합계 구하기 -->
 		var checkCountval = 0;
-		var sum_price = 0;
 		var sale_price = 0;
 		var total_price = 0;
 		
 		$("input[class=cartitemcheck]").change(function(){
+			var sum_price = 0;
 			checkCountval = $('input[class="cartitemcheck"]:checked').length;
-			sum_price = 
+			$('input[class="cartitemcheck"]:checked').each(function(){
+				var product_price = $(this).parent().next().children(".pp").children().text();
+				var cart_count = $(this).parent().next().children(".cc").children().text();
+				sum_price += product_price * cart_count;
+			});
 			total_price = sum_price - sale_price;
+			
+			$("#checkCount").text(checkCountval);
+			$("#sumPrice").text(sum_price);
+			$("#salePrice").text(sale_price);
+			$("#totalPrice").text(total_price);
 		});
 		
 	});
@@ -93,11 +102,13 @@
 						<c:forEach var="cartItem" items="${userCartList}">
 							<tr>
 								<td><input type="checkbox" class="cartitemcheck" value="${cartItem.cart_no}"></td>
-								<td>상품 정보 : ${cartItem} 
+								<td>
+									<div>${cartItem.brand_name}</div>
 									<div>${cartItem.product_name}</div>
-									<div>${cartItem.product_name}</div>
+									<div class="pp">가격 : <span>${cartItem.product_price}</span></div>
+									<div class="cc">주문 수량 : <span>${cartItem.cart_count}</span></div>
 								</td>
-								<td><span class="hidden-cart-no">${cartItem.cart_no}</span><input type="button" class="del-cart-item" value="X"></td>
+								<td><span class="hidden-cart-no" style="display: none;">${cartItem.cart_no}</span><input type="button" class="del-cart-item" value="X"></td>
 							</tr>
 						</c:forEach>
 					</tbody>
