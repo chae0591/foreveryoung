@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
  <style>
  * {
     margin: 0;
@@ -203,9 +204,20 @@ input[type="submit"], button {
    	color: #ffc948;
    	font-style: normal;
 }
-
- 
 </style>
+<script>
+$(function(){
+
+	$(".func-my").click(function(){
+        location.href = '/member/mypage';
+	});
+	
+	$(".func-cart").click(function(){
+        location.href = '/member/cartList';
+	});
+});
+
+</script>
 </head>
 <body>
 <div class="login-box">
@@ -217,7 +229,7 @@ input[type="submit"], button {
 </div>
 <div class="top-box">
 	<div class="logo-box">logo</div>
-	<form class="form-inline" action="<%=request.getContextPath()%>/search/list" method="post">
+	<form class="form-inline" action="<%=request.getContextPath()%>/search/search_results" method="post">
 		<div class="search-box">
     		<input type="text" class="search-input"  placeholder="Search">
     	 	<input type="submit" class="into-btn">
