@@ -25,7 +25,7 @@ import lombok.extern.java.Log;
 @Log
 @Controller
 @RequestMapping("/admin")
-public class AdminController {
+public class AdminController { 
 	
 	@Autowired
 	private AdminService service;

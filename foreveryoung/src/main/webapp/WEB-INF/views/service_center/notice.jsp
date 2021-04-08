@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <style>
 .banner {
 	text-align: center;
@@ -24,7 +26,6 @@
 	padding-top: 20px;
 	margin-right: 10px;
 }
-
 .service-btns {
     padding: 0;
     width: 1020px;
@@ -33,9 +34,6 @@
 	margin:0 auto;
 	margin-bottom:20px;
 	margin-top: 20px;
-}
-.service-btns a {
-text-decoration: none;
 }
 .service-btns button{
     width: 50%;
@@ -51,15 +49,7 @@ text-decoration: none;
 	background-color: #555;
 	color: #fff;
 }
-.service-btns button:hover, :focus{
-    width: 50%;
-	height:100%;
-	text-align: center;
-	float: left;
-	position: relative;
-	font-size: 20px;
-	font-weight: 500;
-	border-radius: 5px;
+.service-btns button:hover {
 	background-color: #555;
 	color: #fff;
 }
@@ -182,7 +172,7 @@ text-decoration: none;
 .category-btns > .notice6 {
 	 background: url( "/resources/img/notice6.png" ) no-repeat;
 	 background-size: 65px 65px;
-	  background-position: 50% 40%;
+	 background-position: 50% 40%;
 	 width: 145.7px;
      height: 100%;
 }
@@ -193,9 +183,65 @@ text-decoration: none;
 	 width: 145.7px;
      height: 100%;
 }
+.service-list {
+	width: 1020px;
+	height: auto;
+	margin: 0 auto;
+	display: block;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border-top: 2px solid #666;
+	border-bottom: 2px solid #666;
+	position: relative;
+}
+.service-list ul li {
+	width: 100%;
+}
+.service-list p {
+	padding: 10px;
+}
+.service-list > .open {
+	width: 100%;
+	height: 60px;
+	border-bottom: 1px solid #e5e5e5;
+	background: url( "/resources/img/list.png" ) no-repeat;
+	 background-size: 1020px 60px;
+	 background-position: 0% 0%;
+	 padding-left: 60px;
+	 padding-top: 10px;
+}
+.service-list > .open > li {
+	width: 100%;
+	height: 100%;
+	float: left;
+	display: inline-block;
+}
+.service-list > .hide {
+	width: 100%;
+	min-height: 60px;
+	background-color: #e6e6e6;
+	padding-left: 60px;
+}
+.service-list > .hide > li {
+	width: 100%;
+	height: 100%;
+}
 </style>
 
+<script>
+$(function(){
+	$(".hide").hide();
+	
+	$(".open").click(function(dis){
+        if($(this).next().css('display') == 'none'){
+        	$(this).next().show();
+    }else{
+        $(".hide").hide();
+    }
+	});
+});
 </script>
+
 </head>
 <body>
 
@@ -233,14 +279,23 @@ text-decoration: none;
 	</div>
 	
 	<div class="service-list">
-		<ul>
-			<li>
-				<p>배송비가 궁금해요</p>
-				<div>
-					<p>배송비 2,500</p>
-				</div>
-			</li>
-		</ul>
+		<c:forEach var="i" begin = "1" end="10" step="1">
+		 		<div class="open" onclick="dis()">
+		 			<ul>
+		 				<li>
+		 					<p>회원<p><p>제목<p>
+		 				</li>
+		 			</ul>
+		 		</div>
+		 	
+		 		<div class="hide" >
+		 			<ul>
+		 				<li>
+		 					<p>내용<p>
+		 				</li>
+		 			</ul>
+		 		</div>
+		</c:forEach>
 	</div>
 <jsp:include page="../template/footer.jsp"></jsp:include>
 

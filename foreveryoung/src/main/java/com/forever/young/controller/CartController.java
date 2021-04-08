@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.forever.young.entity.Cart;
+import com.forever.young.entity.CartListVO;
 import com.forever.young.service.CartService;
 
 import lombok.extern.java.Log;
@@ -32,8 +32,13 @@ public class CartController {
 	public String getCartList(HttpSession session, Model model) throws Exception {
 		log.info("getCartList()");
 		
-		List<Cart> userCartList = service.searchListUser((int)session.getAttribute("user_num"));
-		model.addAttribute("userCartList", userCartList);
+		List<CartListVO> userCartList = service.searchListUser((int)session.getAttribute("check"));
+		
+		log.info("userCartList : " + userCartList.toString());
+		
+		if(userCartList != null) {
+			model.addAttribute("userCartList", userCartList);
+		}
 		
 		return "member/cartList";
 	}

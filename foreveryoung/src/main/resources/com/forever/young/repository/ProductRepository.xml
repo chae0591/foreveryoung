@@ -42,22 +42,16 @@
 		]]>
 	</select>
 	
+	
+	<!-- 카테고리별 상품조회 -->
 	<select id="categoryList" resultType="com.forever.young.entity.Product">
-			select
-				product_no,
-				product_category,
-				product_name,
-				product_price,
-				product_stock,
-				product_regdate,
-				product_brand,
-				product_skintype,
-				event_no
-			from
-				product_table
-			where
-				product_category = #{category}
-			order by
-				product_regdate desc
+		select
+			p.*, i.image_save_name, i.image_type, i.image_name
+		from
+        	product_table P inner join product_img i on p.product_no = i.product_no
+		where
+			product_category = #{category} and image_type = 'N'
+		order by
+			product_regdate desc
 	</select>
 </mapper>

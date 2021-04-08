@@ -14,6 +14,9 @@ public class Product {
 	private String product_skintype;
 	private int event_no;
 	
+	private String image_save_name;
+	private String image_type;
+	
 	private List<ProductFileUpload> uploadFileList;
 
 	public Product() {
@@ -99,14 +102,33 @@ public class Product {
 	public void setUploadFileList(List<ProductFileUpload> uploadFileList) {
 		this.uploadFileList = uploadFileList;
 	}
+	
+	public String getImage_save_name() {
+		return image_save_name;
+	}
+
+	public void setImage_save_name(String image_save_name) {
+		this.image_save_name = image_save_name;
+	}
+
+	public String getImage_type() {
+		return image_type;
+	}
+
+	public void setImage_type(String image_type) {
+		this.image_type = image_type;
+	}
 
 	@Override
 	public String toString() {
 		return "Product [product_no=" + product_no + ", product_category=" + product_category + ", product_name="
 				+ product_name + ", product_price=" + product_price + ", product_stock=" + product_stock
 				+ ", product_regDate=" + product_regDate + ", product_brand=" + product_brand + ", product_skintype="
-				+ product_skintype + ", event_no=" + event_no + ", uploadFileList=" + uploadFileList + "]";
+				+ product_skintype + ", event_no=" + event_no + ", image_save_name=" + image_save_name + ", image_type=" 
+				+ image_type + ", uploadFileList=" + uploadFileList + "]";
 	}
+
+	
 	
 
 	

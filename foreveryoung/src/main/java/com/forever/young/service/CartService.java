@@ -2,8 +2,8 @@ package com.forever.young.service;
 
 import java.util.List;
 
-import com.forever.young.entity.Cart;
+import com.forever.young.entity.CartListVO;
 
 public interface CartService {
-	public List<Cart> searchListUser(int user_num) throws Exception;
+	public List<CartListVO> searchListUser(int user_num) throws Exception;
 }
