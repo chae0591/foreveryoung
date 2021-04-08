@@ -144,12 +144,35 @@
 	height: 60px;
 	display: block;
 	border-bottom: 1px solid #e5e5e5;
-	padding-left: 60px;
-	padding-top: 10px;
 }
-.inquiry-list > .check-inquiry p {
-	 padding-left: 60px;
-	 padding-top: 10px;
+.inquiry-list > .check-inquiry > ul > li > .row1 {
+	width: 15%;
+	height: 100%;
+	float: left;
+	display: inline-block;
+	padding-top: 20px;
+	padding-left: 50px;
+}
+.inquiry-list > .check-inquiry > ul > li > .row2 {
+	width: 85%;
+	height: 100%;
+	float: left;
+	display: inline-block;
+	padding-top: 20px;
+}
+.inquiry-list > .check-inquiry > ul > li > .row1 > strong {
+	display: inline-block;
+    width: 70px;
+    height: 20px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    line-height: 20px;
+    background: #555;
+}
+.inquiry-list > .check-inquiry a {
+	float: left;
 }
 .last-box {
 	width: 1020px;
@@ -158,7 +181,7 @@
 	height: auto;
 	margin-bottom: 40px;
 }
-.inquiry-btn {
+.inquiryGobtn {
 	width: 150px;
 	height: 50px;
 	color: #fff;
@@ -166,6 +189,7 @@
     border-radius: 5px;
     font-size: 18px;
     line-height: 30px;
+    background-color: #555;
 }
 </style>
 
@@ -210,7 +234,8 @@
 		 		<ul>
 		 			<c:forEach var="i" begin = "1" end="10" step="1">
 		 			<li>
-		 				<a href="/service_center/inquiry_detail"><p>회원</p></a>
+		 				<div class="row1"><strong>답변대기</strong></div>
+		 				<div class="row2"><a href="/service_center/inquiry_detail">회원</a></div>
 		 			</li>
 		 			</c:forEach>
 		 		</ul>
@@ -218,7 +243,7 @@
 	</div>
 	
 	<div class="last-box">
-		<button class="inquiry-btn">1:1 문의하기</button>
+		<a href="#"><button class="inquiryGobtn">1:1 문의하기</button></a>
 	</div>
 	
 <jsp:include page="../template/footer.jsp"></jsp:include>

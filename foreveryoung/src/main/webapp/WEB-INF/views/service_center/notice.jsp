@@ -188,7 +188,7 @@
 	margin: 0 auto;
 	display: block;
 	margin-top: 20px;
-	margin-bottom: 20px;
+	margin-bottom: 40px;
 	border-top: 2px solid #666;
 	border-bottom: 2px solid #666;
 	position: relative;
@@ -223,6 +223,23 @@
 .notice-list > .hide > li {
 	width: 100%;
 	height: 100%;
+}
+.last-box {
+	width: 1020px;
+	margin: 0 auto;
+	text-align: center;
+	height: auto;
+	margin-bottom: 40px;
+}
+.inquiryGobtn {
+	width: 150px;
+	height: 50px;
+	color: #fff;
+    font-weight: 700;
+    border-radius: 5px;
+    font-size: 18px;
+    line-height: 30px;
+    background-color: #555;
 }
 </style>
 
@@ -294,6 +311,10 @@ $(function(){
 		 			</ul>
 		 		</div>
 		</c:forEach>
+	</div>
+	
+	<div class="last-box">
+		<a href="#"><button class="inquiryGobtn">1:1 문의하기</button></a>
 	</div>
 	
 <jsp:include page="../template/footer.jsp"></jsp:include>
