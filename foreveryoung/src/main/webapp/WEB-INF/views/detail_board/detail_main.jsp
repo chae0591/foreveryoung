@@ -6,6 +6,7 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
+<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
 </head>
 
 <style>
@@ -34,11 +35,12 @@
       height:430px;
    }
    .prodcut-table{
-   	  padding-top : 5px;
+   	  padding-top : 3px;
       float : right;
       height : 430px;
       border: 3px solid red;
       font-size : 28px;
+      font-family: sans-serif;
       padding : 10px;
    }
    .brand{
@@ -186,11 +188,9 @@
                   <th>배송정보</th>
                   <td colspan="2"> </td>
                </tr>
-               <tr>
-                  <th> 일반배송 |</th>
-                  <td colspan="2">3,000원 (15,000 원 이상 무료배송 )</td>
+               <tr style="font-size : 21px; ">
+                  <th colspan="3" style="text-align:left"> 일반배송 | 3,000원 (15,000 원 이상 무료배송 )</th>
                </tr>
-               
                <form name="form" method="get">
                <tr>
                   <th>상품 수량</th>
@@ -281,30 +281,46 @@
    
    <div class="menu">
 	<ul style="list-style-type:none">
-		<li style="display:inline">
+		<li style="display:inline" class="menu-list">
 			<a href="#">
 				상품설명
 			</a>
 		</li>
 		
-		<li style="display:inline">
+		<li style="display:inline" class="menu-list">
 			<a href="#">
 				구매정보
 			</a>
 		</li>
 		
-		<li style="display:inline">
+		<li style="display:inline" class="menu-list">
 			<a href="#">
 				리뷰
 			</a>
 		</li>
 		
-		<li style="display:inline">
+		<li style="display:inline" class="menu-list">
 			<a href="#">
 				Q&A
 			</a>
 		</li>
 	</ul>	
+   </div>
+   
+   <div class="product-detail">
+   1
+   </div>
+   
+   <div class="purchas-detail">
+   2
+   </div>
+   
+   <div class="review">
+   3
+   </div>
+   
+   <div class="qna">
+   4
    </div>
 <script>	
 	var sell_price;
@@ -347,6 +363,23 @@
 		   e.addEventListener("click",function(){
 			   document.querySelector("#product-img").setAttribute("src",this.getAttribute("src"))
 		   });
+	});
+	
+	$(function(){
+		$(".menu-list").eq(0).click(function(){
+			$(".product-detail").show();
+		});
+		$(".menu-list").eq(1).click(function(){
+			$(".purchas-detail").show();
+		});
+		$(".menu-list").eq(2).click(function(){
+			$(".review").show();
+		});
+		$(".menu-list").eq(3).click(function(){
+			$("qna").show();
+		});
+		
+		$("menu-list").eq(0).click();
 	});
 </script>
 <jsp:include page="../template/footer.jsp"></jsp:include>
