@@ -1,20 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-    
-
-		<!-- 관리자 모드 메뉴 -->
-			<a href="<%=request.getContextPath()%>/admin/login">로그인</a>
-			<a href="<%=request.getContextPath()%>/admin/dashBoard">대시보드</a>
-			<a href="<%=request.getContextPath()%>/admin/adminList">관리자 페이지</a>
-			<a href="<%=request.getContextPath()%>/admin/brandList">판매자 관리</a>
-			<a href="<%=request.getContextPath()%>/admin/customerList">고객 관리</a>
-			<a href="<%=request.getContextPath()%>/admin/productList">상품 관리</a>
-			<a href="<%=request.getContextPath()%>/admin/eventList">이벤트 관리</a>
-			<a href="<%=request.getContextPath()%>/admin/noticeList">공지사항 관리</a>
-			<a href="<%=request.getContextPath()%>/admin/inquiryList">1:1문의 관리</a>
-			<a href="#">리뷰 신고 관리</a>
-			<a href="#">통계 관리</a>
+    			
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" href="../css/admin/css/bootstrap.min.css">
+	<link href="../css/admin/css/font-awesome.min.css" rel="stylesheet">
+	<link href="../css/admin/css/datepicker3.css" rel="stylesheet">
+	<link href="../css/admin/css/styles.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+</head>
+<body>
 			
+		<!-- 헤더 -->	
+	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span></button>
+				<a class="navbar-brand" href="#"><span>foreveryoung</span> &nbsp; Admin</a>
+				<a class="navbar-brand" href="/main" style="float:right;">home</a>
+				<a href="/admin/login"><em class="navbar-brand fa fa-power-off" style="float:right;">Logout</em></a>
+			</div>
+		</div><!-- /.container-fluid -->
+	</nav>		
+	
+		<!-- 사이드바 -->
+		<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<ul class="nav menu">
+			<li><a href="/admin/dashBoard"><em class="fa fa-dashboard">&nbsp;</em> 대시보드</a></li>
+			<li><a href="/admin/adminList"><em class="fa fa-calendar">&nbsp;</em> 관리자관리</a></li>
+			<li><a href="/admin/brandList"><em class="fa fa-calendar">&nbsp;</em> 판매자관리</a></li>
+			<li><a href="/admin/customerList"><em class="fa fa-calendar">&nbsp;</em> 고객관리</a></li>
+			<li><a href="/admin/productList"><em class="fa fa-toggle-off">&nbsp;</em> 상품관리</a></li>
+			<li><a href="/admin/eventList"><em class="fa fa-toggle-off">&nbsp;</em> 이벤트관리</a></li>
+			<li><a href="/admin/noticeList"><em class="fa fa-clone">&nbsp;</em> 공지사항 관리</a></li>
+			<li><a href="/admin/inquiryList"><em class="fa fa-clone">&nbsp;</em> 1:1문의 관리</a></li>
+			<li><a href="#"><em class="fa fa-clone">&nbsp;</em> 리뷰신고관리</a></li>
+			<li><a href="/admin/staticCustomer"><em class="fa fa-bar-chart">&nbsp;</em> 통계(고객분석)</a></li>
+			<li><a href="/admin/staticSales"><em class="fa fa-bar-chart">&nbsp;</em> 통계(매출분석)</a></li>
+		</ul>
+	</div><!--/.sidebar-->	
 			
-			     
+
+</body>
+</html>			     

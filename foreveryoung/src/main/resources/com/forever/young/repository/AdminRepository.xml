@@ -112,7 +112,26 @@
 		select I.* , C.user_id from inquiry I
 		 	left outer join customer C on C.user_num = I.user_num
 		 	where inquiry_no = #{inquiry_no}
+		 	
+
 	</select>
+	
+	<!-- 공지사항 수정 -->
+	<select id="noticeModify">
+		update notice set
+			 notice_type =#{notice_type} , 
+			 notice_title=#{notice_title} , 
+			 notice_content=#{notice_content}
+		 where notice_no =#{notice_no}
+	</select>
+	
+	<!-- 공지사항 삭제 -->
+	<delete id="noticeDelete">
+		delete from notice where notice_no = #{notice_no}
+	</delete>
+	
+	
+	
 
 </mapper>
  

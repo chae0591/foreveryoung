@@ -232,5 +232,38 @@ public class AdminController {
 		model.addAttribute("inquiryDetail" , service.inquiryDetail(inquiry_no));
 	}
 	
+	//공지사항 수정GET
+	@GetMapping("/noticeModify")
+	public void getNoticeModify(int notice_no, Model model) throws Exception{
+		log.info("getNoticeModify()");
+		
+		model.addAttribute("noticeModify" , service.noticeDetail(notice_no));
+	}
+	
+	//공지사항 수정POST
+	@PostMapping("/noticeModify")
+	public RedirectView  postNoticeModify(Notice notice, Model model) throws Exception{
+		log.info("postNoticeModify");
+		
+		service.noticeModify(notice);
+		
+		model.addAttribute("noticeModify", "공지사항 수정완료");
+		
+		return new RedirectView("noticeList");
+	}
+	
+	//공지사항 삭제
+	@PostMapping("/noticeDelete")
+	public RedirectView noticeDelete(int notice_no, Model model) throws Exception{
+		log.info("noticeDelete()");
+		
+		service.noticeDelete(notice_no);
+		
+		model.addAttribute("noticeDelete" , "공지사항 삭제완료");
+		
+		return new RedirectView("noticeList");
+	}
+	
+	
 	
 }

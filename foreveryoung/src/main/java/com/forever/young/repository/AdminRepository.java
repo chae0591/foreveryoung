@@ -46,6 +46,9 @@ public interface AdminRepository {
 	public Notice noticeDetail(Integer notice_no) throws Exception;
 	
 	public Inquiry inquiryDetail(Integer inquiry_no) throws Exception;
+
+	public void noticeModify(Notice notice) throws Exception;
 	
+	public void noticeDelete(Integer notice_no) throws Exception;
 	
 }
