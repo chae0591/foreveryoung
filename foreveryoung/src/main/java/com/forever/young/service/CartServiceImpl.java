@@ -18,4 +18,14 @@ public class CartServiceImpl implements CartService{
 		
 		return repository.searchListUser(user_num);
 	}
+	
+	@Override
+	public void delCartItem(int cart_no) throws Exception {
+		repository.delCartItem(cart_no);
+	}
+	
+	@Override
+	public void delCartItems(int[] cartArr) throws Exception {
+		repository.delCartItems(cartArr);
+	}
 }

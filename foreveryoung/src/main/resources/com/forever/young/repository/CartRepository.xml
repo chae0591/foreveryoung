@@ -13,4 +13,16 @@
 		where c.user_num = #{user_num}
 	</select>
 	
+	<delete id="delCartItem">
+		delete cart where cart_no = #{cart_no}
+		
+	</delete>
+	
+	<delete id="delCartItems">
+		delete cart where cart_no in 
+		<foreach item="item" collection="cartArr" index="index" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
 </mapper>
