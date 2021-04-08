@@ -163,4 +163,12 @@ public class CustomerController {
 		
 		return "main";
 	}
+	
+//	판메자 페이지 메인 맵핑
+	@GetMapping("/mypage_brand/mypage_brand_main")
+	public String getMypage_brand_main() {
+		log.info("getMypage_brand_main()");
+		return "member/mypage_brand/mypage_brand_main";
+	}
+	
 }
