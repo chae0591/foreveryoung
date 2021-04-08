@@ -6,6 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script>
+$(document).ready(function(){
+	$(".home-btn").click(function(){
+		self.location = "../main";
+	});
+});
+</script>
 </head>
 <body>
 	<h1>test</h1>
@@ -26,5 +34,7 @@
 			<h2>테스트 중입니다.</h2>
 		</c:otherwise>
 	</c:choose>
+	
+	<input type="button" class="home-btn" value="홈">
 </body>
 </html>

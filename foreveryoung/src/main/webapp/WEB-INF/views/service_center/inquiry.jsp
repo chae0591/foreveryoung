@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%-- <c:choose>
+    <c:when test="${sessionScope.userid eq null}">
+		<jsp:forward page="/member/login"/>
+    </c:when>
+    <c:otherwise>
+		<jsp:forward page="/service_center/inquiry"/>
+    </c:otherwise>
+</c:choose> --%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -120,6 +131,26 @@
      line-height: 20px;
      padding-top: 280px;
 }
+.inquiry-list > .check-inquiry {
+	width: 100%;
+	min-height:60px;
+}
+.inquiry-list > .check-inquiry ul {
+	width: 100%;
+	height: 100%;
+}
+.inquiry-list > .check-inquiry li {
+	width: 100%;
+	height: 60px;
+	display: block;
+	border-bottom: 1px solid #e5e5e5;
+	padding-left: 60px;
+	padding-top: 10px;
+}
+.inquiry-list > .check-inquiry p {
+	 padding-left: 60px;
+	 padding-top: 10px;
+}
 .last-box {
 	width: 1020px;
 	margin: 0 auto;
@@ -169,11 +200,21 @@
 	</div>
 	
 	<div class="inquiry-list">
-		<div class="no-inquiry">
-			<ul>
-				<li class="img-cover">등록하신 1:1문의가 없습니다</li>
-			</ul>
-		</div>
+		<!-- <div class="no-inquiry">
+				<ul>
+					<li class="img-cover">등록하신 1:1문의가 없습니다</li>
+				</ul>
+		</div> -->
+				
+		<div class="check-inquiry">
+		 		<ul>
+		 			<c:forEach var="i" begin = "1" end="10" step="1">
+		 			<li>
+		 				<a href="/service_center/inquiry_detail"><p>회원</p></a>
+		 			</li>
+		 			</c:forEach>
+		 		</ul>
+		 </div>
 	</div>
 	
 	<div class="last-box">

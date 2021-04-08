@@ -23,7 +23,7 @@
                 </li>
                 
                 <li>
-                    <a href="">장바구니</a>
+                    <a href="cartList">장바구니</a>
                 </li>
                 
                 <li>

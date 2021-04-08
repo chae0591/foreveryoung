@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 <style>
-
 hr {
 	width: 1020px;
 	text-align: center;
@@ -19,14 +18,12 @@ hr {
 	text-align: center;
 	margin: 0 auto;
 }
-
 .second-box {
 	width: 1020px;
 	height: 500px;
 	text-align: center;
 	margin: 0 auto;
 }
-
 .third-box {
 	width: 1020px;
 	height: 500px;
@@ -38,7 +35,6 @@ table {
 	margin: 0;
 	padding: 0;
 }
-
 .event-title {
    padding-top: 20px;
    padding-bottom: 20px;
