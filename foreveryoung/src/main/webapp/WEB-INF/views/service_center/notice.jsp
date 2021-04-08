@@ -204,16 +204,15 @@
 	height: 60px;
 	border-bottom: 1px solid #e5e5e5;
 	background: url( "/resources/img/list.png" ) no-repeat;
-	 background-size: 1020px 60px;
-	 background-position: 0% 0%;
-	 padding-left: 60px;
-	 padding-top: 10px;
+	background-size: 1020px 60px;
+	background-position: 0% 0%;
+	padding-left: 60px;
+	padding-top: 10px;
 }
 .notice-list > .open > li {
 	width: 100%;
 	height: 100%;
-	float: left;
-	display: inline-block;
+	display: block;
 }
 .notice-list > .hide {
 	width: 100%;
