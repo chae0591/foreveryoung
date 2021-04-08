@@ -51,6 +51,30 @@
 	background-color: #555;
 	color: #fff;
 }
+.select-on {
+	width: 1020px;
+	height: 80px;
+	margin: 0 auto;
+	padding: 0;
+	margin-top: 20px;
+	background-color: #fafafa;
+	position: relative;
+	padding: 20px;
+	position: relative;
+}
+.select-on button {
+	display: inline-block;
+	float: left;
+	width: 100px;
+	height: 40px;
+	border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    background: #fff;
+	margin-left: 5px;
+}
+.select-on p {
+	position: 50% 10%;
+}
 </style>
 </head>
 <body>
@@ -66,6 +90,16 @@
 	<div class="service-btns">
 		<a href="/service_center/notice"><button class="notice-btn">공지사항</button></a>
 		<a href="/service_center/inquiry"><button class="inquiry-btn">1:1 문의</button></a>
+	</div>
+	
+	<div class="select-on">
+		<p>문의글 등록기간</p>
+		<ul>
+			<li><button type="button">1개월</button></li>
+			<li><button type="button">3개월</button></li>
+			<li><button type="button">6개월</button></li>
+			<li><button type="button">12개월</button></li>
+		</ul>
 	</div>
 	
 <jsp:include page="../template/footer.jsp"></jsp:include>

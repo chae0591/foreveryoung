@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
 <style>
 .banner {
 	text-align: center;
@@ -297,6 +298,7 @@ $(function(){
 		 		</div>
 		</c:forEach>
 	</div>
+	
 <jsp:include page="../template/footer.jsp"></jsp:include>
 
 </body>
