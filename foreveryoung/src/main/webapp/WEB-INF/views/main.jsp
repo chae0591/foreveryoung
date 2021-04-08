@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
 <style>
-
 hr {
 	width: 1020px;
 	text-align: center;
@@ -19,14 +18,12 @@ hr {
 	text-align: center;
 	margin: 0 auto;
 }
-
 .second-box {
 	width: 1020px;
 	height: 500px;
 	text-align: center;
 	margin: 0 auto;
 }
-
 .third-box {
 	width: 1020px;
 	height: 500px;
@@ -38,7 +35,6 @@ table {
 	margin: 0;
 	padding: 0;
 }
-
 .event-title {
    padding-top: 20px;
    padding-bottom: 20px;
@@ -230,7 +226,7 @@ table {
 	<div class="category-box">
 	<ul>
 		<li><a href="#">전체</a></li>
-		<li><a href="#">스킨케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=skincare&type=">스킨케어</a></li>
 		<li><a href="#">메이크업</a></li>
 		<li><a href="#">바디케어</a></li>
 		<li><a href="#">헤어케어</a></li>
