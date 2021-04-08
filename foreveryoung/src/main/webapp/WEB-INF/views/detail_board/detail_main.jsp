@@ -5,16 +5,24 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
+
 <style>
    .product{
       margin : 0 auto;
-      height: 510px;
+      height: 520px;
       width : 1100px;
       border: 3px solid black;
       position : relative;
       padding : 5px;
       padding-top : 5px;
+   }
+   .information{
+   	  border : 2px solid green;
+   	  float : right;
+   	  width : 60%;
+   	  height : 500px;
    }
    .main-img{
    border : 2px solid blue;
@@ -26,9 +34,10 @@
       height:430px;
    }
    .prodcut-table{
+   	  padding-top : 5px;
       float : right;
-      width : 60%;
-      boarder : 2px solid black;
+      height : 430px;
+      border: 3px solid red;
       font-size : 28px;
       padding : 10px;
    }
@@ -40,6 +49,7 @@
       border-bottom-left-radius:5px;
       border-bottom-right-radius:5px;
       float : left;
+      
       font-size : 22px;
       background : none;
    }
@@ -58,6 +68,12 @@
       color : #FF0040;
       background : none;   
    }
+   .nice{
+      border-top-left-radius:5px;
+      border-top-right-radius:5px;
+      font-family: sans-serif;
+      font-size: 30px;
+   }
    .pay{
       border-color: white;
       border-top-left-radius:5px;
@@ -72,7 +88,7 @@
 	  margin-top : 5px;
 	  border : 3px solid aqua;
 	  width : 1100px;
-	  height : 170px;
+	  height : 187px;
 	  position : relative;
       padding : 5px;
       padding-top : 5px;   	
@@ -121,7 +137,7 @@
 		    .slide li:nth-child(3){background:#ECF8E0;}
 		    .slide li:nth-child(4){background:#ECF8E0;}
 		    .slide input{display:none;}
-		    .slide .bullet{position:absolute;bottom:7px;left:0;right:0;text-align:center;z-index:10;}
+		    .slide .bullet{position:absolute;bottom:3px;left:0;right:0;text-align:center;z-index:10;}
 		    .slide .bullet label{width:10px;height:10px;border-radius:10px;border:2px solid #666;display:inline-block;background:#fff;font-size:0;transition:0.5s;cursor:pointer;}
 		    /* 슬라이드 조작 */
 		    #pos1:checked ~ ul li:nth-child(1),
@@ -134,6 +150,7 @@
 		    #pos3:checked ~ .bullet label:nth-child(3),
 </style>
 <body>
+<jsp:include page="../template/header.jsp"></jsp:include>
    <div class="product">
    
          <div class="main-img">
@@ -150,7 +167,7 @@
             </div>
          </div>
          
-         <div>
+         <div class="information">
             <table class="prodcut-table">
                <tr>
                   <th colspan="3">
@@ -179,23 +196,24 @@
                   <th>상품 수량</th>
                   <td colspan="2">
                   <input type=hidden name="sell_price" value="5500">
-                  <input type="number" name="amount" value="1" size="3" onchange="change();">
-               <input type="button" value=" + " onclick="add();"><input type="button" value=" - " onclick="del();">
+                  <input type="number" style="font-size : 23px; width : 71px;"name="amount" value="1" size="3" onchange="change();">
+               <input type="button" style="HEIGHT: 23pt;width : 24px;" value=" + " onclick="add();"><input type="button" style="HEIGHT: 23pt;width : 25px;" value=" - " onclick="del();">
                   </td>
                </tr>
                
                <tr>
                   <th>합계금액</th>
-                  <td colspan="2"><input type="text" name="sum" size="11" readonly>원</td>
+                  <td colspan="2"><input type="text" style="font-size : 23px; width : 181px;" name="sum" size="11" readonly>원</td>
                </tr>
                </form>
             </table>
             
-           <div class="btn"> 
-            <input type="button" value="장바구니" class="bucket" onclick="location.href='장바구니.jsp';">
-            <input type="button" value="바로 구매" class="pay" onclick="location.href='결재.jsp';">
-            <input type="button" value="좋아요" class="nice" onclick="location.href='현재페이지.jsp';">
+           	<div class="btn"> 
+	            <input type="button" value="장바구니" class="bucket" onclick="location.href='장바구니.jsp';">
+	            <input type="button" value="바로 구매" class="pay" onclick="location.href='결재.jsp';">
+	            <input type="button" value="좋아요" class="nice" onclick="location.href='현재페이지.jsp';">
             </div>
+            
          </div>
    </div>
    
@@ -267,22 +285,12 @@
 			<a href="#">
 				상품설명
 			</a>
-			<ul>
-				<li>
-					<img src="https://placeimg.com/700/1100/tech">
-				</li>
-			</ul>
 		</li>
 		
 		<li style="display:inline">
 			<a href="#">
 				구매정보
 			</a>
-			<ul>
-				<li>
-					1
-				</li>
-			</ul>
 		</li>
 		
 		<li style="display:inline">
@@ -341,5 +349,6 @@
 		   });
 	});
 </script>
+<jsp:include page="../template/footer.jsp"></jsp:include>
 </body>
 </html>
