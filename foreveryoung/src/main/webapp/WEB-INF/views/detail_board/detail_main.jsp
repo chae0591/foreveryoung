@@ -6,7 +6,7 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
-<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 </head>
 
 <style>
@@ -307,19 +307,19 @@
 	</ul>	
    </div>
    
-   <div class="product-detail">
+   <div class="product-detail" id="list">
    1
    </div>
    
-   <div class="purchas-detail">
+   <div class="purchas-detail" id="list">
    2
    </div>
    
-   <div class="review">
+   <div class="review" id="list">
    3
    </div>
    
-   <div class="qna">
+   <div class="qna" id="list">
    4
    </div>
 <script>	
@@ -367,19 +367,21 @@
 	
 	$(function(){
 		$(".menu-list").eq(0).click(function(){
+			$("#list").hide();
 			$(".product-detail").show();
 		});
 		$(".menu-list").eq(1).click(function(){
-			$(".purchas-detail").show();
+			$("#list").hide();
+			$(".purchas-detail").eq(1).show();
 		});
 		$(".menu-list").eq(2).click(function(){
+			$("#list").hide();
 			$(".review").show();
 		});
 		$(".menu-list").eq(3).click(function(){
-			$("qna").show();
+			$("#list").hide();
+			$(".qna").show();
 		});
-		
-		$("menu-list").eq(0).click();
 	});
 </script>
 <jsp:include page="../template/footer.jsp"></jsp:include>
