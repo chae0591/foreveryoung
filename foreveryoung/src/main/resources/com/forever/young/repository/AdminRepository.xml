@@ -107,12 +107,11 @@
 	</select>
 
 	<!-- 1:1문의 상세보기 -->
-	<select id="inquiryDetail" resultType="Inquiry">
-	
-		select I.* , C.user_id from inquiry I
-		 	left outer join customer C on C.user_num = I.user_num
-		 	where inquiry_no = #{inquiry_no}
-		 	
+	<select id="inquiryDetail" resultType="InquiryVO">
+		 select I.* , R.reply_no , R.reply_content , C.user_id  from inquiry I
+ 			left outer join customer C on C.user_num = I.user_num
+ 			left outer join reply R on R.inquiry_no = I.inquiry_no 
+ 			where I.inquiry_no = #{inquiry_no}	
 
 	</select>
 	
@@ -129,6 +128,23 @@
 	<delete id="noticeDelete">
 		delete from notice where notice_no = #{notice_no}
 	</delete>
+	
+	<!-- 1:1문의 답변 등록 -->
+	<insert id="replyRegister">
+	 insert into reply 
+	 	values(reply_seq.nextval, #{reply_content},sysdate, #{inquiry_no}, null)
+	</insert>
+	
+	<!-- 1:1문의 상태 답변완료로 변경 -->
+	<update id="inquiryStatusComplete">
+		update inquiry set inquiry_status = '답변완료' where inquiry_no=#{inquiry_no}
+	</update>
+	 
+	<!-- 1:1문의 답변 수정 -->
+	
+	<!-- 1:1문의 답변 삭제 -->
+	
+	<!-- 1:1문의 상태 답변대기로 수정 -->
 	
 	
 	
