@@ -31,8 +31,8 @@ $(document).ready(function () {
 	$("input[id=duplicate]").click(function(){
 		console.log("클릭");
 		
-		var user_id = $("input[name=brand_id]").val();
-		var user_id_check = $("input[id=duplicate]");
+		var brand_id = $("input[name=brand_id]").val();
+		var brand_id_check = $("input[id=duplicate]");
 		
 		$.ajax({
 			url : "brand_id_check",
@@ -42,16 +42,16 @@ $(document).ready(function () {
 			},
 			success : function(resp){
 				if(resp == "Y") {
-					user_id_check.next("span").text("사용가능");
-					user_id_check.addClass("correct");
-					user_id_check.next().removeClass("bad");
-					user_id_check.next().addClass("good");
+					brand_id_check.next("span").text("사용가능");
+					brand_id_check.addClass("correct");
+					brand_id_check.next().removeClass("bad");
+					brand_id_check.next().addClass("good");
 				}
 				else if(resp == "N") {
-					user_id_check.next("span").text("사용불가");
-					user_id_check.removeClass("correct");
-					user_id_check.next().removeClass("good");
-					user_id_check.next().addClass("bad");
+					brand_id_check.next("span").text("사용불가");
+					brand_id_check.removeClass("correct");
+					brand_id_check.next().removeClass("good");
+					brand_id_check.next().addClass("bad");
 				}
 			}
 		});
@@ -59,7 +59,7 @@ $(document).ready(function () {
 	
 	$(".input[name=brand_pw]").blur(function(){
 		var pw = $(this).val();
-		var regex = /^[a-zA-Z0-9!@#$]{5,11}$/;
+		var regex = /^[a-zA-Z0-9!@#$]{6,12}$/;
 		if(regex.test(pw)){
 			$(this).next().text("올바른 비밀번호 형식입니다");
 			$(this).next().removeClass("bad");
@@ -91,7 +91,7 @@ $(document).ready(function () {
 		}
 	});
 	
-	$(".input[name=user_phone]").blur(function(){
+	$(".input[name=brand_phone]").blur(function(){
 		var phone = $(this).val();
 		var regex = /^01[016-9]-[1-9][0-9]{3}-[0-9]{4}$/;
 		if(regex.test(phone)){
@@ -108,7 +108,7 @@ $(document).ready(function () {
 		}
 	});
 	
-	$("#join_form").submit(function(e){
+	$("#join_brand_form").submit(function(e){
         e.preventDefault();
         
         $("input[id=duplicate]").click();

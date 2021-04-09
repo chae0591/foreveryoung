@@ -15,4 +15,8 @@ public class ServiceCenterController {
 	public String inquiry() {
 		return "service_center/inquiry";
 	}
+	@RequestMapping(value="/inquiry_detail")
+	public String inquiry_detail() {
+		return "service_center/inquiry_detail";
+	}
 }

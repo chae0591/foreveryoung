@@ -12,37 +12,6 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
-<!-- 모달 기본스타일 -->
-  <style>
-        /* The Modal (background) */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-    
-        /* Modal Content/Box */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 30%; /* Could be more or less, depending on screen size */                          
-        }
- 
-</style>
-
-
-
-
-
 
 
 <script>
@@ -56,13 +25,7 @@
 		$("#event_delete").click(function(){
 			//self.location = "/admin/"
 		})
-		$(".modal_on").click(function(){
-			  $('#myModal').show();
-		})
-		
-		$(".modal_off").click(function(){
-			$('#myModal').hide();
-		})		
+
 		
 		
 		
@@ -73,95 +36,97 @@
 
 </head>
 <body>
-	<h2>이벤트 리스트</h2>
+
+<jsp:include page="../admin/adminTemplate/header.jsp"></jsp:include>
+
+
+		<!-- 사이드바 -->
+		<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<ul class="nav menu">
+			<li><a href="/admin/dashBoard"><em class="fa fa-dashboard">&nbsp;</em> 대시보드</a></li>
+			<li><a href="/admin/adminList"><em class="fa fa-calendar">&nbsp;</em> 관리자관리</a></li>
+			<li><a href="/admin/brandList"><em class="fa fa-calendar">&nbsp;</em> 판매자관리</a></li>
+			<li><a href="/admin/customerList"><em class="fa fa-calendar">&nbsp;</em> 고객관리</a></li>
+			<li><a href="/admin/productList"><em class="fa fa-toggle-off">&nbsp;</em> 상품관리</a></li>
+			<li class="active"><a href="/admin/eventList"><em class="fa fa-toggle-off">&nbsp;</em> 이벤트관리</a></li>
+			<li><a href="/admin/noticeList"><em class="fa fa-clone">&nbsp;</em> 공지사항 관리</a></li>
+			<li><a href="/admin/inquiryList"><em class="fa fa-clone">&nbsp;</em> 1:1문의 관리</a></li>
+			<li><a href="#"><em class="fa fa-clone">&nbsp;</em> 리뷰신고관리</a></li>
+			<li><a href="/admin/staticCustomer"><em class="fa fa-bar-chart">&nbsp;</em> 통계(고객분석)</a></li>
+			<li><a href="/admin/staticSales"><em class="fa fa-bar-chart">&nbsp;</em> 통계(매출분석)</a></li>
+		</ul>
+	</div><!--/.sidebar-->	
+
+
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 	
-	<div>
-		<input type="button" id="event_register" value="이벤트 등록">
-	</div>
-	
-	
-	<table border="1">
-		<tr>
-			<th align="center" width="100">이벤트 번호</th>
-			<th align="center" width="100">이벤트명</th>
-			<th align="center" width="100">이벤트 기간</th>
-			<th align="center" width="100">이벤트 할인율</th>
-			<th align="center" width="160">이벤트 적용대상</th>
-			<th align="center" width="100">진행상황</th>
-			<th align="center" width="160"></th>
-		</tr>
+		<div class="row">
+			<div class="col-lg-12">
+				<h2>이벤트 리스트</h2>
+			</div>
+		</div><!--/.row-->
 		
-				<c:choose>
-			<c:when test="${empty eventList}">
-				<tr>
-					<td colspan="7">
-						이벤트가 없습니다.
-					</td>
-				</tr>
-			</c:when>
-			<c:otherwise>
-				<c:forEach items="${eventList}" var="eventList">
+		<div class="row">
+			<div class="col-lg-12">
+				<input type="button" id="event_register" value="이벤트 등록">
+			</div>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<table border="1">
 					<tr>
-						<td align="center">${eventList.event_no}</td>
-						<td align="center">${eventList.event_name}</td>
-						<td align="center">${eventList.event_start}~
-											${eventList.event_end } 
-						</td>
-						<td align="center">${eventList.event_discount}</td>						
-						<td align="center">${eventList.event_target}</td>
-						<td align="center">진행상황</td>
-						<td align="center">
-							<input type="button"  class="modal_on"  value="수정">
-							<input type="button" id="event_delete" value="삭제">
-						</td>
+						<th align="center" width="100">이벤트 번호</th>
+						<th align="center" width="100">이벤트명</th>
+						<th align="center" width="100">이벤트 기간</th>
+						<th align="center" width="100">이벤트 할인율</th>
+						<th align="center" width="160">이벤트 적용대상</th>
+						<th align="center" width="100">진행상황</th>
+						<th align="center" width="160"></th>
 					</tr>
-				</c:forEach>
-			</c:otherwise>
-		</c:choose>
-	</table>
+					
+							<c:choose>
+						<c:when test="${empty eventList}">
+							<tr>
+								<td colspan="7">
+									이벤트가 없습니다.
+								</td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${eventList}" var="eventList">
+								<tr>
+									<td align="center">${eventList.event_no}</td>
+									<td align="center">${eventList.event_name}</td>
+									<td align="center">${eventList.event_start}~
+														${eventList.event_end } 
+									</td>
+									<td align="center">${eventList.event_discount}</td>						
+									<td align="center">${eventList.event_target}</td>
+									<td align="center">진행상황</td>
+									<td align="center">
+										<input type="button"  class="event_modify"  value="수정">
+										<input type="button" id="event_delete" value="삭제">
+									</td>
+								</tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+				</table>
+			
+			</div>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+			
+			</div>
+		</div><!--/.row-->
+
+	</div>	<!--/.main-->
+
 	
-	
-	
-   <!-- The Modal -->
-    <div id="myModal" class="modal">
- 
-      <!-- Modal content -->
-      <div class="modal-content">
-                <p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 24pt;">이벤트 수정</span></b></span></p>
-                <p style="text-align: center; line-height: 1.5;"><br />
-                	<label>이벤트명</label>
-                	<input type="text"  name="event_name" id="event_name" placeholder="이벤트명을 입력해주세요.">
-                 </p>
-                <p style="text-align: center; line-height: 1.5;"><br />
-                	 <label>이벤트기간</label>
-					<input type="date" name="event_start" id="event_start"> ~
-            		<input type="date" name="event_end" id="event_end">              
-               	</p>
-                <p style="text-align: center; line-height: 1.5;"><br />
-                	<label>이벤트 할인율</label>
-                	<input type="text" name="event_discount" id="event_discount" >%
-                </p>
-                <p style="text-align: center; line-height: 1.5;"><br />
-                	<label>이벤트 적용대상</label>
-                	<input type="text" name="event_target" id="event_target">
-                </p>
-                <p><br /></p>
-            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="close_pop();">
-				<button id="event_modify">수정하기</button>
-				<button class="modal_off">취소하기</button>
-            </div>
-      </div>
- 
-    </div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 </body>

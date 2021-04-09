@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.forever.young.entity.Cart;
+import com.forever.young.entity.CartListVO;
 
 @Repository
 public interface CartRepository {
-	public List<Cart> searchListUser(int user_num) throws Exception;
+	public List<CartListVO> searchListUser(int user_num) throws Exception;
+	public void delCartItem(int cart_no) throws Exception;
+	public void delCartItems(int[] cartArr) throws Exception;
 }

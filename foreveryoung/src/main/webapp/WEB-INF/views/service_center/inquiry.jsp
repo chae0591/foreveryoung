@@ -1,11 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%-- <c:choose>
+    <c:when test="${sessionScope.userid eq null}">
+		<jsp:forward page="/member/login"/>
+    </c:when>
+    <c:otherwise>
+		<jsp:forward page="/service_center/inquiry"/>
+    </c:otherwise>
+</c:choose> --%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <style>
 .banner {
 	text-align: center;
@@ -51,7 +63,140 @@
 	background-color: #555;
 	color: #fff;
 }
+.select-on {
+	width: 1020px;
+	height: 80px;
+	margin: 0 auto;
+	padding: 0;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	background-color: #fafafa;
+	position: relative;
+	padding: 20px;
+}
+.select-on > .month-box {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+	padding: 0;
+	position: absolute;
+	left: 35%;
+}
+.select-on button {
+	float: left;
+	width: 100px;
+	height: 40px;
+	border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    background: #fff;
+	margin-left: 10px;
+}
+.select-on p {
+	color: #666;
+    font-size: 15px;
+    font-weight: 400px;
+    float: left;
+    position: absolute;
+    top: 13%;
+    left: 22%;
+}
+.inquiry-list {
+	width: 1020px;
+	height: auto;
+	margin: 0 auto;
+	display: block;
+	margin-top: 20px;
+	margin-bottom: 40px;
+	border-top: 2px solid #666;
+	border-bottom: 2px solid #666;
+	position: relative;
+}
+.inquiry-list > .no-inquiry {
+	width: 100%;
+	height: 400px;
+}
+.inquiry-list > .no-inquiry ul {
+	width: 100%;
+	height: 100%;
+}
+.inquiry-list .no-inquiry ul > .img-cover {
+	 background: url( "/resources/img/no_inquiry.png" ) no-repeat center 100px;
+	 background-size: 150px 150px;
+	 width: 100%;
+     height: 100%;
+     text-align: center;
+     color: #888;
+     font-size: 16px;
+     text-align: center;
+     line-height: 20px;
+     padding-top: 280px;
+}
+.inquiry-list > .check-inquiry {
+	width: 100%;
+	min-height:60px;
+}
+.inquiry-list > .check-inquiry ul {
+	width: 100%;
+	height: 100%;
+}
+.inquiry-list > .check-inquiry li {
+	width: 100%;
+	height: 60px;
+	display: block;
+	border-bottom: 1px solid #e5e5e5;
+}
+.inquiry-list > .check-inquiry > ul > li > .row1 {
+	width: 15%;
+	height: 100%;
+	float: left;
+	display: inline-block;
+	padding-top: 20px;
+	padding-left: 50px;
+}
+.inquiry-list > .check-inquiry > ul > li > .row2 {
+	width: 85%;
+	height: 100%;
+	float: left;
+	display: inline-block;
+	padding-top: 20px;
+}
+.inquiry-list > .check-inquiry > ul > li > .row1 > strong {
+	display: inline-block;
+    width: 70px;
+    height: 20px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    line-height: 20px;
+    background: #555;
+}
+.inquiry-list > .check-inquiry a {
+	float: left;
+}
+.last-box {
+	width: 1020px;
+	margin: 0 auto;
+	text-align: center;
+	height: auto;
+	margin-bottom: 40px;
+}
+.inquiryGobtn {
+	width: 150px;
+	height: 50px;
+	color: #fff;
+    font-weight: 700;
+    border-radius: 5px;
+    font-size: 18px;
+    line-height: 30px;
+    background-color: #555;
+}
 </style>
+
+<script>
+
+
+</script>
 </head>
 <body>
 <jsp:include page="../template/header.jsp"></jsp:include>
@@ -66,6 +211,39 @@
 	<div class="service-btns">
 		<a href="/service_center/notice"><button class="notice-btn">공지사항</button></a>
 		<a href="/service_center/inquiry"><button class="inquiry-btn">1:1 문의</button></a>
+	</div>
+	
+	<div class="select-on">
+		<p>문의글 등록기간</p>
+		<div class="month-box">
+		<button type="button" class="month1">1개월</button>
+		<button type="button" class="month3">3개월</button>
+		<button type="button" class="month6">6개월</button>
+		<button type="button" class="month12">12개월</button>
+		</div>
+	</div>
+	
+	<div class="inquiry-list">
+		<!-- <div class="no-inquiry">
+				<ul>
+					<li class="img-cover">등록하신 1:1문의가 없습니다</li>
+				</ul>
+		</div> -->
+				
+		<div class="check-inquiry">
+		 		<ul>
+		 			<c:forEach var="i" begin = "1" end="10" step="1">
+		 			<li>
+		 				<div class="row1"><strong>답변대기</strong></div>
+		 				<div class="row2"><a href="/service_center/inquiry_detail">회원</a></div>
+		 			</li>
+		 			</c:forEach>
+		 		</ul>
+		 </div>
+	</div>
+	
+	<div class="last-box">
+		<a href="#"><button class="inquiryGobtn">1:1 문의하기</button></a>
 	</div>
 	
 <jsp:include page="../template/footer.jsp"></jsp:include>

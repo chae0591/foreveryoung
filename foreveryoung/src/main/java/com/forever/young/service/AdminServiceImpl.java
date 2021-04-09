@@ -85,6 +85,17 @@ public class AdminServiceImpl implements AdminService{
 		return repository.inquiryDetail(inquiry_no);
 	}
 
+	@Override
+	public void noticeModify(Notice notice) throws Exception {
+		repository.noticeModify(notice);
+		
+	}
+
+	@Override
+	public void noticeDelete(Integer notice_no) throws Exception {
+		repository.noticeDelete(notice_no);
+	}
+
 
 
 
