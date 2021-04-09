@@ -73,15 +73,17 @@
 			</div>
 		</div><!--/.row-->
 		
+		<!-- 답변등록form -->
 		<div class="row">
 			<div class="col-lg-12">
-				<form action ="" method="post">
+				<form action ="replyRegister" method="post">
 		        	<div>
 		        		<h1>답변하기</h1>
 		        	</div>
 		            	
 		            <div>
 		                <textarea name="reply_content" style="width:400px; height:300px; " ></textarea>
+		                <input type="hidden" name="inquiry_no"  value="${inquiryDetail.inquiry_no}">
 		                <br><br>
 		                <input type="submit" value="답변등록">
 		                <input type="button" value="답변삭제">
@@ -90,9 +92,17 @@
 			</div>
 		</div><!--/.row-->
 		
+		<!-- 답변보기form -->
 		<div class="row">
 			<div class="col-lg-12">
-			
+					<div>
+		                <textarea style="width:400px; height:300px; " >
+		                	<c:out value="${inquiryDetail.reply_content}"></c:out>
+		                </textarea>
+		                <br><br>
+		                <input type="submit" value="답변수정">
+		                <input type="button" value="답변삭제">
+					</div>
 			</div>
 		</div><!--/.row-->
 	</div>	<!--/.main-->
