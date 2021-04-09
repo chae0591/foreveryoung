@@ -12,11 +12,11 @@
 	</insert>
 	
 	<select id="login" resultType="Brand">
-		select * from brand where user_id = #{brand_id} and user_pw = #{brand_pw}
+		select * from brand where brand_id = #{brand_id} and brand_pw = #{brand_pw}
 	</select>
 	
 	<select id="findId" resultType="Brand">
-		select * from Brand where user_id = #{brand_id}
+		select * from Brand where brand_id = #{brand_id}
 	</select>
 
 </mapper>

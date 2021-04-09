@@ -230,12 +230,12 @@ table {
 	<div class="category-box">
 	<ul>
 		<li><a href="#">전체</a></li>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=skincare&type=">스킨케어</a></li>
-		<li><a href="#">메이크업</a></li>
-		<li><a href="#">바디케어</a></li>
-		<li><a href="#">헤어케어</a></li>
-		<li><a href="#">향수/디퓨저</a></li>
-		<li><a href="#">남성케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=skincare">스킨케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=skincare">메이크업</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=skincare">바디케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=skincare">헤어케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=skincare">향수/디퓨저</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=skincare">남성케어</a></li>
 	</ul>
 	</div>
 	<button class="more-btn">더보기</button>

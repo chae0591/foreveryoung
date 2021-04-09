@@ -218,12 +218,12 @@ input[type="submit"], button {
 	
 <div class="nav">
 	<ul>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList/skincare">스킨케어</a></li>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList/makeup">메이크업</a></li>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList/bodycare">바디케어</a></li>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList/haircare">헤어케어</a></li>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList/perfume">향수/디퓨저</a></li>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList/manscare">남성케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=skincare">스킨케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=makeup">메이크업</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=bodycare">바디케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=haircare">헤어케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=perfume">향수/디퓨저</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=manscare">남성케어</a></li>
 		<li><a href="/service_center/notice">고객센터</a></li>
 	</ul>
 </div>
