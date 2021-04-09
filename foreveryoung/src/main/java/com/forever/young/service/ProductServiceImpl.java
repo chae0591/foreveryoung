@@ -1,15 +1,17 @@
 package com.forever.young.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import com.forever.young.entity.Brand;
 import com.forever.young.entity.Product;
 import com.forever.young.repository.ProductFileUploadRepository;
 import com.forever.young.repository.ProductRepository;
+import com.forever.young.repository.ProductVoteRepository;
 
 @Service("productService")
 public class ProductServiceImpl implements ProductService{
@@ -19,7 +21,6 @@ public class ProductServiceImpl implements ProductService{
 	
 	@Autowired
 	private ProductFileUploadRepository productUploadRepo;
-	
 	
 	@Override
 	public void registProduct(Product product) throws Exception {
@@ -45,6 +46,25 @@ public class ProductServiceImpl implements ProductService{
 	public List<Product> productList(String category) {
 		return productRepository.categoryList(category);
 	}
+
+	@Override
+	public List<Product> productListSearch(String category, String[] sType, int[] sBrand) {
+		return productRepository.productListSearch(category, sType, sBrand);
+	}
+
+	@Override
+	public List<Brand> getBrand() {
+		return productRepository.getBrand();
+	}
+
+	@Override
+	public int getCount(String category) {
+		return productRepository.getCount(category);
+	}
+
+	
+	
+
 	
 	
 

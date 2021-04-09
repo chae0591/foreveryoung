@@ -54,4 +54,41 @@
 		order by
 			product_regdate desc
 	</select>
+	
+	<!-- skintype 필터링 -->
+	<select id="categoryListType" resultType="com.forever.young.entity.Product">
+		select
+			p.*, i.image_save_name, i.image_type, i.image_name
+		from
+        	product_table P inner join product_img i on p.product_no = i.product_no
+		where
+			product_category = #{category} and image_type = 'N' 
+			<if test="sType != null">
+				and
+				product_skintype in
+				<foreach item="sType" index="i" collection="sType" open="(" close=")" separator=",">
+					#{sType}
+				</foreach>
+			</if>
+			<if test="sBrand != null">
+				and
+				product_brand in
+			<foreach item="sBrand" index="i" collection="sBrand" open="(" close=")" separator=",">
+				#{sBrand}
+			</foreach>
+			</if>
+			
+		order by
+			product_regdate desc
+	</select>
+	
+	<select id="getBrand" resultType="Brand">
+  		select * from brand
+	</select>
+	
+	<select id="getCount" resultType="int">
+	<![CDATA[
+		select count(*) from product_table where product_category = #{category}
+	]]>
+	</select>
 </mapper>
