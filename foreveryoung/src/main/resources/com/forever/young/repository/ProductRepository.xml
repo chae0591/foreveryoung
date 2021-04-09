@@ -55,8 +55,8 @@
 			product_regdate desc
 	</select>
 	
-	<!-- skintype 필터링 -->
-	<select id="categoryListType" resultType="com.forever.young.entity.Product">
+	<!-- 필터링 -->
+	<select id="productListSearch" resultType="com.forever.young.entity.Product">
 		select
 			p.*, i.image_save_name, i.image_type, i.image_name
 		from
