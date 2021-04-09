@@ -135,7 +135,13 @@
         width : 1100px;
         margin : 0 auto;
     	margin-top : 5px;
+    	margin-bottom : 5px;
    }   
+   #pack-list{
+		color : #74DF00;
+		font-family : Sans-Serif;
+		font-size : 28px;
+   }
        *{margin:0;padding:0;}
           ul,li{list-style:none;}
           .slide{height:150px;overflow:hidden;position:relative;}
@@ -319,7 +325,7 @@
 	   </div>
 	   
 	   <div class="purchas-detail">
-	   		<span>배송비/배송가능일</span>
+	   		<span id="pack-list">배송비/배송가능일</span>
 	   		<table style="border : 1px brown solid;">
 	   			<tr style=" width : 1100px;">
 	   				<th width="350px;" style="background-color : #CEF6E3;">배송비/배송가능일</th>
@@ -335,7 +341,7 @@
 	   				</td>
 	   			</tr>
 	   		</table>
-	   		<span>교환/반품/환불 안내</span>
+	   		<span id="pack-list">교환/반품/환불 안내</span>
 	   		<table style="border : 1px brown solid;">
 	   			<tr style=" width : 1100px;">
 	   				<th width="350px;" style="background-color : #CEF6E3;">
