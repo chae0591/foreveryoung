@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -130,6 +130,12 @@
    }
    a { text-decoration:none }
    
+   .detail{
+        border: 3px solid purple;
+        width : 1100px;
+        margin : 0 auto;
+    	margin-top : 5px;
+   }   
        *{margin:0;padding:0;}
           ul,li{list-style:none;}
           .slide{height:150px;overflow:hidden;position:relative;}
@@ -141,12 +147,12 @@
           .slide input{display:none;}
           .slide .bullet{position:absolute;bottom:3px;left:0;right:0;text-align:center;z-index:10;}
           .slide .bullet label{width:10px;height:10px;border-radius:10px;border:2px solid #666;display:inline-block;background:#fff;font-size:0;transition:0.5s;cursor:pointer;}
-          /* �����̵� ���� */
+          /* 슬라이드 조작 */
           #pos1:checked ~ ul li:nth-child(1),
           #pos2:checked ~ ul li:nth-child(2),
           #pos3:checked ~ ul li:nth-child(3),
           #pos4:checked ~ ul li:nth-child(4){opacity:1;}
-          /* bullet ���� */
+          /* bullet 조작 */
           #pos1:checked ~ .bullet label:nth-child(1),
           #pos2:checked ~ .bullet label:nth-child(2),
           #pos3:checked ~ .bullet label:nth-child(3),
@@ -173,27 +179,27 @@
             <table class="prodcut-table">
                <tr>
                   <th colspan="3">
-                     <input class="brand" type="button" value="�귣�� �ѷ��������� >" onclick="location.href='�ش�귣��.jsp';">
+                     <input class="brand" type="button" value="브랜드 둘러보러가기 >" onclick="location.href='해당브랜드.jsp';">
                   </th>
                </tr>
                <tr>
-                  <th>��ǰ�̸�</th>
-                  <td colspan="2">��ǰ�̸�(product_name)�� �������ÿ�.</td>
+                  <th>상품이름</th>
+                  <td colspan="2">상품이름(product_name)을 가져오시오.</td>
                </tr>
                <tr>
-                  <th>��ǰ����</th>
-                  <td colspan="2">��ǰ����(product_price)�� �������ÿ�.</td>
+                  <th>상품가격</th>
+                  <td colspan="2">상품가격(product_price)을 가져오시오.</td>
                </tr>
                <tr>
-                  <th>�������</th>
+                  <th>배송정보</th>
                   <td colspan="2"> </td>
                </tr>
                <tr style="font-size : 21px; ">
-                  <th colspan="3" style="text-align:left"> �Ϲݹ�� | 3,000�� (15,000 �� �̻� ������ )</th>
+                  <th colspan="3" style="text-align:left"> 일반배송 | 3,000원 (15,000 원 이상 무료배송 )</th>
                </tr>
                <form name="form" method="get">
                <tr>
-                  <th>��ǰ ����</th>
+                  <th>상품 수량</th>
                   <td colspan="2">
                   <input type=hidden name="sell_price" value="5500">
                   <input type="number" style="font-size : 23px; width : 71px;"name="amount" value="1" size="3" onchange="change();">
@@ -202,23 +208,23 @@
                </tr>
                
                <tr>
-                  <th>�հ�ݾ�</th>
-                  <td colspan="2"><input type="text" style="font-size : 23px; width : 181px;" name="sum" size="11" readonly>��</td>
+                  <th>합계금액</th>
+                  <td colspan="2"><input type="text" style="font-size : 23px; width : 181px;" name="sum" size="11" readonly>원</td>
                </tr>
                </form>
             </table>
             
               <div class="btn"> 
-               <input type="button" value="��ٱ���" class="bucket" onclick="location.href='��ٱ���.jsp';">
-               <input type="button" value="�ٷ� ����" class="pay" onclick="location.href='����.jsp';">
-               <input type="button" value="���ƿ�" class="nice" onclick="location.href='����������.jsp';">
+               <input type="button" value="장바구니" class="bucket" onclick="location.href='장바구니.jsp';">
+               <input type="button" value="바로 구매" class="pay" onclick="location.href='결재.jsp';">
+               <input type="button" value="좋아요" class="nice" onclick="location.href='현재페이지.jsp';">
             </div>
             
          </div>
    </div>
    
    <div class="recommend">
-      <span style="font-family :sans-serif; font-size : 18px;">�̷� ��ǰ�� �����?</span>
+      <span style="font-family :sans-serif; font-size : 18px;">이런 상품은 어떠세요?</span>
            <div class="slide">
           <input type="radio" name="pos" id="pos1" checked>
           <input type="radio" name="pos" id="pos2">
@@ -283,19 +289,19 @@
    <ul style="list-style-type:none">
       <li style="display:inline" class="menu-list">
          <a href="#">
-            ��ǰ����
+            상품설명
          </a>
       </li>
       
       <li style="display:inline" class="menu-list">
          <a href="#">
-            ��������
+            구매정보
          </a>
       </li>
       
       <li style="display:inline" class="menu-list">
          <a href="#">
-            ����
+            리뷰
          </a>
       </li>
       
@@ -313,7 +319,57 @@
 	   </div>
 	   
 	   <div class="purchas-detail">
-	   2
+	   		<span>배송비/배송가능일</span>
+	   		<table style="border : 1px brown solid;">
+	   			<tr style=" width : 1100px;">
+	   				<th width="350px;" style="background-color : #CEF6E3;">배송비/배송가능일</th>
+	   				<td width="750px;">
+	   				[일반 배송]<br>
+					배송지역 : 전국<br>
+					배송비 : 2,500원<br>
+					올리브영 배송 상품의 총 결제금액 20,000원 이상일 경우 무료배송 됩니다.<br>
+					도서, 산간, 오지 일부 지역은 배송비가 추가될 수 있습니다.<br>
+					배송가능일 : 3일<br>
+					배송가능일이란 본 상품을 주문하신 고객님들께 상품 배송이 가능한 기간을 의미합니다. 단, 연휴 및 공휴일은 기간 계산시 제외하며 현금 주문일 경우 입금일 기준 입니다.<br>
+					예약 상품의 경우 예약된 날짜에 출고되며, 상품의 입고가 빠르게 진행된 경우 예약일 보다 일찍 배송될 수 있습니다.<br>
+	   				</td>
+	   			</tr>
+	   		</table>
+	   		<span>교환/반품/환불 안내</span>
+	   		<table style="border : 1px brown solid;">
+	   			<tr style=" width : 1100px;">
+	   				<th width="350px;" style="background-color : #CEF6E3;">
+	   					교환/반품 신청 방법
+	   				</th>
+	   				<td width="750px;">
+		   				마이페이지 내 주문내역에서 신청가능하며,<br>
+						반품 신청의 경우 택배회수 / 매장방문(일부 매장)중 선택하여 신청가능합니다.
+	   				</td>
+	   			</tr>
+	   			<tr style=" width : 1100px;">
+	   				<th width="350px;" style="background-color : #CEF6E3;">
+	   					교환/반품 신청 기간
+	   				</th>
+	   				<td width="750px;">
+	   					교환, 반품 신청은 배송이 완료된 후 15일 이내 가능합니다.<br>
+						고객님이 배송 받으신 상품의 내용이 표시∙광고의 내용과 다르거나 계약내용과 다르게 이행된 경우에는 배송 받으신 날로부터 3개월 이내, 혹은 그 사실을 알 수 있었던 날로 부터 30일 이내에 가능합니다.
+	   				</td>
+	   			<tr style=" width : 1100px;">
+	   				<th width="350px;" style="background-color : #CEF6E3;">
+	   				
+	   				</th>
+	   				<td width="750px;">
+	   				
+	   				</td>
+	   			<tr style=" width : 1100px;">
+	   				<th width="350px;" style="background-color : #CEF6E3;">
+	   				
+	   				</th>
+	   				<td width="750px;">
+	   				
+	   				</td>
+	   			</tr>
+	   		</table>	   		
 	   </div>
 	   
 	   <div class="review">
