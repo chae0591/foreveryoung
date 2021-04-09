@@ -267,20 +267,30 @@ public class AdminController {
 	
 	//1:1문의 답변등록
 	@PostMapping("/replyRegister")
-	public String postReplyRegister(InquiryVO inquiryVO, Model model) throws Exception{
+	public RedirectView postReplyRegister(InquiryVO inquiryVO, Model model) throws Exception{
 		log.info("postreplyRegister");
 		
 		service.replyRegister(inquiryVO);
 		
 		model.addAttribute("replyRegister", "1:1문의 답변이 등록되었습니다");
 		
-		return "admin/success";
+		return new RedirectView("inquiryList");
 		
 	}
 	
-	//1:1문의 답변완료
+	//1:1문의 답변완료로 상태변경
+	@PostMapping("/inquiryStatusComplete")
+	public void postInquiryStatusComplete(InquiryVO inquiryVO, Model model) throws Exception{
+		log.info("postInquiryStatusComplete()");
+		
+		service.inquiryStatusComplete(inquiryVO);
+		
+		
+		model.addAttribute("inquiryStatusComplete" , "1:1문의 답변완료");
+		
+	}
 	
-	//1:1문의 답변보기
+	//1:1문의 답변대기로 상태변경
 	
 	
 	

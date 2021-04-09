@@ -102,6 +102,11 @@ public class AdminServiceImpl implements AdminService{
 		repository.replyRegister(inquiryVO);
 	}
 
+	@Override
+	public void inquiryStatusComplete(InquiryVO inquiryVO) throws Exception {
+		repository.inquiryStatusComplete(inquiryVO);
+	}
+
 
 
 

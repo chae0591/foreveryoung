@@ -136,7 +136,10 @@
 	</insert>
 	
 	<!-- 1:1문의 상태 답변완료로 변경 -->
-	
+	<update id="inquiryStatusComplete">
+		update inquiry set inquiry_status = '답변완료' where inquiry_no=#{inquiry_no}
+	</update>
+	 
 	<!-- 1:1문의 답변 수정 -->
 	
 	<!-- 1:1문의 답변 삭제 -->

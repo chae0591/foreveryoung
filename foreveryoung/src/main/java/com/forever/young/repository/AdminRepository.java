@@ -54,5 +54,7 @@ public interface AdminRepository {
 	
 	public void replyRegister(InquiryVO inquiryVO) throws Exception; 
 	
+	public void inquiryStatusComplete(InquiryVO inquiryVO) throws Exception;
+	
 	
 }

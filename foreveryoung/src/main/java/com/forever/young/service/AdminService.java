@@ -44,5 +44,7 @@ public interface AdminService {
  	public void noticeDelete(Integer notice_no) throws Exception;
  	
  	public void replyRegister(InquiryVO inquiryVO) throws Exception;
+ 	
+ 	public void inquiryStatusComplete(InquiryVO inquiryVO) throws Exception;
 	
 }
