@@ -33,7 +33,6 @@ public class AdminController {
 	
 	private final Logger log = LoggerFactory.getLogger(AdminController.class);
 	
-	
 	@GetMapping("/success")
 	public String getsuccess() {
 		log.info("getsuccess()");
