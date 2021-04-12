@@ -217,6 +217,12 @@ $(function(){
 	$(".func-cart").click(function(){
         location.href = '/member/cartList';
 	});
+	
+
+	$(".func-my-seller").click(function(){
+        location.href = '/member/mypage_brand/mypage_brand_main';
+	});
+	
 });
 
 </script>
@@ -261,11 +267,22 @@ $(function(){
     	</div>
     </form>
    
-    <div class="icons">
-    	<input type="button" class="func-my" >
-    	<input type="button"  class="func-cart">
-    </div>
-    
+   
+   <c:choose>
+	   	<c:when test="${check ne null && auth eq 'customer'}">
+		    <div class="icons">
+		    	<input type="button" class="func-my" >
+		    	<input type="button"  class="func-cart">
+	 		</div>
+	   	</c:when>
+   	
+   		<c:when test="${check ne null && auth eq 'seller'}">
+		    <div class="icons">
+		    	<input type="button" class="func-my-seller" >
+		    	<input type="button"  class="func-cart">
+	 		</div>
+   		</c:when>
+   </c:choose>
 </div>
 	
 <div class="nav">
