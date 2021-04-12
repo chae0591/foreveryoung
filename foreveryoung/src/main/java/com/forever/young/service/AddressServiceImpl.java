@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.forever.young.entity.Address;
+import com.forever.young.entity.OrderVO;
 import com.forever.young.repository.AddressRepository;
 
 @Service
@@ -42,5 +43,10 @@ public class AddressServiceImpl implements AddressService{
 	@Override
 	public Address selectAddressNum(int address_no) throws Exception {
 		return repository.selectAddressNum(address_no);
+	}
+	
+	@Override
+	public void addVO(OrderVO orderVO) throws Exception {
+		repository.addVO(orderVO);
 	}
 }
