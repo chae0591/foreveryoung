@@ -169,4 +169,4 @@ public class CustomerController {
 	public String join_choice() {
 		return "member/join_choice";
 	}
-
+}
