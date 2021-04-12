@@ -16,6 +16,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.forever.young.entity.Admin;
 import com.forever.young.entity.Event;
+import com.forever.young.entity.InquiryVO;
 import com.forever.young.entity.Notice;
 import com.forever.young.repository.AdminRepository;
 import com.forever.young.service.AdminService;
@@ -263,6 +264,37 @@ public class AdminController {
 		
 		return new RedirectView("noticeList");
 	}
+	
+	//1:1문의 답변등록
+	@PostMapping("/replyRegister")
+	public RedirectView postReplyRegister(InquiryVO inquiryVO, Model model) throws Exception{
+		log.info("postreplyRegister");
+		
+		service.replyRegister(inquiryVO);
+		
+		model.addAttribute("replyRegister", "1:1문의 답변이 등록되었습니다");
+		
+		return new RedirectView("inquiryList");
+		
+	}
+	
+	//1:1문의 답변완료로 상태변경
+	@PostMapping("/inquiryStatusComplete")
+	public void postInquiryStatusComplete(InquiryVO inquiryVO, Model model) throws Exception{
+		log.info("postInquiryStatusComplete()");
+		
+		service.inquiryStatusComplete(inquiryVO);
+		
+		
+		model.addAttribute("inquiryStatusComplete" , "1:1문의 답변완료");
+		
+	}
+	
+	//1:1문의 답변대기로 상태변경
+	
+	
+	
+	
 	
 	
 	
