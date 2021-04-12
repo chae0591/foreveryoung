@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
  <style>
  * {
     margin: 0;
@@ -220,12 +222,35 @@ $(function(){
 </script>
 </head>
 <body>
+  <h3>로그인 확인 여부 :
+  		<c:forEach var="name" items="${pageContext.session.attributeNames}">
+    		Name: ${name}
+    		Value: ${sessionScope[name]}
+		</c:forEach>
+	</h3>
 <div class="login-box">
-		<ul>
-			<li><a href="/member/login">로그인</a></li>
-			<li><a href="/member/join">회원가입</a></li>
-			<li><a href="/admin/login">관리자</a></li>
-		</ul>
+
+ 	<c:choose>
+   		<c:when test="${check ne null && auth eq 'customer'}">
+			<ul>
+				<li><a href="/member/mypage"><c:out value="${check}"/> 님 반갑습니다</a></li>
+				<li><a href="/member/logout">로그아웃</a></li>
+			</ul>
+    	</c:when>
+   		<c:when test="${check ne null && auth eq 'seller'}">
+			<ul>
+				<li><a href="/member/mypage"><c:out value="${check}"/> 님 반갑습니다</a></li>
+				<li><a href="/member/logout">로그아웃</a></li>
+			</ul>
+   		</c:when>
+   		<c:otherwise>
+   			<ul>
+				<li><a href="/member/login">로그인</a></li>
+				<li><a href="/member/join">회원가입</a></li>
+				<li><a href="/admin/login">관리자</a></li>
+			</ul>
+   		</c:otherwise>
+	</c:choose>
 </div>
 <div class="top-box">
 	<div class="logo-box">logo</div>
@@ -235,7 +260,7 @@ $(function(){
     	 	<input type="submit" class="into-btn">
     	</div>
     </form>
-    
+   
     <div class="icons">
     	<input type="button" class="func-my" >
     	<input type="button"  class="func-cart">
