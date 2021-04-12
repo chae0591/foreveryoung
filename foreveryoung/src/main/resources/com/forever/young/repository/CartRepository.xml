@@ -36,4 +36,25 @@
 		</foreach>
 	</select>
 	
+	<select id="searchListProNums" resultType="CartListVO">
+		select c.cart_no, pb.product_no, pb.product_brand, pb.product_name, pb.product_category, pb.product_price, 
+		pb.brand_name, pb.product_skintype, c.cart_count, c.cart_regDate 
+		from cart c join (select p.*, b.* from product_table P join brand B on p.product_brand = b.brand_num) pb 
+		on c.product_no = pb.product_no 
+		where pb.product_no in 
+		<foreach item="item" collection="pronumList" index="index" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	
+	<select id="searchListProNumList" resultType="CartListVO">
+		select c.cart_no, pb.product_no, pb.product_brand, pb.product_name, pb.product_category, pb.product_price, 
+		pb.brand_name, pb.product_skintype, c.cart_count, c.cart_regDate 
+		from cart c join (select p.*, b.* from product_table P join brand B on p.product_brand = b.brand_num) pb 
+		on c.product_no = pb.product_no 
+		where pb.product_no in 
+		<foreach item="item" collection="proList" index="index" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
 </mapper>

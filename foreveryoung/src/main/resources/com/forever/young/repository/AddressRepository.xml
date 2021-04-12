@@ -30,4 +30,8 @@
 	<select id="selectAddressNum" resultType="Address">
 		select * from address where address_no = #{address_no}
 	</select>
+	
+	<insert id="addVO">
+		insert into address values(address_seq.nextval, #{address_name}, #{address_zonecode}, #{address_jibun}, #{address_roadname}, #{address_detail}, #{address_phone}, null, null)
+	</insert>
 </mapper>
