@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.forever.young.repository.AddressRepository">
+	<insert id="addAddress">
+		insert into address values(address_seq.nextval, #{address_name}, #{address_zonecode}, #{address_jibun}, #{address_roadname}, #{address_detail}, #{address_phone}, #{address_customer}, null)
+	</insert>
+	
+	<select id="searchAddress" resultType="Address">
+		select * from address where address_customer = #{address_customer}
+	</select>
+	
+	<delete id="delAddressItem">
+		delete address where address_no = #{address_no}
+	</delete>
+	
+	<delete id="delAddressItems">
+		delete address where address_no in 
+		<foreach item="item" collection="addressArr" index="index" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<update id="selAddressItem">
+		update customer set address_no = #{address_no} where user_num = #{user_no}
+	</update>
+	
+	<select id="selectAddressNum" resultType="Address">
+		select * from address where address_no = #{address_no}
+	</select>
+</mapper>

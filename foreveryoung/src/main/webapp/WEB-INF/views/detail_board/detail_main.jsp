@@ -370,20 +370,23 @@
    
    $(function(){
 	   $(".menu-list").eq(0).click(function(){
-		   $(".detail").hide();
+		 $(".detail").children("div").hide();
          $(".product-detail").show();
          alert("상품설명")
       });
       $(".menu-list").eq(1).click(function(){
+    	 $(".detail").children("div").hide();
          $(".purchas-detail").show();
          alert("구매정보")
       });
       $(".menu-list").eq(2).click(function(){
+    	 $(".detail").children("div").hide();
          $(".review").show();
          alert("리뷰")
       });
       $(".menu-list").eq(3).click(function(){
-         $("qna").show();
+    	 $(".detail").children("div").hide();
+         $(".qna").show();
          alert("qna")
       });
    });
