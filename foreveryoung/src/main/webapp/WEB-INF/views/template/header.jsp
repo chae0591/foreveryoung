@@ -245,14 +245,14 @@ $(function(){
     	</c:when>
    		<c:when test="${check ne null && auth eq 'seller'}">
 			<ul>
-				<li><a href="/member/mypage"><c:out value="${check}"/> 님 반갑습니다</a></li>
+				<li><a href="/member/mypage_brand/mypage_brand_main"><c:out value="${check}"/> 님 반갑습니다</a></li>
 				<li><a href="/member/logout">로그아웃</a></li>
 			</ul>
    		</c:when>
    		<c:otherwise>
    			<ul>
 				<li><a href="/member/login">로그인</a></li>
-				<li><a href="/member/join">회원가입</a></li>
+				<li><a href="/member/join_choice">회원가입</a></li>
 				<li><a href="/admin/login">관리자</a></li>
 			</ul>
    		</c:otherwise>
