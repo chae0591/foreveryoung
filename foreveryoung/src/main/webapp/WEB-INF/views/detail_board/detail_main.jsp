@@ -152,6 +152,10 @@
    #change-table>tr,th,td{
 	    border-bottom: 1px solid #444444;
    }
+   .review{
+		padding-right : 5px;
+		padding-left : 5px;
+   }
        *{margin:0;padding:0;}
           ul,li{list-style:none;}
           .slide{height:150px;overflow:hidden;position:relative;}
@@ -426,6 +430,18 @@
 		   	<div>
 		   		<ul>
 		   			<li>
+		   				<table style=" width : 1100px;border : 5px solid yellow">
+		   					<tr>
+		   						<th>1</th>
+		   						<th>2</th>
+		   						<th>3</th>
+		   					</tr>
+		   					<tr>
+		   						<th>4</th>
+		   						<th>5</th>
+		   						<th>6</th>
+		   					</tr>
+		   				</table>
 		   			</li>
 		   		</ul>
 
