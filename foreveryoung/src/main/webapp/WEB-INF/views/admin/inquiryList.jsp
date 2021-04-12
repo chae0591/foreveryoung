@@ -26,8 +26,7 @@
 			<li><a href="/admin/noticeList"><em class="fa fa-clone">&nbsp;</em> 공지사항 관리</a></li>
 			<li class="active"><a href="/admin/inquiryList"><em class="fa fa-clone">&nbsp;</em> 1:1문의 관리</a></li>
 			<li><a href="#"><em class="fa fa-clone">&nbsp;</em> 리뷰신고관리</a></li>
-			<li><a href="/admin/staticCustomer"><em class="fa fa-bar-chart">&nbsp;</em> 통계(고객분석)</a></li>
-			<li><a href="/admin/staticSales"><em class="fa fa-bar-chart">&nbsp;</em> 통계(매출분석)</a></li>
+			<li><a href="/admin/static"><em class="fa fa-bar-chart">&nbsp;</em> 통계</a></li>
 		</ul>
 	</div><!--/.sidebar-->	
 
@@ -58,7 +57,7 @@
 								<td colspan="5">1:1문의가  없습니다.</td>
 							</tr>
 						</c:when>
-						<c:otherwise>s
+						<c:otherwise>
 							<c:forEach items="${inquiryList}" var="inquiryList">
 								<tr>
 									<td align="center">${inquiryList.inquiry_no}</td>
@@ -67,7 +66,11 @@
 									<td align="center">${inquiryList.inquiry_regDate}</td>
 									<td align="center">
 										<a href="/admin/inquiryDetail?inquiry_no=${inquiryList.inquiry_no}">
-										${inquiryList.inquiry_status}</a> 
+											<c:choose>
+												<c:when test="${ inquiryList.reply_no == 0}">답변대기</c:when>
+												<c:otherwise>답변완료</c:otherwise>
+											</c:choose>
+										</a> 
 									</td>
 								</tr>
 							</c:forEach>
