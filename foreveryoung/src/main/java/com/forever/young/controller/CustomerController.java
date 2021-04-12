@@ -171,4 +171,9 @@ public class CustomerController {
 		return "member/mypage_brand/mypage_brand_main";
 	}
 	
+	//사용자/판매자 회원가입 선택 페이지
+	@RequestMapping("/join_choice")
+	public String join_choice() {
+		return "member/join_choice";
+	}
 }

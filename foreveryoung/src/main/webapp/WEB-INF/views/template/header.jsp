@@ -252,7 +252,7 @@ $(function(){
    		<c:otherwise>
    			<ul>
 				<li><a href="/member/login">로그인</a></li>
-				<li><a href="/member/join">회원가입</a></li>
+				<li><a href="/member/join_choice">회원가입</a></li>
 				<li><a href="/admin/login">관리자</a></li>
 			</ul>
    		</c:otherwise>
