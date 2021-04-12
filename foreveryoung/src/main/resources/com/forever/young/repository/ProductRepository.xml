@@ -24,11 +24,38 @@
 			#{product_price},
 			#{product_stock},
 			sysdate, 
+			#{product_brand},
+			#{product_skintype},
+		 	1)
+	</insert>
+	
+	<!-- <insert id="registProduct">
+	<selectKey keyProperty="product_no" order="BEFORE" resultType="int">
+			select product_table_seq.nextval from dual			
+	</selectKey>
+		insert into product_table 
+			(product_no,
+			product_category,
+			product_name,
+			product_price,
+			product_stock,
+			product_regDate,
+			product_brand,
+			product_skintype,
+			event_no)
+			
+		values
+			(#{product_no},
+			#{product_category},
+			#{product_name},
+			#{product_price},
+			#{product_stock},
+			sysdate, 
 			1,
 			#{product_skintype},
 		 	1)
 	</insert>
-
+ -->
 	<select id="selectBoardList" parameterType="hashMap" resultType="hashmap">
 		<![CDATA[
 			select 
@@ -55,26 +82,26 @@
 			product_regdate desc
 	</select>
 	
-	<!-- skintype 필터링 -->
-	<select id="categoryListType" resultType="com.forever.young.entity.Product">
+	<!-- 검색 필터링 -->
+	<select id="productListSearch" parameterType="map" resultType="com.forever.young.entity.Product">
 		select
 			p.*, i.image_save_name, i.image_type, i.image_name
 		from
         	product_table P inner join product_img i on p.product_no = i.product_no
 		where
 			product_category = #{category} and image_type = 'N' 
-			<if test="sType != null">
+			<if test="type != null">
 				and
 				product_skintype in
-				<foreach item="sType" index="i" collection="sType" open="(" close=")" separator=",">
-					#{sType}
+				<foreach item="type" index="i" collection="type" open="(" close=")" separator=",">
+					#{type}
 				</foreach>
 			</if>
-			<if test="sBrand != null">
+			<if test="brand != null">
 				and
 				product_brand in
-			<foreach item="sBrand" index="i" collection="sBrand" open="(" close=")" separator=",">
-				#{sBrand}
+			<foreach item="brand" index="i" collection="brand" open="(" close=")" separator=",">
+				#{brand}
 			</foreach>
 			</if>
 			
@@ -82,13 +109,57 @@
 			product_regdate desc
 	</select>
 	
+	<!-- 전체 브랜드 조회 -->
 	<select id="getBrand" resultType="Brand">
   		select * from brand
 	</select>
 	
+	<!-- 카테고리별 상품 총 개수 -->
 	<select id="getCount" resultType="int">
 	<![CDATA[
 		select count(*) from product_table where product_category = #{category}
+	]]>
+	</select>
+	
+	
+	
+	<!-- 브랜드별 상품조회 -->
+	<select id="brandList" resultType="com.forever.young.entity.Product">
+		select
+			p.*, i.image_save_name, i.image_type, i.image_name
+		from
+        	product_table P inner join product_img i on p.product_no = i.product_no
+        	inner join brand b on p.product_brand = b.brand_num
+		where
+			p.product_brand = #{brand} and image_type = 'N'
+		order by
+			product_regdate desc
+	</select>
+	
+	<!-- 검색 필터링 -->
+	<select id="brandListSearch" parameterType="map" resultType="com.forever.young.entity.Product">
+		select
+			p.*, i.image_save_name, i.image_type, i.image_name
+		from
+        	product_table P inner join product_img i on p.product_no = i.product_no
+        	inner join brand b on p.product_brand = b.brand_num
+		where
+			p.product_brand = #{brand} and i.image_type = 'N' 
+			<if test="type != null">
+				and
+				p.product_skintype in
+				<foreach item="type" index="i" collection="type" open="(" close=")" separator=",">
+					#{type}
+				</foreach>
+			</if>
+		order by
+			product_regdate desc
+	</select>
+	
+	<!-- 브랜드별 상품 총 개수 -->
+	<select id="getCountByBrand" resultType="int">
+	<![CDATA[
+		select count(*) from product_table where product_brand = #{brand}
 	]]>
 	</select>
 </mapper>

@@ -82,7 +82,6 @@
 			$("#salePrice").text(sale_price);
 			$("#totalPrice").text(total_price);
 		});
-		
 	});
 </script>
 </head>
@@ -97,11 +96,12 @@
 			<c:otherwise>
 				<input type="checkbox" id="totalcheck"><label for="totalcheck">전체 선택</label>
 				<input type="button" class="input input-inline del-cart-btn" value="선택 삭제">
+				<form action="/order/ordertest_cart" method="get">
 				<table>
 					<tbody>
 						<c:forEach var="cartItem" items="${userCartList}">
 							<tr>
-								<td><input type="checkbox" class="cartitemcheck" value="${cartItem.cart_no}"></td>
+								<td><input type="checkbox" class="cartitemcheck" name="cartList" value="${cartItem.cart_no}"></td>
 								<td>
 									<div>${cartItem.brand_name}</div>
 									<div>${cartItem.product_name}</div>
@@ -121,9 +121,11 @@
 							<td>선택 가격 합 : <span id="sumPrice">0</span></td>
 							<td>세일 (지금은 0)<span id="salePrice">0</span></td>
 							<td>토탈 가격 : <span id="totalPrice">0</span></td>
+							<td><input type="submit" class="order-btn" value="구매하기"></td>
 						</tr>
 					</tfoot>
 				</table>
+				</form>
 			</c:otherwise>
 		</c:choose>
 	</div>

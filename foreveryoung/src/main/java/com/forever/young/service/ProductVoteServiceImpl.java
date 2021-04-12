@@ -1,6 +1,7 @@
 package com.forever.young.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,13 +15,13 @@ public class ProductVoteServiceImpl implements ProductVoteService{
 	private ProductVoteRepository voteRepository;
 	
 	@Override
-	public void inVote(int product_no, int user_num) {
-		voteRepository.inVote(product_no, user_num);
+	public void inVote(Map<String, Object> vote) {
+		voteRepository.inVote(vote);
 	}
 
 	@Override
-	public void delVote(int product_no, int user_num) {
-		voteRepository.delVote(product_no, user_num);
+	public void delVote(Map<String, Object> vote) {
+		voteRepository.delVote(vote);
 		
 	}
 

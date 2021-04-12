@@ -1,6 +1,7 @@
 package com.forever.young.controller;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,10 +13,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.forever.young.entity.Brand;
 import com.forever.young.entity.Paging;
 import com.forever.young.entity.Product;
@@ -34,8 +38,11 @@ public class ProductController {
 	private final Logger log = LoggerFactory.getLogger(ProductController.class);
 	
 	@GetMapping("productWrite")
-	public String getproductWrite() {
+	public String getproductWrite(Model model) {
 		log.info("getProductWrite()");
+		List<Brand> brand = service.getBrand();
+		
+		model.addAttribute("brand", brand);
 		
 		return "product/productWrite";
 		
@@ -100,17 +107,38 @@ public class ProductController {
 		return "product/categoryList";
 	}
 	
+	
 	// 검색하기
 	@PostMapping("search")
-	public String search(@RequestParam String category, @RequestParam(value="type", required=false) String type, @RequestParam(value="brand", required=false) String brand, Model model) throws Exception {
+	public String search(@RequestBody Map<String, Object> searchData, Model model) throws Exception {
 		
-		String[] sType = type.split(",");
-		String[] param = brand.split(",");
-		int[] sBrand = Arrays.stream(param).mapToInt(Integer::parseInt).toArray();
+		List<Product> list = service.productListSearch(searchData);
+		model.addAttribute("list", list);
+		System.out.println(list);
+		return "/product/search";
+	}
+
+	// 브랜드 리스트
+	@GetMapping("brandList")
+	public String brandList(@RequestParam String brand, Paging paging, Model model) throws Exception {
+		int total = service.getCountByBrand(Integer.parseInt(brand));
+		model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
 		
-		List<Product> list = service.productListSearch(category, sType, sBrand);
+		List<Product> list = service.brandList(Integer.parseInt(brand));
+		
+		model.addAttribute("brand", Integer.parseInt(brand));
 		model.addAttribute("list", list);
 		
-		return "product/search";
+		return "product/brandList";
+	}
+	
+	// 검색하기
+	@PostMapping("searchBrandList")
+	public String searchBrandList(@RequestBody Map<String, Object> searchData, Model model) throws Exception {
+		
+		List<Product> list = service.brandListSearch(searchData);
+		model.addAttribute("list", list);
+		System.out.println(list);
+		return "/product/search";
 	}
 } 

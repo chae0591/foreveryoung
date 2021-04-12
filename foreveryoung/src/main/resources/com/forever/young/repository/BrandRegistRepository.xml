@@ -18,5 +18,9 @@
 	<select id="findId" resultType="Brand">
 		select * from Brand where brand_id = #{brand_id}
 	</select>
+	
+	<select id="findNum" resultType="Brand">
+		select * from Brand where brand_num = #{brand_num}
+	</select>
 
 </mapper>

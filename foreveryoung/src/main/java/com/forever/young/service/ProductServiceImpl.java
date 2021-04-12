@@ -1,6 +1,5 @@
 package com.forever.young.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +10,6 @@ import com.forever.young.entity.Brand;
 import com.forever.young.entity.Product;
 import com.forever.young.repository.ProductFileUploadRepository;
 import com.forever.young.repository.ProductRepository;
-import com.forever.young.repository.ProductVoteRepository;
 
 @Service("productService")
 public class ProductServiceImpl implements ProductService{
@@ -48,8 +46,8 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<Product> productListSearch(String category, String[] sType, int[] sBrand) {
-		return productRepository.productListSearch(category, sType, sBrand);
+	public List<Product> productListSearch(Map<String, Object> searchData) {
+		return productRepository.productListSearch(searchData);
 	}
 
 	@Override
@@ -60,6 +58,21 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public int getCount(String category) {
 		return productRepository.getCount(category);
+	}
+
+	@Override
+	public List<Product> brandList(int brand) {
+		return productRepository.brandList(brand);
+	}
+
+	@Override
+	public List<Product> brandListSearch(Map<String, Object> searchData) {
+		return productRepository.brandListSearch(searchData);
+	}
+
+	@Override
+	public int getCountByBrand(int brand) {
+		return productRepository.getCountByBrand(brand);
 	}
 
 	

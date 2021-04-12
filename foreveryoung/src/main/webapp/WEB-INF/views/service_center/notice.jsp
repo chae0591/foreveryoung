@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -245,8 +248,10 @@
 
 <script>
 $(function(){
+	//처음에 내용 숨기기
 	$(".hide").hide();
 	
+	//게시글 클릭시 내용 나오도록
 	$(".open").click(function(){
         if($(this).next().css('display') == 'none'){
         	$(this).next().show();
@@ -254,6 +259,39 @@ $(function(){
        		$(".hide").hide();
     	}
 	});
+	
+	//공지사항으로 이동
+	$(".notice-btn").click(function(){
+   			location.href = '/service_center/notice';
+	});
+	
+	//1:1문의로 이동
+	$(".inquiry-btn").click(function(){
+		var id = "${check}";
+		
+        if(id == ''){
+        	 alert("로그인 후 문의 가능합니다.");
+        	 location.href = '/member/login';
+   		 }else{
+   			 location.href = '/service_center/inquiry';
+    	}
+	});
+	
+	/* //카테고리별 클릭시 리스트 출력
+	$(".notice1").click(function(){
+		$.ajax({
+			url : "${pageContext.request.contextPath}/service_center/notice",
+			type : "get", 
+			success : function(resp){//resp == 목록
+				//console.log(resp);
+				resp = $.parseJSON(resp);//JSON 복원
+				$.each(resp, function(){
+					console.log(this);
+				});
+			}
+		});
+	}); */
+	
 });
 </script>
 
@@ -269,8 +307,8 @@ $(function(){
 	</div>
 		
 	<div class="service-btns">
-		<a href="/service_center/notice"><button class="notice-btn">공지사항</button></a>
-		<a href="/service_center/inquiry"><button class="inquiry-btn">1:1 문의</button></a>
+		<button class="notice-btn">공지사항</button>
+		<button class="inquiry-btn">1:1 문의</button>
 	</div>
 	
 	<div class="serviceSrh-box">
@@ -294,11 +332,12 @@ $(function(){
 	</div>
 	
 	<div class="notice-list">
-		<c:forEach var="i" begin = "1" end="10" step="1">
+		<c:forEach items="${noticeList}" var="notice">
 		 		<div class="open">
 		 			<ul>
 		 				<li>
-		 					<p>회원<p><p>제목<p>
+		 					<input type="hidden" name="notice_no" value="${notice.notice_no}">
+		 					<p><c:out value="${notice.notice_type}" /><p><p><c:out value="${notice.notice_title}" /><p>
 		 				</li>
 		 			</ul>
 		 		</div>
@@ -306,12 +345,18 @@ $(function(){
 		 		<div class="hide" >
 		 			<ul>
 		 				<li>
-		 					<p>내용<p>
+		 					<p><c:out value="${notice.notice_content}" /><p>
 		 				</li>
 		 			</ul>
 		 		</div>
 		</c:forEach>
 	</div>
+	<c:forEach items="${noticeList}" var="lists">
+		 	<p><c:out value="${lists.notice_no}" /><p>
+		 	<p><c:out value="${lists.notice_type}" /><p>
+		 	<p><c:out value="${lists.notice_title}" /><p>
+		 	<p><c:out value="${lists.notice_content}" /><p>
+	</c:forEach>
 	
 	<div class="last-box">
 		<a href="#"><button class="inquiryGobtn">1:1 문의하기</button></a>
