@@ -49,8 +49,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script>
 	$(document).ready(function(){
-		//var productList = $("#appendHtml").clone();
-		
 		var user_num = $("input[name='user_num']").val();
 		if(user_num != "") {
 			voteCheck();
@@ -65,14 +63,11 @@
 				type: 'GET',
 				data: {'user_num' : user_num},
 				success : function(result) {
-					console.log(result);
 					var num = 0;
 					for(var i in result) {
 						var i = result[i];
-						console.log($("[data-no="+i+"]").find("#vote_img"));
 						$("[data-no="+i+"]").find("#vote_img").attr("src", "/img/product/like.png");
 						$("[data-no="+i+"]").attr("value", "true");
-						console.log($("[data-no="+i+"]").attr("value"));
 					}
 				}
 			});// ajax
@@ -80,7 +75,7 @@
 		} //end votecheck
 		
 		var category = $("input[name='category']").val();
-		// brand 필터링
+		// 필터링
 		$("input[type='checkbox']").on("change", function(e){
 			var brand = new Array();
 			 
@@ -103,16 +98,25 @@
 			if(type.length == 0 || type == "") {
 				$(".typeCheck input[type='checkbox']").each(function(index, item) {
 					type.push($(item).val());
-			});
+				});
 			}
-			$.ajaxSettings.traditional = true;
+			
+			var searchData = {
+					category : category,
+					type : type,
+					brand : brand
+			}
+			
+			var jsonData = JSON.stringify(searchData);
 			
 			$.ajax({
 				url : '/product/search',
-				data : {'category':category, 'type' : type, 'brand': brand},
+				contentType : 'application/json',
+				data : jsonData,
 				type : 'POST',
+				traditional : true,
 				success : function(result){
-					console.log(result);
+					console.log("성공!");
 					voteCheck();
 					$(".pList").html(result);
 				}
@@ -125,7 +129,6 @@
 			var target = $(this);
 			var user_num = $("input[name='user_num']").val();
 			var product_no = $(this).data("no");
-			console.log(user_num);
 			if(user_num == null || user_num == "") {
 				location.href="/member/login";
 			}
@@ -142,7 +145,6 @@
 				data : {'user_num':user_num, 'product_no':product_no},
 				type: 'POST',
 				success : function(result) {
-					console.log(result);
 					
 					$(target).attr("value", result);
 					if(result == "true") {
@@ -197,7 +199,7 @@
 		<div class="brand_check">
 			<ul>
 				<li>
-					<c:forEach var="brand" items="${brand}" varStatus="status">
+					<c:forEach var="brand" items="${brand}">
 						<label for="${brand.brand_name}"><c:out value="${brand.brand_name}"/></label><input type="checkbox" value="${brand.brand_num}" id="${brand.brand_name}">
 					</c:forEach>
 				</li>
@@ -211,6 +213,7 @@
 				<label for="ckType2">지성</label><input type="checkbox" value="지성" id="ckType2">
 				<label for="ckType3">민감성</label><input type="checkbox" value="민감성" id="ckType3">
 				<label for="ckType4">복합성</label><input type="checkbox" value="복합성" id="ckType4">
+				<input type="checkbox" value="all" style="display:none;">
 			</div>
 		</div>
 	<div class="row" id="appendHtml">
