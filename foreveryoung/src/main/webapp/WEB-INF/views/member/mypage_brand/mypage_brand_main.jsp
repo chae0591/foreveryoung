@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,9 +13,6 @@
 
 <title>판매자 페이지 메인</title>
 <style>
-
-
-
 
  	/* 사이드 매뉴 위치 잡아주기  */
 	.s_left {
@@ -291,18 +289,21 @@
 <div class="center_left">
 		<table>
 			<tr>
-				<td class="bold">판매자 아이디: </td>
+				<td class="bold">판매자 번호: <c:out value="${brand_info.brand_num}"></c:out> </td>
 			</tr>
 			<tr>
-				<td class="bold">판매자 이름: </td>
+				<td class="bold">판매자 아이디: <c:out value="${brand_info.brand_id}"></c:out></td>
 			</tr>
 			<tr>
-				<td class="bold">판매자 전화번호: </td>
+				<td class="bold">판매자 이름: <c:out value="${brand_info.brand_name}"></c:out></td>
 			</tr>
 			<tr>
-				<td class="bold">판매자 주소: </td>
+				<td class="bold">판매자 전화번호: <c:out value="${brand_info.brand_phone}"></c:out></td>
 			</tr>
-		</table>
+			<tr>
+				<td class="bold">판매자 가입일: <c:out value="${brand_info.user_regDate}"></c:out></td>
+			</tr>
+		</table><br><br>
 		
 	<!-- 달럭 -->
 	<%
@@ -376,16 +377,10 @@
 
 <!-- 가로줄 -->
 	<!-- <div class="vi"></div> -->
-	
-	
-	
 <!-- center_left 판매자 정보 + 달럭 마무리 -->
 </div>
 
 
-
-	
-	
 	
 <!--	투두 리스트 -->
 	<div class="toDo center_right">

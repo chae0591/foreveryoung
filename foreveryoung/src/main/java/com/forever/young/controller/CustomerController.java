@@ -163,12 +163,10 @@ public class CustomerController {
 		
 		return "main";
 	}
-	
-//	판메자 페이지 메인 맵핑
-	@GetMapping("/mypage_brand/mypage_brand_main")
-	public String getMypage_brand_main() {
-		log.info("getMypage_brand_main()");
-		return "member/mypage_brand/mypage_brand_main";
+
+	//사용자/판매자 회원가입 선택 페이지
+	@RequestMapping("/join_choice")
+	public String join_choice() {
+		return "member/join_choice";
 	}
-	
 }
