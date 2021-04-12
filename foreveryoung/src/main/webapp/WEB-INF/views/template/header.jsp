@@ -211,7 +211,12 @@ input[type="submit"], button {
 $(function(){
 
 	$(".func-my").click(function(){
-        location.href = '/member/mypage';
+		if(${check ne null && auth eq 'customer'}){
+			 location.href = '/member/mypage';
+		}else if(${check ne null && auth eq 'seller'}){
+			 location.href = '/member/mypage_brand/mypage_brand_main';
+		}
+       		return false;
 	});
 	
 	$(".func-cart").click(function(){
@@ -278,7 +283,7 @@ $(function(){
    	
    		<c:when test="${check ne null && auth eq 'seller'}">
 		    <div class="icons">
-		    	<input type="button" class="func-my-seller" >
+		    	<input type="button" class="func-my" >
 		    	<input type="button"  class="func-cart">
 	 		</div>
    		</c:when>
