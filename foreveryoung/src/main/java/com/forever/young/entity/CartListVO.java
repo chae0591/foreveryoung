@@ -5,6 +5,7 @@ import java.sql.Date;
 public class CartListVO {
 	private int cart_no;
 	private int product_no;
+	private int product_brand;
 	private String product_name;
 	private String product_category;
 	private int product_price;
@@ -24,6 +25,12 @@ public class CartListVO {
 	}
 	public void setProduct_no(int product_no) {
 		this.product_no = product_no;
+	}
+	public int getProduct_brand() {
+		return product_brand;
+	}
+	public void setProduct_brand(int product_brand) {
+		this.product_brand = product_brand;
 	}
 	public String getProduct_name() {
 		return product_name;
@@ -70,9 +77,11 @@ public class CartListVO {
 	
 	@Override
 	public String toString() {
-		return "CartListVO [cart_no=" + cart_no + ", product_no=" + product_no + ", product_name=" + product_name
-				+ ", product_category=" + product_category + ", product_price=" + product_price + ", brand_name="
-				+ brand_name + ", product_skintype=" + product_skintype + ", cart_count=" + cart_count
-				+ ", cart_regDate=" + cart_regDate + "]";
+		return "CartListVO [cart_no=" + cart_no + ", product_no=" + product_no + ", product_brand=" + product_brand
+				+ ", product_name=" + product_name + ", product_category=" + product_category + ", product_price="
+				+ product_price + ", brand_name=" + brand_name + ", product_skintype=" + product_skintype
+				+ ", cart_count=" + cart_count + ", cart_regDate=" + cart_regDate + "]";
 	}
+	
+	
 }

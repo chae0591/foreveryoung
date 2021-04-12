@@ -211,16 +211,32 @@ input[type="submit"], button {
 $(function(){
 
 	$(".func-my").click(function(){
-        location.href = '/member/mypage';
+		var id = "${check}";
+		var auth = "${auth}";
+		
+		if(id != '' && auth == "customer"){
+			 location.href = '/member/mypage';
+		}else if(id != '' && auth == "seller"){ 	 
+			 location.href = '/member/mypage_brand/mypage_brand_main';
+		}else{
+			 alert("로그인 후 사용 가능합니다.");
+        	 location.href = '/member/login';
+		}
 	});
 	
 	$(".func-cart").click(function(){
-        location.href = '/member/cartList';
-	});
-	
-
-	$(".func-my-seller").click(function(){
-        location.href = '/member/mypage_brand/mypage_brand_main';
+		var id = "${check}";
+		var auth = "${auth}";
+		
+		if(id != '' && auth == "customer"){
+			 location.href = '/member/cartList';
+		}else if(id != '' && auth == "seller"){ 	 
+			 alert("일반회원만 사용 가능합니다.");
+			 return false;
+		}else{
+			 alert("로그인 후 사용 가능합니다.");
+        	 location.href = '/member/login';
+		}
 	});
 	
 });
@@ -245,14 +261,14 @@ $(function(){
     	</c:when>
    		<c:when test="${check ne null && auth eq 'seller'}">
 			<ul>
-				<li><a href="/member/mypage"><c:out value="${check}"/> 님 반갑습니다</a></li>
+				<li><a href="/member/mypage_brand/mypage_brand_main"><c:out value="${check}"/> 님 반갑습니다</a></li>
 				<li><a href="/member/logout">로그아웃</a></li>
 			</ul>
    		</c:when>
    		<c:otherwise>
    			<ul>
 				<li><a href="/member/login">로그인</a></li>
-				<li><a href="/member/join">회원가입</a></li>
+				<li><a href="/member/join_choice">회원가입</a></li>
 				<li><a href="/admin/login">관리자</a></li>
 			</ul>
    		</c:otherwise>
@@ -267,22 +283,11 @@ $(function(){
     	</div>
     </form>
    
+   	 <div class="icons">
+		   <input type="button" class="func-my" >
+		    <input type="button"  class="func-cart">
+	 </div>
    
-   <c:choose>
-	   	<c:when test="${check ne null && auth eq 'customer'}">
-		    <div class="icons">
-		    	<input type="button" class="func-my" >
-		    	<input type="button"  class="func-cart">
-	 		</div>
-	   	</c:when>
-   	
-   		<c:when test="${check ne null && auth eq 'seller'}">
-		    <div class="icons">
-		    	<input type="button" class="func-my-seller" >
-		    	<input type="button"  class="func-cart">
-	 		</div>
-   		</c:when>
-   </c:choose>
 </div>
 	
 <div class="nav">

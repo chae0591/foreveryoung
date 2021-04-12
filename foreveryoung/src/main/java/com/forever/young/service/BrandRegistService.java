@@ -8,5 +8,4 @@ public interface BrandRegistService {
 	public Brand findId(String brand_id) throws Exception;
 	public Brand findNum(int brand_num) throws Exception;
 
-	
 }
