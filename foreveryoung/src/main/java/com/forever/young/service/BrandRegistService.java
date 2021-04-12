@@ -7,4 +7,5 @@ public interface BrandRegistService {
 	public Brand login(Brand Brand) throws Exception;
 	public Brand findId(String brand_id) throws Exception;
 	public Brand findNum(int brand_num) throws Exception;
+
 }
