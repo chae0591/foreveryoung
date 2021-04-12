@@ -6,4 +6,7 @@ import com.forever.young.entity.CartListVO;
 
 public interface CartService {
 	public List<CartListVO> searchListUser(int user_num) throws Exception;
+	public void delCartItem(int cart_no) throws Exception;
+	public void delCartItems(int[] cartArr) throws Exception;
+	public List<CartListVO> searchListNums(int[] cartList) throws Exception;
 }

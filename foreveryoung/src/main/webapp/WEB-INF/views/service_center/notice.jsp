@@ -1,13 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css">
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
 <style>
 .banner {
 	text-align: center;
@@ -67,11 +71,9 @@
     font-size: 20px;
     font-weight: 400px;
     float: left;
-
     position: absolute;
     top: 40%;
     left: 25%;
-    
 }
 .srh-box {
 	width: 350px;
@@ -183,62 +185,113 @@
 	 width: 145.7px;
      height: 100%;
 }
-.service-list {
+.notice-list {
 	width: 1020px;
 	height: auto;
 	margin: 0 auto;
 	display: block;
 	margin-top: 20px;
-	margin-bottom: 20px;
+	margin-bottom: 40px;
 	border-top: 2px solid #666;
 	border-bottom: 2px solid #666;
 	position: relative;
 }
-.service-list ul li {
+.notice-list ul li {
 	width: 100%;
 }
-.service-list p {
+.notice-list p {
 	padding: 10px;
 }
-.service-list > .open {
+.notice-list > .open {
 	width: 100%;
 	height: 60px;
 	border-bottom: 1px solid #e5e5e5;
 	background: url( "/resources/img/list.png" ) no-repeat;
-	 background-size: 1020px 60px;
-	 background-position: 0% 0%;
-	 padding-left: 60px;
-	 padding-top: 10px;
+	background-size: 1020px 60px;
+	background-position: 0% 0%;
+	padding-left: 60px;
+	padding-top: 10px;
 }
-.service-list > .open > li {
+.notice-list > .open > li {
 	width: 100%;
 	height: 100%;
-	float: left;
-	display: inline-block;
+	display: block;
 }
-.service-list > .hide {
+.notice-list > .hide {
 	width: 100%;
 	min-height: 60px;
 	background-color: #e6e6e6;
 	padding-left: 60px;
 }
-.service-list > .hide > li {
+.notice-list > .hide > li {
 	width: 100%;
 	height: 100%;
+}
+.last-box {
+	width: 1020px;
+	margin: 0 auto;
+	text-align: center;
+	height: auto;
+	margin-bottom: 40px;
+}
+.inquiryGobtn {
+	width: 150px;
+	height: 50px;
+	color: #fff;
+    font-weight: 700;
+    border-radius: 5px;
+    font-size: 18px;
+    line-height: 30px;
+    background-color: #555;
 }
 </style>
 
 <script>
 $(function(){
+	//처음에 내용 숨기기
 	$(".hide").hide();
 	
-	$(".open").click(function(dis){
+	//게시글 클릭시 내용 나오도록
+	$(".open").click(function(){
         if($(this).next().css('display') == 'none'){
         	$(this).next().show();
-    }else{
-        $(".hide").hide();
-    }
+   		 }else{
+       		$(".hide").hide();
+    	}
 	});
+	
+	//공지사항으로 이동
+	$(".notice-btn").click(function(){
+   			location.href = '/service_center/notice';
+	});
+	
+	//1:1문의로 이동
+	$(".inquiry-btn").click(function(){
+		var id = "${check}";
+		
+        if(id == ''){
+        	 alert("로그인 후 문의 가능합니다.");
+        	 location.href = '/member/login';
+   		 }else{
+   			 location.href = '/service_center/inquiry';
+    	}
+	});
+	
+	/* //카테고리별 클릭시 리스트 출력
+	$(".notice1").click(function(){
+		$.ajax({
+			url : "${pageContext.request.contextPath}/service_center/notice",
+			type : "get", 
+			success : function(resp){//resp == 목록
+				//console.log(resp);
+				resp = $.parseJSON(resp);//JSON 복원
+				$.each(resp, function(){
+					console.log(this);
+				});
+			}
+		});
+	}); */
+	
 });
 </script>
 
@@ -254,8 +307,8 @@ $(function(){
 	</div>
 		
 	<div class="service-btns">
-		<a href="/service_center/notice"><button class="notice-btn">공지사항</button></a>
-		<a href="/service_center/inquiry"><button class="inquiry-btn">1:1 문의</button></a>
+		<button class="notice-btn">공지사항</button>
+		<button class="inquiry-btn">1:1 문의</button>
 	</div>
 	
 	<div class="serviceSrh-box">
@@ -278,12 +331,13 @@ $(function(){
 			<button class="notice7">기타</button>
 	</div>
 	
-	<div class="service-list">
-		<c:forEach var="i" begin = "1" end="10" step="1">
-		 		<div class="open" onclick="dis()">
+	<div class="notice-list">
+		<c:forEach items="${noticeList}" var="notice">
+		 		<div class="open">
 		 			<ul>
 		 				<li>
-		 					<p>회원<p><p>제목<p>
+		 					<input type="hidden" name="notice_no" value="${notice.notice_no}">
+		 					<p><c:out value="${notice.notice_type}" /><p><p><c:out value="${notice.notice_title}" /><p>
 		 				</li>
 		 			</ul>
 		 		</div>
@@ -291,12 +345,23 @@ $(function(){
 		 		<div class="hide" >
 		 			<ul>
 		 				<li>
-		 					<p>내용<p>
+		 					<p><c:out value="${notice.notice_content}" /><p>
 		 				</li>
 		 			</ul>
 		 		</div>
 		</c:forEach>
 	</div>
+	<c:forEach items="${noticeList}" var="lists">
+		 	<p><c:out value="${lists.notice_no}" /><p>
+		 	<p><c:out value="${lists.notice_type}" /><p>
+		 	<p><c:out value="${lists.notice_title}" /><p>
+		 	<p><c:out value="${lists.notice_content}" /><p>
+	</c:forEach>
+	
+	<div class="last-box">
+		<a href="#"><button class="inquiryGobtn">1:1 문의하기</button></a>
+	</div>
+	
 <jsp:include page="../template/footer.jsp"></jsp:include>
 
 </body>

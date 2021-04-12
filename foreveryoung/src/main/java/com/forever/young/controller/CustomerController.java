@@ -163,4 +163,10 @@ public class CustomerController {
 		
 		return "main";
 	}
-}
+
+	//사용자/판매자 회원가입 선택 페이지
+	@RequestMapping("/join_choice")
+	public String join_choice() {
+		return "member/join_choice";
+	}
+

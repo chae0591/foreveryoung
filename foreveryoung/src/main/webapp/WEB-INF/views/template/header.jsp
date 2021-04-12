@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link href="style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
  <style>
  * {
     margin: 0;
@@ -27,9 +30,11 @@ ol, ul {
 }
 a {
 	text-decoration: none;
+	color: #555;
 }
-a:link, a:visited, a:hover {
+a:link, a:visited, a:hover, a:active {
 	text-decoration: none;
+	color: #555;
 }
 label, input.button, input.submit, input.image, button {
     cursor: pointer;
@@ -148,38 +153,51 @@ input[type="submit"], button {
 }
 
 .nav {
-	min-width: 1020px;
+	min-width: 100%;
 	height: 47px;
 	background-color: #fff;
     border-top: 1px solid #dddddd;
     border-bottom: 2px solid #555;
     margin: 0 auto;
+    position: relative;
 }
-.nav ul {
+.nav-line {
+	width: 1020px;
+	height: 100%;
+	 margin: 0 auto;
+    position: relative;
+}
+.nav-line ul {
 	float: left;
 	text-align:center;
     margin: 0;
     padding: 0;
     width: 100%;
-    position: relative;
 }
-.nav li {
+.nav-line li {
     display: inline-block;
     text-align:center;
     padding-top: 8px;
+    margin-left: 70px;
+    vertical-align:middle;
 }
-.nav li a {
-    padding: 40px;
+.nav-line li:first-child {
+	margin-left: 30px;
+}
+.nav-line li:last-child {
+	margin-right: 30px;
+}
+.nav-line li a {
     font-size: 18px;
     line-height: 27px;
     font-weight: 500;
     letter-spacing: -.27px;
     color: #222;
     font-style: normal;
+    position: relative;
 }
 
-.nav li a:hover {
-    padding: 40px;
+.nav-line li a:hover {
     text-decoration: none;
     font-size: 18px;
     line-height: 27px;
@@ -188,44 +206,102 @@ input[type="submit"], button {
    	color: #ffc948;
    	font-style: normal;
 }
-
- 
 </style>
+<script>
+$(function(){
+
+	$(".func-my").click(function(){
+		var id = "${check}";
+		var auth = "${auth}";
+		
+		if(id != '' && auth == "customer"){
+			 location.href = '/member/mypage';
+		}else if(id != '' && auth == "seller"){ 	 
+			 location.href = '/member/mypage_brand/mypage_brand_main';
+		}else{
+			 alert("로그인 후 사용 가능합니다.");
+        	 location.href = '/member/login';
+		}
+	});
+	
+	$(".func-cart").click(function(){
+		var id = "${check}";
+		var auth = "${auth}";
+		
+		if(id != '' && auth == "customer"){
+			 location.href = '/member/cartList';
+		}else if(id != '' && auth == "seller"){ 	 
+			 alert("일반회원만 사용 가능합니다.");
+			 return false;
+		}else{
+			 alert("로그인 후 사용 가능합니다.");
+        	 location.href = '/member/login';
+		}
+	});
+	
+});
+
+</script>
 </head>
 <body>
+  <h3>로그인 확인 여부 :
+  		<c:forEach var="name" items="${pageContext.session.attributeNames}">
+    		Name: ${name}
+    		Value: ${sessionScope[name]}
+		</c:forEach>
+	</h3>
 <div class="login-box">
-		<ul>
-			<li><a href="/member/login">로그인</a></li>
-			<li><a href="/member/join">회원가입</a></li>
-			<li><a href="/admin/login">관리자</a></li>
-		</ul>
+
+ 	<c:choose>
+   		<c:when test="${check ne null && auth eq 'customer'}">
+			<ul>
+				<li><a href="/member/mypage"><c:out value="${check}"/> 님 반갑습니다</a></li>
+				<li><a href="/member/logout">로그아웃</a></li>
+			</ul>
+    	</c:when>
+   		<c:when test="${check ne null && auth eq 'seller'}">
+			<ul>
+				<li><a href="/member/mypage_brand/mypage_brand_main"><c:out value="${check}"/> 님 반갑습니다</a></li>
+				<li><a href="/member/logout">로그아웃</a></li>
+			</ul>
+   		</c:when>
+   		<c:otherwise>
+   			<ul>
+				<li><a href="/member/login">로그인</a></li>
+				<li><a href="/member/join_choice">회원가입</a></li>
+				<li><a href="/admin/login">관리자</a></li>
+			</ul>
+   		</c:otherwise>
+	</c:choose>
 </div>
 <div class="top-box">
 	<div class="logo-box">logo</div>
-	<form class="form-inline" action="<%=request.getContextPath()%>/search/list" method="post">
+	<form class="form-inline" action="<%=request.getContextPath()%>/search/search_results" method="post">
 		<div class="search-box">
     		<input type="text" class="search-input"  placeholder="Search">
     	 	<input type="submit" class="into-btn">
     	</div>
     </form>
-    
-    <div class="icons">
-    	<input type="button" class="func-my" >
-    	<input type="button"  class="func-cart">
-    </div>
-    
+   
+   	 <div class="icons">
+		   <input type="button" class="func-my" >
+		    <input type="button"  class="func-cart">
+	 </div>
+   
 </div>
 	
 <div class="nav">
+	<div class="nav-line">
 	<ul>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList/skincare">스킨케어</a></li>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList/makeup">메이크업</a></li>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList/bodycare">바디케어</a></li>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList/haircare">헤어케어</a></li>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList/perfume">향수/디퓨저</a></li>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList/manscare">남성케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=skincare">스킨케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=makeup">메이크업</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=bodycare">바디케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=haircare">헤어케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=perfume">향수/디퓨저</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=manscare">남성케어</a></li>
 		<li><a href="/service_center/notice">고객센터</a></li>
 	</ul>
+	</div>
 </div>
 
 </body>

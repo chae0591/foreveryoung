@@ -10,6 +10,7 @@ import com.forever.young.entity.Brand;
 import com.forever.young.entity.Customer;
 import com.forever.young.entity.Event;
 import com.forever.young.entity.Inquiry;
+import com.forever.young.entity.InquiryVO;
 import com.forever.young.entity.Notice;
 import com.forever.young.entity.ProductVO;
 import com.forever.young.repository.AdminRepository;
@@ -81,8 +82,29 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public Inquiry inquiryDetail(Integer inquiry_no) throws Exception {
+	public InquiryVO inquiryDetail(Integer inquiry_no) throws Exception {
 		return repository.inquiryDetail(inquiry_no);
+	}
+
+	@Override
+	public void noticeModify(Notice notice) throws Exception {
+		repository.noticeModify(notice);
+		
+	}
+
+	@Override
+	public void noticeDelete(Integer notice_no) throws Exception {
+		repository.noticeDelete(notice_no);
+	}
+
+	@Override
+	public void replyRegister(InquiryVO inquiryVO) throws Exception {
+		repository.replyRegister(inquiryVO);
+	}
+
+	@Override
+	public void inquiryStatusComplete(InquiryVO inquiryVO) throws Exception {
+		repository.inquiryStatusComplete(inquiryVO);
 	}
 
 

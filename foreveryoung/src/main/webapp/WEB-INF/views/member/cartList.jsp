@@ -17,18 +17,70 @@
 		
 		$(".del-cart-item").click(function(){
 			if(confirm("정말로 삭제하시겠습니까?")) {
-								
-				<!--$.ajax({
+				var cart_no = $(this).prev().text();
+				var del_row = $(this).parent().parent();
+				
+				$.ajax({
 					url : "cart_item_del",
 					type : "get",
 					data : {
-						cart_no : 
+						cart_no : cart_no
 					},
 					success : function(resp) {
-						
+						del_row.remove();
 					}
-				});-->
+				});
 			}
+		});
+		
+		$(".del-cart-btn").click(function(){
+			if(confirm("정말로 삭제하시겠습니까?")) {
+				var cart_no_array = [];
+				
+				$('input[class="cartitemcheck"]:checked').each(function(){
+					cart_no_array.push($(this).val());
+				});
+				
+				if(cart_no_array.length == 0) {
+					alert("삭제할 상품을 1개 이상 선택해주세요");
+					return;
+				}
+				
+				$.ajax({
+					url : "cart_item_del",
+					type : "post",
+					traditional : true,
+					data : {
+						cartArr : cart_no_array
+					},
+					success : function(resp) {
+						$('input[class="cartitemcheck"]:checked').each(function(){
+							$(this).parent().parent().remove();
+						});
+					}
+				});
+			}
+		});
+		
+		<!-- 합계 구하기 -->
+		var checkCountval = 0;
+		var sale_price = 0;
+		var total_price = 0;
+		
+		$("input[class=cartitemcheck]").change(function(){
+			var sum_price = 0;
+			checkCountval = $('input[class="cartitemcheck"]:checked').length;
+			$('input[class="cartitemcheck"]:checked').each(function(){
+				var product_price = $(this).parent().next().children(".pp").children().text();
+				var cart_count = $(this).parent().next().children(".cc").children().text();
+				sum_price += product_price * cart_count;
+			});
+			total_price = sum_price - sale_price;
+			
+			$("#checkCount").text(checkCountval);
+			$("#sumPrice").text(sum_price);
+			$("#salePrice").text(sale_price);
+			$("#totalPrice").text(total_price);
 		});
 	});
 </script>
@@ -43,14 +95,20 @@
 			</c:when>
 			<c:otherwise>
 				<input type="checkbox" id="totalcheck"><label for="totalcheck">전체 선택</label>
-				<input type="button" class="input input-inline del-cart-btn" value="전체 삭제">
+				<input type="button" class="input input-inline del-cart-btn" value="선택 삭제">
+				<form action="/order/ordertest_cart" method="get">
 				<table>
 					<tbody>
 						<c:forEach var="cartItem" items="${userCartList}">
 							<tr>
-								<td><span class="hidden-cart-no">${cartItem.cart_no}</span><input type="checkbox" class="cartitemcheck"></td>
-								<td>상품 정보 : ${cartItem} </td>
-								<td><span class="hidden-cart-no">${cartItem.cart_no}</span><input type="button" class="del-cart-item" value="X"></td>
+								<td><input type="checkbox" class="cartitemcheck" name="cartList" value="${cartItem.cart_no}"></td>
+								<td>
+									<div>${cartItem.brand_name}</div>
+									<div>${cartItem.product_name}</div>
+									<div class="pp">가격 : <span>${cartItem.product_price}</span></div>
+									<div class="cc">주문 수량 : <span>${cartItem.cart_count}</span></div>
+								</td>
+								<td><span class="hidden-cart-no" style="display: none;">${cartItem.cart_no}</span><input type="button" class="del-cart-item" value="X"></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -58,12 +116,16 @@
 						<tr>
 							<td>
 								체크된 항목 계산 (얼마인지)
-								
-								구매 버튼 -> 구매화면으로 이동
 							</td>
+							<td>선택 수 : <span id="checkCount">0</span></td>
+							<td>선택 가격 합 : <span id="sumPrice">0</span></td>
+							<td>세일 (지금은 0)<span id="salePrice">0</span></td>
+							<td>토탈 가격 : <span id="totalPrice">0</span></td>
+							<td><input type="submit" class="order-btn" value="구매하기"></td>
 						</tr>
 					</tfoot>
 				</table>
+				</form>
 			</c:otherwise>
 		</c:choose>
 	</div>

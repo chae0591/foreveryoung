@@ -6,11 +6,34 @@
 <mapper namespace="com.forever.young.repository.CartRepository">
 	
 	<select id="searchListUser" resultType="CartListVO">
-		select c.cart_no, pb.product_no, pb.product_name, pb.product_category, pb.product_price, 
+		select c.cart_no, pb.product_no, pb.product_brand, pb.product_name, pb.product_category, pb.product_price, 
 		pb.brand_name, pb.product_skintype, c.cart_count, c.cart_regDate 
 		from cart c join (select p.*, b.* from product_table P join brand B on p.product_brand = b.brand_num) pb 
 		on c.product_no = pb.product_no 
 		where c.user_num = #{user_num}
+	</select>
+	
+	<delete id="delCartItem">
+		delete cart where cart_no = #{cart_no}
+		
+	</delete>
+	
+	<delete id="delCartItems">
+		delete cart where cart_no in 
+		<foreach item="item" collection="cartArr" index="index" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<select id="searchList" resultType="CartListVO">
+		select c.cart_no, pb.product_no, pb.product_brand, pb.product_name, pb.product_category, pb.product_price, 
+		pb.brand_name, pb.product_skintype, c.cart_count, c.cart_regDate 
+		from cart c join (select p.*, b.* from product_table P join brand B on p.product_brand = b.brand_num) pb 
+		on c.product_no = pb.product_no 
+		where c.cart_no in 
+		<foreach item="item" collection="cartList" index="index" open="(" separator="," close=")">
+			#{item}
+		</foreach>
 	</select>
 	
 </mapper>

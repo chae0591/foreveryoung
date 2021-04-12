@@ -10,59 +10,178 @@
 	display: inline-block;
 }
 
-.p_list {
+.pList {
 	width: 150px;
 	height: auto;
 	display: inline-block;
 }
-.p_list:hover{
+.pList:hover{
 	text-decotation:none;
 	background-color: gray;
 }
-.p_list a {
+.pList a {
 	padding: 1rem;
+	
 }
-.p_list a label{
+.pList a label{
+	display:inline-block;
+	width: 150px;
 	text-decoration:none;
 	color: black;
 }
 
-.p_list img{
+.pList img{
 	display: block;
+}
+
+.pList ul {
+	list-style:none;
+}
+
+.pList > li {
+	padding-bottom: 3px;
+	font-size:20px;
+	display:inline-block;
+	float:left;
 }
 
 </style>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script>
 	$(document).ready(function(){
-		$("input[type='checkbox']").on("change", function(e){
-			var type = new Array();
-			$("input[type='checkbox']:checked").each(function(index, item) {
-				type.push($(item).val());
-			});
-			console.log(type);
-			//var type = $("input[type='checkbox']:checked").val();
-			for(var i = 0; i < type.length; i ++) {
-				
-				
-			}
-			type.each(function(index, obj) {
-				if(type.length == 1) {
-					$.ajax({
-						url : '/product/categoryList?category=${category}',
-						data : {type:type},
-						type : 'POST',
-						traditional:true
-					});
+		var user_num = $("input[name='user_num']").val();
+		if(user_num != "") {
+			voteCheck();
+		}
+		
+		function voteCheck() {
+			if(user_num == "") {
+				return false;
+			} else {
+			$.ajax({
+				url : '/vote/selectVote',
+				type: 'GET',
+				data: {'user_num' : user_num},
+				success : function(result) {
+					var num = 0;
+					for(var i in result) {
+						var i = result[i];
+						$("[data-no="+i+"]").find("#vote_img").attr("src", "/img/product/like.png");
+						$("[data-no="+i+"]").attr("value", "true");
+					}
 				}
+			});// ajax
+			}
+		} //end votecheck
+		
+		var category = $("input[name='category']").val();
+		// 필터링
+		$("input[type='checkbox']").on("change", function(e){
+			var brand = new Array();
+			 
+			$(".brand_check input[type='checkbox']:checked").each(function(index, item) {
+				brand.push($(item).val());
 			});
 			
+			if(brand.length == 0 || brand == "") {
+				$(".brand_check input[type='checkbox']").each(function(index, item) {
+					brand.push($(item).val());
+				});
+			}
+			
+			var type = new Array();
+		 
+			$(".typeCheck input[type='checkbox']:checked").each(function(index, item) {
+				type.push($(item).val());
+			});
+			
+			if(type.length == 0 || type == "") {
+				$(".typeCheck input[type='checkbox']").each(function(index, item) {
+					type.push($(item).val());
+				});
+			}
+			
+			var searchData = {
+					category : category,
+					type : type,
+					brand : brand
+			}
+			
+			var jsonData = JSON.stringify(searchData);
+			
+			$.ajax({
+				url : '/product/search',
+				contentType : 'application/json',
+				data : jsonData,
+				type : 'POST',
+				traditional : true,
+				success : function(result){
+					console.log("성공!");
+					voteCheck();
+					$(".pList").html(result);
+				}
+			}); // ajax
+		}); // end 필터링
+		
+		
+		// 좋아요
+		$(document).on('click', '.vot_btn', function(){
+			var target = $(this);
+			var user_num = $("input[name='user_num']").val();
+			var product_no = $(this).data("no");
+			if(user_num == null || user_num == "") {
+				location.href="/member/login";
+			}
+			
+			var url;
+			if($(this).attr("value") == "true") {
+				url = "/vote/deleteVote";
+			} else if ($(this).attr("value") == "false") {
+				url = "/vote/insertVote";
+			}
+			
+			$.ajax({
+				url : url,
+				data : {'user_num':user_num, 'product_no':product_no},
+				type: 'POST',
+				success : function(result) {
+					
+					$(target).attr("value", result);
+					if(result == "true") {
+						$(target).find(".like").attr("src", "/img/product/like.png");	
+					} else {
+						$(target).find(".like").attr("src", "/img/product/unlike.png");
+					}
+				}
+			}); // ajax
+		}); // end 좋아요
+		
+		// 페이징
+		var pagingForm = $("#pagingForm");
+		$(".paging_num a").on("click", function(e) {
+			e.preventDefault();
+			pagingForm.find("input[name='pageNum']").val($(this).attr("href"));
+			pagingForm.submit();
 		});
+		
+		// 상품 등록 페이지 이동
+		$("#productWrite").on("click", function(e) {
+			location.href = "/product/productWrite" ;
+		});
+		
 	});
 </script>
 <div class="outbox">
+<input type="hidden" name="category" value="${category}">
+<input type="hidden" name="user_num"value="${check}">
+<div class="row">
+	<c:if test="${auth eq 'seller'}">
+		<input type="button" id="productWrite" value="상품 등록">
+	</c:if>
+</div>
+
 	<div class="row">
-		<h2>${category} BEST</h2>
+		<h2>${cName} BEST  </h2>
 		<button>prev</button>
 		<div class="slide_list">
 			<a href="#">
@@ -77,36 +196,70 @@
 	
 	<div class="row">
 		<h2>브랜드별 검색</h2>
-		<%-- <c:forEach var="brand" items="${brand}">
-			<input type="checkbox" value="${brand.brand_name}">
-			<input type="hidden" value="${brand.brand_no}">
-		</c:forEach> --%>
-	</div>	
-	<form method="post" action="serach">
+		<div class="brand_check">
+			<ul>
+				<li>
+					<c:forEach var="brand" items="${brand}">
+						<label for="${brand.brand_name}"><c:out value="${brand.brand_name}"/></label><input type="checkbox" value="${brand.brand_num}" id="${brand.brand_name}">
+					</c:forEach>
+				</li>
+			</ul>
+		</div>
+	</div>
 		<div class="row">
 			<h2>내 피부에 맞는 상품 검색</h2>
 			<div class="typeCheck">
-				<label for="ck_type1">건성</label><input type="checkbox" value="건성" id="ck_type1">
-				<label for="ck_type2">지성</label><input type="checkbox" value="지성" id="ck_type2">
-				<label for="ck_type3">민감성</label><input type="checkbox" value="민감성" id="ck_type3">
-				<label for="ck_type4">복합성</label><input type="checkbox" value="복합성" id="ck_type4">
+				<label for="ckType1">건성</label><input type="checkbox" value="건성" id="ckType1">
+				<label for="ckType2">지성</label><input type="checkbox" value="지성" id="ckType2">
+				<label for="ckType3">민감성</label><input type="checkbox" value="민감성" id="ckType3">
+				<label for="ckType4">복합성</label><input type="checkbox" value="복합성" id="ckType4">
+				<input type="checkbox" value="all" style="display:none;">
 			</div>
 		</div>
-	</form>
-	<div class="row">
-			<div class="p_list" >
-			<c:forEach var="lists" items="${list}">
-				<a href="#">
-					<img src="/viewImg?fileName=${lists.image_save_name}&imageType=${lists.image_type}" style="width:150px; height:150px">
-					<label><fmt:formatNumber value="${lists.product_price}" pattern="###,###,###"/>원</label>
-					<br>				
-					<label><c:out value="${lists.product_name}" /></label>
-					<!-- 좋아요 여부 -->
-				</a>
+	<div class="row" id="appendHtml">
+			<ul class="pList">
+				<c:forEach var="lists" items="${list}">
+					<li>
+						<input type="hidden" name="product_no" value="${lists.product_no}">
+						<a class="detail" href="#">
+ 							<img src="/viewImg?fileName=${lists.image_save_name}&imageType=${lists.image_type}" style="width:150px; height:150px">
+							<label><fmt:formatNumber value="${lists.product_price}" pattern="###,###,###"/>원</label>
+							<label><c:out value="${lists.product_name}" /></label>
+						</a>
+							<button class="vot_btn" data-no="${lists.product_no}" value="false">
+								<img src="/img/product/unlike.png" id="vote_img" style="width:30px; heigth:30px;" alt="좋아요" class="like">
+							</button>
+					</li>
 				</c:forEach>
-			</div>
+			</ul>
 	</div>
 	
+	<div class="row">
+		<ul class="pagination">
+			<c:if test="${page.prev}">
+				<li>
+					<a href="${page.startPage-1}">Prev</a>
+				</li>
+			</c:if>
+			
+			<c:forEach var="num" begin="${page.startPage}" end="${page.endPage}">
+				<li class="paging_num ${page.pageNum == num ? "active":""} ">
+					<a href="${num}">${num}</a>
+				</li>
+			</c:forEach>
+			
+			<c:if test="${page.next}">
+				<li>
+					<a href="${page.endPage+1}">Next</a>
+				</li>
+			</c:if>
+		</ul>
+	</div>
+	<form id='pagingForm' action="/product/categoryList" method="get">
+	<input type="hidden" name="category" value="${category}">
+	   	<input type="hidden" name='pageNum' value='${page.pageNum}'>
+	   	<input type="hidden" name='amount' value='${page.amount}'>
+   </form>
 </div>
 
 <jsp:include page="../template/footer.jsp"></jsp:include>

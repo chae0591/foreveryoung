@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.forever.young.repository.ProductVoteRepository">
+
+<insert id="inVote" parameterType="map">
+	insert into vote values(#{user_num}, #{product_no})
+</insert>
+
+<delete id="delVote" parameterType="map">
+	delete vote where
+			user_num = #{user_num}
+		and
+			product_no = #{product_no}
+</delete>
+
+<select id="findVote" resultType="String">
+	select product_no from vote where user_num = #{user_num}
+	order by product_no desc
+</select>
+
+</mapper>

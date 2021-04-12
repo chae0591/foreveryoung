@@ -25,71 +25,99 @@
 
 </head>
 <body>
-	<h1>대시보드</h1>
-	
-	
-	<div>
-		<h2>전체 현황</h2>
-		<table border="1">
-			<tr>
-				<th align="center">회원 수</th>
-				<th align="center">브랜드 수</th>
-				<th align="center">상품 수</th>
-			</tr>
-			<tr>
-				<td align="center">
-					<a href="/admin/customerList">
-						아직임
-						<c:out value="${customerCount}"></c:out><!-- 안나옴... -->
-					</a>
-				</td>
-				<td align="center">
-					<a href="/admin/brandList">아직임</a>
-				</td>
-				<td align="center">
-					<a href="/admin/productList">아직임</a>
-				</td>
-			</tr>
-			
-		</table>
-		
-	</div>
-	
-	<div>
-		<h2>주문처리 현황</h2>
-		
-		<table border="1">
-			<tr>
-				<th align="center">입금 대기</th>
-				<th align="center">입금 완료</th>
-				<th align="center">배송 대기</th>
-				<th align="center">배송 대기</th>
-				<th align="center">환불</th>
-				
-			</tr>
-			<tr>
-				<td align="center">아직</td>
-				<td align="center">아직</td>
-				<td align="center">아직</td>
-				<td align="center">아직</td>
-				<td align="center">아직</td>
+<jsp:include page="../admin/adminTemplate/header.jsp"></jsp:include>
 
-			</tr>
+		<!-- 사이드바 -->
+		<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<ul class="nav menu">
+			<li class="active"><a href="/admin/dashBoard"><em class="fa fa-dashboard">&nbsp;</em> 대시보드</a></li>
+			<li><a href="/admin/adminList"><em class="fa fa-calendar">&nbsp;</em> 관리자관리</a></li>
+			<li><a href="/admin/brandList"><em class="fa fa-calendar">&nbsp;</em> 판매자관리</a></li>
+			<li><a href="/admin/customerList"><em class="fa fa-calendar">&nbsp;</em> 고객관리</a></li>
+			<li><a href="/admin/productList"><em class="fa fa-toggle-off">&nbsp;</em> 상품관리</a></li>
+			<li><a href="/admin/eventList"><em class="fa fa-toggle-off">&nbsp;</em> 이벤트관리</a></li>
+			<li><a href="/admin/noticeList"><em class="fa fa-clone">&nbsp;</em> 공지사항 관리</a></li>
+			<li><a href="/admin/inquiryList"><em class="fa fa-clone">&nbsp;</em> 1:1문의 관리</a></li>
+			<li><a href="#"><em class="fa fa-clone">&nbsp;</em> 리뷰신고관리</a></li>
+			<li><a href="/admin/staticCustomer"><em class="fa fa-bar-chart">&nbsp;</em> 통계(고객분석)</a></li>
+			<li><a href="/admin/staticSales"><em class="fa fa-bar-chart">&nbsp;</em> 통계(매출분석)</a></li>
+		</ul>
+	</div><!--/.sidebar-->	
+
+
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1>대시보드</h1>
+			</div>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<h2>전체 현황</h2>
+				<table border="1">
+					<tr>
+						<th align="center">회원 수</th>
+						<th align="center">브랜드 수</th>
+						<th align="center">상품 수</th>
+					</tr>
+					<tr>
+						<td align="center">
+							<a href="/admin/customerList">
+								아직임
+								<c:out value="${customerCount}"></c:out><!-- 안나옴... -->
+							</a>
+						</td>
+						<td align="center">
+							<a href="/admin/brandList">아직임</a>
+						</td>
+						<td align="center">
+							<a href="/admin/productList">아직임</a>
+						</td>
+					</tr>
+					
+				</table>
+			</div>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
 			
-		</table>
-	</div>
-	
-	
-	<div>
-		<h2>클레임 현황</h2>
+				<h2>주문처리 현황</h2>
+				
+				<table border="1">
+					<tr>
+						<th align="center">입금 대기</th>
+						<th align="center">입금 완료</th>
+						<th align="center">배송 대기</th>
+						<th align="center">배송 대기</th>
+						<th align="center">환불</th>
+						
+					</tr>
+					<tr>
+						<td align="center">아직</td>
+						<td align="center">아직</td>
+						<td align="center">아직</td>
+						<td align="center">아직</td>
+						<td align="center">아직</td>
 		
-		<button id="inquiry_list">1:1문의</button>
-		<button id="report_list">상품 리뷰 신고</button>
+					</tr>
+					
+				</table>
+			</div>	
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<h2>클레임 현황</h2>
+				
+				<button id="inquiry_list">1:1문의</button>
+				<button id="report_list">상품 리뷰 신고</button>
+			</div>	
+		</div><!--/.row-->
 		
 		
-		
-	</div>
-	
+	</div>	<!--/.main-->
 	
 </body>
 </html>

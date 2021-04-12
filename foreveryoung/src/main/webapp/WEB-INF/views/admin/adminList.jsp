@@ -10,34 +10,6 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
-    <style>
-        /* The Modal (background) */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-    
-        /* Modal Content/Box */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 30%; /* Could be more or less, depending on screen size */                          
-        }
- 
-</style>
-
-
-
 
 
 
@@ -53,14 +25,7 @@
 			//self.location = "/admin/"
 		})
 		
-		$(".modal_on").click(function(){
-			  $('#myModal').show();
-		})
-		
-		$(".modal_off").click(function(){
-			$('#myModal').hide();
-		})
-		
+
 		
 	})
 
@@ -70,94 +35,88 @@
 
 <body>
 
-		<!-- 관리자 모드 메뉴 -->
-			<a href="/admin/login">로그인</a>
-			<a href="/admin/dashBoard">대시보드</a>
-			<a href="/admin/adminList">관리자페이지</a>
-			<a href="/admin/brandList">판매자관리</a>
-			<a href="/admin/customerList">고객관리</a>
-			<a href="/admin/productList">상품관리</a>
-			<a href="/admin/eventList">이벤트관리</a>
-			<a href="/admin/noticeList">공지사항관리</a>
-			<a href="/admin/inquiryList">1:1문의관리</a>
-			<a href="#">리뷰신고관리</a>
-			<a href="/admin/staticCustomer">통계관리(회원분석)</a> 
-			<a href="/admin/staticSales">통계관리(매출분석)</a> 
+<jsp:include page="../admin/adminTemplate/header.jsp"></jsp:include>
 
-	<h2>관리자 리스트</h2>
+		<!-- 사이드바 -->
+		<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<ul class="nav menu">
+			<li><a href="/admin/dashBoard"><em class="fa fa-dashboard">&nbsp;</em> 대시보드</a></li>
+			<li class="active"><a href="/admin/adminList"><em class="fa fa-calendar">&nbsp;</em> 관리자관리</a></li>
+			<li><a href="/admin/brandList"><em class="fa fa-calendar">&nbsp;</em> 판매자관리</a></li>
+			<li><a href="/admin/customerList"><em class="fa fa-calendar">&nbsp;</em> 고객관리</a></li>
+			<li><a href="/admin/productList"><em class="fa fa-toggle-off">&nbsp;</em> 상품관리</a></li>
+			<li><a href="/admin/eventList"><em class="fa fa-toggle-off">&nbsp;</em> 이벤트관리</a></li>
+			<li><a href="/admin/noticeList"><em class="fa fa-clone">&nbsp;</em> 공지사항 관리</a></li>
+			<li><a href="/admin/inquiryList"><em class="fa fa-clone">&nbsp;</em> 1:1문의 관리</a></li>
+			<li><a href="#"><em class="fa fa-clone">&nbsp;</em> 리뷰신고관리</a></li>
+			<li><a href="/admin/staticCustomer"><em class="fa fa-bar-chart">&nbsp;</em> 통계(고객분석)</a></li>
+			<li><a href="/admin/staticSales"><em class="fa fa-bar-chart">&nbsp;</em> 통계(매출분석)</a></li>
+		</ul>
+	</div><!--/.sidebar-->	
+
+
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 	
-	
-	<div>
-		<input type="button" id="admin_join" value="관리자 등록">
-	</div>
-	
-	<table border="1">
-		<tr>
-			<th align="center" width="100">관리자번호</th>
-			<th align="center" width="100">관리자ID</th>
-			<th align="center" width="100">관리자 이름</th>
-			<th align="center" width="160">전화번호</th>
-			<th align="center" width="160">등록일</th>
-			<th align="center" width="160"> </th>
-		</tr>
+		<div class="row">
+			<div class="col-lg-12">
+				<h2>관리자 리스트</h2>
+			</div>
+		</div><!--/.row-->
 		
-				<c:choose>
-			<c:when test="${empty adminList}">
-				<tr>
-					<td colspan="6">
-						관리자 계정이 없습니다.
-					</td>
-				</tr>
-			</c:when>
-			<c:otherwise>
-				<c:forEach items="${adminList}" var="adminList">
+		<div class="row">
+			<div class="col-lg-12">
+				<input type="button" id="admin_join" value="관리자 등록">
+			</div>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+			
+				<table border="1">
 					<tr>
-						<td align="center">${adminList.admin_no}</td>
-						<td align="center">${adminList.admin_id}</td>
-						<td align="center">${adminList.admin_name}</td>
-						<td align="center">${adminList.admin_phone}</td>
-						<td align="center">${adminList.admin_regDate}</td>
-						<td align="center">
-							<input type="button" class="modal_on" value="수정">
-							<input type="button" id="admin_delete" value="삭제">
-						</td>
+						<th align="center" width="100">관리자번호</th>
+						<th align="center" width="100">관리자ID</th>
+						<th align="center" width="100">관리자 이름</th>
+						<th align="center" width="160">전화번호</th>
+						<th align="center" width="160">등록일</th>
+						<th align="center" width="160"> </th>
 					</tr>
-				</c:forEach>
-			</c:otherwise>
-		</c:choose>
-	</table>
-	
+					
+							<c:choose>
+						<c:when test="${empty adminList}">
+							<tr>
+								<td colspan="6">
+									관리자 계정이 없습니다.
+								</td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${adminList}" var="adminList">
+								<tr>
+									<td align="center">${adminList.admin_no}</td>
+									<td align="center">${adminList.admin_id}</td>
+									<td align="center">${adminList.admin_name}</td>
+									<td align="center">${adminList.admin_phone}</td>
+									<td align="center">${adminList.admin_regDate}</td>
+									<td align="center">
+										<input type="button" id="admin_modify" value="수정">
+										<input type="button" id="admin_delete" value="삭제">
+									</td>
+								</tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+				</table>
+			</div>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+			
+			</div>
+		</div><!--/.row-->
 
-   <!-- The Modal -->
-    <div id="myModal" class="modal">
- 
-      <!-- Modal content -->
-      <div class="modal-content">
-                <p style="text-align: center;"><span style="font-size: 14pt;"><b><span style="font-size: 24pt;">관리자 정보수정</span></b></span></p>
-                <p style="text-align: center; line-height: 1.5;"><br />ID </p>
-                <p style="text-align: center; line-height: 1.5;"><br />PASSWORD
-					  	<input type="password" name="admin_pw" placeholder="비밀번호를 입력해주세요">                
-               	</p>
-                <p style="text-align: center; line-height: 1.5;"><br />NAME
-                	<input type="text" name="admin_name" placeholder="이릅을 입력해주세요">
-                </p>
-                <p style="text-align: center; line-height: 1.5;"><br />PHONE NUMBER
-                	<input type="text" name="admin_phone" id="phone" placeholder="전화번호를 입력해주세요">
-                </p>
-                <p><br /></p>
-            <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="close_pop();">
-				<button id="admin_modify">수정하기</button>
-				<button class="modal_off">취소하기</button>
-            </div>
-      </div>
- 
-    </div>
-
-
-
-
-
-
+	</div>	<!--/.main-->
 
 
 </body>

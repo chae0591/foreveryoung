@@ -1,6 +1,7 @@
 package com.forever.young.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -14,5 +15,9 @@ public class ServiceCenterController {
 	@RequestMapping(value="/inquiry")
 	public String inquiry() {
 		return "service_center/inquiry";
+	}
+	@RequestMapping(value="/inquiry_detail")
+	public String inquiry_detail() {
+		return "service_center/inquiry_detail";
 	}
 }

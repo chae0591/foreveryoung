@@ -16,6 +16,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.forever.young.entity.Admin;
 import com.forever.young.entity.Event;
+import com.forever.young.entity.InquiryVO;
 import com.forever.young.entity.Notice;
 import com.forever.young.repository.AdminRepository;
 import com.forever.young.service.AdminService;
@@ -231,6 +232,70 @@ public class AdminController {
 		
 		model.addAttribute("inquiryDetail" , service.inquiryDetail(inquiry_no));
 	}
+	
+	//공지사항 수정GET
+	@GetMapping("/noticeModify")
+	public void getNoticeModify(int notice_no, Model model) throws Exception{
+		log.info("getNoticeModify()");
+		
+		model.addAttribute("noticeModify" , service.noticeDetail(notice_no));
+	}
+	
+	//공지사항 수정POST
+	@PostMapping("/noticeModify")
+	public RedirectView  postNoticeModify(Notice notice, Model model) throws Exception{
+		log.info("postNoticeModify");
+		
+		service.noticeModify(notice);
+		
+		model.addAttribute("noticeModify", "공지사항 수정완료");
+		
+		return new RedirectView("noticeList");
+	}
+	
+	//공지사항 삭제
+	@PostMapping("/noticeDelete")
+	public RedirectView noticeDelete(int notice_no, Model model) throws Exception{
+		log.info("noticeDelete()");
+		
+		service.noticeDelete(notice_no);
+		
+		model.addAttribute("noticeDelete" , "공지사항 삭제완료");
+		
+		return new RedirectView("noticeList");
+	}
+	
+	//1:1문의 답변등록
+	@PostMapping("/replyRegister")
+	public RedirectView postReplyRegister(InquiryVO inquiryVO, Model model) throws Exception{
+		log.info("postreplyRegister");
+		
+		service.replyRegister(inquiryVO);
+		
+		model.addAttribute("replyRegister", "1:1문의 답변이 등록되었습니다");
+		
+		return new RedirectView("inquiryList");
+		
+	}
+	
+	//1:1문의 답변완료로 상태변경
+	@PostMapping("/inquiryStatusComplete")
+	public void postInquiryStatusComplete(InquiryVO inquiryVO, Model model) throws Exception{
+		log.info("postInquiryStatusComplete()");
+		
+		service.inquiryStatusComplete(inquiryVO);
+		
+		
+		model.addAttribute("inquiryStatusComplete" , "1:1문의 답변완료");
+		
+	}
+	
+	//1:1문의 답변대기로 상태변경
+	
+	
+	
+	
+	
 	
 	
 }
