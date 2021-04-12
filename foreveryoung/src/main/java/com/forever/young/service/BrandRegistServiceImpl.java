@@ -25,7 +25,7 @@ public class BrandRegistServiceImpl implements BrandRegistService{
 	public Brand findId(String brand_id) throws Exception {
 		return repository.findId(brand_id);
 	}
-	
+
 	@Override
 	public Brand findNum(int brand_num) throws Exception {
 		return repository.findNum(brand_num);
