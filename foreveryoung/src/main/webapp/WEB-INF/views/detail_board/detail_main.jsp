@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -130,6 +130,28 @@
    }
    a { text-decoration:none }
    
+   .detail{
+        border: 3px solid purple;
+        height : auto;
+        width : 1100px;
+        margin : 0 auto;
+    	margin-top : 5px;
+    	margin-bottom : 5px;
+   }   
+   #pack-list{
+		color : #74DF00;
+		font-family : Sans-Serif;
+		font-size : 18px;
+		font-weight : bold;
+		margin-top : 13px;
+   }
+   #change-table{
+		border-top: 1px solid #444444;
+		border-collapse: collapse;
+   }
+   #change-table>tr,th,td{
+	    border-bottom: 1px solid #444444;
+   }
        *{margin:0;padding:0;}
           ul,li{list-style:none;}
           .slide{height:150px;overflow:hidden;position:relative;}
@@ -141,12 +163,12 @@
           .slide input{display:none;}
           .slide .bullet{position:absolute;bottom:3px;left:0;right:0;text-align:center;z-index:10;}
           .slide .bullet label{width:10px;height:10px;border-radius:10px;border:2px solid #666;display:inline-block;background:#fff;font-size:0;transition:0.5s;cursor:pointer;}
-          /* �����̵� ���� */
+          /* 슬라이드 조작 */
           #pos1:checked ~ ul li:nth-child(1),
           #pos2:checked ~ ul li:nth-child(2),
           #pos3:checked ~ ul li:nth-child(3),
           #pos4:checked ~ ul li:nth-child(4){opacity:1;}
-          /* bullet ���� */
+          /* bullet 조작 */
           #pos1:checked ~ .bullet label:nth-child(1),
           #pos2:checked ~ .bullet label:nth-child(2),
           #pos3:checked ~ .bullet label:nth-child(3),
@@ -173,27 +195,27 @@
             <table class="prodcut-table">
                <tr>
                   <th colspan="3">
-                     <input class="brand" type="button" value="�귣�� �ѷ��������� >" onclick="location.href='�ش�귣��.jsp';">
+                     <input class="brand" type="button" value="브랜드 둘러보러가기 >" onclick="location.href='해당브랜드.jsp';">
                   </th>
                </tr>
                <tr>
-                  <th>��ǰ�̸�</th>
-                  <td colspan="2">��ǰ�̸�(product_name)�� �������ÿ�.</td>
+                  <th>상품이름</th>
+                  <td colspan="2">상품이름(product_name)을 가져오시오.</td>
                </tr>
                <tr>
-                  <th>��ǰ����</th>
-                  <td colspan="2">��ǰ����(product_price)�� �������ÿ�.</td>
+                  <th>상품가격</th>
+                  <td colspan="2">상품가격(product_price)을 가져오시오.</td>
                </tr>
                <tr>
-                  <th>�������</th>
+                  <th>배송정보</th>
                   <td colspan="2"> </td>
                </tr>
                <tr style="font-size : 21px; ">
-                  <th colspan="3" style="text-align:left"> �Ϲݹ�� | 3,000�� (15,000 �� �̻� ������ )</th>
+                  <th colspan="3" style="text-align:left"> 일반배송 | 3,000원 (15,000 원 이상 무료배송 )</th>
                </tr>
                <form name="form" method="get">
                <tr>
-                  <th>��ǰ ����</th>
+                  <th>상품 수량</th>
                   <td colspan="2">
                   <input type=hidden name="sell_price" value="5500">
                   <input type="number" style="font-size : 23px; width : 71px;"name="amount" value="1" size="3" onchange="change();">
@@ -202,23 +224,23 @@
                </tr>
                
                <tr>
-                  <th>�հ�ݾ�</th>
-                  <td colspan="2"><input type="text" style="font-size : 23px; width : 181px;" name="sum" size="11" readonly>��</td>
+                  <th>합계금액</th>
+                  <td colspan="2"><input type="text" style="font-size : 23px; width : 181px;" name="sum" size="11" readonly>원</td>
                </tr>
                </form>
             </table>
             
               <div class="btn"> 
-               <input type="button" value="��ٱ���" class="bucket" onclick="location.href='��ٱ���.jsp';">
-               <input type="button" value="�ٷ� ����" class="pay" onclick="location.href='����.jsp';">
-               <input type="button" value="���ƿ�" class="nice" onclick="location.href='����������.jsp';">
+               <input type="button" value="장바구니" class="bucket" onclick="location.href='장바구니.jsp';">
+               <input type="button" value="바로 구매" class="pay" onclick="location.href='결재.jsp';">
+               <input type="button" value="좋아요" class="nice" onclick="location.href='현재페이지.jsp';">
             </div>
             
          </div>
    </div>
    
    <div class="recommend">
-      <span style="font-family :sans-serif; font-size : 18px;">�̷� ��ǰ�� �����?</span>
+      <span style="font-family :sans-serif; font-size : 18px;">이런 상품은 어떠세요?</span>
            <div class="slide">
           <input type="radio" name="pos" id="pos1" checked>
           <input type="radio" name="pos" id="pos2">
@@ -283,19 +305,19 @@
    <ul style="list-style-type:none">
       <li style="display:inline" class="menu-list">
          <a href="#">
-            ��ǰ����
+            상품설명
          </a>
       </li>
       
       <li style="display:inline" class="menu-list">
          <a href="#">
-            ��������
+            구매정보
          </a>
       </li>
       
       <li style="display:inline" class="menu-list">
          <a href="#">
-            ����
+            리뷰
          </a>
       </li>
       
@@ -313,7 +335,75 @@
 	   </div>
 	   
 	   <div class="purchas-detail">
-	   2
+	   	<div style="padding-top:50px;">
+	   		<span id="pack-list">배송비/배송가능일</span>
+	   		<table id="change-table">
+	   			<tr style=" width : 1100px;">
+	   				<th width="350px;" style="background-color : #CEF6E3;">배송비/배송가능일</th>
+	   				<td width="750px;">
+	   				[일반 배송]<br>
+					배송지역 : 전국<br>
+					배송비 : 2,500원<br>
+					올리브영 배송 상품의 총 결제금액 20,000원 이상일 경우 무료배송 됩니다.<br>
+					도서, 산간, 오지 일부 지역은 배송비가 추가될 수 있습니다.<br>
+					배송가능일 : 3일<br>
+					배송가능일이란 본 상품을 주문하신 고객님들께 상품 배송이 가능한 기간을 의미합니다. 단, 연휴 및 공휴일은 기간 계산시 제외하며 현금 주문일 경우 입금일 기준 입니다.<br>
+					예약 상품의 경우 예약된 날짜에 출고되며, 상품의 입고가 빠르게 진행된 경우 예약일 보다 일찍 배송될 수 있습니다.<br>
+	   				</td>
+	   			</tr>
+	   		</table>
+	   		</div>
+	   		<div style="padding-top:50px">
+	   		<span id="pack-list">교환/반품/환불 안내</span>
+	   		<table id="change-table">
+	   			<tr style=" width : 1100px;">
+	   				<th width="350px;" style="background-color : #CEF6E3;">
+	   					교환/반품 신청 방법
+	   				</th>
+	   				<td width="750px;">
+		   				마이페이지 내 주문내역에서 신청가능하며,<br>
+						반품 신청의 경우 택배회수 / 매장방문(일부 매장)중 선택하여 신청가능합니다.
+	   				</td>
+	   			</tr>
+	   			<tr style=" width : 1100px;">
+	   				<th width="350px;" style="background-color : #CEF6E3;">
+	   					교환/반품 신청 기간
+	   				</th>
+	   				<td width="750px;">
+	   					교환, 반품 신청은 배송이 완료된 후 15일 이내 가능합니다.<br>
+						고객님이 배송 받으신 상품의 내용이 표시∙광고의 내용과 다르거나 계약내용과 다르게 이행된 경우에는 배송 받으신 날로부터 3개월 이내, 혹은 그 사실을 알 수 있었던 날로 부터 30일 이내에 가능합니다.
+	   				</td>
+	   			<tr style=" width : 1100px;">
+	   				<th width="350px;" style="background-color : #CEF6E3;">
+	   					교환/반품/회수 비용
+	   				</th>
+	   				<td width="750px;">
+	   					<span style="font-weight : bold">[택배 회수 반품]</span><br>
+	   					<br>
+						고객님의 사유에 의한 교환 및 반품은 회수 및 배송에 필요한 비용을 부담해주셔야 합니다.<br>
+						기본 비용은 교환 5,000원(회수비+배송비), 반품 2,500원(회수비)입니다.<br>
+						제주도 및 도서산간 지방에는 추가 운임이 발생합니다.<br>
+						당사의 사유(상품의 하자, 배송의 오류 등)로 인한 경우 교환 및 반품에 필요한 비용은 당사에서 부담합니다.<br>
+						<br>
+						<span style="font-weight : bold">[매장 방문 반품]</span><br>
+						올리브영 일반 주문 Green Olive 이상 등급 또는 오늘드림 주문에 한해서 별도 회수비 부담없이 반품 가능합니다.(단, 일부 매장만 가능)<br>	   				
+	   				</td>
+	   			<tr style=" width : 1100px;">
+	   				<th width="350px;" style="background-color : #CEF6E3;">
+	   					교환/반품 불가안내
+	   				</th>
+	   				<td width="750px;">
+						고객님의 사유에 의한 교환 및 반품이 불가한 경우<br>
+						1. 배송이 완료된 후 15일이 경과한 경우<br>
+						2. 포장 훼손 및 사용 또는 일부 소비, 구성품 누락 및 상품의 결함 발생으로 인해 상품의 가치가 훼손된 경우<br>
+						<br>
+						당사의 사유에 의한 교환 및 반품이 불가한 경우<br>
+						1. 배송 받으신 날로부터 3개월, 혹은 그 사실을 알 수 있었던 날로 부터 30일이 경과한 경우<br>
+						2. 당사의 귀책(상품의 불량, 생산 및 제조 및 배송 간의 파손 등)으로 인한 현상이 아닌 해당 상품의 고유한 특성, 혹은 상품 수령 후 고객님의 과실로 인한 문제임이 규명된 경우<br>
+	   				</td>
+	   			</tr>
+	   		</table>
+	   		</div>	   		
 	   </div>
 	   
 	   <div class="review">
@@ -369,26 +459,27 @@
    });
    
    $(function(){
-	   $(".menu-list").eq(0).click(function(){
-		 $(".detail").children("div").hide();
-         $(".product-detail").show();
-         alert("��ǰ����")
-      });
-      $(".menu-list").eq(1).click(function(){
-    	 $(".detail").children("div").hide();
-         $(".purchas-detail").show();
-         alert("��������")
-      });
-      $(".menu-list").eq(2).click(function(){
-    	 $(".detail").children("div").hide();
-         $(".review").show();
-         alert("����")
-      });
-      $(".menu-list").eq(3).click(function(){
-    	 $(".detail").children("div").hide();
-         $(".qna").show();
-         alert("qna")
-      });
+	   	  $(".menu-list").eq(0).show(function(){
+		       $(".detail").children("div").hide();
+		       $(".product-detail").show();
+	   	  });
+	   	  
+	      $(".menu-list").eq(0).click(function(){
+	       $(".detail").children("div").hide();
+	         $(".product-detail").show();
+	      });
+	      $(".menu-list").eq(1).click(function(){
+	        $(".detail").children("div").hide();
+	         $(".purchas-detail").show();
+	      });
+	      $(".menu-list").eq(2).click(function(){
+	        $(".detail").children("div").hide();
+	         $(".review").show();
+	      });
+	      $(".menu-list").eq(3).click(function(){
+	        $(".detail").children("div").hide();
+	         $(".qna").show();
+	      });
    });
 </script>
 <jsp:include page="../template/footer.jsp"></jsp:include>

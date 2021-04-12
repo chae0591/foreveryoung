@@ -19,8 +19,10 @@
 			self.location = "/admin/noticeModify?notice_no=" + notice_noVal
 		})
 		$("#notice_delete").click(function(){
+			
+			 window.alert("공지사항이 삭제되었습니다");
 			formObj.attr("action" , "/admin/noticeDelete")
-			formObj.submit();
+			formObj.submit();				 
 		})
 		
 	})

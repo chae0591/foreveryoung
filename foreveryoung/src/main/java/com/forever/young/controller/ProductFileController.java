@@ -38,10 +38,13 @@ public class ProductFileController {
 		
 		String uploadFolder = "";
 
+		// ***경로 수정***
 		if(image_type.equals("N")) {
 			uploadFolder = "/Users/yujin/Documents/upload";
 		} else if(image_type.equals("D")) {
 			uploadFolder = "/Users/yujin/Documents/upload/detail";
+		} else if(image_type.equals("P")) {
+			uploadFolder = "/Users/yujin/Documents/upload/product";
 		}
 	
 		for(MultipartFile multipartFile : uploadFile) {
@@ -95,12 +98,14 @@ public class ProductFileController {
 		// byte[] 이미지 파일 전송 시 MIME 타입 종류
 		// - probeContentType() 으로 적절한 MIME 타입을 Http 헤더에 포함한다.
 		
-		// **경로 수정**
+		// ***경로 수정***
 		File file = null;
 		if(imageType.equals("N")) {
 			file = new File("/Users/yujin/Documents/upload/" + fileName);
 		} else if(imageType.equals("D")) {
 			file = new File("/Users/yujin/Documents/upload/detail/" + fileName);
+		} else if(imageType.equals("P")) {
+			file = new File("/Users/yujin/Documents/upload/product/" + fileName);
 		}
 		
 		ResponseEntity<byte[]> result =null;
@@ -127,12 +132,14 @@ public class ProductFileController {
 		File file = null;
 		
 		try {
-			// **경로 수정**
+			// ***경로 수정***
 			// 파일명에 특수문자가 있을 수 있으니 디코더 처리
 			if(imageType.equals("N")) {
 				file = new File("/Users/yujin/Documents/upload/" + URLDecoder.decode(fileName, "UTF-8"));
 			} else if(imageType.equals("D")) {
 				file = new File("/Users/yujin/Documents/upload/detail/" + URLDecoder.decode(fileName, "UTF-8"));
+			} else if(imageType.equals("P")) {
+				file = new File("/Users/yujin/Documents/upload/product/" + URLDecoder.decode(fileName, "UTF-8"));
 			}
 			
 			file.delete();

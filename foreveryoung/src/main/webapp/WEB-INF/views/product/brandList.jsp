@@ -49,6 +49,8 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script>
 	$(document).ready(function(){
+		//var productList = $("#appendHtml").clone();
+		
 		var user_num = $("input[name='user_num']").val();
 		if(user_num != "") {
 			voteCheck();
@@ -74,21 +76,9 @@
 			}
 		} //end votecheck
 		
-		var category = $("input[name='category']").val();
+		var brand = $("input[name='brand']").val();
 		// 필터링
 		$("input[type='checkbox']").on("change", function(e){
-			var brand = new Array();
-			 
-			$(".brand_check input[type='checkbox']:checked").each(function(index, item) {
-				brand.push($(item).val());
-			});
-			
-			if(brand.length == 0 || brand == "") {
-				$(".brand_check input[type='checkbox']").each(function(index, item) {
-					brand.push($(item).val());
-				});
-			}
-			
 			var type = new Array();
 		 
 			$(".typeCheck input[type='checkbox']:checked").each(function(index, item) {
@@ -100,23 +90,13 @@
 					type.push($(item).val());
 				});
 			}
-			
-			var searchData = {
-					category : category,
-					type : type,
-					brand : brand
-			}
-			
-			var jsonData = JSON.stringify(searchData);
+			$.ajaxSettings.traditional = true;
 			
 			$.ajax({
-				url : '/product/search',
-				contentType : 'application/json',
-				data : jsonData,
+				url : '/product/searchBrandList',
+				data : {'brand': brand, 'type' : type},
 				type : 'POST',
-				traditional : true,
 				success : function(result){
-					console.log("성공!");
 					voteCheck();
 					$(".pList").html(result);
 				}
@@ -172,7 +152,7 @@
 	});
 </script>
 <div class="outbox">
-<input type="hidden" name="category" value="${category}">
+<input type="hidden" name="brand" value="${brand}">
 <input type="hidden" name="user_num"value="${check}">
 <div class="row">
 	<c:if test="${auth eq 'seller'}">
@@ -181,7 +161,7 @@
 </div>
 
 	<div class="row">
-		<h2>${cName} BEST  </h2>
+		<h2> BEST </h2>
 		<button>prev</button>
 		<div class="slide_list">
 			<a href="#">
@@ -194,28 +174,17 @@
 		<button>next</button>
 	</div>
 	
+	
 	<div class="row">
-		<h2>브랜드별 검색</h2>
-		<div class="brand_check">
-			<ul>
-				<li>
-					<c:forEach var="brand" items="${brand}">
-						<label for="${brand.brand_name}"><c:out value="${brand.brand_name}"/></label><input type="checkbox" value="${brand.brand_num}" id="${brand.brand_name}">
-					</c:forEach>
-				</li>
-			</ul>
+		<h2>내 피부에 맞는 상품 검색</h2>
+		<div class="typeCheck">
+			<label for="ckType1">건성</label><input type="checkbox" value="건성" id="ckType1">
+			<label for="ckType2">지성</label><input type="checkbox" value="지성" id="ckType2">
+			<label for="ckType3">민감성</label><input type="checkbox" value="민감성" id="ckType3">
+			<label for="ckType4">복합성</label><input type="checkbox" value="복합성" id="ckType4">
+			<input type="checkbox" value="all" style="display:none;">
 		</div>
 	</div>
-		<div class="row">
-			<h2>내 피부에 맞는 상품 검색</h2>
-			<div class="typeCheck">
-				<label for="ckType1">건성</label><input type="checkbox" value="건성" id="ckType1">
-				<label for="ckType2">지성</label><input type="checkbox" value="지성" id="ckType2">
-				<label for="ckType3">민감성</label><input type="checkbox" value="민감성" id="ckType3">
-				<label for="ckType4">복합성</label><input type="checkbox" value="복합성" id="ckType4">
-				<input type="checkbox" value="all" style="display:none;">
-			</div>
-		</div>
 	<div class="row" id="appendHtml">
 			<ul class="pList">
 				<c:forEach var="lists" items="${list}">
@@ -255,8 +224,8 @@
 			</c:if>
 		</ul>
 	</div>
-	<form id='pagingForm' action="/product/categoryList" method="get">
-	<input type="hidden" name="category" value="${category}">
+	<form id='pagingForm' action="/product/brandList" method="get">
+		<input type="hidden" name="brand" value="${brand}">
 	   	<input type="hidden" name='pageNum' value='${page.pageNum}'>
 	   	<input type="hidden" name='amount' value='${page.amount}'>
    </form>

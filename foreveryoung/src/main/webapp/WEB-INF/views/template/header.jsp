@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
  <style>
  * {
     margin: 0;
@@ -215,17 +217,46 @@ $(function(){
 	$(".func-cart").click(function(){
         location.href = '/member/cartList';
 	});
+	
+
+	$(".func-my-seller").click(function(){
+        location.href = '/member/mypage_brand/mypage_brand_main';
+	});
+	
 });
 
 </script>
 </head>
 <body>
+  <h3>로그인 확인 여부 :
+  		<c:forEach var="name" items="${pageContext.session.attributeNames}">
+    		Name: ${name}
+    		Value: ${sessionScope[name]}
+		</c:forEach>
+	</h3>
 <div class="login-box">
-		<ul>
-			<li><a href="/member/login">로그인</a></li>
-			<li><a href="/member/join">회원가입</a></li>
-			<li><a href="/admin/login">관리자</a></li>
-		</ul>
+
+ 	<c:choose>
+   		<c:when test="${check ne null && auth eq 'customer'}">
+			<ul>
+				<li><a href="/member/mypage"><c:out value="${check}"/> 님 반갑습니다</a></li>
+				<li><a href="/member/logout">로그아웃</a></li>
+			</ul>
+    	</c:when>
+   		<c:when test="${check ne null && auth eq 'seller'}">
+			<ul>
+				<li><a href="/member/mypage_brand/mypage_brand_main"><c:out value="${check}"/> 님 반갑습니다</a></li>
+				<li><a href="/member/logout">로그아웃</a></li>
+			</ul>
+   		</c:when>
+   		<c:otherwise>
+   			<ul>
+				<li><a href="/member/login">로그인</a></li>
+				<li><a href="/member/join_choice">회원가입</a></li>
+				<li><a href="/admin/login">관리자</a></li>
+			</ul>
+   		</c:otherwise>
+	</c:choose>
 </div>
 <div class="top-box">
 	<div class="logo-box">logo</div>
@@ -235,24 +266,35 @@ $(function(){
     	 	<input type="submit" class="into-btn">
     	</div>
     </form>
-    
-    <div class="icons">
-    	<input type="button" class="func-my" >
-    	<input type="button"  class="func-cart">
-    </div>
-    
+   
+   
+   <c:choose>
+	   	<c:when test="${check ne null && auth eq 'customer'}">
+		    <div class="icons">
+		    	<input type="button" class="func-my" >
+		    	<input type="button"  class="func-cart">
+	 		</div>
+	   	</c:when>
+   	
+   		<c:when test="${check ne null && auth eq 'seller'}">
+		    <div class="icons">
+		    	<input type="button" class="func-my-seller" >
+		    	<input type="button"  class="func-cart">
+	 		</div>
+   		</c:when>
+   </c:choose>
 </div>
 	
 <div class="nav">
 	<div class="nav-line">
 	<ul>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList/skincare">스킨케어</a></li>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList/makeup">메이크업</a></li>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList/bodycare">바디케어</a></li>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList/haircare">헤어케어</a></li>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList/perfume">향수/디퓨저</a></li>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList/manscare">남성케어</a></li>
-		<li><a href="${pageContext.request.contextPath}/service_center/notice">고객센터</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=skincare">스킨케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=makeup">메이크업</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=bodycare">바디케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=haircare">헤어케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=perfume">향수/디퓨저</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=manscare">남성케어</a></li>
+		<li><a href="/service_center/notice">고객센터</a></li>
 	</ul>
 	</div>
 </div>

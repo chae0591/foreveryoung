@@ -9,6 +9,7 @@ import com.forever.young.entity.Brand;
 import com.forever.young.entity.Customer;
 import com.forever.young.entity.Event;
 import com.forever.young.entity.Inquiry;
+import com.forever.young.entity.InquiryVO;
 import com.forever.young.entity.Notice;
 import com.forever.young.entity.ProductVO;
 
@@ -45,10 +46,15 @@ public interface AdminRepository {
 	
 	public Notice noticeDetail(Integer notice_no) throws Exception;
 	
-	public Inquiry inquiryDetail(Integer inquiry_no) throws Exception;
+	public InquiryVO inquiryDetail(Integer inquiry_no) throws Exception;
 
 	public void noticeModify(Notice notice) throws Exception;
 	
 	public void noticeDelete(Integer notice_no) throws Exception;
+	
+	public void replyRegister(InquiryVO inquiryVO) throws Exception; 
+	
+	public void inquiryStatusComplete(InquiryVO inquiryVO) throws Exception;
+	
 	
 }

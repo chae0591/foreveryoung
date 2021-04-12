@@ -10,6 +10,23 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
 
+<script>
+	$(document).ready(function(){
+		var formObj = $('#inquiryStatusComplete')
+		var formObj1 = $("#replyRegister")
+		
+		
+		
+		$("#completeBtn").click(function(){
+			formObj.attr("action", "/admin/inquiryStatusComplete")
+			formObj.attr("method" , "post")
+			formObj.submit();
+		})
+		
+	})
+
+</script>
+
 </head>
 <body>
 
@@ -73,29 +90,57 @@
 			</div>
 		</div><!--/.row-->
 		
-		<div class="row">
-			<div class="col-lg-12">
-				<form action ="" method="post">
-		        	<div>
-		        		<h1>답변하기</h1>
-		        	</div>
-		            	
-		            <div>
-		                <textarea name="reply_content" style="width:400px; height:300px; " ></textarea>
-		                <br><br>
-		                <input type="submit" value="답변등록">
-		                <input type="button" value="답변삭제">
-					</div>
-		    	</form>
-			</div>
-		</div><!--/.row-->
-		
-		<div class="row">
-			<div class="col-lg-12">
+		<!-- inquiry_status 답변대기:답변등록form, 답변완료:답변보기 form-->
+		<c:choose>
+			<c:when test="${inquiryDetail.inquiry_status eq '답변대기'}">
+					<!-- 답변등록form -->
+					<div class="row">
+						<div class="col-lg-12">
+							<form action ="replyRegister" method="post">
+					        	<div>
+					        		<h1>답변하기</h1>
+					        	</div>
+					            	
+					            <div>
+					                <textarea name="reply_content" style="width:400px; height:300px; " required="required" ></textarea>
+					                <input type="hidden" name="inquiry_no"  value="${inquiryDetail.inquiry_no}">
+					                <br><br>
+					                <input type="submit" id="replyRegisterBtn" value="답변등록">
+					                <input type="button" value="답변삭제">
+								</div>
+					    	</form>
+						</div>
+					</div><!--/.row-->
+					
+					<!-- inquiry_status 답변완료로 변경 -->
+					<form:form modelAttribute="inquiryStatusComplete" action="inquiryStatusComplete">
+						<input type="text" name="inquiry_no" value="${inquiryDetail.inquiry_no}">
+						<input type="submit" id="completeBtn" value="답변완료"> 
+					</form:form>
+					
+			</c:when>
 			
-			</div>
-		</div><!--/.row-->
+			<c:when test="${inquiryDetail.inquiry_status eq '답변완료'}">
+					<!-- 답변보기form -->
+					<div class="row">
+						<div class="col-lg-12">
+								<div>
+					                <textarea style="width:400px; height:300px; " >
+					                	<c:out value="${inquiryDetail.reply_content}"></c:out>
+					                </textarea>
+					                <br><br>
+					                <input type="submit" value="답변수정">
+					                <input type="button" value="답변삭제">
+								</div>
+						</div>
+					</div><!--/.row-->
+			</c:when>
+		</c:choose>
+	
 	</div>	<!--/.main-->
+	
+	
+	
 	
 </body>
 </html>
