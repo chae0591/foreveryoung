@@ -407,7 +407,33 @@
 	   </div>
 	   
 	   <div class="review">
-	   3
+	   	<input type="button" value="리뷰작성">
+	   	<hr>
+	   		<div>
+		   		<div>
+		   			<span>최신순</span>
+		   			<span>오래된순</span>
+		   			<span>평점 높은순</span>
+		   			<span>평점 낮은순</span>
+		   		</div>
+		   		
+		   		<div>
+					<input type="radio" name="order" value="포토리뷰" checked="checked">포토리뷰
+					<input type="radio" name="order" value="일반리뷰">일반리뷰
+		   		</div>
+		   	</div>
+		   	
+		   	<div>
+		   		<ul>
+		   			<li>
+		   			</li>
+		   		</ul>
+
+		   		<ul>
+		   			<li>
+		   			</li>
+		   		</ul>
+		   	</div>
 	   </div>
 	   
 	   <div class="qna">
