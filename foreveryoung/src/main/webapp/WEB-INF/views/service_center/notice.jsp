@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -275,7 +278,7 @@ $(function(){
 	});
 	
 	/* //카테고리별 클릭시 리스트 출력
-	$("button").click(function(){
+	$(".notice1").click(function(){
 		$.ajax({
 			url : "${pageContext.request.contextPath}/service_center/notice",
 			type : "get", 
@@ -288,6 +291,7 @@ $(function(){
 			}
 		});
 	}); */
+	
 });
 </script>
 
@@ -328,12 +332,12 @@ $(function(){
 	</div>
 	
 	<div class="notice-list">
-		<c:forEach var="lists" items="${list}">
+		<c:forEach items="${noticeList}" var="notice">
 		 		<div class="open">
 		 			<ul>
 		 				<li>
-		 					<input type="hidden" name="notice_no" value="${lists.notice_no}">
-		 					<p><c:out value="${lists.notice_type}" /><p><p><c:out value="${lists.notice_title}" /><p>
+		 					<input type="hidden" name="notice_no" value="${notice.notice_no}">
+		 					<p><c:out value="${notice.notice_type}" /><p><p><c:out value="${notice.notice_title}" /><p>
 		 				</li>
 		 			</ul>
 		 		</div>
@@ -341,12 +345,18 @@ $(function(){
 		 		<div class="hide" >
 		 			<ul>
 		 				<li>
-		 					<p><c:out value="${lists.notice_content}" /><p>
+		 					<p><c:out value="${notice.notice_content}" /><p>
 		 				</li>
 		 			</ul>
 		 		</div>
 		</c:forEach>
 	</div>
+	<c:forEach items="${noticeList}" var="lists">
+		 	<p><c:out value="${lists.notice_no}" /><p>
+		 	<p><c:out value="${lists.notice_type}" /><p>
+		 	<p><c:out value="${lists.notice_title}" /><p>
+		 	<p><c:out value="${lists.notice_content}" /><p>
+	</c:forEach>
 	
 	<div class="last-box">
 		<a href="#"><button class="inquiryGobtn">1:1 문의하기</button></a>
