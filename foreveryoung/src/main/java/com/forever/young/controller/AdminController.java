@@ -33,7 +33,6 @@ public class AdminController {
 	
 	private final Logger log = LoggerFactory.getLogger(AdminController.class);
 	
-	
 	@GetMapping("/success")
 	public String getsuccess() {
 		log.info("getsuccess()");
@@ -43,8 +42,13 @@ public class AdminController {
 	
 	//대시보드 화면
 	@GetMapping("/dashBoard")
-	public String getDashBoard() {
+	public String getDashBoard(Model model1,Model model2, Model model3) throws Exception{
 		log.info("getDashBoard()");
+		
+		
+		model1.addAttribute("customerList", service.customerList());
+		model2.addAttribute("brandList", service.brandList());
+		model3.addAttribute("productList", service.productList());
 		
 		return "admin/dashBoard";
 	}
@@ -93,12 +97,12 @@ public class AdminController {
 	
 	//관리자 등록 Post
 	@PostMapping("/join")
-	public String postJoin(Admin admin, Model model) throws Exception{
+	public RedirectView postJoin(Admin admin, Model model) throws Exception{
 		log.info("postJoin()");
 		
 		service.join(admin);
 		
-		return "admin/success";
+		return new RedirectView("adminList");
 	}
 	
 	//관리자리스트
@@ -201,20 +205,12 @@ public class AdminController {
 		return "admin/success";
 	}
 	
-	//통계(회원분석) 화면
-	@GetMapping("/staticCustomer")
-	public String getStaticCustomer() {
-		log.info("getStaticCustomer()");
+	//통계 화면
+	@GetMapping("/static")
+	public String getStatic() {
+		log.info("getStatic()");
 		
-		return "admin/staticCustomer";
-	}
-	
-	//통계(매출분석) 화면
-	@GetMapping("/staticSales")
-	public String getStaticSales() {
-		log.info("getStaticSales()");
-		
-		return "admin/staticSales";
+		return "admin/static";
 	}
 	
 	//공지사항 상세보기
@@ -279,20 +275,54 @@ public class AdminController {
 	}
 	
 	//1:1문의 답변완료로 상태변경
-	@PostMapping("/inquiryStatusComplete")
-	public void postInquiryStatusComplete(InquiryVO inquiryVO, Model model) throws Exception{
-		log.info("postInquiryStatusComplete()");
+//	@PostMapping("/inquiryStatusComplete")
+//	public RedirectView postInquiryStatusComplete(InquiryVO inquiryVO, Model model) throws Exception{
+//		log.info("postInquiryStatusComplete()");
+//		
+//		service.inquiryStatusComplete(inquiryVO);
+//		
+//		
+//		model.addAttribute("inquiryStatusComplete" , "1:1문의 답변완료");
+//		
+//		return new RedirectView("inquiryList");
+//		
+//	}
+	
+	//관리자 정보 수정Get
+	@GetMapping("/adminModify")
+	public void getAdminModify(int admin_no, Model model)throws Exception{
 		
-		service.inquiryStatusComplete(inquiryVO);
+		log.info("getAdminNotify");
 		
 		
-		model.addAttribute("inquiryStatusComplete" , "1:1문의 답변완료");
 		
 	}
 	
-	//1:1문의 답변대기로 상태변경
+	//관리자 정보 수정POST
+	@PostMapping("/adminModify")
+	public RedirectView postAdminModify(Admin admin, Model model)throws Exception{
+		log.info("postAdminModify");
+		
+		service.adminModify(admin);
+		
+		model.addAttribute("adminModify", "관리자 정보 수정완료");
+		
+		return new RedirectView("adminList");
+	}
 	
+	//관리자 삭제
+	@PostMapping("/adminDelete")
+	public RedirectView adminDelete(int admin_no, Model model) throws Exception{
+		log.info("adminDelete()");
+		
+		service.adminDelete(admin_no);
+		
+		model.addAttribute("adminDelete", "관리자 삭제완료");
+		
+		return new RedirectView("adminList");
+	}
 	
+
 	
 	
 	

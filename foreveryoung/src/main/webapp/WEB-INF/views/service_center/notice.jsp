@@ -332,12 +332,12 @@ $(function(){
 	</div>
 	
 	<div class="notice-list">
-		<c:forEach items="${noticeList}" var="notice">
+		<c:forEach items="${noticeList}" var="noticeList">
+		<input type="hidden" name="notice_no" value="${noticeList.notice_no}">
 		 		<div class="open">
 		 			<ul>
 		 				<li>
-		 					<input type="hidden" name="notice_no" value="${notice.notice_no}">
-		 					<p><c:out value="${notice.notice_type}" /><p><p><c:out value="${notice.notice_title}" /><p>
+		 					<p>${noticeList.notice_type}</p> <p>${noticeList.notice_title}</p>
 		 				</li>
 		 			</ul>
 		 		</div>
@@ -345,21 +345,26 @@ $(function(){
 		 		<div class="hide" >
 		 			<ul>
 		 				<li>
-		 					<p><c:out value="${notice.notice_content}" /><p>
+		 					<p>${noticeList.notice_content}<p>
 		 				</li>
 		 			</ul>
 		 		</div>
 		</c:forEach>
 	</div>
-	<c:forEach items="${noticeList}" var="lists">
-		 	<p><c:out value="${lists.notice_no}" /><p>
-		 	<p><c:out value="${lists.notice_type}" /><p>
-		 	<p><c:out value="${lists.notice_title}" /><p>
-		 	<p><c:out value="${lists.notice_content}" /><p>
-	</c:forEach>
 	
 	<div class="last-box">
 		<a href="#"><button class="inquiryGobtn">1:1 문의하기</button></a>
+	</div>
+	
+	<div>
+	<c:forEach items="${noticeList}" var="noticeList">
+				<ul>
+					<li>${noticeList.notice_no}</li>
+					<li>${noticeList.notice_type}</li>
+					<li>${noticeList.notice_title}</li>	
+					<li>${noticeList.notice_content}</li>				
+				</ul>
+	</c:forEach>
 	</div>
 	
 <jsp:include page="../template/footer.jsp"></jsp:include>

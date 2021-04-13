@@ -3,6 +3,7 @@ package com.forever.young.service;
 import java.util.List;
 
 import com.forever.young.entity.Address;
+import com.forever.young.entity.OrderVO;
 
 public interface AddressService {
 	public void addAddress(Address address) throws Exception;
@@ -11,4 +12,5 @@ public interface AddressService {
 	public void delAddressItems(int[] addressArr) throws Exception;
 	public void selectAddressItem(int user_no, int address_no) throws Exception;
 	public Address selectAddressNum(int address_no) throws Exception;
+	public void addVO(OrderVO orderVO) throws Exception;
 }

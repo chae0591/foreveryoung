@@ -1,6 +1,8 @@
 package com.forever.young.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,7 +21,10 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.forever.young.entity.ChangePwVO;
 import com.forever.young.entity.Customer;
+import com.forever.young.entity.Order;
+import com.forever.young.service.CartService;
 import com.forever.young.service.CustomerService;
+import com.forever.young.service.OrderService;
 
 import lombok.extern.java.Log;
 
@@ -30,6 +35,10 @@ public class CustomerController {
 	
 	@Autowired
 	private CustomerService service;
+	@Autowired
+	private OrderService service_or;
+	@Autowired
+	private CartService service_ca;
 	
 	private final Logger log = LoggerFactory.getLogger(CustomerController.class);
 	
@@ -92,10 +101,18 @@ public class CustomerController {
 	public String getMyPage(HttpSession session, Model model) throws Exception {
 		log.info("getMypage()");
 		
-		//번호로 쿼리 찾아서 model에 attr 시켜서 보냄
-		
 		
 		model.addAttribute("user_info", service.findNum((int)session.getAttribute("check")));
+		
+		List<Order> order_list = service_or.searchUserNum((int)session.getAttribute("check"));
+		
+		List<Integer> proList = new ArrayList<>();
+		for(Order order : order_list) {
+			proList.add(order.getOrder_product());
+		}
+		
+		model.addAttribute("order_info", order_list);
+		model.addAttribute("product_info", service_or.searchListVO((int)session.getAttribute("check")));
 		
 		return "member/mypage";
 	}
@@ -171,3 +188,4 @@ public class CustomerController {
 	}
 
 }
+
