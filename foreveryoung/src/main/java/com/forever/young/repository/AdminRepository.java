@@ -55,10 +55,14 @@ public interface AdminRepository {
 	public void replyRegister(InquiryVO inquiryVO) throws Exception; 
 	
 //	public void inquiryStatusComplete(InquiryVO inquiryVO) throws Exception;
+	//관리자 상세보기
+	public Admin adminDetail(Integer admin_no) throws Exception;
 	//관리자 수정
 	public void adminModify(Admin admin) throws Exception;
  	//관리자 삭제
 	public void adminDelete(Integer admin_no) throws Exception;
+	
+	
  	//상품 통합검색
  	//상품 이벤트 적용
  	//이벤트 수정

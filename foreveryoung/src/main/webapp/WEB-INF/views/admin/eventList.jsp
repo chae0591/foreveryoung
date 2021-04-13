@@ -73,7 +73,7 @@
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<table border="1">
+				<table class="table table-hover">
 					<tr>
 						<th align="center" width="100">이벤트 번호</th>
 						<th align="center" width="100">이벤트명</th>
@@ -104,8 +104,7 @@
 									<td align="center">${eventList.event_target}</td>
 									<td align="center">진행상황</td>
 									<td align="center">
-										<input type="button"  class="event_modify"  value="수정">
-										<input type="button" id="event_delete" value="삭제">
+										<a id="event_detail" href="/admin/eventDetail?event_no=${eventList.event_no}">상세보기</a>
 									</td>
 								</tr>
 							</c:forEach>

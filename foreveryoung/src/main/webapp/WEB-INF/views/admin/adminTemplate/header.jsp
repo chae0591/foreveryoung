@@ -49,6 +49,16 @@
 		</ul>
 	</div><!--/.sidebar-->	
 			
+	<script src="../css/admin/js/jquery-1.11.1.min.js"></script>
+	<script src="../css/admin/js/bootstrap.min.js"></script>
+	<script src="../css/admin/js/chart.min.js"></script>
+	<script src="../css/admin/js/chart-data.js"></script>
+	<script src="../css/admin/js/easypiechart.js"></script>
+	<script src="../css/admin/js/easypiechart-data.js"></script>
+	<script src="../css/admin/js/bootstrap-datepicker.js"></script>
+	<script src="../css/admin/js/custom.js"></script>
+
+
 
 </body>
 </html>			     

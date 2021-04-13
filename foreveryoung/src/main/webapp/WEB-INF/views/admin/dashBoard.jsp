@@ -123,6 +123,27 @@
 			</div>	
 		</div><!--/.row-->
 		
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Calendar
+					<div class="panel-body">
+						<div id="calendar">
+						
+						</div>
+					</div>
+				</div>
+			</div><!--/.col-->		
+		
+		
+			<script src="../css/admin/js/jquery-1.11.1.min.js"></script>
+	<script src="../css/admin/js/bootstrap.min.js"></script>
+	<script src="../css/admin/js/chart.min.js"></script>
+	<script src="../css/admin/js/chart-data.js"></script>
+	<script src="../css/admin/js/easypiechart.js"></script>
+	<script src="../css/admin/js/easypiechart-data.js"></script>
+	<script src="../css/admin/js/bootstrap-datepicker.js"></script>
+	<script src="../css/admin/js/custom.js"></script>
 		
 	</div>	<!--/.main-->
 	
