@@ -277,20 +277,17 @@ $(function(){
     	}
 	});
 	
-	/* //카테고리별 클릭시 리스트 출력
-	$(".notice1").click(function(){
-		$.ajax({
-			url : "${pageContext.request.contextPath}/service_center/notice",
-			type : "get", 
-			success : function(resp){//resp == 목록
-				//console.log(resp);
-				resp = $.parseJSON(resp);//JSON 복원
-				$.each(resp, function(){
-					console.log(this);
-				});
-			}
-		});
-	}); */
+	//1:1버튼 클릭시
+	$(".inquiryGobtn").click(function(){
+		var id = "${check}";
+		
+        if(id == ''){
+        	 alert("로그인 후 문의 가능합니다.");
+        	 location.href = '/member/login';
+   		 }else{
+   			 location.href = '/service_center/inquiryRegister';
+    	}
+	});
 	
 });
 </script>
@@ -353,7 +350,7 @@ $(function(){
 	</div>
 	
 	<div class="last-box">
-		<a href="/service_center/inquiryRegister"><button class="inquiryGobtn">1:1 문의하기</button></a>
+		<button class="inquiryGobtn">1:1 문의하기</button>
 	</div>
 	
 	<div>
