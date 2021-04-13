@@ -32,7 +32,7 @@ public class AdminController {
 	private AdminService service;
 	
 	private final Logger log = LoggerFactory.getLogger(AdminController.class);
-	
+
 	
 	@GetMapping("/success")
 	public String getsuccess() {
@@ -77,7 +77,7 @@ public class AdminController {
 			
 		}else {
 			log.info("login Failure");
-			return new RedirectView("login");
+			return new RedirectView("login?error=0");
 			
 		}
 	}
@@ -85,8 +85,9 @@ public class AdminController {
 	//관리자 로그아웃 Get
 	@GetMapping("/logout")
 	public String getLogout(HttpSession session) throws Exception {
+		log.info("logout()");
 		session.invalidate();
-		return "redirect:/";
+		return "redirect:/admin/login";
 	}
 	
 	//관리자 등록Get
@@ -291,11 +292,10 @@ public class AdminController {
 	
 	//관리자 정보 수정Get
 	@GetMapping("/adminModify")
-	public void getAdminModify(int admin_no, Model model)throws Exception{
-		
+	public void getAdminModify(Model model)throws Exception{
 		log.info("getAdminNotify");
 		
-		
+		model.addAttribute("adminModify", "관리자 정보 수정");
 		
 	}
 	
@@ -313,17 +313,33 @@ public class AdminController {
 	
 	//관리자 삭제
 	@PostMapping("/adminDelete")
-	public RedirectView adminDelete(int admin_no, Model model) throws Exception{
+	public RedirectView adminDelete(int admin_no ,Model model) throws Exception{
 		log.info("adminDelete()");
 		
 		service.adminDelete(admin_no);
 		
-		model.addAttribute("adminDelete", "관리자 삭제완료");
+		model.addAttribute("adminDelete","관리자계정 삭제 완료");
 		
 		return new RedirectView("adminList");
 	}
 	
-
+	//이벤트 수정
+	@GetMapping("/eventModify")
+	public void geteventModify(int event_no, Model model) throws Exception{
+		log.info("getEventModify()");
+		
+		//model.addAttribute("eventModify" , service.eventModify(event_no));
+		
+	}
+	
+	
+	//이벤트 삭제
+	
+	
+	
+	
+	
+	
 	
 	
 	

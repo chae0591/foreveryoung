@@ -22,7 +22,12 @@
 			//self.location = "/admin/"
 		})
 		$("#admin_delete").click(function(){
-			//self.location = "/admin/"
+			e.preventDefault();
+			
+			var check = window.confirm("관리자 계정을 삭제하시겠습니까?");
+			if(check){
+				location.href=$(this).attr("href");
+			}
 		})
 		
 
