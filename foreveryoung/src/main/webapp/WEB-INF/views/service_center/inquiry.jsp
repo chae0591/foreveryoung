@@ -203,6 +203,18 @@ $(function(){
    			 location.href = '/service_center/inquiry';
     	}
 	});
+	
+	//1:1버튼 클릭시
+	$(".inquiryGobtn").click(function(){
+		var id = "${check}";
+		
+        if(id == ''){
+        	 alert("로그인 후 문의 가능합니다.");
+        	 location.href = '/member/login';
+   		 }else{
+   			 location.href = '/service_center/inquiryRegister';
+    	}
+	});
 });
 </script>
 
@@ -258,7 +270,7 @@ $(function(){
 	</div>
 	
 	<div class="last-box">
-		<a href="/service_center/inquiryRegister"><button class="inquiryGobtn">1:1 문의하기</button></a>
+		<button class="inquiryGobtn">1:1 문의하기</button>
 	</div>
 	
 <jsp:include page="../template/footer.jsp"></jsp:include>

@@ -62,25 +62,38 @@
 </style>
 
 <script>
-	$(document).ready(function () {
-		var formObj = $("#inquiry")
+$(document).ready(function() {
+	
+	var formObj = $("#inquiry")
 		
-		$("#btnModify").on("click", function () {
-			var inquiryNo = $("#inquiryNo")
-			var inquiryNoVal = inquiryNo.val();
+	$("#btnModify").on("click", function () {
+		var inquiryNo = $("#inquiry_no")
+		var inquiryNoVal = inquiryNo.val();
 			
-			self.location = "/service_center/inquiryModify?inquiryNo=" + inquiryNoVal
-		})
+		self.location = "/service_center/inquiryModify?inquiry_no=" + inquiryNoVal
+	});
 		
-		$("#btnList").on("click", function () {
-			self.location = "/service_center/inquiry"
-		})
+	$("#btnList").on("click", function () {
+		self.location = "/service_center/inquiry"
+	});
 		
-		$("#btnRemove").on("click", function () {
-			formObj.attr("action", "/service_center/inquiryDelete")
-			formObj.submit();
-		})
-	})
+	$("#btnRemove").on("click", function () {
+		formObj.attr("action", "/service_center/inquiryDelete")
+		formObj.submit();
+	});
+		
+	//1:1버튼 클릭시
+	$(".inquiryGobtn").click(function(){
+		var id = "${check}";
+			
+	    if(id == ''){
+	        alert("로그인 후 문의 가능합니다.");
+	        location.href = '/member/login';
+	   	}else{
+	   	 	location.href = '/service_center/inquiryRegister';
+	    }
+	});
+});
 </script>
 
 </head>
@@ -125,7 +138,7 @@
 	</div>
 	
 	<div class="last-box">
-		<button class="inquiry-btn">1:1 문의하기</button>
+		<button class="inquiryGobtn">1:1 문의하기</button>
 	</div>
 	
 <jsp:include page="../template/footer.jsp"></jsp:include>
