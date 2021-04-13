@@ -80,10 +80,32 @@ public class BrandRegistController {
 	@GetMapping("/mypage_brand/mypage_brand_main")
 	public String getMypage_brand_main(HttpSession session, Model model) throws Exception {
 		log.info("getMypage_brand_main()");
-		
+		//세션 없이 테스트 - 링크로 바로 이동 
 		model.addAttribute("brand_info", service.findNum((int)session.getAttribute("check")));
 		
 		return "member/mypage_brand/mypage_brand_main";
+	}
+	
+	//판매자 페이지 메인 - 판매자 정보 수정
+	@GetMapping("/mypage_brand/mypage_brand_main_edit")
+	public String getMypage_brand_main_edit(HttpSession session, Model model) throws Exception {
+		log.info("getMypage_brand_main_edit()");
+		
+		Brand brand = service.findNum((int)session.getAttribute("check"));
+		
+		model.addAttribute("brand_info", brand);
+		return "member/mypage_brand/mypage_brand_main_edit";
+	}
+	
+	//판메자 정보 수정 post 
+	@PostMapping("/mypage_brand/mypage_brand_main_edit")
+	public String postMypage_brand_main_edit(@ModelAttribute Brand brand) throws Exception {
+		log.info("PostMypage_brand_main_edit()"); 
+		
+		log.info(brand.toString());
+		service.editBrandInfo(brand); 
+		
+		return "main";
 	}
 
 }

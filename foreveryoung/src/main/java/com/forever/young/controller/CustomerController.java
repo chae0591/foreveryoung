@@ -170,3 +170,4 @@ public class CustomerController {
 		return "member/join_choice";
 	}
 
+}
