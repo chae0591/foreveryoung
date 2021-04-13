@@ -265,6 +265,12 @@ $(function(){
 				<li><a href="/member/logout">로그아웃</a></li>
 			</ul>
    		</c:when>
+   		<c:when test="${check ne null && auth eq 'admin'}">
+			<ul>
+				<li><a href="/admin/dashBoard"><c:out value="${check}"/> 님 반갑습니다</a></li>
+				<li><a href="/admin/logout">로그아웃</a></li>
+			</ul>
+   		</c:when>
    		<c:otherwise>
    			<ul>
 				<li><a href="/member/login">로그인</a></li>

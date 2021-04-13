@@ -17,14 +17,11 @@ $(document).ready(function(){
 	
 	$("#admin_complete").click(function(){
 		formObj.attr("action", "/admin/adminModify")
-		formObj.attr("method" , "post")
+		formObj.attr("method", "post")
 		formObj.submit();
-		
-		
-		
 	})
 	
-	$("#adminList").click(function(){
+	$("admin_list").click(function(){
 		self.location = "/admin/adminList"
 	})
 	
@@ -63,24 +60,35 @@ $(document).ready(function(){
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<form:form modelAttribute="adminModify" action="adminModify" >
-					
-					
+				<form:form modelAttribute="adminModify" action="adminModify">
+				<form:hidden path="admin_no"/>
 					<table>
-						<tr>
-							<td>분류</td>
-							<td><form:input path="admin_name"/></td>
-						</tr>
-						<tr>
-							<td>제목</td>
-							<td><form:input path="admin_phone"/></td>
-						</tr>
+							<tr>
+								<th align="center" width="100">관리자 번호</th>
+								<td>${adminDetail.admin_no}</td>
+							</tr>						
+							<tr>
+								<th align="center" width="100">ID</th>
+								<td>${adminDetail.admin_id}</td>
+							</tr>
+							<tr>
+								<th align="center" width="100">관리자 이름</th>
+								<td><form:input path="admin_name" /></td>
+							</tr>
+							<tr>
+								<th align="center" width="100">관리자 전화번호</th>
+								<td><form:input path="admin_phone" /></td>			
+							</tr>
+							<tr>
+								<th align="center" width="100">관리자 등록일</th>
+								<td>${adminDetail.admin_regDate}</td>			
+							</tr>
 					</table>
 				</form:form>
 				
 				<div>
 					<button type="submit" id="admin_complete">수정 완료</button>
-					<button type="submit" id="adminList">공지사항 보기</button>
+					<button type="submit" id="admin_list">공지사항 보기</button>
 				</div>				
 			</div>
 		</div><!--/.row-->

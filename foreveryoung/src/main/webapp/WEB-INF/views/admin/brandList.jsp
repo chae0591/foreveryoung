@@ -54,7 +54,7 @@
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<table border="1">
+				<table  class="table table-hover">
 					<tr>
 						<th align="center" width="100">브랜드 번호</th>
 						<th align="center" width="100">브랜드 ID</th>

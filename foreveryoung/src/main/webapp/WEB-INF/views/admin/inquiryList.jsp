@@ -41,7 +41,7 @@
 
 		<div class="row">
 			<div class="col-lg-12">
-				<table border="1">
+				<table  class="table table-hover">
 					<tr>
 						<th align="center" width="100"> 번호</th>
 						<th align="center" width="100">제목</th>

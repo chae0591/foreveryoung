@@ -43,6 +43,7 @@ $(document).ready(function(){
 
 <body>
 	<h2>foreveryoung</h2>
+	<a class="navbar-brand" href="/main" style="float:right;">home</a>
 
 	<div class="container text-center">
     	<form action ="login" method="post">

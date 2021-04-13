@@ -108,6 +108,11 @@ public class AdminServiceImpl implements AdminService{
 //	}
 	
 	@Override
+	public Admin adminDetail(Integer admin_no) throws Exception {
+		return repository.adminDetail(admin_no);
+	}
+	
+	@Override
 	public void adminModify(Admin admin) throws Exception {
 		repository.adminModify(admin);
 	}
@@ -116,7 +121,10 @@ public class AdminServiceImpl implements AdminService{
 	public void adminDelete(Integer admin_no) throws Exception {
 		repository.adminDelete(admin_no);
 	}
-		
+
+
+
+
 
 
 
