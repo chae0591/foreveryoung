@@ -30,4 +30,9 @@ public class BrandRegistServiceImpl implements BrandRegistService{
 	public Brand findNum(int brand_num) throws Exception {
 		return repository.findNum(brand_num);
 	}
+	
+	@Override
+	public void editBrandInfo(Brand brand) throws Exception {
+		repository.editBrandInfo(brand); 
+	}
 }
