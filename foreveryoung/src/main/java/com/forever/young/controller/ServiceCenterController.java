@@ -56,14 +56,14 @@ public class ServiceCenterController {
 	
 	//1:1문의 작성POST
 	@PostMapping("/inquiryRegister")
-	public String postInquiryRegister(Inquiry inquiry, Model model) throws Exception {
+	public RedirectView postInquiryRegister(Inquiry inquiry, Model model) throws Exception {
 		log.info("postInquiryRegister()");
 		
 		service.inquiryRegister(inquiry);
 		
-		model.addAttribute("msg", "문의글 등록이 성공적으로 완료되었습니다.");
+		model.addAttribute("inquiryRegister", "문의글 등록이 성공적으로 완료되었습니다.");
 		
-		return "board/success";
+		return new RedirectView("inquiryDetail");
 	}
 	
 	//1:1문의 상세보기GET

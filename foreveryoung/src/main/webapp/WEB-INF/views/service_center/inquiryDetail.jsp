@@ -69,7 +69,7 @@
 			var inquiryNo = $("#inquiryNo")
 			var inquiryNoVal = inquiryNo.val();
 			
-			self.location = "/service_center/inquiry_modify?inquiryNo=" + inquiryNoVal
+			self.location = "/service_center/inquiryModify?inquiryNo=" + inquiryNoVal
 		})
 		
 		$("#btnList").on("click", function () {
@@ -77,7 +77,7 @@
 		})
 		
 		$("#btnRemove").on("click", function () {
-			formObj.attr("action", "/service_center/remove")
+			formObj.attr("action", "/service_center/inquiryDelete")
 			formObj.submit();
 		})
 	})
@@ -99,8 +99,8 @@
 		<a href="/service_center/inquiry"><button class="inquiry-btn">1:1 문의</button></a>
 	</div>
 	
-	<form:form modelAttribute="board">
-		<form:hidden path="boardNo"/>
+	<form:form modelAttribute="inquiry">
+		<form:hidden path="inquiryNo"/>
 		
 		<table>
 			<tr>
