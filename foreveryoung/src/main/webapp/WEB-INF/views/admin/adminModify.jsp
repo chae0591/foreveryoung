@@ -64,7 +64,7 @@ $(document).ready(function(){
 		<div class="row">
 			<div class="col-lg-12">
 				<form:form modelAttribute="adminModify" action="adminModify" >
-					<form:hidden path="admin_no"/>
+					
 					
 					<table>
 						<tr>
