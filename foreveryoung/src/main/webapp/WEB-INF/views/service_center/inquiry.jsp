@@ -258,7 +258,7 @@ $(function(){
 	</div>
 	
 	<div class="last-box">
-		<a href="#"><button class="inquiryGobtn">1:1 문의하기</button></a>
+		<a href="/service_center/inquiryRegister"><button class="inquiryGobtn">1:1 문의하기</button></a>
 	</div>
 	
 <jsp:include page="../template/footer.jsp"></jsp:include>

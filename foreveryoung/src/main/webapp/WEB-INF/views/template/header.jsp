@@ -164,7 +164,7 @@ input[type="submit"], button {
 .nav-line {
 	width: 1020px;
 	height: 100%;
-	 margin: 0 auto;
+	margin: 0 auto;
     position: relative;
 }
 .nav-line ul {
@@ -178,14 +178,14 @@ input[type="submit"], button {
     display: inline-block;
     text-align:center;
     padding-top: 8px;
-    margin-left: 70px;
+    margin-left: 73px;
     vertical-align:middle;
 }
 .nav-line li:first-child {
-	margin-left: 30px;
+	margin-left: 10px;
 }
 .nav-line li:last-child {
-	margin-right: 30px;
+	margin-right: 10px;
 }
 .nav-line li a {
     font-size: 18px;

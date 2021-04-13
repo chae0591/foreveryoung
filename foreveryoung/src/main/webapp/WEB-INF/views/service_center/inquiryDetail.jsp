@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,6 +60,29 @@
     line-height: 30px;
 }
 </style>
+
+<script>
+	$(document).ready(function () {
+		var formObj = $("#inquiry")
+		
+		$("#btnModify").on("click", function () {
+			var inquiryNo = $("#inquiryNo")
+			var inquiryNoVal = inquiryNo.val();
+			
+			self.location = "/service_center/inquiryModify?inquiryNo=" + inquiryNoVal
+		})
+		
+		$("#btnList").on("click", function () {
+			self.location = "/service_center/inquiry"
+		})
+		
+		$("#btnRemove").on("click", function () {
+			formObj.attr("action", "/service_center/inquiryDelete")
+			formObj.submit();
+		})
+	})
+</script>
+
 </head>
 <body>
 <jsp:include page="../template/header.jsp"></jsp:include>
@@ -72,6 +97,31 @@
 	<div class="service-btns">
 		<a href="/service_center/notice"><button class="notice-btn">공지사항</button></a>
 		<a href="/service_center/inquiry"><button class="inquiry-btn">1:1 문의</button></a>
+	</div>
+	
+	<form:form modelAttribute="inquiry">
+		<form:hidden path="inquiryNo"/>
+		
+		<table>
+			<tr>
+				<td>제목</td>
+				<td><form:input path="title" readonly="true"/></td>
+			</tr>
+			<tr>
+				<td>작성자</td>
+				<td><form:input path="writer" readonly="true"/></td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td><form:input path="content" readonly="true"/></td>
+			</tr>
+		</table>
+	</form:form>
+	
+	<div>
+		<button type="submit" id="btnModify">수정</button>
+		<button type="submit" id="btnList">게시글 보기</button>
+		<button type="submit" id="btnRemove">게시글 삭제</button>
 	</div>
 	
 	<div class="last-box">
