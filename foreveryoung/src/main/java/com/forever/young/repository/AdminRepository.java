@@ -76,6 +76,12 @@ public interface AdminRepository {
  	//통계 (매출분석)
 	
 	
+
+	
+	
+	public void replyRegister(InquiryVO inquiryVO) throws Exception; 
+	
+	public void inquiryStatusComplete(InquiryVO inquiryVO) throws Exception;
 	
 	
 }

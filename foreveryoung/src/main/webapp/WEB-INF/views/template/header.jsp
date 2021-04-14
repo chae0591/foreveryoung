@@ -298,7 +298,7 @@ $(function(){
 		   <input type="button" class="func-my" >
 		    <input type="button"  class="func-cart">
 	 </div>
-   
+  
 </div>
 	
 <div class="nav">

@@ -140,7 +140,7 @@
 	<update id="inquiryStatusComplete">
 		update inquiry set inquiry_status = '답변완료' where inquiry_no=#{inquiry_no}
 	</update>
-	
+  
 	<!-- 1:1문의 상태 답변대기로 수정 -->
 	 
 	<!-- 1:1문의 답변 수정 -->

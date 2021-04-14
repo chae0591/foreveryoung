@@ -350,7 +350,7 @@ public class AdminController {
 		log.info("geteventDetail()");
 		
 		return "admin/eventDetail";
-	}
+  }
 	
 	
 	
