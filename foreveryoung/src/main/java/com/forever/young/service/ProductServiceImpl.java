@@ -76,10 +76,16 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
+
 	public Product findByNo(int no) {
 		return productRepository.findByNo(no);
 	}
+	
+	public List<Product> getBest(String category) {
+		return productRepository.getBest(category);
 
+	}
+	
 	
 	
 

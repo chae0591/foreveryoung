@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/product/productCommon.css">
 
-<title>판매자 페이지 메인</title>
+<title>판매자 정보 변경 페이지 - 판매자 페이지 메인</title>
 <style>
  	/* 사이드 매뉴 위치 잡아주기  */
 	.s_left {
@@ -199,16 +199,6 @@
 	.addBtn:hover {
 	  background-color: #bbb;
 	
-	}
-	
-	  .orderInfo {
-	     position: absolute; 
-	     float:left; 
-	     right:250px;
-	     padding-top: 400px; 
-	     font-weight:bold; 
-	     /* padding-right: 100px; */
-	 }
 	
 </style>
 
@@ -296,24 +286,40 @@
 
 <!-- center_left 판매자 정보 + 달럭 -->
 <div class="center_left">
-		<a href="mypage_brand_main_edit">회원정보 수정</a>
-		<table>
-			<tr>
-				<td class="bold" style="display:none">판매자 번호: <c:out value="${brand_info.brand_num}"></c:out> </td>
-			</tr>
-			<tr>
-				<td class="bold">판매자 아이디: <c:out value="${brand_info.brand_id}"></c:out></td>
-			</tr>
-			<tr>
-				<td class="bold">판매자 이름: <c:out value="${brand_info.brand_name}"></c:out></td>
-			</tr>
-			<tr>
-				<td class="bold">판매자 전화번호: <c:out value="${brand_info.brand_phone}"></c:out></td>
-			</tr>
-			<tr>
-				<td class="bold">판매자 가입일: <c:out value="${brand_info.brand_regDate}"></c:out></td>
-			</tr>
-		</table><br><br>
+	<h2>회원 정보 수정</h2>
+	<form id="edit_brand_form" action="mypage_brand_main_edit" method="post">
+	<fieldset>
+		<legend>판매자 회원 정보</legend>
+		<label>판매자 이름, 번호를 변경하실 수 있습니다. </label>
+		<div>
+			<input type="hidden" name="brand_num" class="input" value="${brand_info.brand_num}">
+		</div>
+		
+		<div>
+			<label>판매자 아이디</label>
+            <input type="text" name="brand_id" class="input" value="${brand_info.brand_id}">
+		</div>
+		
+		<div>
+			<label>판매자 이름</label>
+            <input type="text" name="brand_name" required class="input" placeholder="한글 2~10자" value="${brand_info.brand_name}">
+		</div>
+		
+		<div>
+			<label>판매자 번호</label>		
+			<input type="text" name="brand_phone" required class="input" value="${brand_info.brand_phone}">
+		</div>
+		
+		<div>
+			<label>판매자 회원가입일</label>
+			<input type="text" name="brand_regDate" required class="input" value="${brand_info.brand_regDate}">
+		</div>
+	</fieldset>
+		<div class="row">
+					<input type="submit" value="정보 수정" class="input">
+				</div>
+	</form>
+	<br><br>
 		
 	<!-- 달럭 -->
 	<%
@@ -403,14 +409,6 @@
           <ul id="myUL">
           </ul>
 	</div>
-	
-	
-	<!-- 주문 관련 정보  -->
-	
-	<div class="center_right orderInfo">
-		<h2>주문 관련 정보</h2>
-	</div>
-	
 	
 </body>
 </html>

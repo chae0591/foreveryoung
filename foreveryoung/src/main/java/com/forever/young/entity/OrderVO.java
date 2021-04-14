@@ -9,6 +9,7 @@ public class OrderVO {
 	private String address_roadname;
 	private String address_jibun;
 	private String address_detail;
+	private String address_phone;
 	private int[] order_brand;
 	private int[] order_product;
 	private int[] order_amount;
@@ -44,6 +45,12 @@ public class OrderVO {
 	public void setAddress_detail(String address_detail) {
 		this.address_detail = address_detail;
 	}
+	public String getAddress_phone() {
+		return address_phone;
+	}
+	public void setAddress_phone(String address_phone) {
+		this.address_phone = address_phone;
+	}
 	public int[] getOrder_brand() {
 		return order_brand;
 	}
@@ -73,8 +80,10 @@ public class OrderVO {
 	public String toString() {
 		return "OrderVO [address_name=" + address_name + ", address_zonecode=" + address_zonecode
 				+ ", address_roadname=" + address_roadname + ", address_jibun=" + address_jibun + ", address_detail="
-				+ address_detail + ", order_brand=" + Arrays.toString(order_brand) + ", order_product="
-				+ Arrays.toString(order_product) + ", order_amount=" + Arrays.toString(order_amount)
-				+ ", order_totalPrice=" + Arrays.toString(order_totalPrice) + "]";
+				+ address_detail + ", address_phone=" + address_phone + ", order_brand=" + Arrays.toString(order_brand)
+				+ ", order_product=" + Arrays.toString(order_product) + ", order_amount="
+				+ Arrays.toString(order_amount) + ", order_totalPrice=" + Arrays.toString(order_totalPrice) + "]";
 	}
+	
+	
 }

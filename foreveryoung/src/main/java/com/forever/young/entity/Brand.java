@@ -8,7 +8,7 @@ public class Brand {
 	private String brand_pw;
 	private String brand_name;
 	private String brand_phone;
-	private Date user_regDate;
+	private Date brand_regDate;
 	private String brand_permission;
 	private int address_no;
 	
@@ -42,11 +42,11 @@ public class Brand {
 	public void setBrand_phone(String brand_phone) {
 		this.brand_phone = brand_phone;
 	}
-	public Date getUser_regDate() {
-		return user_regDate;
+	public Date getBrand_regDate() {
+		return brand_regDate;
 	}
 	public void setBrand_regDate(Date brand_regDate) {
-		this.user_regDate = brand_regDate;
+		this.brand_regDate = brand_regDate;
 	}
 	public String getBrand_permission() {
 		return brand_permission;
@@ -64,7 +64,7 @@ public class Brand {
 	@Override
 	public String toString() {
 		return "Brand [brand_num=" + brand_num + ", brand_id=" + brand_id + ", brand_pw=" + brand_pw + ", brand_name="
-				+ brand_name + ", brand_phone=" + brand_phone + ", brand_regDate=" + user_regDate
+				+ brand_name + ", brand_phone=" + brand_phone + ", brand_regDate=" + brand_regDate
 				+ ", brand_permission=" + brand_permission + ", address_no=" + address_no + "]";
 	}
 }

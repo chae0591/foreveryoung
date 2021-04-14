@@ -277,20 +277,17 @@ $(function(){
     	}
 	});
 	
-	/* //카테고리별 클릭시 리스트 출력
-	$(".notice1").click(function(){
-		$.ajax({
-			url : "${pageContext.request.contextPath}/service_center/notice",
-			type : "get", 
-			success : function(resp){//resp == 목록
-				//console.log(resp);
-				resp = $.parseJSON(resp);//JSON 복원
-				$.each(resp, function(){
-					console.log(this);
-				});
-			}
-		});
-	}); */
+	//1:1버튼 클릭시
+	$(".inquiryGobtn").click(function(){
+		var id = "${check}";
+		
+        if(id == ''){
+        	 alert("로그인 후 문의 가능합니다.");
+        	 location.href = '/member/login';
+   		 }else{
+   			 location.href = '/service_center/inquiryRegister';
+    	}
+	});
 	
 });
 </script>
@@ -332,12 +329,12 @@ $(function(){
 	</div>
 	
 	<div class="notice-list">
-		<c:forEach items="${noticeList}" var="notice">
+		<c:forEach items="${noticeList}" var="noticeList">
+		<input type="hidden" name="notice_no" value="${noticeList.notice_no}">
 		 		<div class="open">
 		 			<ul>
 		 				<li>
-		 					<input type="hidden" name="notice_no" value="${notice.notice_no}">
-		 					<p><c:out value="${notice.notice_type}" /><p><p><c:out value="${notice.notice_title}" /><p>
+		 					<p>${noticeList.notice_type}</p> <p>${noticeList.notice_title}</p>
 		 				</li>
 		 			</ul>
 		 		</div>
@@ -345,21 +342,15 @@ $(function(){
 		 		<div class="hide" >
 		 			<ul>
 		 				<li>
-		 					<p><c:out value="${notice.notice_content}" /><p>
+		 					<p>${noticeList.notice_content}<p>
 		 				</li>
 		 			</ul>
 		 		</div>
 		</c:forEach>
 	</div>
-	<c:forEach items="${noticeList}" var="lists">
-		 	<p><c:out value="${lists.notice_no}" /><p>
-		 	<p><c:out value="${lists.notice_type}" /><p>
-		 	<p><c:out value="${lists.notice_title}" /><p>
-		 	<p><c:out value="${lists.notice_content}" /><p>
-	</c:forEach>
 	
 	<div class="last-box">
-		<a href="#"><button class="inquiryGobtn">1:1 문의하기</button></a>
+		<button class="inquiryGobtn">1:1 문의하기</button>
 	</div>
 	
 <jsp:include page="../template/footer.jsp"></jsp:include>

@@ -4,5 +4,26 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.forever.young.repository.OrderRepository">
+
+	<insert id="addOrder">
+		insert into Order_table values(order_seq.nextval, #{order_customer}, address_seq.currval, #{order_brand}, #{order_product}, #{order_amount}, '결제', #{order_totalPrice}, systimestamp)
+	</insert>
+	
+	<select id="searchUserOrder" resultType="Order">
+		select * from Order_table where order_customer = #{user_num}
+	</select>
+	
+	<select id="searchproVO" resultType="OrderProductVO">
+		select p.*, b.* from product_table P join brand B on p.product_brand = b.brand_num where product_no = #{product_no}
+	</select>
+	
+	<select id="searchListMyPg" resultType="OrderMypgVO">
+		select O.order_no, O.order_customer, O.order_brand, O.order_product, O.order_amount, O.order_status, 
+		O.order_totalPrice, O.order_time, pb.product_name, pb.product_price, pb.brand_name 
+		from order_table O 
+		join (select p.*, b.* from product_table P join brand B on p.product_brand = b.brand_num) pb 
+		on O.order_product = pb.product_no 
+		where O.order_customer = #{user_num}
+	</select>
 	
 </mapper>

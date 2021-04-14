@@ -1,6 +1,8 @@
 package com.forever.young.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.forever.young.entity.Customer;
+import com.forever.young.entity.Order;
+import com.forever.young.entity.OrderProductVO;
 import com.forever.young.entity.OrderVO;
 import com.forever.young.service.AddressService;
 import com.forever.young.service.CartService;
@@ -59,6 +63,27 @@ public class OrderController {
 		return "order/ordertest";
 	}
 	
+	@GetMapping("/ordertest_detail")
+	public String getOrderDetail(HttpSession session, Model model, @RequestParam int product_no, @RequestParam int product_amount) throws Exception {
+		log.info("getOrderDetail()");
+		
+		Customer customer = service_cu.findNum((int)session.getAttribute("check"));
+		model.addAttribute("customerInfo", customer);
+		
+		if(customer.getAddress_no() != 0) {
+			model.addAttribute("addressInfo", service_ad.selectAddressNum(customer.getAddress_no()));
+		}
+		
+		OrderProductVO orderProductVO = service.searchproVO(product_no);
+		orderProductVO.setCart_count(product_amount);
+		List<OrderProductVO> list = new ArrayList<>();
+		list.add(orderProductVO);
+		
+		model.addAttribute("productInfo", list);
+		
+		return "order/ordertest";
+	}
+	
 	@GetMapping("/test")
 	public String test() throws Exception {
 		log.info("test()");
@@ -72,8 +97,20 @@ public class OrderController {
 		
 		log.info(orderVO.toString());
 		
+		service_ad.addVO(orderVO);
 		
-		return new RedirectView("member/mypage");
+		for (int i = 0; i < orderVO.getOrder_product().length; i++ ) {
+			Order order_temp = new Order();
+			order_temp.setOrder_customer((int)session.getAttribute("check"));
+			order_temp.setOrder_product(orderVO.getOrder_product()[i]);
+			order_temp.setOrder_brand(orderVO.getOrder_brand()[i]);
+			order_temp.setOrder_amount(orderVO.getOrder_amount()[i]);
+			order_temp.setOrder_totalPrice(orderVO.getOrder_totalPrice()[i]);
+			
+			service.addOrder(order_temp);
+		}
+		
+		return new RedirectView("/member/mypage");
 	}
 
 }

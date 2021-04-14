@@ -61,6 +61,32 @@
 			</div>
 			<div class="row">
 				<h2>주문 / 배송 조회</h2>
+				<c:out value="${order_info}"></c:out>
+				<c:set var="count1" value="0"></c:set>
+				<c:set var="count2" value="0"></c:set>
+				<c:set var="count3" value="0"></c:set>
+				<c:set var="count4" value="0"></c:set>
+				<c:set var="count5" value="0"></c:set>
+				<c:forEach var="count" items="${order_info}">
+					<c:choose>
+						<c:when test="${count.order_status eq '결제'}">
+							<c:set var="count1" value="${count1 + 1}"></c:set>
+						</c:when>
+						<c:when test="${count.order_status eq '배송진행'}">
+							<c:set var="count2" value="${count2 + 1}"></c:set>
+						</c:when>
+						<c:when test="${count.order_status eq '배송완료'}">
+							<c:set var="count3" value="${count3 + 1}"></c:set>
+						</c:when>
+						<c:when test="${count.order_status eq '주문취소'}">
+							<c:set var="count4" value="${count4 + 1}"></c:set>
+						</c:when>
+						<c:when test="${count.order_status eq '반품교환'}">
+							<c:set var="count5" value="${count5 + 1}"></c:set>
+						</c:when>
+						<c:otherwise></c:otherwise>
+					</c:choose>
+				</c:forEach>
 				<table>
 					<tbody>
 						<tr>
@@ -71,11 +97,11 @@
 							<th>반품/교환</tr>
 						<tr>
 						<tr>
-							<td>0</td>
-							<td>1</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
+							<td><c:out value="${count1}"></c:out></td>
+							<td><c:out value="${count2}"></c:out></td>
+							<td><c:out value="${count3}"></c:out></td>
+							<td><c:out value="${count4}"></c:out></td>
+							<td><c:out value="${count5}"></c:out></td>
 						</tr>
 					</tbody>
 				</table>
@@ -83,6 +109,7 @@
 			
 			<div class="row">
 				<h2>최근 주문내역</h2>
+				<c:out value="${product_info}"></c:out>
 				<table>
 					<tbody>
 						<tr>

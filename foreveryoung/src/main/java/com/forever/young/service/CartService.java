@@ -9,4 +9,6 @@ public interface CartService {
 	public void delCartItem(int cart_no) throws Exception;
 	public void delCartItems(int[] cartArr) throws Exception;
 	public List<CartListVO> searchListNums(int[] cartList) throws Exception;
+	public List<CartListVO> searchListProNums(int[] pronumList) throws Exception;
+	public List<CartListVO> searchListproNumList(List<Integer> proList) throws Exception;
 }

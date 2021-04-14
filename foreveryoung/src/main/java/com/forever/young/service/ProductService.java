@@ -3,8 +3,6 @@ package com.forever.young.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.forever.young.entity.Brand;
 import com.forever.young.entity.Product;
 
@@ -24,5 +22,10 @@ public interface ProductService {
 	public List<Product> brandListSearch(Map<String, Object> searchData);
 	public int getCountByBrand(int brand);
 	
+
 	public Product findByNo(int no);
+
+	// 베스트 상품
+	public List<Product> getBest(String category);
+
 }

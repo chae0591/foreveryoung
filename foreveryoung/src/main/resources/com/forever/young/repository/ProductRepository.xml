@@ -73,9 +73,10 @@
 	<!-- 카테고리별 상품조회 -->
 	<select id="categoryList" resultType="com.forever.young.entity.Product">
 		select
-			p.*, i.image_save_name, i.image_type, i.image_name
+			p.*, i.image_save_name, i.image_type, i.image_name, b.brand_name
 		from
         	product_table P inner join product_img i on p.product_no = i.product_no
+        	inner join brand b on p.product_brand = b.brand_num
 		where
 			product_category = #{category} and image_type = 'N'
 		order by
@@ -165,5 +166,38 @@
 	
 	<select id="findByNo" parameterType="int" resultType="com.forever.young.entity.Product">
 		select * from product_table where product_no=#{no}
+	</select>
+	<!-- best 상품 -->
+	<select id="getBest" resultType="Product">
+		select
+			rn, 
+	        p.*,
+	        I.image_save_name,
+	        I.image_type,
+	        I.image_name,
+	        b.brand_name
+		from(
+		    select
+		        rownum rn,
+		        순위,
+		        order_product
+		    from(
+		        select
+		            order_product,
+		            sum(order_amount)total,
+		            dense_rank() over(order by sum(order_amount) desc) 순위
+		        from
+		            order_table
+		        group by
+		            order_product
+		        )
+		    where
+		        순위 between 1 and 3
+		    )tmp
+			    inner join product_table p on tmp.order_product = p.product_no
+			    inner join product_img I on p.product_no = I.product_no
+			    inner join brand B on p.product_brand = B.brand_num
+			where
+			    I.image_type='N' and P.product_category = #{category}
 	</select>
 </mapper>

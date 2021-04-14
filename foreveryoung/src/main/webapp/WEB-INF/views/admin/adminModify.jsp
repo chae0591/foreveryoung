@@ -11,27 +11,23 @@
 
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
-
 <script>
-	$(document).ready(function(){
-		var formObj = $("#noticeModify")
-		
-		$("#notice_complete").click(function(){
-			formObj.attr("action", "/admin/noticeModify")
-			formObj.attr("method" , "post")
-			formObj.submit();
-			
-			
-			
-		})
-		
-		$("#noticeList").click(function(){
-			self.location = "/admin/noticeList"
-		})
-		
+$(document).ready(function(){
+	var formObj = $("#adminModify")
+	
+	$("#admin_complete").click(function(){
+		formObj.attr("action", "/admin/adminModify")
+		formObj.attr("method", "post")
+		formObj.submit();
 	})
+	
+	$("admin_list").click(function(){
+		self.location = "/admin/adminList"
+	})
+	
+})
+</script>
 
-</script> 
 
 </head>
 <body>
@@ -42,12 +38,12 @@
 		<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<ul class="nav menu">
 			<li><a href="/admin/dashBoard"><em class="fa fa-dashboard">&nbsp;</em> 대시보드</a></li>
-			<li><a href="/admin/adminList"><em class="fa fa-calendar">&nbsp;</em> 관리자관리</a></li>
+			<li  class="active"><a href="/admin/adminList"><em class="fa fa-calendar">&nbsp;</em> 관리자관리</a></li>
 			<li><a href="/admin/brandList"><em class="fa fa-calendar">&nbsp;</em> 판매자관리</a></li>
 			<li><a href="/admin/customerList"><em class="fa fa-calendar">&nbsp;</em> 고객관리</a></li>
 			<li><a href="/admin/productList"><em class="fa fa-toggle-off">&nbsp;</em> 상품관리</a></li>
 			<li><a href="/admin/eventList"><em class="fa fa-toggle-off">&nbsp;</em> 이벤트관리</a></li>
-			<li class="active"><a href="/admin/noticeList"><em class="fa fa-clone">&nbsp;</em> 공지사항 관리</a></li>
+			<li><a href="/admin/noticeList"><em class="fa fa-clone">&nbsp;</em> 공지사항 관리</a></li>
 			<li><a href="/admin/inquiryList"><em class="fa fa-clone">&nbsp;</em> 1:1문의 관리</a></li>
 			<li><a href="#"><em class="fa fa-clone">&nbsp;</em> 리뷰신고관리</a></li>
 			<li><a href="/admin/static"><em class="fa fa-bar-chart">&nbsp;</em> 통계</a></li>
@@ -58,44 +54,42 @@
 	
 		<div class="row">
 			<div class="col-lg-12">
-				<h2>공지사항 수정</h2>		
+				<h2>관리자정보 수정</h2>		
 			</div>
 		</div><!--/.row-->
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<form:form modelAttribute="noticeModify" action="noticeModify" >
-					<form:hidden path="notice_no"/>
-					
+				<form:form modelAttribute="adminModify" action="adminModify">
+				<form:hidden path="admin_no"/>
 					<table>
-						<tr>
-							<td>분류</td>
-							<td><form:select path="notice_type">
-								<form:option value="회원" label="회원"></form:option>
-								<form:option value="주문/결제" label="주문/결제"></form:option>
-								<form:option value="배송" label="배송"></form:option>
-								<form:option value="교환/환불/반품" label="교환/환불/반품"></form:option>
-								<form:option value="이벤트/쿠폰" label="이벤트/쿠폰"></form:option>
-								<form:option value="판매자" label="판매자"></form:option>
-								<form:option value="기타" label="기타"></form:option>
-							</form:select></td>
-						</tr>
-						<tr>
-							<td>제목</td>
-							<td><form:input path="notice_title"/></td>
-						</tr>
-						<tr>
-							<td>공지사항 내용</td>
-							<td><form:textarea cols="50" rows="5" path="notice_content"/></td>
-						</tr>
+							<tr>
+								<th align="center" width="100">관리자 번호</th>
+								<td>${adminDetail.admin_no}</td>
+							</tr>						
+							<tr>
+								<th align="center" width="100">ID</th>
+								<td>${adminDetail.admin_id}</td>
+							</tr>
+							<tr>
+								<th align="center" width="100">관리자 이름</th>
+								<td><form:input path="admin_name" /></td>
+							</tr>
+							<tr>
+								<th align="center" width="100">관리자 전화번호</th>
+								<td><form:input path="admin_phone" /></td>			
+							</tr>
+							<tr>
+								<th align="center" width="100">관리자 등록일</th>
+								<td>${adminDetail.admin_regDate}</td>			
+							</tr>
 					</table>
 				</form:form>
 				
 				<div>
-					<button type="submit" id="notice_complete">수정 완료</button>
-					<button type="submit" id="noticeList">공지사항 보기</button>
-				</div>
-			
+					<button type="submit" id="admin_complete">수정 완료</button>
+					<button type="submit" id="admin_list">관리자리스트 보기</button>
+				</div>				
 			</div>
 		</div><!--/.row-->
 		
