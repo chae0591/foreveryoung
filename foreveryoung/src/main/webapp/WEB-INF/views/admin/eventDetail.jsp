@@ -36,7 +36,7 @@
 <body>
 <jsp:include page="../admin/adminTemplate/header.jsp"></jsp:include>
 
-	<!-- 사이드바 -->
+		<!-- 사이드바 -->
 	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<ul class="nav menu">
 			<li><a href="/admin/dashBoard"><em class="fa fa-dashboard">&nbsp;</em> 대시보드</a></li>
