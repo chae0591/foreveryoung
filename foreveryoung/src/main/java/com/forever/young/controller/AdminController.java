@@ -182,7 +182,7 @@ public class AdminController {
 		
 		model.addAttribute("msg" , "이벤트 등록이 성공적으로 완료되었습니다.");
 		
-		return "admin/success";
+		return "redirect:/admin/eventList";
 	}
 	
 	//공지사항 등록GET
@@ -201,7 +201,7 @@ public class AdminController {
 		
 		model.addAttribute("msg", "공지사항 등록이 성공적으로 완료되었습니다.");
 		
-		return "admin/success";
+		return "redirect:/admin/noticeList";
 	}
 	
 	//통계 화면
@@ -287,12 +287,22 @@ public class AdminController {
 //		
 //	}
 	
+	//관리자 상세보기GET
+	@GetMapping("/adminDetail")
+	public void getAdminDetail(int admin_no, Model model)throws Exception{
+		log.info("getAdminDetail()");
+		
+		model.addAttribute("adminDetail", service.adminDetail(admin_no));
+		
+	}
+	
 	//관리자 정보 수정Get
 	@GetMapping("/adminModify")
-	public void getAdminModify(Model model)throws Exception{
+	public void getAdminModify(int admin_no, Model model , Model model1)throws Exception{
 		log.info("getAdminNotify");
 		
-		model.addAttribute("adminModify", "관리자 정보 수정");
+		model.addAttribute("adminModify", service.adminDetail(admin_no));
+		model.addAttribute("adminDetail", service.adminDetail(admin_no));
 		
 	}
 	
@@ -335,7 +345,12 @@ public class AdminController {
 	
 	
 	
-	
+	@GetMapping("/eventDetail")
+	public String geteventdetail() {
+		log.info("geteventDetail()");
+		
+		return "admin/eventDetail";
+	}
 	
 	
 	

@@ -46,6 +46,8 @@ public interface AdminService {
  	public void replyRegister(InquiryVO inquiryVO) throws Exception;
  	//1:1문의 답변상태-답변완료(테이블 수정으로 삭제 예정)
 // 	public void inquiryStatusComplete(InquiryVO inquiryVO) throws Exception;
+ 	//관리자 상세보기
+ 	public Admin adminDetail(Integer admin_no) throws Exception;
  	//관리자 수정
  	public void adminModify(Admin admin) throws Exception;
  	//관리자 삭제
