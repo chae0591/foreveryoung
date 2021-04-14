@@ -272,11 +272,11 @@
 	    <h3 class="w3-padding-64"><b>포에버영<br>판메자 페이지</b></h3>
 	  </div>
 	  <div class="w3-bar-block">
-	    <a href="" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">판매자 메인</a> 
-	    <a href="#showcase" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">구매자 관리</a> 
-	    <a href="#services" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">판매 상품관리</a> 
-	    <a href="#designers" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">주문 관리</a> 
-	    <a href="#packages" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">통계</a> 
+	    <a href="mypage_brand_main" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">판매자 메인</a> 
+	    <a href="mypage_brand_buyer" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">구매자 관리</a> 
+	    <a href="mypage_brand_product" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">판매 상품관리</a> 
+	    <a href="mypage_brand_order" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">주문 관리</a> 
+	    <a href="mypage_brand_chart" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">통계</a> 
 	  </div>
 	</nav>
 </div>
@@ -292,7 +292,7 @@
 		<legend>판매자 회원 정보</legend>
 		<label>판매자 이름, 번호를 변경하실 수 있습니다. </label>
 		<div>
-			<input type="text" name="brand_num" class="input" value="${brand_info.brand_num}">
+			<input type="hidden" name="brand_num" class="input" value="${brand_info.brand_num}">
 		</div>
 		
 		<div>
