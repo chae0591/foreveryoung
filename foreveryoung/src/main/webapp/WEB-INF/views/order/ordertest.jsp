@@ -132,7 +132,7 @@ $(document).ready(function(){
 				<input type="text" id="extraAddress" placeholder="참고항목">
 			</div>
 			<div class="row">
-				연락처 : <input class="input" type="text">
+				연락처 : <input class="input" type="text" name="address_phone" value="${addressInfo.address_phone}">
 			</div>
 		</div>
 		

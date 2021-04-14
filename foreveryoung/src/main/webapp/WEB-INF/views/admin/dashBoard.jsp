@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,8 +43,7 @@
 			<li><a href="/admin/noticeList"><em class="fa fa-clone">&nbsp;</em> 공지사항 관리</a></li>
 			<li><a href="/admin/inquiryList"><em class="fa fa-clone">&nbsp;</em> 1:1문의 관리</a></li>
 			<li><a href="#"><em class="fa fa-clone">&nbsp;</em> 리뷰신고관리</a></li>
-			<li><a href="/admin/staticCustomer"><em class="fa fa-bar-chart">&nbsp;</em> 통계(고객분석)</a></li>
-			<li><a href="/admin/staticSales"><em class="fa fa-bar-chart">&nbsp;</em> 통계(매출분석)</a></li>
+			<li><a href="/admin/static"><em class="fa fa-bar-chart">&nbsp;</em> 통계</a></li>
 		</ul>
 	</div><!--/.sidebar-->	
 
@@ -64,15 +67,19 @@
 					<tr>
 						<td align="center">
 							<a href="/admin/customerList">
-								아직임
-								<c:out value="${customerCount}"></c:out><!-- 안나옴... -->
+								<c:out value="${fn:length(customerList)}"/>
 							</a>
 						</td>
 						<td align="center">
-							<a href="/admin/brandList">아직임</a>
+							<a href="/admin/brandList">
+								<c:out value="${fn:length(brandList)}"></c:out>
+							</a>
 						</td>
 						<td align="center">
-							<a href="/admin/productList">아직임</a>
+							<a href="/admin/productList">
+								<c:out value="${fn:length(productList)}"></c:out>
+							</a>
+							
 						</td>
 					</tr>
 					

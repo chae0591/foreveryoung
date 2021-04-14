@@ -2,17 +2,18 @@ package com.forever.young.entity;
 
 import java.sql.Timestamp;
 
-public class Order {
+public class OrderMypgVO {
 	private int order_no;
 	private int order_customer;
-	private int order_address;
 	private int order_brand;
 	private int order_product;
 	private int order_amount;
 	private String order_status;
 	private int order_totalPrice;
 	private Timestamp order_time;
-	
+	private String product_name;
+	private int product_price;
+	private String brand_name;
 	public int getOrder_no() {
 		return order_no;
 	}
@@ -24,12 +25,6 @@ public class Order {
 	}
 	public void setOrder_customer(int order_customer) {
 		this.order_customer = order_customer;
-	}
-	public int getOrder_address() {
-		return order_address;
-	}
-	public void setOrder_address(int order_address) {
-		this.order_address = order_address;
 	}
 	public int getOrder_brand() {
 		return order_brand;
@@ -67,11 +62,32 @@ public class Order {
 	public void setOrder_time(Timestamp order_time) {
 		this.order_time = order_time;
 	}
+	public String getProduct_name() {
+		return product_name;
+	}
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
+	public int getProduct_price() {
+		return product_price;
+	}
+	public void setProduct_price(int product_price) {
+		this.product_price = product_price;
+	}
+	public String getBrand_name() {
+		return brand_name;
+	}
+	public void setBrand_name(String brand_name) {
+		this.brand_name = brand_name;
+	}
+	
 	@Override
 	public String toString() {
-		return "Order [order_no=" + order_no + ", order_customer=" + order_customer + ", order_address=" + order_address
-				+ ", order_brand=" + order_brand + ", order_product=" + order_product + ", order_amount=" + order_amount
+		return "OrderMypgVO [order_no=" + order_no + ", order_customer=" + order_customer + ", order_brand="
+				+ order_brand + ", order_product=" + order_product + ", order_amount=" + order_amount
 				+ ", order_status=" + order_status + ", order_totalPrice=" + order_totalPrice + ", order_time="
-				+ order_time + "]";
+				+ order_time + ", product_name=" + product_name + ", product_price=" + product_price + ", brand_name="
+				+ brand_name + "]";
 	}
+	
 }
