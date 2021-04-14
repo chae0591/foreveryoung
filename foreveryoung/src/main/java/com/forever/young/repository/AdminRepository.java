@@ -37,12 +37,6 @@ public interface AdminRepository {
 	public void eventRegister(Event event) throws Exception;
 	//공지사항 등록
 	public void noticeRegister(Notice notice) throws Exception;
-	
-//	public int customerCount() throws Exception;
-	
-//	public int brandCount() throws Exception;
-
-//	public int productCount() throws Exception;
 	//공지사항 상세보기
 	public Notice noticeDetail(Integer notice_no) throws Exception;
 	//1:1문의 상세보기
@@ -53,20 +47,22 @@ public interface AdminRepository {
 	public void noticeDelete(Integer notice_no) throws Exception;
 	//1:1문의 답변등록
 	public void replyRegister(InquiryVO inquiryVO) throws Exception; 
-	
-//	public void inquiryStatusComplete(InquiryVO inquiryVO) throws Exception;
 	//관리자 상세보기
 	public Admin adminDetail(Integer admin_no) throws Exception;
 	//관리자 수정
 	public void adminModify(Admin admin) throws Exception;
  	//관리자 삭제
 	public void adminDelete(Integer admin_no) throws Exception;
+ 	//이벤트 상세보기
+	public Event eventDetail(Integer event_no) throws Exception;
+	//이벤트 수정
+	public void eventModify(Event event) throws Exception;
+ 	//이벤트 삭제
+	public void eventDelete(Integer event_no) throws Exception;
 	
 	
  	//상품 통합검색
  	//상품 이벤트 적용
- 	//이벤트 수정
- 	//이벤트 삭제
  	//1:1문의 답변 수정
  	//1:1문의 답변 삭제
  	//리뷰신고 목록
@@ -79,9 +75,7 @@ public interface AdminRepository {
 
 	
 	
-	public void replyRegister(InquiryVO inquiryVO) throws Exception; 
 	
-	public void inquiryStatusComplete(InquiryVO inquiryVO) throws Exception;
 	
 	
 }

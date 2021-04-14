@@ -87,21 +87,6 @@
 		 #{notice_type} , #{notice_title}, #{notice_content},  null)
 	</insert>
 	
-	<!-- 총 고객수 -->
-	<select id="customerCount" resultType="int">
-		select count(*) from customer
-	</select>
-	
-	<!-- 총 브랜드수 -->
-	<select id="brandCount" resultType="int">
-		select count(*) from brand
-	</select>
-	
-	<!-- 총 상품수 -->
-	<select id="productCount" resultType="int">
-		select count(*) from product_table
-	</select>	
-	
 	<!-- 공지사항 상세보기 -->	
 	<select id="noticeDetail" resultType="Notice">
 		select * from notice where notice_no = #{notice_no}
@@ -135,11 +120,6 @@
 	 insert into reply 
 	 	values(reply_seq.nextval, #{reply_content},sysdate, #{inquiry_no}, null)
 	</insert>
-	
-	<!-- 1:1문의 상태 답변완료로 변경 -->
-	<update id="inquiryStatusComplete">
-		update inquiry set inquiry_status = '답변완료' where inquiry_no=#{inquiry_no}
-	</update>
   
 	<!-- 1:1문의 상태 답변대기로 수정 -->
 	 
@@ -163,6 +143,27 @@
 	<!-- 관리자 삭제 -->
 	<delete id="adminDelete">
 	delete from admin where admin_no =#{admin_no}
+	</delete>
+	
+	<!-- 이벤트 상세보기 -->
+	<select id="eventDetail" resultType="event">
+		select * from event where event_no = #{event_no}
+	</select>
+	
+	<!-- 이벤트 수정 -->
+	<update id="eventModify">
+		update event set
+    		event_name=#{event_name},
+    		event_start=#{event_start},
+    		event_end= #{event_end},
+   		 	event_discount= #{event_discount},
+   		 	event_target=#{event_target}
+		where event_no = #{event_no}
+	</update>
+	
+	<!-- 이벤트 삭제 -->
+	<delete id="eventDelete">
+		delete from event where event_no = #{event_no}
 	</delete>
 
 </mapper>

@@ -14,8 +14,8 @@
 		var formObj = $('#eventDetail')
 		
 		$("#event_modify").click(function(){
-			var event_no = $("#admin_no");
-			var event_noVal = admin_no.val();
+			var event_no = $("#event_no");
+			var event_noVal = event_no.val();
 			self.location = "/admin/eventModify?event_no=" +event_noVal
 		})
 		
@@ -53,7 +53,57 @@
 	</div><!--/.sidebar-->	
 
 
-
-
+	
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<h2>이벤트 상세보기</h2>
+			</div>
+		</div><!--/.row-->
+	
+		<div class="row">
+			<div class="col-lg-12">
+				<form:form modelAttribute="eventDetail">
+						<table border="1">
+							<tr>
+								<th align="center" width="100">이벤트 번호</th>
+								<td><form:input path="event_no" readonly="true"/></td>
+							</tr>						
+							<tr>
+								<th align="center" width="100">이벤트명</th>
+								<td><form:input path="event_name" readonly="true"/></td>
+							</tr>
+							<tr>
+								<th align="center" width="100">기간</th>
+								<td><form:input path="event_start" readonly="true"/>
+								~<form:input path="event_end" readonly="true"/></td>
+							</tr>
+							<tr>
+								<th align="center" width="100">할인율</th>
+								<td><form:input path="event_discount" readonly="true"/></td>			
+							</tr>
+							<tr>
+								<th align="center" width="100">이벤트 적용대상</th>
+								<td><form:input path="event_target" readonly="true"/></td>			
+							</tr>
+							<tr>
+								<th align="center" width="100">진행상황</th>
+								<td>진행상황</td>			
+							</tr>							
+						</table>			
+				</form:form>
+			</div>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<button id="event_modify">수정</button>
+				<button id="event_delete">삭제</button>
+				<button id="event_list">목록으로</button>
+			</div>
+		</div><!--/.row-->
+	</div>	<!--/.main-->
+	
 </body>
 </html>

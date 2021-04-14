@@ -85,8 +85,6 @@
 							</tr>
 							
 						</table>			
-					<form:hidden path="inquiry_status"/>
-					<form:hidden path="user_num"/>
 				</form:form>
 			</div>
 		</div><!--/.row-->

@@ -123,6 +123,21 @@ public class AdminServiceImpl implements AdminService{
 		repository.adminDelete(admin_no);
 	}
 
+	@Override
+	public Event eventDetail(Integer event_no) throws Exception {
+		return repository.eventDetail(event_no);
+	}
+
+	@Override
+	public void eventModify(Event event) throws Exception {
+		repository.eventModify(event);
+	}
+
+	@Override
+	public void eventDelete(Integer event_no) throws Exception {
+		repository.eventDelete(event_no);
+	}
+
 
 
 
