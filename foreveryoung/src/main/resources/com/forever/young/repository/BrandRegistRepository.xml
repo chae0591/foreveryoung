@@ -18,5 +18,15 @@
 	<select id="findId" resultType="Brand">
 		select * from Brand where brand_id = #{brand_id}
 	</select>
+	
+	<select id="findNum" resultType="Brand">
+		select * from Brand where brand_num = #{brand_num}
+	</select>
+	
+	<update id="editBrandInfo">
+		update brand set 
+		brand_name = #{brand_name}, brand_phone=#{brand_phone}
+		where brand_num = #{brand_num} 
+	</update>
 
 </mapper>
