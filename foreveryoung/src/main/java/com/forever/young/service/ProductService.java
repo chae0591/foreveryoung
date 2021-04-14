@@ -23,4 +23,7 @@ public interface ProductService {
 	public List<Product> brandList(int brand);
 	public List<Product> brandListSearch(Map<String, Object> searchData);
 	public int getCountByBrand(int brand);
+	
+	// 베스트 상품
+	public List<Product> getBest(String category);
 }
