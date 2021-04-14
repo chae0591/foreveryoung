@@ -31,8 +31,8 @@
 	
 	<!-- 1:1문의  등록 -->
 	<insert id="inquiryRegister">
-		insert into inquiry values(inquiry_seq.nextval,
-		 #{inquiry_title}, #{inquiry_content}, sysdate, #{user_num})
+		insert into inquiry (inquiry_no, inquiry_title, inquiry_content, inquiry_regDate, user_num)
+		values(inquiry_seq.nextval, #{inquiry_title}, #{inquiry_content}, sysdate, #{user_num})
 
 	</insert>
 	
@@ -50,6 +50,20 @@
 		delete from inquiry where inquiry_no = #{inquiry_no}
 	</delete>
 	 
+	 <insert id="addAttach">
+		insert into inquiry (user_num) 
+		values (#{userNum})
+	</insert>
+	
+    <select id="getUser_num" resultType="Integer">
+		select customer_seq.currval from dual
+	</select>
+	
+	<!-- <select id="getAttach" resultType="string">
+		select inquiry_no from inquiry
+		where user_num = #{user_num}
+		order by inquiry_regdate
+	</select> -->
 
 </mapper>
  
