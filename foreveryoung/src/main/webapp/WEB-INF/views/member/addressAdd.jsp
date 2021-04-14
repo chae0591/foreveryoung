@@ -66,15 +66,15 @@ $(document).ready(function () {
 		<div class="outbox" style="width: 500px">
 			<input type="text" name="address_customer" value="${check}">
 			<div class="row">
-				배송지명 : <input class="input" type="text" name="address_name">
+				배송지명 : <input class="input" type="text" name="address_name" required>
 			</div>
 			<div class="row">
-				<input type="text" id="postcode" name="address_zonecode" placeholder="우편번호">
+				<input type="text" id="postcode" name="address_zonecode" placeholder="우편번호" required>
 				<input type="button" id="postcode-btn" value="우편번호 찾기"><br>
 				<input type="text" id="roadAddress" name="address_roadname" placeholder="도로명주소">
 				<input type="text" id="jibunAddress" name="address_jibun" placeholder="지번주소">
 				<span id="guide" style="color:#999;display:none"></span>
-				<input type="text" id="detailAddress" name="address_detail" placeholder="상세주소">
+				<input type="text" id="detailAddress" name="address_detail" placeholder="상세주소" required>
 				<input type="text" id="extraAddress" placeholder="참고항목">
 			</div>
 			<div class="row">
