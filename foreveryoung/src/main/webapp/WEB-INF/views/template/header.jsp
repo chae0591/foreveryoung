@@ -218,6 +218,8 @@ $(function(){
 			 location.href = '/member/mypage';
 		}else if(id != '' && auth == "seller"){ 	 
 			 location.href = '/member/mypage_brand/mypage_brand_main';
+		}else if(id != '' && auth == "admin"){ 	 
+			 location.href = '/admin/dashBoard';
 		}else{
 			 alert("로그인 후 사용 가능합니다.");
         	 location.href = '/member/login';
@@ -231,6 +233,9 @@ $(function(){
 		if(id != '' && auth == "customer"){
 			 location.href = '/member/cartList';
 		}else if(id != '' && auth == "seller"){ 	 
+			 alert("일반회원만 사용 가능합니다.");
+			 return false;
+		}else if(id != '' && auth == "admin"){ 	 
 			 alert("일반회원만 사용 가능합니다.");
 			 return false;
 		}else{

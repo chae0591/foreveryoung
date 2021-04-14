@@ -63,34 +63,42 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<table class="table table-hover">
-					<tr>
-						<th align="center" width="100">공지글 번호</th>
-						<th align="center" width="100">분류</th>
-						<th align="center" width="100">제목</th>
-						<th align="center" width="100"></th>
-					</tr>
+				
+					<thead>
+						<tr>
+							<th align="center" width="100">공지글 번호</th>
+							<th align="center" width="100">분류</th>
+							<th align="center" width="100">제목</th>
+							<th align="center" width="100"></th>
+						</tr>
+					</thead>
 					
-					<c:choose>
-						<c:when test="${empty noticeList}">
-							<tr>
-								<td colspan="4">
-									공지사항이 없습니다.
-								</td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-							<c:forEach items="${noticeList}" var="noticeList">
+					<tbody>
+						<c:choose>
+							<c:when test="${empty noticeList}">
 								<tr>
-									<td align="center">${noticeList.notice_no}</td>
-									<td align="center">${noticeList.notice_type}</td>
-									<td align="center">${noticeList.notice_title}</td>						
-									<td align="center">
-										<a href="/admin/noticeDetail?notice_no=${noticeList.notice_no}">상세보기</a>
+									<td colspan="4">
+										공지사항이 없습니다.
 									</td>
 								</tr>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${noticeList}" var="noticeList">
+									<tr>
+										<td align="center">${noticeList.notice_no}</td>
+										<td align="center">${noticeList.notice_type}</td>
+										<td align="center">${noticeList.notice_title}</td>						
+										<td align="center">
+											<a href="/admin/noticeDetail?notice_no=${noticeList.notice_no}">상세보기</a>
+										</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
+						
+					
+						
 				</table>	
 			</div>
 		</div><!--/.row-->
