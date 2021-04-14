@@ -42,6 +42,14 @@ public class CustomerController {
 	
 	private final Logger log = LoggerFactory.getLogger(CustomerController.class);
 	
+	@GetMapping("/joinAgreement")
+	public String getJoinAgreement() {
+		log.info("getJoinAgreement()");
+		
+		return "member/joinAgreement";
+	}
+	
+	
 	@GetMapping("/join")
 	public String getJoin() {
 		log.info("getJoin()");
@@ -179,6 +187,43 @@ public class CustomerController {
 		session.removeAttribute("auth");
 		
 		return "main";
+	}
+	
+	@GetMapping("/contractList")
+	public String getContractList(HttpSession session, Model model) throws Exception{
+		log.info("getContractList()");
+		
+		List<Order> order_list = service_or.searchUserNum((int)session.getAttribute("check"));
+		
+		List<Integer> proList = new ArrayList<>();
+		for(Order order : order_list) {
+			proList.add(order.getOrder_product());
+		}
+		
+		model.addAttribute("order_info", order_list);
+		model.addAttribute("product_info", service_or.searchListVO((int)session.getAttribute("check")));
+		
+		return "member/contractList";
+	}
+	
+	@GetMapping("/test")
+	public String getTestPage(HttpSession session, Model model) throws Exception {
+		log.info("getTestpage()");
+		
+		
+		model.addAttribute("user_info", service.findNum((int)session.getAttribute("check")));
+		
+		List<Order> order_list = service_or.searchUserNum((int)session.getAttribute("check"));
+		
+		List<Integer> proList = new ArrayList<>();
+		for(Order order : order_list) {
+			proList.add(order.getOrder_product());
+		}
+		
+		model.addAttribute("order_info", order_list);
+		model.addAttribute("product_info", service_or.searchListVO((int)session.getAttribute("check")));
+		
+		return "member/testpage";
 	}
 
 	//사용자/판매자 회원가입 선택 페이지
