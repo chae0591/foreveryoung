@@ -199,6 +199,16 @@
 	.addBtn:hover {
 	  background-color: #bbb;
 	
+	}
+	
+	  .orderInfo {
+	     position: absolute; 
+	     float:left; 
+	     right:250px;
+	     padding-top: 400px; 
+	     font-weight:bold; 
+	     /* padding-right: 100px; */
+	 }
 	
 </style>
 
@@ -272,11 +282,11 @@
 	    <h3 class="w3-padding-64"><b>포에버영<br>판메자 페이지</b></h3>
 	  </div>
 	  <div class="w3-bar-block">
-	    <a href="" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">판매자 메인</a> 
-	    <a href="#showcase" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">구매자 관리</a> 
-	    <a href="#services" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">판매 상품관리</a> 
-	    <a href="#designers" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">주문 관리</a> 
-	    <a href="#packages" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">통계</a> 
+	    <a href="mypage_brand_main" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">판매자 메인</a> 
+	    <a href="mypage_brand_buyer" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">구매자 관리</a> 
+	    <a href="mypage_brand_product" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">판매 상품관리</a> 
+	    <a href="mypage_brand_order" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">주문 관리</a> 
+	    <a href="mypage_brand_chart" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">통계</a> 
 	  </div>
 	</nav>
 </div>
@@ -289,7 +299,7 @@
 		<a href="mypage_brand_main_edit">회원정보 수정</a>
 		<table>
 			<tr>
-				<td class="bold">판매자 번호: <c:out value="${brand_info.brand_num}"></c:out> </td>
+				<td class="bold" style="display:none">판매자 번호: <c:out value="${brand_info.brand_num}"></c:out> </td>
 			</tr>
 			<tr>
 				<td class="bold">판매자 아이디: <c:out value="${brand_info.brand_id}"></c:out></td>
@@ -393,6 +403,14 @@
           <ul id="myUL">
           </ul>
 	</div>
+	
+	
+	<!-- 주문 관련 정보  -->
+	
+	<div class="center_right orderInfo">
+		<h2>주문 관련 정보</h2>
+	</div>
+	
 	
 </body>
 </html>
