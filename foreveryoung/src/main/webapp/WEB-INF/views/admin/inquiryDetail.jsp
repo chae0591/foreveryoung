@@ -62,9 +62,11 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<form:form modelAttribute="inquiryDetail">
-					<form:hidden path="inquiry_no"/>
-		
 						<table border="1">
+							<tr>
+								<th align="center" width="100">1:1문의 번호</th>
+								<td><form:input path="inquiry_no" readonly="true"/></td>
+							</tr>
 							<tr>
 								<th align="center" width="100">제목</th>
 								<td><form:input path="inquiry_title" readonly="true"/></td>

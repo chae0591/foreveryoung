@@ -77,38 +77,44 @@
 			<div class="col-lg-12">
 			
 				<table class="table table-hover">
-					<tr>
-						<th align="center" width="100">관리자번호</th>
-						<th align="center" width="100">관리자ID</th>
-						<th align="center" width="100">관리자 이름</th>
-						<th align="center" width="160">전화번호</th>
-						<th align="center" width="160">등록일</th>
-						<th align="center" width="160"> </th>
-					</tr>
-					
+				
+					<thead>
+						<tr>
+							<th align="center" width="100">관리자번호</th>
+							<th align="center" width="100">관리자ID</th>
+							<th align="center" width="100">관리자 이름</th>
+							<th align="center" width="160">전화번호</th>
+							<th align="center" width="160">등록일</th>
+							<th align="center" width="160"> </th>
+						</tr>
+										
+					</thead>
+						<tbody>	
 							<c:choose>
-						<c:when test="${empty adminList}">
-							<tr>
-								<td colspan="6">
-									관리자 계정이 없습니다.
-								</td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-							<c:forEach items="${adminList}" var="adminList">
-								<tr>
-									<td align="center">${adminList.admin_no}</td>
-									<td align="center">${adminList.admin_id}</td>
-									<td align="center">${adminList.admin_name}</td>
-									<td align="center">${adminList.admin_phone}</td>
-									<td align="center">${adminList.admin_regDate}</td>
-									<td align="center">
-										<a id="admin_Detail" href="/admin/adminDetail?admin_no=${adminList.admin_no}">상세보기</a>
-									</td>
-								</tr>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
+								<c:when test="${empty adminList}">
+									<tr>
+										<td colspan="6">
+											관리자 계정이 없습니다.
+										</td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${adminList}" var="adminList">
+										<tr>
+											<td align="center">${adminList.admin_no}</td>
+											<td align="center">${adminList.admin_id}</td>
+											<td align="center">${adminList.admin_name}</td>
+											<td align="center">${adminList.admin_phone}</td>
+											<td align="center">${adminList.admin_regDate}</td>
+											<td align="center">
+												<a id="admin_Detail" href="/admin/adminDetail?admin_no=${adminList.admin_no}">상세보기</a>
+											</td>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>						
+						</tbody>
+					
 				</table>
 			</div>
 		</div><!--/.row-->

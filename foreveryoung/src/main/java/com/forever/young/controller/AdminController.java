@@ -182,7 +182,7 @@ public class AdminController {
 		
 		model.addAttribute("msg" , "이벤트 등록이 성공적으로 완료되었습니다.");
 		
-		return "admin/success";
+		return "redirect:/admin/eventList";
 	}
 	
 	//공지사항 등록GET
@@ -201,7 +201,7 @@ public class AdminController {
 		
 		model.addAttribute("msg", "공지사항 등록이 성공적으로 완료되었습니다.");
 		
-		return "admin/success";
+		return "redirect:/admin/noticeList";
 	}
 	
 	//통계 화면
