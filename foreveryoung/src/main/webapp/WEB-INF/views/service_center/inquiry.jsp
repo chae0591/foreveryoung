@@ -256,11 +256,11 @@ $(function(){
     <c:otherwise>
 		<div class="check-inquiry">
 		 		<ul>
-		 			<c:forEach var="i" begin = "1" end="10" step="1">
+		 			<c:forEach items="${inquiryList}" var="inquiryList">
 		 			<li>
-		 				<input type="hidden" name="inquiry_no" value="${lists.inquiry_no}">
-		 				<div class="row1"><strong><c:out value="${lists.inquiry_status}" /></strong></div>
-		 				<div class="row2"><a href="/service_center/inquiry_detail"><c:out value="${lists.inquiry_title}" /></a></div>
+		 				<input type="hidden" name="inquiry_no" value="${inquiryList.inquiry_no}">
+		 				<div class="row1"><strong>답변대기</strong></div>
+		 				<div class="row2"><a href="/service_center/inquiry_detail"><c:out value="${inquiryList.inquiry_title}" /></a></div>
 		 			</li>
 		 			</c:forEach>
 		 		</ul>

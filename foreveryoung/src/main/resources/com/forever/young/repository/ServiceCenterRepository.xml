@@ -32,15 +32,16 @@
 	<!-- 1:1문의  등록 -->
 	<insert id="inquiryRegister">
 		insert into inquiry values(inquiry_seq.nextval,
-		 #{inquiry_type} , #{inquiry_title}, #{inquiry_content},  null, null)
+		 #{inquiry_title}, #{inquiry_content}, sysdate, #{user_num})
+
 	</insert>
 	
 	<!-- 1:1문의 수정 -->
 	<select id="inquiryModify">
 		update inquiry set
-			 inquiry_type =#{inquiry_type} , 
 			 inquiry_title=#{inquiry_title} , 
-			 inquiry_content=#{inquiry_content}
+			 inquiry_content=#{inquiry_content},
+			 inquiry_regdate=sysdate,
 		 where inquiry_no =#{inquiry_no}
 	</select>
 	
