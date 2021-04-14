@@ -164,7 +164,7 @@ input[type="submit"], button {
 .nav-line {
 	width: 1020px;
 	height: 100%;
-	 margin: 0 auto;
+	margin: 0 auto;
     position: relative;
 }
 .nav-line ul {
@@ -178,14 +178,14 @@ input[type="submit"], button {
     display: inline-block;
     text-align:center;
     padding-top: 8px;
-    margin-left: 70px;
+    margin-left: 73px;
     vertical-align:middle;
 }
 .nav-line li:first-child {
-	margin-left: 30px;
+	margin-left: 10px;
 }
 .nav-line li:last-child {
-	margin-right: 30px;
+	margin-right: 10px;
 }
 .nav-line li a {
     font-size: 18px;
@@ -218,6 +218,8 @@ $(function(){
 			 location.href = '/member/mypage';
 		}else if(id != '' && auth == "seller"){ 	 
 			 location.href = '/member/mypage_brand/mypage_brand_main';
+		}else if(id != '' && auth == "admin"){ 	 
+			 location.href = '/admin/dashBoard';
 		}else{
 			 alert("로그인 후 사용 가능합니다.");
         	 location.href = '/member/login';
@@ -231,6 +233,9 @@ $(function(){
 		if(id != '' && auth == "customer"){
 			 location.href = '/member/cartList';
 		}else if(id != '' && auth == "seller"){ 	 
+			 alert("일반회원만 사용 가능합니다.");
+			 return false;
+		}else if(id != '' && auth == "admin"){ 	 
 			 alert("일반회원만 사용 가능합니다.");
 			 return false;
 		}else{
@@ -265,6 +270,12 @@ $(function(){
 				<li><a href="/member/logout">로그아웃</a></li>
 			</ul>
    		</c:when>
+   		<c:when test="${check ne null && auth eq 'admin'}">
+			<ul>
+				<li><a href="/admin/dashBoard"><c:out value="${check}"/> 님 반갑습니다</a></li>
+				<li><a href="/admin/logout">로그아웃</a></li>
+			</ul>
+   		</c:when>
    		<c:otherwise>
    			<ul>
 				<li><a href="/member/login">로그인</a></li>
@@ -287,7 +298,7 @@ $(function(){
 		   <input type="button" class="func-my" >
 		    <input type="button"  class="func-cart">
 	 </div>
-   
+  
 </div>
 	
 <div class="nav">

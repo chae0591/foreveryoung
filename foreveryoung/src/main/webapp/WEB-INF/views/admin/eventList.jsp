@@ -40,8 +40,8 @@
 <jsp:include page="../admin/adminTemplate/header.jsp"></jsp:include>
 
 
-		<!-- 사이드바 -->
-		<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+<!-- 사이드바 -->
+	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<ul class="nav menu">
 			<li><a href="/admin/dashBoard"><em class="fa fa-dashboard">&nbsp;</em> 대시보드</a></li>
 			<li><a href="/admin/adminList"><em class="fa fa-calendar">&nbsp;</em> 관리자관리</a></li>
@@ -73,44 +73,50 @@
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<table border="1">
-					<tr>
-						<th align="center" width="100">이벤트 번호</th>
-						<th align="center" width="100">이벤트명</th>
-						<th align="center" width="100">이벤트 기간</th>
-						<th align="center" width="100">이벤트 할인율</th>
-						<th align="center" width="160">이벤트 적용대상</th>
-						<th align="center" width="100">진행상황</th>
-						<th align="center" width="160"></th>
-					</tr>
+				<table class="table table-hover">
+				
+					<thead>
+						<tr>
+							<th align="center" width="100">이벤트 번호</th>
+							<th align="center" width="100">이벤트명</th>
+							<th align="center" width="100">이벤트 기간</th>
+							<th align="center" width="100">이벤트 할인율</th>
+							<th align="center" width="160">이벤트 적용대상</th>
+							<th align="center" width="100">진행상황</th>
+							<th align="center" width="160"></th>
+						</tr>
+					</thead>
 					
-							<c:choose>
-						<c:when test="${empty eventList}">
-							<tr>
-								<td colspan="7">
-									이벤트가 없습니다.
-								</td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-							<c:forEach items="${eventList}" var="eventList">
+					<tbody>
+						<c:choose>
+							<c:when test="${empty eventList}">
 								<tr>
-									<td align="center">${eventList.event_no}</td>
-									<td align="center">${eventList.event_name}</td>
-									<td align="center">${eventList.event_start}~
-														${eventList.event_end } 
-									</td>
-									<td align="center">${eventList.event_discount}</td>						
-									<td align="center">${eventList.event_target}</td>
-									<td align="center">진행상황</td>
-									<td align="center">
-										<input type="button"  class="event_modify"  value="수정">
-										<input type="button" id="event_delete" value="삭제">
+									<td colspan="7">
+										이벤트가 없습니다.
 									</td>
 								</tr>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${eventList}" var="eventList">
+									<tr>
+										<td align="center">${eventList.event_no}</td>
+										<td align="center">${eventList.event_name}</td>
+										<td align="center">${eventList.event_start}~
+															${eventList.event_end } 
+										</td>
+										<td align="center">${eventList.event_discount}%</td>						
+										<td align="center">${eventList.event_target}</td>
+										<td align="center">진행상황</td>
+										<td align="center">
+											<a id="event_detail" href="/admin/eventDetail?event_no=${eventList.event_no}">상세보기</a>
+										</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</tbody>				
+				
+						
 				</table>
 			
 			</div>

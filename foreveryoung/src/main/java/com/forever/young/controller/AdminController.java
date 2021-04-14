@@ -11,14 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.forever.young.entity.Admin;
 import com.forever.young.entity.Event;
 import com.forever.young.entity.InquiryVO;
 import com.forever.young.entity.Notice;
-import com.forever.young.repository.AdminRepository;
 import com.forever.young.service.AdminService;
 
 import lombok.extern.java.Log;
@@ -76,7 +74,7 @@ public class AdminController {
 			
 		}else {
 			log.info("login Failure");
-			return new RedirectView("login");
+			return new RedirectView("login?error=0");
 			
 		}
 	}
@@ -84,8 +82,9 @@ public class AdminController {
 	//관리자 로그아웃 Get
 	@GetMapping("/logout")
 	public String getLogout(HttpSession session) throws Exception {
+		log.info("logout()");
 		session.invalidate();
-		return "redirect:/";
+		return "redirect:/admin/login";
 	}
 	
 	//관리자 등록Get
@@ -183,7 +182,7 @@ public class AdminController {
 		
 		model.addAttribute("msg" , "이벤트 등록이 성공적으로 완료되었습니다.");
 		
-		return "admin/success";
+		return "redirect:/admin/eventList";
 	}
 	
 	//공지사항 등록GET
@@ -202,7 +201,7 @@ public class AdminController {
 		
 		model.addAttribute("msg", "공지사항 등록이 성공적으로 완료되었습니다.");
 		
-		return "admin/success";
+		return "redirect:/admin/noticeList";
 	}
 	
 	//통계 화면
@@ -288,13 +287,22 @@ public class AdminController {
 //		
 //	}
 	
+	//관리자 상세보기GET
+	@GetMapping("/adminDetail")
+	public void getAdminDetail(int admin_no, Model model)throws Exception{
+		log.info("getAdminDetail()");
+		
+		model.addAttribute("adminDetail", service.adminDetail(admin_no));
+		
+	}
+	
 	//관리자 정보 수정Get
 	@GetMapping("/adminModify")
-	public void getAdminModify(int admin_no, Model model)throws Exception{
-		
+	public void getAdminModify(int admin_no, Model model , Model model1)throws Exception{
 		log.info("getAdminNotify");
 		
-		
+		model.addAttribute("adminModify", service.adminDetail(admin_no));
+		model.addAttribute("adminDetail", service.adminDetail(admin_no));
 		
 	}
 	
@@ -312,17 +320,56 @@ public class AdminController {
 	
 	//관리자 삭제
 	@PostMapping("/adminDelete")
-	public RedirectView adminDelete(int admin_no, Model model) throws Exception{
+	public RedirectView adminDelete(int admin_no ,Model model) throws Exception{
 		log.info("adminDelete()");
 		
 		service.adminDelete(admin_no);
 		
-		model.addAttribute("adminDelete", "관리자 삭제완료");
+		model.addAttribute("adminDelete","관리자계정 삭제 완료");
 		
 		return new RedirectView("adminList");
+	}	
+	
+	//이벤트 상세보기GET
+	@GetMapping("/eventDetail")
+	public void geteventdetail(int event_no, Model model) throws Exception {
+		log.info("geteventDetail()");
+		
+		model.addAttribute("eventDetail",service.eventDetail(event_no));
 	}
 	
+	//이벤트 수정GET
+	@GetMapping("/eventModify")
+	public void geteventModify(int event_no, Model model, Model model1) throws Exception{
+		log.info("getEventModify()");
+		
+		model.addAttribute("eventModify" , service.eventDetail(event_no));
+		model1.addAttribute("eventDetail", service.eventDetail(event_no));
+	}
+	
+	//이벤트 수정POST
+	@PostMapping("/eventModify")
+	public RedirectView postEventModify(Event event, Model model) throws Exception{
+		log.info("postEventModify");
+		
+		service.eventModify(event);
+		
+		model.addAttribute("eventModify", "이벤트 정보 수정완료");
+		
+		return new RedirectView("eventList");
+	}
 
+	//이벤트 삭제
+	@PostMapping("/eventDelete")
+	public String eventDelete(int event_no, Model model) throws Exception{
+		log.info("eventDelete()");
+		
+		service.eventDelete(event_no);
+		
+		model.addAttribute("eventDelete", "관리자계정 삭제 완료");
+		
+		return "redirect:/admin/eventList";
+	}
 	
 	
 	

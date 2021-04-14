@@ -61,44 +61,53 @@
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<table border="1">
-					<tr>
-						<th align="center" width="100">상품 번호</th>
-						<th align="center" width="100">삼품명</th>
-						<th align="center" width="100">카테고리</th>
-						<th align="center" width="100">브랜드</th>
-						<th align="center" width="100">할인적용</th>
-						<th align="center" width="200">상품가격/할인가격</th>
-						<th align="center" width="160">등록일</th>
-						<th align="center" width="100">재고수</th>
-						<th align="center" width="100">판매수</th>
-					</tr>
+				<table  class="table table-hover">
+					<thead>
+						<tr>
+							<th align="center" width="100">상품 번호</th>
+							<th align="center" width="100">삼품명</th>
+							<th align="center" width="100">카테고리</th>
+							<th align="center" width="100">브랜드</th>
+							<th align="center" width="100">할인적용</th>
+							<th align="center" width="200">상품가격/할인가격</th>
+							<th align="center" width="160">등록일</th>
+							<th align="center" width="100">재고수</th>
+							<th align="center" width="100">판매수</th>
+						</tr>
+					</thead>
 					
-							<c:choose>
-						<c:when test="${empty productList}">
-							<tr>
-								<td colspan="9">
-									등록된 상품이 없습니다.
-								</td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-							<c:forEach items="${productList}" var="productList">
+					<tbody>
+						<c:choose>
+							<c:when test="${empty productList}">
 								<tr>
-									<td align="center">${productList.product_id}</td>
-									<td align="center">${productList.product_name}</td>
-									<td align="center">${productList.product_category}</td>
-									<td align="center">${productList.brand_name}</td>
-									<td align="center"><input type="checkbox"></td>
-									<td align="center">${productList.product_price}/
-									 					할인가격</td>
-									<td align="center">${productList.product_regDate}</td>
-									<td align="center">${productList.product_stock}</td>						
-									<td align="center">판매수</td>
+									<td colspan="9">
+										등록된 상품이 없습니다.
+									</td>
 								</tr>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${productList}" var="productList">
+									<tr>
+										<td align="center">${productList.product_id}</td>
+										<td align="center">${productList.product_name}</td>
+										<td align="center">${productList.product_category}</td>
+										<td align="center">${productList.brand_name}</td>
+										<td align="center"><input type="checkbox"></td>
+										<td align="center">${productList.product_price}/
+										 					할인가격</td>
+										<td align="center">${productList.product_regDate}</td>
+										<td align="center">${productList.product_stock}</td>						
+										<td align="center">판매수</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
+				
+				
+						
+					
+
 				</table>
 			</div>
 		</div><!--/.row-->

@@ -7,7 +7,6 @@ public class Inquiry {
 	private String inquiry_title;
 	private String inquiry_content;
 	private Date inquiry_regDate;
-	private String inquiry_status;
 	private int user_num;
 	private String user_id;
 	public int getInquiry_no() {
@@ -34,12 +33,6 @@ public class Inquiry {
 	public void setInquiry_regDate(Date inquiry_regDate) {
 		this.inquiry_regDate = inquiry_regDate;
 	}
-	public String getInquiry_status() {
-		return inquiry_status;
-	}
-	public void setInquiry_status(String inquiry_status) {
-		this.inquiry_status = inquiry_status;
-	}
 	public int getUser_num() {
 		return user_num;
 	}
@@ -55,7 +48,7 @@ public class Inquiry {
 	@Override
 	public String toString() {
 		return "Inquiry [inquiry_no=" + inquiry_no + ", inquiry_title=" + inquiry_title + ", inquiry_content="
-				+ inquiry_content + ", inquiry_regDate=" + inquiry_regDate + ", inquiry_status=" + inquiry_status
+				+ inquiry_content + ", inquiry_regDate=" + inquiry_regDate
 				+ ", user_num=" + user_num + ", user_id=" + user_id + "]";
 	}
 	
