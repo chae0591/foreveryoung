@@ -523,7 +523,7 @@
             $(".qna").show();
          });
    });
-//좋아요   
+//좋아요   1
 	$(document).ready(function(){
 		var user_num = $("input[name='user_num']").val();
 		if(user_num != "") {
