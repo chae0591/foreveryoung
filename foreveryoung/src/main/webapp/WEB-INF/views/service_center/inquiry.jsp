@@ -2,15 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%-- <c:choose>
-    <c:when test="${sessionScope.userid eq null}">
-		<jsp:forward page="/member/login"/>
-    </c:when>
-    <c:otherwise>
-		<jsp:forward page="/service_center/inquiry"/>
-    </c:otherwise>
-</c:choose> --%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -194,9 +185,39 @@
 </style>
 
 <script>
+$(function(){
 
-
+	//공지사항으로 이동
+	$(".notice-btn").click(function(){
+   			location.href = '/service_center/notice';
+	});
+	
+	//1:1문의로 이동
+	$(".inquiry-btn").click(function(){
+		var id = "${check}";
+		
+        if(id == ''){
+        	 alert("로그인 후 문의 가능합니다.");
+        	 location.href = '/member/login';
+   		 }else{
+   			 location.href = '/service_center/inquiry';
+    	}
+	});
+	
+	//1:1버튼 클릭시
+	$(".inquiryGobtn").click(function(){
+		var id = "${check}";
+		
+        if(id == ''){
+        	 alert("로그인 후 문의 가능합니다.");
+        	 location.href = '/member/login';
+   		 }else{
+   			 location.href = '/service_center/inquiryRegister';
+    	}
+	});
+});
 </script>
+
 </head>
 <body>
 <jsp:include page="../template/header.jsp"></jsp:include>
@@ -209,8 +230,8 @@
 	</div>
 		
 	<div class="service-btns">
-		<a href="/service_center/notice"><button class="notice-btn">공지사항</button></a>
-		<a href="/service_center/inquiry"><button class="inquiry-btn">1:1 문의</button></a>
+		<button class="notice-btn">공지사항</button>
+		<button class="inquiry-btn">1:1 문의</button>
 	</div>
 	
 	<div class="select-on">
@@ -224,26 +245,32 @@
 	</div>
 	
 	<div class="inquiry-list">
-		<!-- <div class="no-inquiry">
+	<c:choose>
+    <c:when test="${sessionScope.userid eq null}">
+		<div class="no-inquiry">
 				<ul>
 					<li class="img-cover">등록하신 1:1문의가 없습니다</li>
 				</ul>
-		</div> -->
-				
+		</div>
+    </c:when>
+    <c:otherwise>
 		<div class="check-inquiry">
 		 		<ul>
-		 			<c:forEach var="i" begin = "1" end="10" step="1">
+		 			<c:forEach items="${inquiryList}" var="inquiryList">
 		 			<li>
+		 				<input type="hidden" name="inquiry_no" value="${inquiryList.inquiry_no}">
 		 				<div class="row1"><strong>답변대기</strong></div>
-		 				<div class="row2"><a href="/service_center/inquiry_detail">회원</a></div>
+		 				<div class="row2"><a href="/service_center/inquiry_detail"><c:out value="${inquiryList.inquiry_title}" /></a></div>
 		 			</li>
 		 			</c:forEach>
 		 		</ul>
 		 </div>
+    </c:otherwise>
+	</c:choose>		
 	</div>
 	
 	<div class="last-box">
-		<a href="#"><button class="inquiryGobtn">1:1 문의하기</button></a>
+		<button class="inquiryGobtn">1:1 문의하기</button>
 	</div>
 	
 <jsp:include page="../template/footer.jsp"></jsp:include>

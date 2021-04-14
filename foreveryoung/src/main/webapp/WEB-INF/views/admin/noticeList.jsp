@@ -41,8 +41,7 @@
 			<li class="active"><a href="/admin/noticeList"><em class="fa fa-clone">&nbsp;</em> 공지사항 관리</a></li>
 			<li><a href="/admin/inquiryList"><em class="fa fa-clone">&nbsp;</em> 1:1문의 관리</a></li>
 			<li><a href="#"><em class="fa fa-clone">&nbsp;</em> 리뷰신고관리</a></li>
-			<li><a href="/admin/staticCustomer"><em class="fa fa-bar-chart">&nbsp;</em> 통계(고객분석)</a></li>
-			<li><a href="/admin/staticSales"><em class="fa fa-bar-chart">&nbsp;</em> 통계(매출분석)</a></li>
+			<li><a href="/admin/static"><em class="fa fa-bar-chart">&nbsp;</em> 통계</a></li>
 		</ul>
 	</div><!--/.sidebar-->	
 
@@ -63,35 +62,43 @@
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<table border="1">
-					<tr>
-						<th align="center" width="100">공지글 번호</th>
-						<th align="center" width="100">분류</th>
-						<th align="center" width="100">제목</th>
-						<th align="center" width="100"></th>
-					</tr>
+				<table class="table table-hover">
+				
+					<thead>
+						<tr>
+							<th align="center" width="100">공지글 번호</th>
+							<th align="center" width="100">분류</th>
+							<th align="center" width="100">제목</th>
+							<th align="center" width="100"></th>
+						</tr>
+					</thead>
 					
-					<c:choose>
-						<c:when test="${empty noticeList}">
-							<tr>
-								<td colspan="4">
-									공지사항이 없습니다.
-								</td>
-							</tr>
-						</c:when>
-						<c:otherwise>
-							<c:forEach items="${noticeList}" var="noticeList">
+					<tbody>
+						<c:choose>
+							<c:when test="${empty noticeList}">
 								<tr>
-									<td align="center">${noticeList.notice_no}</td>
-									<td align="center">${noticeList.notice_type}</td>
-									<td align="center">${noticeList.notice_title}</td>						
-									<td align="center">
-										<a href="/admin/noticeDetail?notice_no=${noticeList.notice_no}">상세보기</a>
+									<td colspan="4">
+										공지사항이 없습니다.
 									</td>
 								</tr>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${noticeList}" var="noticeList">
+									<tr>
+										<td align="center">${noticeList.notice_no}</td>
+										<td align="center">${noticeList.notice_type}</td>
+										<td align="center">${noticeList.notice_title}</td>						
+										<td align="center">
+											<a href="/admin/noticeDetail?notice_no=${noticeList.notice_no}">상세보기</a>
+										</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
+						
+					
+						
 				</table>	
 			</div>
 		</div><!--/.row-->

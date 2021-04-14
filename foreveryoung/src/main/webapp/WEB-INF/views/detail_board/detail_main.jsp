@@ -132,10 +132,26 @@
    
    .detail{
         border: 3px solid purple;
+        height : auto;
         width : 1100px;
         margin : 0 auto;
     	margin-top : 5px;
+    	margin-bottom : 5px;
    }   
+   #pack-list{
+		color : #74DF00;
+		font-family : Sans-Serif;
+		font-size : 18px;
+		font-weight : bold;
+		margin-top : 13px;
+   }
+   #change-table{
+		border-top: 1px solid #444444;
+		border-collapse: collapse;
+   }
+   #change-table>tr,th,td{
+	    border-bottom: 1px solid #444444;
+   }
        *{margin:0;padding:0;}
           ul,li{list-style:none;}
           .slide{height:150px;overflow:hidden;position:relative;}
@@ -319,8 +335,9 @@
 	   </div>
 	   
 	   <div class="purchas-detail">
-	   		<span>배송비/배송가능일</span>
-	   		<table style="border : 1px brown solid;">
+	   	<div style="padding-top:50px;">
+	   		<span id="pack-list">배송비/배송가능일</span>
+	   		<table id="change-table">
 	   			<tr style=" width : 1100px;">
 	   				<th width="350px;" style="background-color : #CEF6E3;">배송비/배송가능일</th>
 	   				<td width="750px;">
@@ -335,8 +352,10 @@
 	   				</td>
 	   			</tr>
 	   		</table>
-	   		<span>교환/반품/환불 안내</span>
-	   		<table style="border : 1px brown solid;">
+	   		</div>
+	   		<div style="padding-top:50px">
+	   		<span id="pack-list">교환/반품/환불 안내</span>
+	   		<table id="change-table">
 	   			<tr style=" width : 1100px;">
 	   				<th width="350px;" style="background-color : #CEF6E3;">
 	   					교환/반품 신청 방법
@@ -356,20 +375,35 @@
 	   				</td>
 	   			<tr style=" width : 1100px;">
 	   				<th width="350px;" style="background-color : #CEF6E3;">
-	   				
+	   					교환/반품/회수 비용
 	   				</th>
 	   				<td width="750px;">
-	   				
+	   					<span style="font-weight : bold">[택배 회수 반품]</span><br>
+	   					<br>
+						고객님의 사유에 의한 교환 및 반품은 회수 및 배송에 필요한 비용을 부담해주셔야 합니다.<br>
+						기본 비용은 교환 5,000원(회수비+배송비), 반품 2,500원(회수비)입니다.<br>
+						제주도 및 도서산간 지방에는 추가 운임이 발생합니다.<br>
+						당사의 사유(상품의 하자, 배송의 오류 등)로 인한 경우 교환 및 반품에 필요한 비용은 당사에서 부담합니다.<br>
+						<br>
+						<span style="font-weight : bold">[매장 방문 반품]</span><br>
+						올리브영 일반 주문 Green Olive 이상 등급 또는 오늘드림 주문에 한해서 별도 회수비 부담없이 반품 가능합니다.(단, 일부 매장만 가능)<br>	   				
 	   				</td>
 	   			<tr style=" width : 1100px;">
 	   				<th width="350px;" style="background-color : #CEF6E3;">
-	   				
+	   					교환/반품 불가안내
 	   				</th>
 	   				<td width="750px;">
-	   				
+						고객님의 사유에 의한 교환 및 반품이 불가한 경우<br>
+						1. 배송이 완료된 후 15일이 경과한 경우<br>
+						2. 포장 훼손 및 사용 또는 일부 소비, 구성품 누락 및 상품의 결함 발생으로 인해 상품의 가치가 훼손된 경우<br>
+						<br>
+						당사의 사유에 의한 교환 및 반품이 불가한 경우<br>
+						1. 배송 받으신 날로부터 3개월, 혹은 그 사실을 알 수 있었던 날로 부터 30일이 경과한 경우<br>
+						2. 당사의 귀책(상품의 불량, 생산 및 제조 및 배송 간의 파손 등)으로 인한 현상이 아닌 해당 상품의 고유한 특성, 혹은 상품 수령 후 고객님의 과실로 인한 문제임이 규명된 경우<br>
 	   				</td>
 	   			</tr>
-	   		</table>	   		
+	   		</table>
+	   		</div>	 
 	   </div>
 	   
 	   <div class="review">

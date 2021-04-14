@@ -44,8 +44,7 @@
 			<li><a href="/admin/noticeList"><em class="fa fa-clone">&nbsp;</em> 공지사항 관리</a></li>
 			<li class="active"><a href="/admin/inquiryList"><em class="fa fa-clone">&nbsp;</em> 1:1문의 관리</a></li>
 			<li><a href="#"><em class="fa fa-clone">&nbsp;</em> 리뷰신고관리</a></li>
-			<li><a href="/admin/staticCustomer"><em class="fa fa-bar-chart">&nbsp;</em> 통계(고객분석)</a></li>
-			<li><a href="/admin/staticSales"><em class="fa fa-bar-chart">&nbsp;</em> 통계(매출분석)</a></li>
+			<li><a href="/admin/static"><em class="fa fa-bar-chart">&nbsp;</em> 통계</a></li>
 		</ul>
 	</div><!--/.sidebar-->	
 
@@ -63,9 +62,11 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<form:form modelAttribute="inquiryDetail">
-					<form:hidden path="inquiry_no"/>
-		
 						<table border="1">
+							<tr>
+								<th align="center" width="100">1:1문의 번호</th>
+								<td><form:input path="inquiry_no" readonly="true"/></td>
+							</tr>
 							<tr>
 								<th align="center" width="100">제목</th>
 								<td><form:input path="inquiry_title" readonly="true"/></td>
@@ -90,9 +91,8 @@
 			</div>
 		</div><!--/.row-->
 		
-		<!-- inquiry_status 답변대기:답변등록form, 답변완료:답변보기 form-->
 		<c:choose>
-			<c:when test="${inquiryDetail.inquiry_status eq '답변대기'}">
+			<c:when test="${ inquiryDetail.reply_no == 0}">
 					<!-- 답변등록form -->
 					<div class="row">
 						<div class="col-lg-12">
@@ -111,16 +111,9 @@
 					    	</form>
 						</div>
 					</div><!--/.row-->
-					
-					<!-- inquiry_status 답변완료로 변경 -->
-					<form:form modelAttribute="inquiryStatusComplete" action="inquiryStatusComplete">
-						<input type="text" name="inquiry_no" value="${inquiryDetail.inquiry_no}">
-						<input type="submit" id="completeBtn" value="답변완료"> 
-					</form:form>
-					
 			</c:when>
 			
-			<c:when test="${inquiryDetail.inquiry_status eq '답변완료'}">
+			<c:otherwise>
 					<!-- 답변보기form -->
 					<div class="row">
 						<div class="col-lg-12">
@@ -134,7 +127,7 @@
 								</div>
 						</div>
 					</div><!--/.row-->
-			</c:when>
+			</c:otherwise>
 		</c:choose>
 	
 	</div>	<!--/.main-->

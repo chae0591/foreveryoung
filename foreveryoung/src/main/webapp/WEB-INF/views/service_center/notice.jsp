@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -245,8 +248,10 @@
 
 <script>
 $(function(){
+	//처음에 내용 숨기기
 	$(".hide").hide();
 	
+	//게시글 클릭시 내용 나오도록
 	$(".open").click(function(){
         if($(this).next().css('display') == 'none'){
         	$(this).next().show();
@@ -254,6 +259,36 @@ $(function(){
        		$(".hide").hide();
     	}
 	});
+	
+	//공지사항으로 이동
+	$(".notice-btn").click(function(){
+   			location.href = '/service_center/notice';
+	});
+	
+	//1:1문의로 이동
+	$(".inquiry-btn").click(function(){
+		var id = "${check}";
+		
+        if(id == ''){
+        	 alert("로그인 후 문의 가능합니다.");
+        	 location.href = '/member/login';
+   		 }else{
+   			 location.href = '/service_center/inquiry';
+    	}
+	});
+	
+	//1:1버튼 클릭시
+	$(".inquiryGobtn").click(function(){
+		var id = "${check}";
+		
+        if(id == ''){
+        	 alert("로그인 후 문의 가능합니다.");
+        	 location.href = '/member/login';
+   		 }else{
+   			 location.href = '/service_center/inquiryRegister';
+    	}
+	});
+	
 });
 </script>
 
@@ -269,8 +304,8 @@ $(function(){
 	</div>
 		
 	<div class="service-btns">
-		<a href="/service_center/notice"><button class="notice-btn">공지사항</button></a>
-		<a href="/service_center/inquiry"><button class="inquiry-btn">1:1 문의</button></a>
+		<button class="notice-btn">공지사항</button>
+		<button class="inquiry-btn">1:1 문의</button>
 	</div>
 	
 	<div class="serviceSrh-box">
@@ -294,11 +329,12 @@ $(function(){
 	</div>
 	
 	<div class="notice-list">
-		<c:forEach var="i" begin = "1" end="10" step="1">
+		<c:forEach items="${noticeList}" var="noticeList">
+		<input type="hidden" name="notice_no" value="${noticeList.notice_no}">
 		 		<div class="open">
 		 			<ul>
 		 				<li>
-		 					<p>회원<p><p>제목<p>
+		 					<p>${noticeList.notice_type}</p> <p>${noticeList.notice_title}</p>
 		 				</li>
 		 			</ul>
 		 		</div>
@@ -306,7 +342,7 @@ $(function(){
 		 		<div class="hide" >
 		 			<ul>
 		 				<li>
-		 					<p>내용<p>
+		 					<p>${noticeList.notice_content}<p>
 		 				</li>
 		 			</ul>
 		 		</div>
@@ -314,7 +350,7 @@ $(function(){
 	</div>
 	
 	<div class="last-box">
-		<a href="#"><button class="inquiryGobtn">1:1 문의하기</button></a>
+		<button class="inquiryGobtn">1:1 문의하기</button>
 	</div>
 	
 <jsp:include page="../template/footer.jsp"></jsp:include>

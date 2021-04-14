@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,6 +60,42 @@
     line-height: 30px;
 }
 </style>
+
+<script>
+$(document).ready(function() {
+	
+	var formObj = $("#inquiry")
+		
+	$("#btnModify").on("click", function () {
+		var inquiryNo = $("#inquiry_no")
+		var inquiryNoVal = inquiryNo.val();
+			
+		self.location = "/service_center/inquiryModify?inquiry_no=" + inquiryNoVal
+	});
+		
+	$("#btnList").on("click", function () {
+		self.location = "/service_center/inquiry"
+	});
+		
+	$("#btnRemove").on("click", function () {
+		formObj.attr("action", "/service_center/inquiryDelete")
+		formObj.submit();
+	});
+		
+	//1:1버튼 클릭시
+	$(".inquiryGobtn").click(function(){
+		var id = "${check}";
+			
+	    if(id == ''){
+	        alert("로그인 후 문의 가능합니다.");
+	        location.href = '/member/login';
+	   	}else{
+	   	 	location.href = '/service_center/inquiryRegister';
+	    }
+	});
+});
+</script>
+
 </head>
 <body>
 <jsp:include page="../template/header.jsp"></jsp:include>
@@ -74,8 +112,33 @@
 		<a href="/service_center/inquiry"><button class="inquiry-btn">1:1 문의</button></a>
 	</div>
 	
+	<form:form modelAttribute="inquiry">
+		<form:hidden path="inquiryNo"/>
+		
+		<table>
+			<tr>
+				<td>제목</td>
+				<td><form:input path="title" readonly="true"/></td>
+			</tr>
+			<tr>
+				<td>작성자</td>
+				<td><form:input path="writer" readonly="true"/></td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td><form:input path="content" readonly="true"/></td>
+			</tr>
+		</table>
+	</form:form>
+	
+	<div>
+		<button type="submit" id="btnModify">수정</button>
+		<button type="submit" id="btnList">게시글 보기</button>
+		<button type="submit" id="btnRemove">게시글 삭제</button>
+	</div>
+	
 	<div class="last-box">
-		<button class="inquiry-btn">1:1 문의하기</button>
+		<button class="inquiryGobtn">1:1 문의하기</button>
 	</div>
 	
 <jsp:include page="../template/footer.jsp"></jsp:include>
