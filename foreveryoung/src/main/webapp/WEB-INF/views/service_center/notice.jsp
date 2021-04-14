@@ -353,17 +353,6 @@ $(function(){
 		<button class="inquiryGobtn">1:1 문의하기</button>
 	</div>
 	
-	<div>
-	<c:forEach items="${noticeList}" var="noticeList">
-				<ul>
-					<li>${noticeList.notice_no}</li>
-					<li>${noticeList.notice_type}</li>
-					<li>${noticeList.notice_title}</li>	
-					<li>${noticeList.notice_content}</li>				
-				</ul>
-	</c:forEach>
-	</div>
-	
 <jsp:include page="../template/footer.jsp"></jsp:include>
 
 </body>

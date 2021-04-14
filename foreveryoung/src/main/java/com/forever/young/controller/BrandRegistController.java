@@ -1,5 +1,7 @@
 package com.forever.young.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -16,7 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.forever.young.entity.Brand;
+import com.forever.young.entity.Paging;
+import com.forever.young.entity.Product;
 import com.forever.young.service.BrandRegistService;
+import com.forever.young.service.ProductService;
 
 import lombok.extern.java.Log;
 
@@ -26,6 +31,9 @@ import lombok.extern.java.Log;
 public class BrandRegistController {
 	@Autowired
 	private BrandRegistService service;
+	
+	@Autowired
+	private ProductService productService; 
 	
 	private final Logger log = LoggerFactory.getLogger(CustomerController.class);
 	
@@ -107,5 +115,20 @@ public class BrandRegistController {
 		
 		return "main";
 	}
-
+	
+	//판매자 등록 상품 관리 
+	@GetMapping("/mypage_brand/mypage_brand_product")
+	public String getMypage_brand_product(@RequestParam String brand, Paging paging, Model model) throws Exception {
+		log.info("getMypage_brand_product()");
+		
+		int total = productService.getCountByBrand(Integer.parseInt(brand));
+		model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+		
+		List<Product> list = productService.brandList(Integer.parseInt(brand));
+		
+		model.addAttribute("brand", brand);
+		model.addAttribute("list", list);
+		
+		return "member/mypage_brand/mypage_brand_product";
+	}
 }

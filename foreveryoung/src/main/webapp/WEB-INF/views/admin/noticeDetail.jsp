@@ -63,9 +63,11 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<form:form modelAttribute="noticeDetail">
-					<form:hidden path="notice_no"/>
-					
 						<table border="1">
+							<tr>
+								<th align="center" width="100">공지글 번호</th>
+								<td><form:input path="notice_no" readonly="true"/></td>
+							</tr>
 							<tr>
 								<th align="center" width="100">분류</th>
 								<td><form:input path="notice_type" readonly="true"/></td>
