@@ -120,7 +120,7 @@
 	 insert into reply 
 	 	values(reply_seq.nextval, #{reply_content},sysdate, #{inquiry_no}, null)
 	</insert>
-	
+  
 	<!-- 1:1문의 상태 답변대기로 수정 -->
 	 
 	<!-- 1:1문의 답변 수정 -->

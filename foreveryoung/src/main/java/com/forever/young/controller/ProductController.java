@@ -1,7 +1,5 @@
 package com.forever.young.controller;
 
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,13 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.forever.young.entity.Brand;
 import com.forever.young.entity.Paging;
 import com.forever.young.entity.Product;
+import com.forever.young.service.BrandRegistService;
 import com.forever.young.service.ProductService;
 
 import lombok.extern.java.Log;
@@ -34,6 +31,9 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService service;
+	
+	@Autowired
+	private BrandRegistService brandService;
 	
 	private final Logger log = LoggerFactory.getLogger(ProductController.class);
 	
@@ -76,11 +76,12 @@ public class ProductController {
 		
 		List<Product> list = service.productList(category);
 		List<Brand> brand = service.getBrand();
+		List<Product> best = service.getBest(category);
 		
 		model.addAttribute("brand", brand);
 		model.addAttribute("category", category);
 		model.addAttribute("list", list);
-		
+		model.addAttribute("best", best);
 		String cName = null;
 		switch(category) {
 		case "skincare" :
@@ -104,6 +105,7 @@ public class ProductController {
 		}
 		
 		model.addAttribute("cName", cName);
+		
 		return "product/categoryList";
 	}
 	
@@ -114,7 +116,7 @@ public class ProductController {
 		
 		List<Product> list = service.productListSearch(searchData);
 		model.addAttribute("list", list);
-		System.out.println(list);
+	
 		return "/product/search";
 	}
 
@@ -138,7 +140,8 @@ public class ProductController {
 		
 		List<Product> list = service.brandListSearch(searchData);
 		model.addAttribute("list", list);
-		System.out.println(list);
+
 		return "/product/search";
 	}
+	
 } 

@@ -72,6 +72,10 @@ public interface AdminRepository {
  	//통계 (매출분석)
 	
 	
+
+	
+	
+	
 	
 	
 }
