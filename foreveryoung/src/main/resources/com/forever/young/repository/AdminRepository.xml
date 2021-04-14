@@ -157,7 +157,7 @@
 	
 	<!-- 관리자 삭제 -->
 	<delete id="adminDelete">
-	delete admin where admin_no =#{admin_no}
+	delete from admin where admin_no =#{admin_no}
 	</delete>
 
 </mapper>
