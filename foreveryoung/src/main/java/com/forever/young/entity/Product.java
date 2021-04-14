@@ -13,6 +13,8 @@ public class Product {
 	private int product_brand;
 	private String product_skintype;
 	private int event_no;
+	private String brand_name;
+	private int rn;
 	
 	private String image_save_name;
 	private String image_type;
@@ -128,7 +130,21 @@ public class Product {
 				+ image_type + ", uploadFileList=" + uploadFileList + "]";
 	}
 
-	
+	public String getBrand_name() {
+		return brand_name;
+	}
+
+	public void setBrand_name(String brand_name) {
+		this.brand_name = brand_name;
+	}
+
+	public int getRn() {
+		return rn;
+	}
+
+	public void setRn(int rn) {
+		this.rn = rn;
+	}
 	
 
 	

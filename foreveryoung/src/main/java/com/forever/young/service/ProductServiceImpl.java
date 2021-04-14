@@ -75,6 +75,11 @@ public class ProductServiceImpl implements ProductService{
 		return productRepository.getCountByBrand(brand);
 	}
 
+	@Override
+	public List<Product> getBest(String category) {
+		return productRepository.getBest(category);
+	}
+
 	
 	
 
