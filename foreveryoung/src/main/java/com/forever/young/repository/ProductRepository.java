@@ -26,4 +26,6 @@ public interface ProductRepository {
 	public List<Product> brandList(int brand);
 	public List<Product> brandListSearch(Map<String, Object> searchData);
 	public int getCountByBrand(int brand);
+	
+	public Product findByNo(int no);
 }

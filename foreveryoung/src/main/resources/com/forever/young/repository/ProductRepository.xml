@@ -162,4 +162,8 @@
 		select count(*) from product_table where product_brand = #{brand}
 	]]>
 	</select>
+	
+	<select id="findByNo" parameterType="int" resultType="com.forever.young.entity.Product">
+		select * from product_table where product_no=#{no}
+	</select>
 </mapper>

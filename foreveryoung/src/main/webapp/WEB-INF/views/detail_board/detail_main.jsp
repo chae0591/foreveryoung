@@ -6,7 +6,7 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
-<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </head>
 
 <style>
@@ -178,6 +178,9 @@
 <body>
 <jsp:include page="../template/header.jsp"></jsp:include>
    <div class="product">
+   <input type="hidden" name="user_num" value="${check}">
+   <input type="hidden" name="product_no" value="${product.product_no}">
+   
          <div class="main-img">
             <div class="product-img">
                <img src="https://placeimg.com/400/430/tech" id="product-img">
@@ -191,7 +194,7 @@
                <img src="https://placeimg.com/58/58/tech" class="sub-img">
             </div>
          </div>
-         
+
          <div class="information">
             <table class="prodcut-table">
                <tr>
@@ -201,11 +204,11 @@
                </tr>
                <tr>
                   <th>상품이름</th>
-                  <td colspan="2">상품이름(product_name)을 가져오시오.</td>
+                  <td colspan="2">${product.product_name} </td>
                </tr>
                <tr>
                   <th>상품가격</th>
-                  <td colspan="2">상품가격(product_price)을 가져오시오.</td>
+                  <td colspan="2">${product.product_price}원</td>
                </tr>
                <tr>
                   <th>배송정보</th>
@@ -218,7 +221,7 @@
                <tr>
                   <th>상품 수량</th>
                   <td colspan="2">
-                  <input type=hidden name="sell_price" value="5500">
+                  <input type=hidden name="sell_price" value="${product.product_price}">
                   <input type="number" style="font-size : 23px; width : 71px;"name="amount" value="1" size="3" onchange="change();">
                <input type="button" style="HEIGHT: 23pt;width : 24px;" value=" + " onclick="add();"><input type="button" style="HEIGHT: 23pt;width : 25px;" value=" - " onclick="del();">
                   </td>
@@ -234,8 +237,8 @@
               <div class="btn"> 
                <input type="button" value="장바구니" class="bucket" onclick="location.href='장바구니.jsp';">
                <input type="button" value="바로 구매" class="pay" onclick="location.href='결재.jsp';">
-               <input type="hidden" name="user_num"value="${check}">
-               <button class="nice" value="false">
+               
+               <button class="nice" value="">
                      <img src="/img/product/unlike.png" id="vote_img" style="width:40px; heigth:35px; " alt="좋아요" class="like">
                </button>
             </div>
@@ -466,7 +469,7 @@
       document.form.sum.value = sell_price;
       change();
    }
-   
+   init();
    function add () {
       hm = document.form.amount;
       sum = document.form.sum;
@@ -523,9 +526,11 @@
             $(".qna").show();
          });
    });
-//좋아요   1
+//user_num 좋아요 가져오기
 	$(document).ready(function(){
 		var user_num = $("input[name='user_num']").val();
+		var product_no = $("input[name='product_no']").val();
+		
 		if(user_num != "") {
 			voteCheck();
 		}
@@ -534,23 +539,58 @@
 				return false;
 			}else{
 				$.ajax({
-					url : '/vote/selectVote',
+					url : '/vote/checkVote',
 					type : 'GET',
 					data : {
-						'user_num' : user_num
+						'user_num' : user_num,
+						'product_no' : product_no
 					},
-					success : function(resp){
-						if(){
-							
+					success : function(result){
+						console.log(result);
+						if(result=="yes"){	
+							$("#vote_img").attr("src","/img/product/like.png")
+							$(".nice").attr("value", "true")
 						}else{
-							
+							$("#vote_img").attr("src","/img/product/unlike.png")
+							$(".nice").attr("value", "false")
 						}
 					}
 				});
 			}
 		}
-	});
- 
+//좋아요 기능 실행		
+		$(document).on('click', '.nice', function(){
+			var target = $(this);
+			var user_num = $("input[name='user_num']").val();
+			var product_no = $("input[name='product_no']").val();
+			if(user_num == null || user_num == "") {
+				location.href="/member/login";
+			}
+			
+			var url;
+			if($(this).attr("value") == "true") {
+				url = "/vote/deleteVote";
+			} else if ($(this).attr("value") == "false") {
+				url = "/vote/insertVote";
+			}
+			console.log(url);
+			
+			$.ajax({
+				url : url,
+				data : {'user_num':user_num, 'product_no':product_no},
+				type: 'POST',
+				success : function(result) {
+					console.log(result)
+					$(target).attr("value", result);
+					if(result == "true") {
+						$(target).find(".like").attr("src", "/img/product/like.png");	
+					} else {
+						$(target).find(".like").attr("src", "/img/product/unlike.png");
+					}
+				}
+			}); // ajax
+		}); // end 좋아요
+	})
 </script>
 <jsp:include page="../template/footer.jsp"></jsp:include>
 </body>

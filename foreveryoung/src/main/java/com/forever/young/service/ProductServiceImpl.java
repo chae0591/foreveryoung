@@ -75,6 +75,11 @@ public class ProductServiceImpl implements ProductService{
 		return productRepository.getCountByBrand(brand);
 	}
 
+	@Override
+	public Product findByNo(int no) {
+		return productRepository.findByNo(no);
+	}
+
 	
 	
 
