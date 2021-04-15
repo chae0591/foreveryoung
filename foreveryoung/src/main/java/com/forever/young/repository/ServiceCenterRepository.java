@@ -3,6 +3,7 @@ package com.forever.young.repository;
 import java.util.List;
 
 import com.forever.young.entity.Inquiry;
+import com.forever.young.entity.InquiryVO;
 import com.forever.young.entity.Notice;
 
 public interface ServiceCenterRepository {
@@ -13,7 +14,7 @@ public interface ServiceCenterRepository {
 	
 	public void inquiryRegister(Inquiry inquiry) throws Exception;
 	
-	public Inquiry inquiryDetail(Integer inquiry_no) throws Exception;
+	public InquiryVO inquiryDetail(Integer inquiry_no) throws Exception;
 	
 	public void inquiryModify(Inquiry inquiry_no) throws Exception;
 	

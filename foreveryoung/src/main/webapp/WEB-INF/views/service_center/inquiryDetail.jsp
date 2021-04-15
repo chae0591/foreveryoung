@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
@@ -63,24 +64,6 @@
 
 <script>
 $(document).ready(function() {
-	
-	var formObj = $("#inquiry")
-		
-	$("#btnModify").on("click", function () {
-		var inquiryNo = $("#inquiry_no")
-		var inquiryNoVal = inquiryNo.val();
-			
-		self.location = "/service_center/inquiryModify?inquiry_no=" + inquiryNoVal
-	});
-		
-	$("#btnList").on("click", function () {
-		self.location = "/service_center/inquiry"
-	});
-		
-	$("#btnRemove").on("click", function () {
-		formObj.attr("action", "/service_center/inquiryDelete")
-		formObj.submit();
-	});
 		
 	//1:1버튼 클릭시
 	$(".inquiryGobtn").click(function(){
@@ -112,26 +95,36 @@ $(document).ready(function() {
 		<a href="/service_center/inquiry"><button class="inquiry-btn">1:1 문의</button></a>
 	</div>
 	
-	<form:form modelAttribute="inquiryDetail">
-		<form:hidden path="inquiry_no"/>
+	<div class="col-lg-12">
+				<form:form modelAttribute="inquiryDetail">
+					<form:hidden path="inquiry_no"/>
 		
-		<table>
-			<tr>
-				<td>제목</td>
-				<td><form:input path="inquiry_title" readonly="true"/></td>
-			</tr>
-			<tr>
-				<td>날짜</td>
-				<td><form:input path="inquiry_regDate" readonly="true"/></td>
-			</tr>
-			<tr>
-				<td>내용</td>
-				<td><form:input path="inquiry_content" readonly="true"/></td>
-			</tr>
-		</table>
-		<form:hidden path="user_num"/>
-	</form:form>
-	
+						<table border="1">
+							<tr>
+								<th align="center" width="100">제목</th>
+								<td><form:input path="inquiry_title" readonly="true"/></td>
+							</tr>
+							<tr>
+								<th align="center" width="100">작성자</th>
+								<td><form:input path="user_id" readonly="true"/></td>
+							</tr>
+							<tr>
+								<th align="center" width="100">등록일</th>
+								<td><form:input path="inquiry_regDate" readonly="true"/></td>			
+							</tr>
+							<tr>
+								<th align="center" width="100">문의 내용</th>
+								<td><form:input path="inquiry_content" readonly="true"/></td>			
+							</tr>
+							
+						</table>			
+					<form:hidden path="user_num"/>
+				</form:form>
+		</div>
+		
+		<div>
+			<c:out value="${inquiryDetail.reply_content}"></c:out>
+		</div>
 	<div>
 		<button type="submit" id="btnModify">수정</button>
 		<button type="submit" id="btnList">게시글 보기</button>
