@@ -174,19 +174,52 @@ $(".menu a").click(function() {
 	</div>
 	
 	
-	<div class="row">
-		<ul class="">
-				<c:forEach var="lists" items="${list}">
-				<li>
-				<input type="hidden" name="product_no" value="${lists.product_no}">
-				<a>
-				<label><fmt:formatNumber value="${lists.product_price}" pattern="###,###,###"/>원</label>
-				<label><c:out value="${lists.product_name}" /></label>
-				</a>
-				</li>
-				</c:forEach>
-		</ul>
-	
+	<div class="center">
+		<c:forEach var="product_info" items="${product_info}">
+			<li>
+				<label>
+					<c:out value="${product_info.product_no}"/>
+				</label>
+				<label>
+					<c:out value="${product_info.product_name}"/>
+				</label>
+				<label>
+					<c:out value="${product_info.product_category}"/>
+				</label>
+				<label>
+					<c:out value="${product_info.product_price}"/>
+				</label>
+				<label>
+					<c:out value="${product_info.product_stock}"/>
+				</label>
+				<label>
+					<c:out value="${product_info.product_regDate}"/>
+				</label>
+			</li>
+		</c:forEach>
 	</div>
+	
+	
+		<%-- <table>
+			<tr>
+				<td class="bold" style="display:none">상품번호: <c:out value="${product_info.product_no}"></c:out> </td>
+			</tr>
+			<tr>
+				<td class="bold">상품 카테고리: <c:out value="${product_info.product_cetegory}"></c:out></td>
+			</tr>
+			<tr>
+				<td class="bold">상품 이름: <c:out value="${product_info.product_name}"></c:out></td>
+			</tr>
+			<tr>
+				<td class="bold">상품 가격: <c:out value="${product_info.product_price}"></c:out></td>
+			</tr>
+			<tr>
+				<td class="bold">상품 재고: <c:out value="${product_info.product_stock}"></c:out></td>
+			</tr>
+			<tr>
+				<td class="bold">상품 등록일: <c:out value="${product_info.product_regdate}"></c:out></td>
+			</tr>
+		</table><br><br> --%>
+	
 </body>
 </html>
