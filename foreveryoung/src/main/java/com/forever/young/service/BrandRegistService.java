@@ -15,6 +15,5 @@ public interface BrandRegistService {
 	//상품 리스트 
 	public List<Product> brandList(int brand);
 	public int getCountByBrand(int brand);
-
 	
 }

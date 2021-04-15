@@ -83,14 +83,10 @@ public class ProductServiceImpl implements ProductService{
 	
 	public List<Product> getBest(String category) {
 		return productRepository.getBest(category);
-
 	}
-	
-	
-	
-
-	
-	
-
-
+	//테스트 - 준식
+	@Override
+	public List<Product> getFindBrandProduct(Product product) {
+		return productRepository.getFindBrandProduct(product);
+	}
 }
