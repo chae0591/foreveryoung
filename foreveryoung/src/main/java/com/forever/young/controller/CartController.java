@@ -31,7 +31,7 @@ public class CartController {
 	private final Logger log = LoggerFactory.getLogger(CartController.class);
 	
 
-	@GetMapping("cartList")
+	@GetMapping("/cartList")
 	public String getCartList(HttpSession session, Model model) throws Exception {
 		log.info("getCartList()");
 		
