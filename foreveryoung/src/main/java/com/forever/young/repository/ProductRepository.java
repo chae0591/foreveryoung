@@ -29,4 +29,9 @@ public interface ProductRepository {
 	
 	//베스트상품
 	public List<Product> getBest(String category);
+
+	//판매상품 관리 페이지 
+	public List<Product> getFindBrandProduct(Product product);
+	
+	
 }

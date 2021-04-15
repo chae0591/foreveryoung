@@ -26,4 +26,8 @@ public interface ProductService {
 	
 	// 베스트 상품
 	public List<Product> getBest(String category);
+
+	
+	//테스트 
+	public List<Product> getFindBrandProduct(Product product);
 }

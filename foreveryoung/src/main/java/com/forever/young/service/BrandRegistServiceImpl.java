@@ -53,6 +53,4 @@ public class BrandRegistServiceImpl implements BrandRegistService{
 		return productRepository.getCountByBrand(brand);
 	}
 
-	
-	
 }
