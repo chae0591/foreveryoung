@@ -2,87 +2,57 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member/common.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member/css/bootstrap.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="${pageContext.request.contextPath}/css/member/js/bootstrap.js"></script>
 <script>
-$(document).ready(function(){
-	$("#totalcheck").change(function(){
-		var checkval = $(this).prop("checked");
-		$(".checkitem").prop("checked", checkval);
-	});
-	
-	$(".del-ad-item").click(function(){
-		if(confirm("정말로 삭제하시겠습니까?")) {
-			var address_no = $(this).prev().text();
-			var del_row = $(this).parent().parent();
-			
-			$.ajax({
-				url : "address_item_del",
-				type : "get",
-				data : {
-					address_no : address_no
-				},
-				success : function(resp) {
-					del_row.remove();
-				}
-			});
+$(document).ready(function () {
+	$(".input[name=change_pw]").blur(function(){
+		var pw = $(this).val();
+		var regex = /^[a-zA-Z0-9!@#$]{5,11}$/;
+		if(regex.test(pw)){
+			$(this).next().text("올바른 비밀번호 형식입니다");
+			$(this).next().removeClass("bad");
+			$(this).next().addClass("good");
+			$(this).addClass("correct");
+		}
+		else{
+			$(this).next().text("비밀번호는는 영문 숫자 특수문자(!@#$) 조합 6자~12자까지 가능합니다.");
+			$(this).removeClass("correct");
+			$(this).next().removeClass("good");
+			$(this).next().addClass("bad");
 		}
 	});
 	
-	$(".del-total-btn").click(function(){
-		if(confirm("정말로 삭제하시겠습니까?")) {
-			var address_no_array = [];
-			
-			$('input[class="checkitem"]:checked').each(function(){
-				address_no_array.push($(this).val());
-			});
-			
-			if(address_no_array.length == 0) {
-				alert("삭제할 상품을 1개 이상 선택해주세요");
-				return;
-			}
-			
-			$.ajax({
-				url : "address_item_del",
-				type : "post",
-				traditional : true,
-				data : {
-					addressArr : address_no_array
-				},
-				success : function(resp) {
-					$('input[class="checkitem"]:checked').each(function(){
-						$(this).parent().parent().remove();
-					});
-				}
-			});
-		}
+	$("#edit_pw_form").submit(function(e){
+        e.preventDefault();
+        
+        $(".input").blur();
+        
+        var pw1 = $("input[name=change_pw]").val();
+        var pw2 = $("#change_pw_check").val();
+        
+        if(pw1 && pw1 === pw2) {}
+        else {
+        	alert("비밀번호가 비밀번호 확인란과 같지 않습니다.");
+        	return;
+        }
+        
+        if($(".input.correct").length == 1){
+            this.submit();
+        }
+        else {
+        	window.alert("입력창을 확인해 주세요");
+        }
 	});
-	
-	$(".sel-ad-item").click(function(){
-		if(confirm("기본 배송지로 설정하시겠습니까?")){
-			var address_no = $(this).prev().prev().text();
-			var sel_row = $(this).parent().parent();
-			
-			$.ajax({
-				url : "address_item_sel",
-				type : "get",
-				data : {
-					address_no : address_no
-				},
-				success : function(resp) {
-					<!--여기에 셀렉트 된 (기본 배송지가 된 줄은 다르게 표시되도록) -->
-				}
-			});
-		}
-	});
-	
-})
+});
 </script>
 </head>
 <body>
@@ -94,47 +64,41 @@ $(document).ready(function(){
 	<div class="row">
 		<jsp:include page="mypagetemplate/mypagemenu.jsp"></jsp:include>
 		<div class="col-md-10 col-lg-6">
-			<div class="outbox" style="width: 700px">
-				<h2>배송지 목록</h2>
-				<c:choose>
-					<c:when test="${empty adList}">
-						<h5>배송지를 등록해 주세요!</h5>
-					</c:when>
-					<c:otherwise>
-						<input type="checkbox" id="totalcheck"><label for="totalcheck">전체 선택</label>
-						<input type="button" class="input input-inline del-total-btn" value="선택 삭제">
-						<table class="table table-bordered">
-							<tr>
-								<th></th>
-								<th>배송지명</th>
-								<th>배송지 주소</th>
-								<th></th>
-							</tr>
-							<c:forEach var="ad" items="${adList}">
-							<tr>
-								<td rowspan="2"><input type="checkbox" class="checkitem" value="${ad.address_no}"></td>
-								<td rowspan="2">${ad.address_name}</td>
-								<td>${ad.address_jibun}, ${ad.address_detail}</td>
-								<td rowspan="2">
-									<span class="hidden-cart-no" style="display: none;">${ad.address_no}</span>
-									<input type="button" class="del-ad-item" value="삭제">
-									<input type="button" class="sel-ad-item" value="대표주소">
-								</td>
-							</tr>
-							<tr>
-								<td>${ad.address_roadname}, ${ad.address_detail}</td>
-							</tr>
-							</c:forEach>
-						</table>
-					</c:otherwise>
-				</c:choose>
-			</div>
+		<div class="contentbox">
+			<form id="edit_pw_form" action="mypage_edit_pw" method="post">
+			
+				<input type="hidden" name="user_num" value="${user_info.user_num}">
+				<div class="outbox" style="width: 500px">
+					<fieldset class="outbox">
+						<legend>비밀번호 수정</legend>
+						<div class="row">
+		                    <label>Current Password</label>
+		                    <input type="password" name="current_pw" required class="input">
+		                    <span>&nbsp;</span>
+		                </div>
+		                <div class="row">
+		                    <label>Change Password</label>
+		                    <input type="password" name="change_pw" required class="input">
+		                    <span>&nbsp;</span>
+		                </div>
+		                <div class="row">
+		                    <label>Password_Check</label>
+		                    <input type="password" id="change_pw_check" required class="input" placeholder="바꿀 패스워드를 한번 더 입력해주세요">
+		                    <span>&nbsp;</span>
+		                </div>
+		                <div class="row">
+							<input type="submit" value="정보 수정" class="input">
+						</div>
+					</fieldset>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>
-</section>
+	</div>
+	</section>
 <footer>
 <jsp:include page="../template/footer.jsp"></jsp:include>
 </footer>
 </body>
-</html>
+</html>	

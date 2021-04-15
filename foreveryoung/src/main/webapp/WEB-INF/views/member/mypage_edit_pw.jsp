@@ -9,8 +9,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member/common.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member/mypage.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member/css/bootstrap.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="${pageContext.request.contextPath}/css/member/js/bootstrap.js"></script>
 <script>
 $(document).ready(function () {
 	$(".input[name=change_pw]").blur(function(){
@@ -55,45 +56,14 @@ $(document).ready(function () {
 </script>
 </head>
 <body>
-
-	<div class="outbox" style="width: 1000px; position: relative" >
-		<div class="leftmenu">
-		    <h3>마이페이지</h3>
-			<ul class="leftmenu_list">
-                <li>
-                    <a href="">주문 내역</a>
-                </li>
-                
-                <li>
-                    <a href="cartList">장바구니</a>
-                </li>
-                
-                <li>
-                    <a href="">관심등록</a>
-                    <ul>
-                        <li><a href="">관심 상품</a></li>
-                        <li><a href="">관심 브랜드</a></li>
-                    </ul>
-                </li>
-                
-                <li>
-                    <a href="">내가 쓴 글</a>
-                    <ul>
-                        <li><a href="">상품 리뷰</a></li>
-                        <li><a href="">Q & A</a></li>
-                        <li><a href="">1 대 1 상담</a></li>
-                    </ul>
-                </li>
-                
-                <li>
-                    <a href="mypage_edit">내 설정</a>
-                    <ul>
-                        <li><a href="mypage_edit">회원 정보 변경</a></li>
-                        <li><a href="">주소록 변경</a></li>
-                    </ul>
-                </li>
-			</ul>
-		</div>
+<header>
+<jsp:include page="../template/header.jsp"></jsp:include>
+</header>
+<section>
+<div class="container">
+	<div class="row">
+		<jsp:include page="mypagetemplate/mypagemenu.jsp"></jsp:include>
+		<div class="col-md-10 col-lg-6">
 		<div class="contentbox">
 			<form id="edit_pw_form" action="mypage_edit_pw" method="post">
 			
@@ -124,5 +94,11 @@ $(document).ready(function () {
 			</form>
 		</div>
 	</div>
+</div>
+	</div>
+	</section>
+<footer>
+<jsp:include page="../template/footer.jsp"></jsp:include>
+</footer>
 </body>
 </html>	

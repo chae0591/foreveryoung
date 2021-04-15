@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.forever.young.entity.CartListVO;
 import com.forever.young.entity.ChangePwVO;
 import com.forever.young.entity.Customer;
 import com.forever.young.entity.Order;
@@ -210,6 +211,18 @@ public class CustomerController {
 	@RequestMapping("/join_choice")
 	public String join_choice() {
 		return "member/join_choice";
+	}
+	
+	@GetMapping("/test")
+	public String getTest(HttpSession session, Model model) throws Exception {
+		log.info("getTest()");
+		log.info("getMypage_edit_pw()");
+		
+		Customer customer = service.findNum((int)session.getAttribute("check"));
+		
+		model.addAttribute("user_info", customer);
+		
+		return "member/testpage";
 	}
 
 }

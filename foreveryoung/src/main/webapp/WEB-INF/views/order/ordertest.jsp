@@ -45,6 +45,8 @@ $(document).ready(function(){
 		msg += '결제 금액 : ' + rsp.paid_amount;
 		msg += '카드 승인번호 : ' + rsp.apply_num;
 		
+		formObj.submit();
+		
 		} else {
 		var msg = '결제에 실패하였습니다.';
 		msg += '에러내용 : ' + rsp.error_msg;
@@ -103,43 +105,57 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+<header>
+<jsp:include page="../template/header.jsp"></jsp:include>
+</header>
+	
 	<div class="outbox" style="width: 500px">
+	<h2>주문 결제</h2>
 	<form id="order-form" action="ordertest_payment" method="post">
+		<fieldset>
 		<div class="row">주문자 정보 </div>
 		<div class="row">아이디 : 
-			<input type="text" value="${customerInfo.user_id}" readonly>
+			<input class="input" type="text" value="${customerInfo.user_id}" readonly required>
 		</div>
 		<div class="row">이름 : 
-			<input type="text" id="customer_name" value="${customerInfo.user_name}" readonly>
+			<input class="input" type="text" id="customer_name" value="${customerInfo.user_name}" readonly>
 		</div>
 		<div class="row">연락처 : 
-			<input type="text" id="customer_phone" value="${customerInfo.user_phone}" readonly>
+			<input class="input" type="text" id="customer_phone" value="${customerInfo.user_phone}" readonly required>
 		</div>
+		</fieldset>
 		<br>
+		<hr>
 		
 		<div class="row">배송지 정보</div>
 		<div class="row">
+		<fieldset>
 			<div class="row">
 				배송지명 : <input class="input" type="text" name="address_name" value="${addressInfo.address_name}">
 			</div>
 			<div class="row">
-				<input type="text" id="postcode" placeholder="우편번호" name="address_zonecode" value="${addressInfo.address_zonecode}">
+				<input type="text" id="postcode" placeholder="우편번호" name="address_zonecode" value="${addressInfo.address_zonecode}" required>
 				<input type="button" id="postcode-btn" value="우편번호 찾기"><br>
 				<input type="text" id="roadAddress" placeholder="도로명주소" name="address_roadname" value="${addressInfo.address_roadname}">
 				<input type="text" id="jibunAddress" placeholder="지번주소" name="address_jibun" value="${addressInfo.address_jibun}">
 				<span id="guide" style="color:#999;display:none"></span>
-				<input type="text" id="detailAddress" placeholder="상세주소" name="address_detail" value="${addressInfo.address_detail}">
+				<input type="text" id="detailAddress" placeholder="상세주소" name="address_detail" value="${addressInfo.address_detail}" required>
 				<input type="text" id="extraAddress" placeholder="참고항목">
 			</div>
 			<div class="row">
-				연락처 : <input class="input" type="text" name="address_phone" value="${addressInfo.address_phone}">
+				연락처 : <input class="input" type="text" name="address_phone" value="${addressInfo.address_phone}" required>
 			</div>
+		</fieldset>
 		</div>
+		<br>
+		<hr>
 		
 		<div class="row">상품 정보</div>
 		<c:set var="totaltemp" value="0"></c:set>
 		<c:forEach var="product" items="${productInfo}">
 		<div class="row">
+		<fieldset>
+			<legend>주문 상품 정보</legend>
 			<input type="hidden" name="order_product" value="${product.product_no}">
 			<input type="hidden" name="order_brand" value="${product.product_brand}">
 			제품명 : <input class="input" type="text" value="${product.product_name}" readonly>
@@ -148,14 +164,23 @@ $(document).ready(function(){
 			수량 : <input class="input" type="text" name="order_amount" value="${product.cart_count}" readonly>
 			합계 : <input class="input" type="text" name="order_totalPrice" value="${product.product_price*product.cart_count}" readonly>	
 			<c:set var="totaltemp" value="${totaltemp+product.product_price*product.cart_count}"></c:set>
+			<br>
+		</fieldset>
 		</div>
 		</c:forEach>
 		<div class="row">
-			최종 결제 금액 : <input class="input" id="finalpayment" type="text" value="${totaltemp}" readonly>
+			<fieldset>
+			최종 결제 금액 : <input class="input" id="finalpayment" type="text" value="${totaltemp}" readonly>			
+			</fieldset>
 		</div>
+		<br>
+		<hr>
 		<div class="row"><input id="test" type="button" value="test"></div>
 		<input type="submit" value="입력">
 	</form>
 	</div>
+<footer>
+<jsp:include page="../template/footer.jsp"></jsp:include>
+</footer>
 </body>
 </html>

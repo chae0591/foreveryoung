@@ -27,8 +27,8 @@ public class ServiceCenterServiceImpl implements ServiceCenterService{
 	}
 	
 	@Override
-	public List<Inquiry> inquiryList() throws Exception {
-		return repository.inquiryList();
+	public List<Inquiry> inquiryList(int user_num) throws Exception {
+		return repository.inquiryList(user_num);
 	}
 	
 	@Override

@@ -97,15 +97,5 @@ public class AddressController {
 		
 		return "select" + address_no;
 	}
-	
-	@GetMapping("/test")
-	public String getTestPage(HttpSession session, Model model) throws Exception {
-		log.info("getAddressList()");
-		
-		List<Address> adList = service.searchAddress((int)session.getAttribute("check"));
-		model.addAttribute("adList", adList);
-		
-		return "member/testpage";
-	}
 
 }

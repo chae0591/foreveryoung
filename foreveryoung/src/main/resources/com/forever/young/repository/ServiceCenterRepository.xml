@@ -16,7 +16,7 @@
 	<select id="inquiryList" resultType="Inquiry">
   		<![CDATA[
   			  	select I.* , C.user_id from inquiry I
- 				left outer join customer C on C.user_num = I.user_num
+ 				left outer join customer C on C.user_num = I.user_num where C.user_num = #{user_num}
   		]]>
 	</select>
 

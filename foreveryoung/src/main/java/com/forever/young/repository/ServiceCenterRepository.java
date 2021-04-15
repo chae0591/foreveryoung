@@ -9,7 +9,7 @@ public interface ServiceCenterRepository {
 
 	public List<Notice> noticeList() throws Exception;
 	
-	public List<Inquiry> inquiryList() throws Exception;
+	public List<Inquiry> inquiryList(int user_num) throws Exception;
 	
 	public void inquiryRegister(Inquiry inquiry) throws Exception;
 	
