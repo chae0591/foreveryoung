@@ -3,7 +3,6 @@ package com.forever.young.repository;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.forever.young.entity.Brand;
@@ -27,6 +26,10 @@ public interface ProductRepository {
 	public List<Product> brandListSearch(Map<String, Object> searchData);
 	public int getCountByBrand(int brand);
 	
+
+	public Product findByNo(int no);
+
 	//베스트상품
 	public List<Product> getBest(String category);
+
 }
