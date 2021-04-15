@@ -2,6 +2,8 @@ package com.forever.young.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,52 +40,64 @@ public class ServiceCenterController {
 	
 	//공지사항 리스트GET
 	@GetMapping("/notice")
-	public void noticeList(Model model) throws Exception {
+	public String noticeList(Model model) throws Exception {
 		log.info("noticeList()");
 			
 		model.addAttribute("noticeList", service.noticeList());
+		
+		return "service_center/notice";
 	}
 		
 	//1:1문의 리스트GET
 	@GetMapping("/inquiry")
-	public void inquiryList(Model model) throws Exception {
+	public String inquiryList(Model model, HttpSession session) throws Exception {
 		log.info("inquiryList()");
 		
-		model.addAttribute("inquiryList", service.inquiryList());
+		model.addAttribute("inquiryList", service.inquiryList((int)session.getAttribute("check")));
+		
+		return "service_center/inquiry";
 	}
 	
 	//1:1문의 작성GET
 	@GetMapping("/inquiryRegister")
-	public void getInquiryRegister(Inquiry inquiry, Model model) throws Exception {
+	public String getInquiryRegister(Inquiry inquiry, Model model) throws Exception {
 		log.info("getInquriyRegister()");
+		
+		return "service_center/noticeRegister";
 	}
 	
 	//1:1문의 작성POST
 	@PostMapping("/inquiryRegister")
-	public RedirectView postInquiryRegister(Inquiry inquiry, Model model) throws Exception {
+	public RedirectView postInquiryRegister(Inquiry inquiry, Model model, HttpSession session) throws Exception {
 		log.info("postInquiryRegister()");
 		
-		service.inquiryRegister(inquiry);
-		
-		model.addAttribute("inquiryRegister", "문의글 등록이 성공적으로 완료되었습니다.");
-		
-		return new RedirectView("inquiryDetail");
+		inquiry.setUser_num((int)session.getAttribute("check"));
+	      
+	    service.inquiryRegister(inquiry);
+	      
+	    model.addAttribute("inquiryRegister", "문의글 등록이 성공적으로 완료되었습니다.");
+	      
+	    return new RedirectView("inquiryDetail");
 	}
 	
 	//1:1문의 상세보기GET
 	@GetMapping("/inquiryDetail")
-	public void getInquiryDetail(int inquiry_no, Model model) throws Exception {
+	public String getInquiryDetail(int inquiry_no, Model model) throws Exception {
 		log.info("getInquiryDetail()");
 		
 		model.addAttribute("inquiryDetail" , service.inquiryDetail(inquiry_no));
+		
+		return "service_center/inquiryDetail";
 	}
 	
 	//1:1문의 수정GET
 	@GetMapping("/inquiryModify")
-	public void getInquiryModify(int inquiry_no, Model model) throws Exception {
+	public String getInquiryModify(int inquiry_no, Model model) throws Exception {
 		log.info("getInquiryModify()");
 		
 		model.addAttribute("inquiryModify" , service.inquiryDetail(inquiry_no));
+		
+		return "service_center/inquiryModify";
 	}
 	
 	//1:1문의 수정POST

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.forever.young.entity.Vote;
 import com.forever.young.service.ProductVoteService;
 
 @Controller
@@ -26,6 +27,7 @@ public class ProductVoteController {
 	@PostMapping("/insertVote")
 	@ResponseBody
 	public String insertVote(@RequestParam Map<String, Object> vote) {
+		System.out.println(vote);
 		voteService.inVote(vote);
 		return "true";
 	}
@@ -33,6 +35,7 @@ public class ProductVoteController {
 	@PostMapping("/deleteVote")
 	@ResponseBody
 	public String deleteVote(@RequestParam Map<String, Object> vote) {
+		System.out.println(vote);
 		voteService.delVote(vote);
 		return "false";
 	}
@@ -45,5 +48,17 @@ public class ProductVoteController {
 		
 		return result;
 	}
-
+	
+	@GetMapping("/checkVote")
+	@ResponseBody
+	public String checkVote(@RequestParam int user_num, @RequestParam int product_no ) {
+		Vote vote =	voteService.checkVote(user_num, product_no);
+		if(vote != null) {
+			return "yes";
+		}
+		else {
+			return "no";
+		}
+	}
+	
 }

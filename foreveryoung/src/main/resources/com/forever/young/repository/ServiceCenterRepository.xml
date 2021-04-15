@@ -16,7 +16,8 @@
 	<select id="inquiryList" resultType="Inquiry">
   		<![CDATA[
   			  	select I.* , C.user_id from inquiry I
- 				left outer join customer C on C.user_num = I.user_num
+				left outer join customer C on I.user_num = C.user_num
+				where C.user_num = #{user_num}
   		]]>
 	</select>
 
@@ -26,7 +27,6 @@
  			left outer join customer C on C.user_num = I.user_num
  			left outer join reply R on R.inquiry_no = I.inquiry_no 
  			where I.inquiry_no = #{inquiry_no}	
-
 	</select>
 	
 	<!-- 1:1문의  등록 -->
@@ -49,21 +49,6 @@
 	<delete id="inquiryDelete">
 		delete from inquiry where inquiry_no = #{inquiry_no}
 	</delete>
-	 
-	 <insert id="addAttach">
-		insert into inquiry (user_num) 
-		values (#{userNum})
-	</insert>
-	
-    <select id="getUser_num" resultType="Integer">
-		select customer_seq.currval from dual
-	</select>
-	
-	<!-- <select id="getAttach" resultType="string">
-		select inquiry_no from inquiry
-		where user_num = #{user_num}
-		order by inquiry_regdate
-	</select> -->
 
 </mapper>
  

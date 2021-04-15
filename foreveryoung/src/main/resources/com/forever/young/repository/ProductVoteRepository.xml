@@ -18,4 +18,9 @@
 	order by product_no desc
 </select>
 
+<select id="checkVote" resultType="Vote">
+	select * from vote where user_num = #{user_num} 
+	and product_no = #{product_no}
+	
+</select>
 </mapper>

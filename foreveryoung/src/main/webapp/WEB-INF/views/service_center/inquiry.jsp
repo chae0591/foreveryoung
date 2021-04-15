@@ -215,6 +215,43 @@ $(function(){
    			 location.href = '/service_center/inquiryRegister';
     	}
 	});
+	
+	//비동기
+	var category = $("input[name='category']").val();
+		// 필터링
+		$(".month-box > button").on("change", function(e){
+			var month = new Array();
+			 
+			$(".brand_check input[type='checkbox']:checked").each(function(index, item) {
+				inquiry.push($(item).val());
+			});
+			
+			if(brand.length == 0 || brand == "") {
+				$(".brand_check input[type='checkbox']").each(function(index, item) {
+					brand.push($(item).val());
+				});
+			}
+			
+			var searchData = {
+					category : category,
+					type : type,
+					brand : brand
+			}
+			
+			var jsonData = JSON.stringify(searchData);
+			
+			$.ajax({
+				url : '/product/search',
+				contentType : 'application/json',
+				data : jsonData,
+				type : 'POST',
+				traditional : true,
+				success : function(result){
+					console.log("성공!");
+					voteCheck();
+					$(".pList").html(result);
+				}
+			}); // ajax
 });
 </script>
 
@@ -246,26 +283,28 @@ $(function(){
 	
 	<div class="inquiry-list">
 	<c:choose>
-    <c:when test="${sessionScope.userid eq null}">
+   	 	<c:when  test="${empty inquiryList}">
 		<div class="no-inquiry">
 				<ul>
 					<li class="img-cover">등록하신 1:1문의가 없습니다</li>
 				</ul>
 		</div>
-    </c:when>
-    <c:otherwise>
-		<div class="check-inquiry">
+    	</c:when>
+      	<c:otherwise>
+      	<div class="check-inquiry">
 		 		<ul>
 		 			<c:forEach items="${inquiryList}" var="inquiryList">
 		 			<li>
 		 				<input type="hidden" name="inquiry_no" value="${inquiryList.inquiry_no}">
+		 				<input type="hidden" name="user_num" value="${inquiryList.user_id}">
+		 				<input type="hidden" name="user_num" value="${inquiryList.inquiry_regDate}">
 		 				<div class="row1"><strong>답변대기</strong></div>
-		 				<div class="row2"><a href="/service_center/inquiry_detail"><c:out value="${inquiryList.inquiry_title}" /></a></div>
+		 				<div class="row2"><a href="/service_center/inquiryDetail?inquiry_no=${inquiryList.inquiry_no}"><c:out value="${inquiryList.inquiry_title}" /></a></div>
 		 			</li>
 		 			</c:forEach>
 		 		</ul>
 		 </div>
-    </c:otherwise>
+    	</c:otherwise>
 	</c:choose>		
 	</div>
 	
