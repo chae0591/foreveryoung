@@ -9,7 +9,7 @@ public interface ServiceCenterRepository {
 
 	public List<Notice> noticeList() throws Exception;
 	
-	public List<Inquiry> inquiryList() throws Exception;
+	public List<Inquiry> inquiryList(Integer user_num) throws Exception;
 	
 	public void inquiryRegister(Inquiry inquiry) throws Exception;
 	
@@ -18,9 +18,5 @@ public interface ServiceCenterRepository {
 	public void inquiryModify(Inquiry inquiry_no) throws Exception;
 	
 	public void inquiryDelete(Integer inquiry_no) throws Exception;
-
-	public Integer getUser_num() throws Exception;
-
-	public void addAttach(Integer userNum) throws Exception;
 
 }

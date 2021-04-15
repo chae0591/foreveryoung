@@ -112,23 +112,24 @@ $(document).ready(function() {
 		<a href="/service_center/inquiry"><button class="inquiry-btn">1:1 문의</button></a>
 	</div>
 	
-	<form:form modelAttribute="inquiry">
-		<form:hidden path="inquiryNo"/>
+	<form:form modelAttribute="inquiryDetail">
+		<form:hidden path="inquiry_no"/>
 		
 		<table>
 			<tr>
 				<td>제목</td>
-				<td><form:input path="title" readonly="true"/></td>
+				<td><form:input path="inquiry_title" readonly="true"/></td>
 			</tr>
 			<tr>
-				<td>작성자</td>
-				<td><form:input path="writer" readonly="true"/></td>
+				<td>날짜</td>
+				<td><form:input path="inquiry_regDate" readonly="true"/></td>
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><form:input path="content" readonly="true"/></td>
+				<td><form:input path="inquiry_content" readonly="true"/></td>
 			</tr>
 		</table>
+		<form:hidden path="user_num"/>
 	</form:form>
 	
 	<div>

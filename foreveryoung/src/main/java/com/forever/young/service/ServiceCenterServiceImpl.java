@@ -27,19 +27,13 @@ public class ServiceCenterServiceImpl implements ServiceCenterService{
 	}
 	
 	@Override
-	public List<Inquiry> inquiryList() throws Exception {
-		return repository.inquiryList();
-	}
+	 public List<Inquiry> inquiryList(Integer user_num) throws Exception {
+	      return repository.inquiryList(user_num);
+	 }
 	
 	@Override
 	public void inquiryRegister(Inquiry inquiry) throws Exception {
 		repository.inquiryRegister(inquiry);
-		
-		Integer userNum = repository.getUser_num();
-		
-		log.info("user_num : " + userNum);
-		
-		repository.addAttach(userNum);
 	}
 	
 	@Override
@@ -57,8 +51,4 @@ public class ServiceCenterServiceImpl implements ServiceCenterService{
 		repository.inquiryDelete(inquiry_no);
 	}
 
-	@Override
-	public Integer getUser_num() throws Exception {
-		return repository.getUser_num();
-	}
 }
