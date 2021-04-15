@@ -19,8 +19,4 @@ public interface ServiceCenterRepository {
 	
 	public void inquiryDelete(Integer inquiry_no) throws Exception;
 
-	public Integer getUser_num() throws Exception;
-
-	public void addAttach(Integer userNum) throws Exception;
-
 }

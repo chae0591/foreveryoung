@@ -18,7 +18,4 @@ public interface ServiceCenterService {
 	public void inquiryModify(Inquiry inquiry_no) throws Exception;
 	
 	public void inquiryDelete(Integer inquiry_no) throws Exception;
-
-	public Integer getUser_num() throws Exception;
-
 }

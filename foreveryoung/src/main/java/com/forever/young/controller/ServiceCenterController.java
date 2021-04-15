@@ -2,6 +2,8 @@ package com.forever.young.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,14 +62,16 @@ public class ServiceCenterController {
 	
 	//1:1문의 작성POST
 	@PostMapping("/inquiryRegister")
-	public RedirectView postInquiryRegister(Inquiry inquiry, Model model) throws Exception {
+	public RedirectView postInquiryRegister(Inquiry inquiry, Model model, HttpSession session) throws Exception {
 		log.info("postInquiryRegister()");
 		
-		service.inquiryRegister(inquiry);
-		
-		model.addAttribute("inquiryRegister", "문의글 등록이 성공적으로 완료되었습니다.");
-		
-		return new RedirectView("inquiryDetail");
+		inquiry.setUser_num((int)session.getAttribute("check"));
+	      
+	    service.inquiryRegister(inquiry);
+	      
+	    model.addAttribute("inquiryRegister", "문의글 등록이 성공적으로 완료되었습니다.");
+	      
+	    return new RedirectView("inquiryDetail");
 	}
 	
 	//1:1문의 상세보기GET

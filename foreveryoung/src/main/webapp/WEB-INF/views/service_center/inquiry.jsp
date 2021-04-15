@@ -246,15 +246,15 @@ $(function(){
 	
 	<div class="inquiry-list">
 	<c:choose>
-    <c:when test="${sessionScope.userid eq null}">
+   	 	<c:when  test="${empty inquiryList}">
 		<div class="no-inquiry">
 				<ul>
 					<li class="img-cover">등록하신 1:1문의가 없습니다</li>
 				</ul>
 		</div>
-    </c:when>
-    <c:otherwise>
-		<div class="check-inquiry">
+    	</c:when>
+      	<c:otherwise>
+      	<div class="check-inquiry">
 		 		<ul>
 		 			<c:forEach items="${inquiryList}" var="inquiryList">
 		 			<li>
@@ -265,7 +265,7 @@ $(function(){
 		 			</c:forEach>
 		 		</ul>
 		 </div>
-    </c:otherwise>
+    	</c:otherwise>
 	</c:choose>		
 	</div>
 	
