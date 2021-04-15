@@ -48,10 +48,10 @@ public class ServiceCenterController {
 		
 	//1:1문의 리스트GET
 	@GetMapping("/inquiry")
-	public void inquiryList(Model model) throws Exception {
+	public void inquiryList(Model model, HttpSession session) throws Exception {
 		log.info("inquiryList()");
 		
-		model.addAttribute("inquiryList", service.inquiryList());
+		model.addAttribute("inquiryList", service.inquiryList((int)session.getAttribute("check")));
 	}
 	
 	//1:1문의 작성GET

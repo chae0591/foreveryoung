@@ -17,6 +17,7 @@
   		<![CDATA[
   			  	select I.* , C.user_id from inquiry I
 				left outer join customer C on I.user_num = C.user_num
+				where C.user_num = #{user_num}
   		]]>
 	</select>
 

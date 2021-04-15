@@ -259,6 +259,7 @@ $(function(){
 		 			<c:forEach items="${inquiryList}" var="inquiryList">
 		 			<li>
 		 				<input type="hidden" name="inquiry_no" value="${inquiryList.inquiry_no}">
+		 				<input type="hidden" name="inquiry_no" value="${inquiryList.user_num}">
 		 				<div class="row1"><strong>답변대기</strong></div>
 		 				<div class="row2"><a href="/service_center/inquiry_detail"><c:out value="${inquiryList.inquiry_title}" /></a></div>
 		 			</li>
