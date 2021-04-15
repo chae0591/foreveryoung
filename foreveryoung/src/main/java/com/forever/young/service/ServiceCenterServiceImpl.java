@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.forever.young.repository.ServiceCenterRepository;
 
 import com.forever.young.entity.Inquiry;
+import com.forever.young.entity.InquiryVO;
 import com.forever.young.entity.Notice;
 
 @Service
@@ -37,7 +38,7 @@ public class ServiceCenterServiceImpl implements ServiceCenterService{
 	}
 	
 	@Override
-	public Inquiry inquiryDetail(Integer inquiry_no) throws Exception {
+	public InquiryVO inquiryDetail(Integer inquiry_no) throws Exception {
 		return repository.inquiryDetail(inquiry_no);
 	}
 	
