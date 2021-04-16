@@ -77,6 +77,8 @@ public class ServiceCenterController {
 	      
 	    service.inquiryRegister(inquiry);
 
+	    service.inquiryRegisterAfter(inquiry_no);
+	    
 	    model.addAttribute("inquiryRegister", "문의글 등록이 성공적으로 완료되었습니다.");
 	    
 	    return "service_center/inquiryDetail";
