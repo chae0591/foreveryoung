@@ -15,6 +15,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.forever.young.entity.Admin;
 import com.forever.young.entity.Event;
+import com.forever.young.entity.Inquiry;
 import com.forever.young.entity.InquiryVO;
 import com.forever.young.entity.Notice;
 import com.forever.young.service.AdminService;
@@ -273,20 +274,6 @@ public class AdminController {
 		
 	}
 	
-	//1:1문의 답변완료로 상태변경
-//	@PostMapping("/inquiryStatusComplete")
-//	public RedirectView postInquiryStatusComplete(InquiryVO inquiryVO, Model model) throws Exception{
-//		log.info("postInquiryStatusComplete()");
-//		
-//		service.inquiryStatusComplete(inquiryVO);
-//		
-//		
-//		model.addAttribute("inquiryStatusComplete" , "1:1문의 답변완료");
-//		
-//		return new RedirectView("inquiryList");
-//		
-//	}
-	
 	//관리자 상세보기GET
 	@GetMapping("/adminDetail")
 	public void getAdminDetail(int admin_no, Model model)throws Exception{
@@ -370,6 +357,42 @@ public class AdminController {
 		
 		return "redirect:/admin/eventList";
 	}
+	
+	//1:1문의 답변 수정GET
+	@GetMapping("/replyModify")
+	public void getReplyModify(int inquiry_no, Model model,Model model1) throws Exception{
+		log.info("getReplyModify()");
+		
+		model.addAttribute("replyModify", service.inquiryDetail(inquiry_no));
+		model1.addAttribute("inquiryDetail", service.inquiryDetail(inquiry_no));
+		
+	}
+	
+	//1:1문의 답변 수정POST
+	@PostMapping("/replyModify")
+	public RedirectView postReplyModify(InquiryVO inquiryVO, Model model) throws Exception{
+		log.info("postreplyModify()");
+		
+		service.replyModify(inquiryVO);
+		
+		model.addAttribute("replyModify", "1:1문의 답변 수정 완료");
+		
+		return new RedirectView("inquiryList");
+		
+	}
+	
+	//1:1문의 답변 삭제
+	@PostMapping("/replyDelete")
+	public RedirectView  replyDelete(int inquiry_no, Model model) throws Exception{
+		log.info("replyDelete()");
+		
+		service.replyDelete(inquiry_no);
+		
+		model.addAttribute("inquiryDelete" , "1:1문의 답변 삭제");
+		
+		return new RedirectView("inquiryList");
+	}
+	
 	
 	
 	

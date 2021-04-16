@@ -101,12 +101,6 @@ public class AdminServiceImpl implements AdminService{
 	public void replyRegister(InquiryVO inquiryVO) throws Exception {
 		repository.replyRegister(inquiryVO);
 	}
-
-
-//	@Override
-//	public void inquiryStatusComplete(InquiryVO inquiryVO) throws Exception {
-//		repository.inquiryStatusComplete(inquiryVO);
-//	}
 	
 	@Override
 	public Admin adminDetail(Integer admin_no) throws Exception {
@@ -136,6 +130,16 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public void eventDelete(Integer event_no) throws Exception {
 		repository.eventDelete(event_no);
+	}
+
+	@Override
+	public void replyModify(InquiryVO inquiryVO) throws Exception {
+		repository.replyModify(inquiryVO);
+	}
+
+	@Override
+	public void replyDelete(Integer inquiry_no) throws Exception {
+		repository.replyDelete(inquiry_no);
 	}
 
 

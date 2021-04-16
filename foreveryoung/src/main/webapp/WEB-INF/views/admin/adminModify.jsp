@@ -21,9 +21,9 @@ $(document).ready(function(){
 		formObj.submit();
 	})
 	
-	$("admin_list").click(function(){
-		self.location = "/admin/adminList"
-	})
+		$("#admin_list").click(function(){
+			self.location ="/admin/adminList"
+		})
 	
 })
 </script>
@@ -88,7 +88,7 @@ $(document).ready(function(){
 				
 				<div>
 					<button type="submit" id="admin_complete">수정 완료</button>
-					<button type="submit" id="admin_list">관리자리스트 보기</button>
+					<button id="admin_list">목록으로</button>
 				</div>				
 			</div>
 		</div><!--/.row-->

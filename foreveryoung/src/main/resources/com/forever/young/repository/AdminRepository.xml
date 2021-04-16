@@ -120,13 +120,7 @@
 	 insert into reply 
 	 	values(reply_seq.nextval, #{reply_content},sysdate, #{inquiry_no}, null)
 	</insert>
-  
-	<!-- 1:1문의 상태 답변대기로 수정 -->
-	 
-	<!-- 1:1문의 답변 수정 -->
-	
-	<!-- 1:1문의 답변 삭제 -->
-	
+
 	<!--관리자 상세보기 -->
 	<select id="adminDetail" resultType="admin">
 		select * from admin where admin_no =#{admin_no}
@@ -165,7 +159,18 @@
 	<delete id="eventDelete">
 		delete from event where event_no = #{event_no}
 	</delete>
-
+	
+	<!-- 1:1문의 답변 수정 -->
+	<update id="replyModify">
+		 update reply set
+		  	reply_content = #{reply_content}
+		  where inquiry_no = #{inquiry_no}
+	</update>
+	
+	<!-- 1:1문의 답변 삭제 -->
+		<delete id="replyDelete">
+			 delete from reply where inquiry_no = #{inquiry_no}
+		</delete>
 </mapper>
  
 

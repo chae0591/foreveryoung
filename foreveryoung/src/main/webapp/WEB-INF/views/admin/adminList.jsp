@@ -18,20 +18,14 @@
 		$("#admin_join").click(function(){
 			self.location = "/admin/join"
 		})
-		$("#admin_modify").click(function(){
-			//self.location = "/admin/"
-		})
-		$("#admin_delete").click(function(){
+		
+		// 페이징
+		var pagingForm = $("#pagingForm");
+		$(".paginate_button a").on("click", function(e) {
 			e.preventDefault();
-			
-			var check = window.confirm("관리자 계정을 삭제하시겠습니까?");
-			if(check){
-				location.href=$(this).attr("href");
-			}
-		})
-		
-
-		
+			pagingForm.find("input[name='pageNum']").val($(this).attr("href"));
+			pagingForm.submit();
+		});
 	})
 
 </script> 
@@ -118,6 +112,21 @@
 				</table>
 			</div>
 		</div><!--/.row-->
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		<div class="row">
 			<div class="col-lg-12">

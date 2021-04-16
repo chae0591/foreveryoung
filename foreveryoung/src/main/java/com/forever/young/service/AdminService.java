@@ -44,8 +44,6 @@ public interface AdminService {
  	public void noticeDelete(Integer notice_no) throws Exception;
  	//1:1문의 답변 등록
  	public void replyRegister(InquiryVO inquiryVO) throws Exception;
- 	//1:1문의 답변상태-답변완료(테이블 수정으로 삭제 예정)
-// 	public void inquiryStatusComplete(InquiryVO inquiryVO) throws Exception;
  	//관리자 상세보기
  	public Admin adminDetail(Integer admin_no) throws Exception;
  	//관리자 수정
@@ -58,16 +56,18 @@ public interface AdminService {
  	public void eventModify(Event event) throws Exception;
  	//이벤트 삭제	
  	public void eventDelete(Integer event_no) throws Exception;
+ 	//1:1문의 답변 수정
+ 	public void replyModify(InquiryVO inquiryVO) throws Exception;
+ 	//1:1문의 답변 삭제
+ 	public void replyDelete(Integer inquiry_no) throws Exception;
  	
  	//상품 통합검색
  	//상품 이벤트 적용
- 	//1:1문의 답변 수정
- 	//1:1문의 답변 삭제
  	//리뷰신고 목록
  	//리뷰신고 블라인드 처리하기(삭제는 안됨!)
  	//리뷰신고 블라인드 취소하기
- 	//통계(고객분석)
- 	//통계 (매출분석)
+ 	//통계
+
  	
  	
 

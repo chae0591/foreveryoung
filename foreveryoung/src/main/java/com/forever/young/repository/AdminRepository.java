@@ -58,13 +58,14 @@ public interface AdminRepository {
 	//이벤트 수정
 	public void eventModify(Event event) throws Exception;
  	//이벤트 삭제
-	public void eventDelete(Integer event_no) throws Exception;
-	
+	public void eventDelete(Integer event_no) throws Exception;	
+ 	//1:1문의 답변 수정
+	public void replyModify(InquiryVO inquiryVO) throws Exception;
+ 	//1:1문의 답변 삭제
+	public void replyDelete(Integer inquiry_no) throws Exception;
 	
  	//상품 통합검색
  	//상품 이벤트 적용
- 	//1:1문의 답변 수정
- 	//1:1문의 답변 삭제
  	//리뷰신고 목록
  	//리뷰신고 블라인드 처리하기(삭제는 안됨!)
  	//리뷰신고 블라인드 취소하기
