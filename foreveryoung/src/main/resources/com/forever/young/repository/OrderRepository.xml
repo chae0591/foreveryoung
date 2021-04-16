@@ -23,7 +23,8 @@
 		from order_table O 
 		join (select p.*, b.* from product_table P join brand B on p.product_brand = b.brand_num) pb 
 		on O.order_product = pb.product_no 
-		where O.order_customer = #{user_num}
+		where O.order_customer = #{user_num} 
+		order by O.order_time desc
 	</select>
 	
 </mapper>
