@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -153,6 +154,9 @@
    .review{
       padding-right : 5px;
       padding-left : 5px;
+   }
+   .review_filt{
+   	list-style : none;
    }
        *{margin:0;padding:0;}
           ul,li{list-style:none;}
@@ -430,26 +434,23 @@
                </div>
             </div>
             
-            <div>
+            <div class="review_filt">
+            
                <ul>
-                  <li>
-                     <table style=" width : 1100px;border : 5px solid yellow">
-                        <tr>
-                           <th>1</th>
-                           <th>2</th>
-                           <th>3</th>
-                        </tr>
-                        <tr>
-                           <th>4</th>
-                           <th>5</th>
-                           <th>6</th>
-                        </tr>
-                     </table>
-                  </li>
+               <c:forEach var = "lists" items="${list}">
+                  <li>${list.review_title}</li>
+                  <li>${list.review_content}</li>
+                  <li>${list.review_date}</li>
+                  <li>${list.review_score}</li>
+                </c:forEach>
                </ul>
 
                <ul>
+                  <li>내용</li>
+                  <li>사진</li>
                   <li>
+                  	<button>리뷰 좋아요</button>
+                  	<button>신고하기</button>
                   </li>
                </ul>
             </div>
