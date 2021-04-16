@@ -33,9 +33,13 @@
 	<insert id="inquiryRegister">
 		insert into inquiry (inquiry_no, inquiry_title, inquiry_content, inquiry_regDate, user_num)
 		values(inquiry_seq.nextval, #{inquiry_title}, #{inquiry_content}, sysdate, #{user_num})
-
 	</insert>
 	
+	<!-- 1:1문의  등록 후 상세페이지로 이동 -->
+	<select id="inquiryRegisterAfter">
+		select seq.currval from dual
+	</select>
+
 	<!-- 1:1문의 수정 -->
 	<select id="inquiryModify">
 		update inquiry set

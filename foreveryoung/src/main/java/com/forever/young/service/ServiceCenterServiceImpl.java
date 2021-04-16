@@ -52,4 +52,9 @@ public class ServiceCenterServiceImpl implements ServiceCenterService{
 		repository.inquiryDelete(inquiry_no);
 	}
 
+	@Override
+	public void inquiryRegisterAfter(Integer inquiry_no) throws Exception {
+		repository.inquiryRegister(inquiry_no);
+	}
+
 }

@@ -60,24 +60,26 @@ public class ServiceCenterController {
 	
 	//1:1문의 작성GET
 	@GetMapping("/inquiryRegister")
-	public String getInquiryRegister(Inquiry inquiry, Model model) throws Exception {
+	public String getInquiryRegister(Inquiry inquiry, Model model, HttpSession session) throws Exception {
 		log.info("getInquriyRegister()");
 		
-		return "service_center/noticeRegister";
+		inquiry.setUser_num((int)session.getAttribute("check"));
+		
+		return "service_center/inquiryRegister";
 	}
 	
 	//1:1문의 작성POST
 	@PostMapping("/inquiryRegister")
-	public RedirectView postInquiryRegister(Inquiry inquiry, Model model, HttpSession session) throws Exception {
+	public String postInquiryRegister(Inquiry inquiry, Model model, HttpSession session, Integer inquiry_no) throws Exception {
 		log.info("postInquiryRegister()");
 		
 		inquiry.setUser_num((int)session.getAttribute("check"));
 	      
 	    service.inquiryRegister(inquiry);
-	      
+
 	    model.addAttribute("inquiryRegister", "문의글 등록이 성공적으로 완료되었습니다.");
-	      
-	    return new RedirectView("inquiryDetail");
+	    
+	    return "service_center/inquiryDetail";
 	}
 	
 	//1:1문의 상세보기GET
@@ -94,7 +96,7 @@ public class ServiceCenterController {
 	@GetMapping("/inquiryModify")
 	public String getInquiryModify(int inquiry_no, Model model) throws Exception {
 		log.info("getInquiryModify()");
-		
+	    
 		model.addAttribute("inquiryModify" , service.inquiryDetail(inquiry_no));
 		
 		return "service_center/inquiryModify";
@@ -102,14 +104,18 @@ public class ServiceCenterController {
 	
 	//1:1문의 수정POST
 	@PostMapping("/inquiryModify")
-	public RedirectView postInquiryModify(Inquiry inquiry, Model model) throws Exception {
+	public RedirectView postInquiryModify(int inquiry_no, Inquiry inquiry, Model model) throws Exception {
 		log.info("postInquiryModify()");
-		
-		service.inquiryModify(inquiry);
-		
-		model.addAttribute("inquiryModify", "문의글 수정완료");
-		
-		return new RedirectView("inquiryDetail");
+	      
+	    service.inquiryModify(inquiry);
+	      
+	    model.addAttribute("inquiryModify", "문의글 수정완료");
+
+	    RedirectView rv = new RedirectView("inquiryDetail");
+	      
+	    rv.addStaticAttribute("inquiry_no", inquiry.getInquiry_no());
+	      
+	    return rv;
 	}
 	
 	//1:1문의 삭제POST
