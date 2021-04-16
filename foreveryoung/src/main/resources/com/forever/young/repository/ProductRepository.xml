@@ -164,6 +164,9 @@
 	]]>
 	</select>
 	
+	<select id="findByNo" parameterType="int" resultType="com.forever.young.entity.Product">
+		select * from product_table where product_no=#{no}
+	</select>
 	<!-- best 상품 -->
 	<select id="getBest" resultType="Product">
 		select
@@ -197,4 +200,17 @@
 			where
 			    I.image_type='N' and P.product_category = #{category}
 	</select>
+	
+	
+	
+	<select id="getFindBrandProduct" resultType="Product">
+		select p.product_no, p.product_name, p.product_category, p.product_price, p.product_stock, p.product_regdate from product_table p 
+		INNER JOIN brand b on p.product_brand = b.brand_num  
+		order by product_regdate DESC
+	</select>
+	
+	
+	
+	
+	
 </mapper>
