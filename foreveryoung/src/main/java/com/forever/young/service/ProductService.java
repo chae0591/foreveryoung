@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.forever.young.entity.Brand;
 import com.forever.young.entity.Product;
+import com.forever.young.entity.ProductFile;
 
 public interface ProductService {
 	public void registProduct(Product product) throws Exception;
@@ -23,7 +24,6 @@ public interface ProductService {
 	public int getCountByBrand(int brand);
 	
 
-	public Product findByNo(int no);
 
 	// 베스트 상품
 	public List<Product> getBest(String category);

@@ -164,9 +164,16 @@
 	]]>
 	</select>
 	
+	<!-- 상세게시글-->
 	<select id="findByNo" parameterType="int" resultType="com.forever.young.entity.Product">
 		select * from product_table where product_no=#{no}
 	</select>
+	
+	<!-- 상세게시글 이미지 -->
+	<select id="filelist" parameterType="int" resultType="com.forever.young.entity.Product">
+		select * from product_img where product_no=#{no}
+	</select>
+	
 	<!-- best 상품 -->
 	<select id="getBest" resultType="Product">
 		select
