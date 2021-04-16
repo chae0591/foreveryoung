@@ -140,10 +140,16 @@ public class BrandRegistController {
 		
 		Brand brand = service.findNum((int)session.getAttribute("check"));
 		
-		List<Product> brandProductList = productService.getFindBrandProduct(product); 
-		
+		List<Product> brandProductList = productService.getFindBrandProduct(product);
+		//이미지 
+		List<Product> list = productService.brandList((int)session.getAttribute("check"));
+
 		model.addAttribute("brand_info", brand); 
 		model.addAttribute("product_info", brandProductList); 
+		
+		
+		model.addAttribute("list", list);
+
 		
 		return "member/mypage_brand/mypage_brand_product"; 
 	}
