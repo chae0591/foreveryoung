@@ -28,5 +28,11 @@
 		brand_name = #{brand_name}, brand_phone=#{brand_phone}
 		where brand_num = #{brand_num} 
 	</update>
+	
+	<!-- <select id="getFindBrandProduct">
+		select product_no, product_category, product_name, product_price, product_stock, product_regdate
+		from product_table where product_brand = #{brand_num} 
+		order by product_regdate DESC
+	</select> -->
 
 </mapper>

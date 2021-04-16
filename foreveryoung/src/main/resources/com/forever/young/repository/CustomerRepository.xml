@@ -7,14 +7,14 @@
 
 	<insert id="regist">
 		insert into customer
-		values ( customer_seq.nextval, 
-		#{user_id}, #{user_pw}, #{user_name}, #{user_phone}, #{user_gender, jdbcType=CHAR}, #{user_birth, jdbcType=DATE}, sysdate, null )
+		values (customer_seq.nextval, 
+		#{user_id}, #{user_pw}, #{user_name}, #{user_phone}, #{user_gender}, #{user_birth}, sysdate, null )
 	</insert>
 	
 	<insert id="regist2">
 		insert into customer
-		values (customer_seq.nextval, 
-		#{user_id}, #{user_pw}, #{user_name}, #{user_phone}, #{user_gender}, #{user_birth}, sysdate, null )
+		values ( customer_seq.nextval, 
+		#{user_id}, #{user_pw}, #{user_name}, #{user_phone}, #{user_gender, jdbcType=CHAR}, #{user_birth, jdbcType=DATE}, sysdate, null )
 	</insert>
 	
 	<select id="login" resultType="Customer">

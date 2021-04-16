@@ -30,4 +30,6 @@ public interface ProductRepository {
 	//베스트상품
 	public List<Product> getBest(String category);
 
+	public List<Product> getFindBrandProduct(Product product);
+
 }

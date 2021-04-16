@@ -91,7 +91,7 @@ public class OrderController {
 		return "order/test";
 	}
 	
-	@PostMapping("ordertest_payment")
+	@PostMapping("/ordertest_payment")
 	public RedirectView orderPayment(@ModelAttribute OrderVO orderVO, HttpSession session) throws Exception{
 		log.info("orderPayment()");
 		
