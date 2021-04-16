@@ -24,11 +24,38 @@
 			#{product_price},
 			#{product_stock},
 			sysdate, 
+			#{product_brand},
+			#{product_skintype},
+		 	1)
+	</insert>
+	
+	<!-- <insert id="registProduct">
+	<selectKey keyProperty="product_no" order="BEFORE" resultType="int">
+			select product_table_seq.nextval from dual			
+	</selectKey>
+		insert into product_table 
+			(product_no,
+			product_category,
+			product_name,
+			product_price,
+			product_stock,
+			product_regDate,
+			product_brand,
+			product_skintype,
+			event_no)
+			
+		values
+			(#{product_no},
+			#{product_category},
+			#{product_name},
+			#{product_price},
+			#{product_stock},
+			sysdate, 
 			1,
 			#{product_skintype},
 		 	1)
 	</insert>
-
+ -->
 	<select id="selectBoardList" parameterType="hashMap" resultType="hashmap">
 		<![CDATA[
 			select 
@@ -46,9 +73,10 @@
 	<!-- 카테고리별 상품조회 -->
 	<select id="categoryList" resultType="com.forever.young.entity.Product">
 		select
-			p.*, i.image_save_name, i.image_type, i.image_name
+			p.*, i.image_save_name, i.image_type, i.image_name, b.brand_name
 		from
         	product_table P inner join product_img i on p.product_no = i.product_no
+        	inner join brand b on p.product_brand = b.brand_num
 		where
 			product_category = #{category} and image_type = 'N'
 		order by
@@ -135,4 +163,54 @@
 		select count(*) from product_table where product_brand = #{brand}
 	]]>
 	</select>
+	
+	<select id="findByNo" parameterType="int" resultType="com.forever.young.entity.Product">
+		select * from product_table where product_no=#{no}
+	</select>
+	<!-- best 상품 -->
+	<select id="getBest" resultType="Product">
+		select
+			rn, 
+	        p.*,
+	        I.image_save_name,
+	        I.image_type,
+	        I.image_name,
+	        b.brand_name
+		from(
+		    select
+		        rownum rn,
+		        순위,
+		        order_product
+		    from(
+		        select
+		            order_product,
+		            sum(order_amount)total,
+		            dense_rank() over(order by sum(order_amount) desc) 순위
+		        from
+		            order_table
+		        group by
+		            order_product
+		        )
+		    where
+		        순위 between 1 and 3
+		    )tmp
+			    inner join product_table p on tmp.order_product = p.product_no
+			    inner join product_img I on p.product_no = I.product_no
+			    inner join brand B on p.product_brand = B.brand_num
+			where
+			    I.image_type='N' and P.product_category = #{category}
+	</select>
+	
+	
+	
+	<select id="getFindBrandProduct" resultType="Product">
+		select p.product_no, p.product_name, p.product_category, p.product_price, p.product_stock, p.product_regdate from product_table p 
+		INNER JOIN brand b on p.product_brand = b.brand_num  
+		order by product_regdate DESC
+	</select>
+	
+	
+	
+	
+	
 </mapper>

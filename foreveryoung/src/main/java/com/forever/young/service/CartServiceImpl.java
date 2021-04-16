@@ -28,4 +28,19 @@ public class CartServiceImpl implements CartService{
 	public void delCartItems(int[] cartArr) throws Exception {
 		repository.delCartItems(cartArr);
 	}
+	
+	@Override
+	public List<CartListVO> searchListNums(int[] cartList) throws Exception {
+		return repository.searchList(cartList);
+	}
+	
+	@Override
+	public List<CartListVO> searchListProNums(int[] pronumList) throws Exception {
+		return repository.searchListProNums(pronumList);
+	}
+	
+	@Override
+	public List<CartListVO> searchListproNumList(List<Integer> proList) throws Exception {
+		return repository.searchListProNumList(proList);
+	}
 }
