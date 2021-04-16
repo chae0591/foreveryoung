@@ -20,6 +20,6 @@ public interface ServiceCenterRepository {
 	
 	public void inquiryDelete(Integer inquiry_no) throws Exception;
 
-	public void inquiryRegisterAfter(Integer inquiry_no) throws Exception;
+	public int inquiryRegisterAfter() throws Exception;
 
 }

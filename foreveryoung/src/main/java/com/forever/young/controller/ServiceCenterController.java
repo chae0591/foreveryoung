@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.forever.young.entity.Inquiry;
@@ -70,18 +71,19 @@ public class ServiceCenterController {
 	
 	//1:1문의 작성POST
 	@PostMapping("/inquiryRegister")
-	public String postInquiryRegister(Inquiry inquiry, Model model, HttpSession session, Integer inquiry_no) throws Exception {
-		log.info("postInquiryRegister()");
-		
-		inquiry.setUser_num((int)session.getAttribute("check"));
+	  public RedirectView postInquiryRegister(Inquiry inquiry, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
+		 log.info("postInquiryRegister()");
 	      
-	    service.inquiryRegister(inquiry);
-
-	    service.inquiryRegisterAfter(inquiry_no);
-	    
-	    model.addAttribute("inquiryRegister", "문의글 등록이 성공적으로 완료되었습니다.");
-	    
-	    return "service_center/inquiryDetail";
+	     inquiry.setUser_num((int)session.getAttribute("check"));
+	         
+	     service.inquiryRegister(inquiry);
+	         
+	      model.addAttribute("inquiryRegister", "문의글 등록이 성공적으로 완료되었습니다.");
+	       
+	      RedirectView rv = new RedirectView("inquiryDetail");
+	      rv.addStaticAttribute("inquiry_no", service.inquiryRegisterAfter());
+	         
+	      return rv;
 	}
 	
 	//1:1문의 상세보기GET

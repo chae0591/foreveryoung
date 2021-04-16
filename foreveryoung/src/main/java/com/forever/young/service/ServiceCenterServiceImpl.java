@@ -53,8 +53,8 @@ public class ServiceCenterServiceImpl implements ServiceCenterService{
 	}
 
 	@Override
-	public void inquiryRegisterAfter(Integer inquiry_no) throws Exception {
-		repository.inquiryRegisterAfter(inquiry_no);
+	public int inquiryRegisterAfter() throws Exception {
+		return repository.inquiryRegisterAfter();
 	}
 
 }
