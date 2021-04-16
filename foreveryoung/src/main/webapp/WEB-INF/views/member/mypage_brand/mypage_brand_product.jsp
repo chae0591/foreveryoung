@@ -9,9 +9,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 사이드 매뉴 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+
+<!-- Common Design Link -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/product/productCommon.css">
 
 <!--  DatePicker-->
@@ -19,8 +22,25 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 
+<!-- 부트스트랩 -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/product/css/bootstrap.css">
+
 <title>판매상품 관리 페이지</title>
 <style>
+	nav, section {
+		padding:10px;
+		
+	}
+
+
+	section {
+		width:1450px;
+		float:right; 
+	 
+	}
+	
+	
+	
 	.menu a:hover {
 	    background:#e9d319;
 	    color: #000;
@@ -47,7 +67,6 @@
 		background: #ffffff;
 		
 		margin:0 auto;
-		
 	}
 
 	.searchInput{
@@ -85,7 +104,23 @@
 	.calendarLabel{
 		display: block;
 	}
+	
+	
+	.productImg{
+		width:150px; 
+		height:100px; 
+		/* border-radius: 8px; */ 
+		
+	}
+	
+	
+	.search{
+		display: inline-block; 
+		margin:10px;
+	}
+
 </style>
+
 <script>
 $(".menu a").click(function() {
     $(".menu a.active").removeClass("active");
@@ -136,90 +171,123 @@ $(".menu a").click(function() {
 </script>
 </head>
 <body>
+	<!-- <div id="left"> -->
+		<!-- Sidebar/menu -->
+		<nav class="menu w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
+		  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
+		  <div class="w3-container">
+		    <h3 class="w3-padding-64"><b>포에버영<br>판메자 페이지</b></h3>
+		  </div>
+		  
+		  <div class="w3-bar-block">
+		    <a href="mypage_brand_main" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">판매자 메인</a> 
+		    <a href="mypage_brand_buyer" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">구매자 관리</a> 
+		    <a href="mypage_brand_product" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">판매 상품관리</a> 
+		    <a href="mypage_brand_order" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">주문 관리</a> 
+		    <a href="mypage_brand_chart" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">통계</a> 
+		  </div>
+		</nav>
 
-<div id="left">
-	<!-- Sidebar/menu -->
-	<nav class="menu w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
-	  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
-	  <div class="w3-container">
-	    <h3 class="w3-padding-64"><b>포에버영<br>판메자 페이지</b></h3>
-	  </div>
-	  <div class="w3-bar-block">
-	    <a href="mypage_brand_main" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">판매자 메인</a> 
-	    <a href="mypage_brand_buyer" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">구매자 관리</a> 
-	    <a href="mypage_brand_product" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">판매 상품관리</a> 
-	    <a href="mypage_brand_order" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">주문 관리</a> 
-	    <a href="mypage_brand_chart" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">통계</a> 
-	  </div>
-	</nav>
-</div>
-
-<div class="center title">
-	<h2>판매상품 관리 페이지</h2>
-</div>
-
-<!-- 검색창 -->
-<div class="center searchBar">
-	<input class="searchInput" type="text" placeholder="상품명을 입력해주세요">
-	<button class="searchButton">검색</button>
-</div>
-
-	
-	<div class="calendarForm">
-		<label class="calendarLabel">날짜입력</label>
-		<input class="calendarInput" type="text" id="startDate">
-		<label class="calendarLabel">부터</label> 
-		<input class="calendarInput" type="text" id="endDate">
-		<label class="calendarLabel">까지</label> 
+<section>
+	<div class="center title">
+		<h2>판매상품 관리 페이지</h2>
 	</div>
 	
 	
-	<div class="center">
-		<c:forEach var="product_info" items="${product_info}">
-			<li>
-				<label>
-					<c:out value="${product_info.product_no}"/>
-				</label>
-				<label>
-					<c:out value="${product_info.product_name}"/>
-				</label>
-				<label>
-					<c:out value="${product_info.product_category}"/>
-				</label>
-				<label>
-					<c:out value="${product_info.product_price}"/>
-				</label>
-				<label>
-					<c:out value="${product_info.product_stock}"/>
-				</label>
-				<label>
-					<c:out value="${product_info.product_regDate}"/>
-				</label>
-			</li>
-		</c:forEach>
-	</div>
+	
+	<div class="search center">
+		<!--Date Picker   -->
+		<div class="calendarForm">
+			<label class="calendarLabel">날짜입력</label>
+			<input class="calendarInput" type="text" id="startDate">
+			<label class="calendarLabel">부터</label> 
+			<input class="calendarInput" type="text" id="endDate">
+			<label class="calendarLabel">까지</label> 
+		</div><br>
+	
+		<!-- 검색창 -->
+		<div class="center searchBar">
+			<input class="searchInput" type="text" placeholder="상품명을 입력해주세요">
+			<button class="searchButton">검색</button>
+		</div>
+	</div><br>
 	
 	
-		<%-- <table>
-			<tr>
-				<td class="bold" style="display:none">상품번호: <c:out value="${product_info.product_no}"></c:out> </td>
-			</tr>
-			<tr>
-				<td class="bold">상품 카테고리: <c:out value="${product_info.product_cetegory}"></c:out></td>
-			</tr>
-			<tr>
-				<td class="bold">상품 이름: <c:out value="${product_info.product_name}"></c:out></td>
-			</tr>
-			<tr>
-				<td class="bold">상품 가격: <c:out value="${product_info.product_price}"></c:out></td>
-			</tr>
-			<tr>
-				<td class="bold">상품 재고: <c:out value="${product_info.product_stock}"></c:out></td>
-			</tr>
-			<tr>
-				<td class="bold">상품 등록일: <c:out value="${product_info.product_regdate}"></c:out></td>
-			</tr>
-		</table><br><br> --%>
+		<table class="table table-hover m-2" >
+			<thead>
+				<tr>
+					<th scope="col" class="text-center">상품 번호</th>
+					<th scope="col" class="text-center">이미지</th>
+					<th scope="col" class="text-center">상품 카테고리</th>
+					<th scope="col" class="text-center">상품 등록자</th>
+					<th scope="col" class="text-center">상품 이름</th>
+					<th scope="col" class="text-center">상품 가격</th>
+					<th scope="col" class="text-center">상품 재고</th>
+					<th scope="col" class="text-center">상품 등록 날짜</th>
+					<th scope="col" class="text-center">수정 / 삭제</th>
+				</tr>
+			</thead>
+		
+			<tbody>
+			
+				<c:forEach var="lists" items="${list}">
+				<tr>
+					<td class="col-md-1">
+						<c:out value="${lists.product_no}" />
+					</td>
+					<td>
+						<img class="productImg" src="/viewImg?fileName=${lists.image_save_name}&imageType=${lists.image_type}">
+					</td>
+					<td class="col-md-1">
+						<c:out value="${lists.product_category}" />
+					</td>
+					<td class="col-md-1"> 
+						<c:out value="${brand_info.brand_name}" />
+					 </td>
+					<td class="col-md-1">
+						<c:out value="${lists.product_name}" />
+					</td>
+					<td class="col-md-1">
+						<label class="price"><fmt:formatNumber value="${lists.product_price}" pattern="###,###,###"/>원</label>
+					</td>
+					<td class="col-md-1">
+						<label class="stock"><fmt:formatNumber value="${lists.product_stock}" pattern="###,###,###"/>개</label>
+					</td>
+					<td class="col-md-1">
+						<c:out value="${lists.product_regDate}" />
+					</td>
+					<td class="col-md-1">
+						<div>
+							<button>수정하기</button>
+							<button>삭제하기</button>
+						</div>
+					<td>	
+				<tr>
+				</c:forEach>
+			</tbody>
+		</table>
+</section>
 	
+	<%-- 
+		<a class="detail" href="#">
+						
+								<label></label>
+								
+								<label><c:out value="${lists.product_category}" /></label>
+								<label><c:out value="${lists.brand_name}"/></label>
+							<label><c:out value="${lists.product_name}" /></label>
+							<label class="price"><fmt:formatNumber value="${lists.product_price}" pattern="###,###,###"/>원</label>
+							<label class="stock"><fmt:formatNumber value="${lists.product_stock}" pattern="###,###,###"/>개</label>
+							<label><c:out value="${lists.product_regDate}" /></label>
+						</a>
+						<button>샹품 삭제</button>
+						<br>
+	
+	<div class="center" style="padding-top: 10px; ">
+	</div> --%>
+	
+		
+<!--  부트스트랩을 사용하기위한 js설정 입력 -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/css/product/js/bootstrap.js"></script>
 </body>
 </html>
