@@ -40,8 +40,7 @@
 	<select id="inquiryModify">
 		update inquiry set
 			 inquiry_title=#{inquiry_title} , 
-			 inquiry_content=#{inquiry_content},
-			 inquiry_regdate=sysdate,
+			 inquiry_content=#{inquiry_content}
 		 where inquiry_no =#{inquiry_no}
 	</select>
 	

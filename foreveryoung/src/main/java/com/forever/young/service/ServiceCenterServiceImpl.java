@@ -43,8 +43,8 @@ public class ServiceCenterServiceImpl implements ServiceCenterService{
 	}
 	
 	@Override
-	public void inquiryModify(Inquiry inquiry) throws Exception {
-		repository.inquiryModify(inquiry);
+	public void inquiryModify(Inquiry inquiry_no) throws Exception {
+		repository.inquiryModify(inquiry_no);
 	}
 	
 	@Override

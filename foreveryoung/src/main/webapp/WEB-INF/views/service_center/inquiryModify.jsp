@@ -11,22 +11,28 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script>
-	$(document).ready(function(){
-		var formObj = $('#inquiryDetail')
+$(document).ready(function(){
 		
-		$("#inquiry_modify").click(function(){
-			var inquiry_no = $("#inquiry_no");
-			var inquiry_noVal = inquiry_no.val();
-			self.location = "/service_center/inquiryModify?inquiry_no=" + inquiry_noVal
-		})
-		$("#inquiry_delete").click(function(){
+		//목록으로 버튼 클릭시
+		$(".btnGoList").click(function(){
+			location.href = '/service_center/inquiry';
+		});
+		
+		//수정취소 버튼 클릭시
+		$(".btnModifyCancel").click(function(){
+			 history.go(-1);
+		});
+		
+		//수정 완료 버튼
+		$(".btnModifyDone").click(function(){
+			var formObj = $('#inquiryModify')
 			
-			 window.alert("문의글이 삭제되었습니다.");
-				formObj.attr("action" , "/service_center/inquiryDelete")
-				formObj.submit();				 
-		})
+			formObj.attr("action", "/service_center/inquiryModify")
+			formObj.attr("method" , "post")
+			formObj.submit();			 
+		});
 		
-	})
+});
 
 </script> 
 </head>
@@ -41,16 +47,17 @@
 					
 							<p><form:input path="inquiry_title"/></p>
 		
-							<p><form:textarea cols="50" rows="5" path="notice_content"/></p>
+							<p><form:textarea cols="50" rows="5" path="inquiry_content"/></p>
 					<form:hidden path="inquiry_regDate"/>
 					<form:hidden path="user_num"/>
 				</form:form>
-				
-				<div>
-					<button type="submit" id="inquiry_complete">수정 완료</button>
-					<button type="submit" id="inquiryList">목록으로</button>
-				</div>
+	</div>		
+	<div>
+		<button class="btnGoList">목록으로</button>
+		<button class="btnModifyCancel">수정 취소</button>
+		<button type="submit" class="btnModifyDone">수정 완료</button>
 	</div>
+
 <jsp:include page="../template/footer.jsp"></jsp:include>
 </body>
 </html>

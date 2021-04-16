@@ -85,29 +85,20 @@
 .detailText-box {
 	width: 100%;
 	height: auto;
-	margin: 0;
-	display: block;
-}
-.detailText-box > p > form:input {
-	border: none;
-}
-.detailText-box > .inquiryContent {
-	width: 100%;
-	height: auto;
 	min-height: 60px;
-	background-color: yellow;
 	position: relative;
 	padding: 10px;
 }
-.detailText-box >.detailServebtns { 
-	width: 100%;
+.detailServebtns { 
+	width: 1020px;
 	height: auto;
 	background-color: #blue;
 	border-bottom: 1px solid #e5e5e5;
 	position: relative;
 	text-align: center;
+	margin: 0 auto;
 }
-.detailText-box > .detailServebtns  button {
+.detailServebtns  button {
 	width: 33%;
 	height: 50px;
 	color: #fff;
@@ -141,26 +132,22 @@ $(document).ready(function() {
 		
 	//1:1버튼 클릭시
 	$(".inquiryGobtn").click(function(){
-		var id = "${check}";
-			
-	    if(id == ''){
-	        alert("로그인 후 문의 가능합니다.");
-	        location.href = '/member/login';
-	   	}else{
-	   	 	location.href = '/service_center/inquiryRegister';
-	    }
+	    location.href = '/service_center/inquiryRegister';
 	});
 	
+	//목록으로 버튼 클릭시
+	$(".btnGoList").click(function(){
+		location.href = '/service_center/inquiry';
+	});
+	
+	//수정하기 버튼 클릭시
 	$(".btnModify").click(function(){
 		var inquiry_no = $("#inquiry_no");
 		var inquiry_noVal = inquiry_no.val();
 		self.location = "/service_center/inquiryModify?inquiry_no=" + inquiry_noVal
 	});
 	
-	$(".btnGoList").click(function(){
-		self.location = "/service_center/inquiry"
-	});
-	
+	//삭제하기 버튼 클릭시
 	$(".btnDelete").click(function(){
 		var formObj = $('#inquiryDetail')
 		
@@ -197,23 +184,21 @@ $(document).ready(function() {
 			</div>
 	
 			<div class="detailText-box">
-				<div class="inquiryContent">
-					<p><form:input path="inquiry_content" readonly="true"/></p>
-				</div>
-				
-				<div class="detailServebtns">
-					<button class="btnGoList">목록으로</button>
-					<button class="btnModify">수정</button>
-					<button class="btnDelete">게시글 삭제</button>
-				</div>
+				<p><form:input path="inquiry_content" readonly="true"/></p>
 			</div>	
 			<form:hidden path="user_num"/>
 		 </form:form>
 	</div>
-		
-		<div>
-			<c:out value="${inquiryDetail.reply_content}"></c:out>
-		</div>
+	
+	<div class="detailServebtns">
+		<button class="btnGoList">목록으로</button>
+		<button class="btnModify">수정</button>
+		<button class="btnDelete">게시글 삭제</button>
+	</div>
+	
+	<div>
+		<c:out value="${inquiryDetail.reply_content}"></c:out>
+	</div>
 	
 	<div class="last-box">
 		<button class="inquiryGobtn">1:1 문의하기</button>
