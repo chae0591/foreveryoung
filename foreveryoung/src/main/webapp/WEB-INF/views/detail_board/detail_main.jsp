@@ -342,7 +342,7 @@
    
    <div class="detail">
       <div class="product-detail">
-      1
+      "${prodcut.prodcut_img}"
       </div>
       
       <div class="purchas-detail">
@@ -438,10 +438,10 @@
             
                <ul>
                <c:forEach var = "lists" items="${list}">
-                  <li>${list.review_title}</li>
-                  <li>${list.review_content}</li>
-                  <li>${list.review_date}</li>
-                  <li>${list.review_score}</li>
+                  <li>${lists.review_title}</li>
+                  <li>${lists.review_content}</li>
+                  <li>${lists.review_date}</li>
+                  <li>${lists.review_score}</li>
                 </c:forEach>
                </ul>
 
