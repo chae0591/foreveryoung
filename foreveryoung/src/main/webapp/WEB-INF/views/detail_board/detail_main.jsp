@@ -14,7 +14,7 @@
 <style>
 .detail-all{
 	width : 1100px;
-	border : 3px red solid;
+	border : 3px blue solid;
 	align : center;
 	
 }
