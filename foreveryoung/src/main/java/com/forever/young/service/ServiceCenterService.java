@@ -19,7 +19,6 @@ public interface ServiceCenterService {
 	public void inquiryModify(Inquiry inquiry_no) throws Exception;
 	
 	public void inquiryDelete(Integer inquiry_no) throws Exception;
-	
-	public int inquiryRegisterAfter() throws Exception;
 
+	public int inquiryRegisterAfter() throws Exception;
 }

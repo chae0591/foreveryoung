@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.forever.young.entity.Brand;
 import com.forever.young.entity.Product;
+import com.forever.young.entity.ProductFile;
 
 @Repository
 public interface ProductRepository {
@@ -25,9 +26,6 @@ public interface ProductRepository {
 	public List<Product> brandList(int brand);
 	public List<Product> brandListSearch(Map<String, Object> searchData);
 	public int getCountByBrand(int brand);
-	
-
-	public Product findByNo(int no);
 
 	//베스트상품
 	public List<Product> getBest(String category);

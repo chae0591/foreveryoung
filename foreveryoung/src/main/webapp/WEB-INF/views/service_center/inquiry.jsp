@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html>
@@ -206,52 +208,10 @@ $(function(){
 	
 	//1:1버튼 클릭시
 	$(".inquiryGobtn").click(function(){
-		var id = "${check}";
-		
-        if(id == ''){
-        	 alert("로그인 후 문의 가능합니다.");
-        	 location.href = '/member/login';
-   		 }else{
-   			 location.href = '/service_center/inquiryRegister';
-    	}
+   			location.href = '/service_center/inquiryRegister';
 	});
 	
-	//비동기
-	var category = $("input[name='category']").val();
-		// 필터링
-		$(".month-box > button").on("change", function(e){
-			var month = new Array();
-			 
-			$(".brand_check input[type='checkbox']:checked").each(function(index, item) {
-				inquiry.push($(item).val());
-			});
-			
-			if(brand.length == 0 || brand == "") {
-				$(".brand_check input[type='checkbox']").each(function(index, item) {
-					brand.push($(item).val());
-				});
-			}
-			
-			var searchData = {
-					category : category,
-					type : type,
-					brand : brand
-			}
-			
-			var jsonData = JSON.stringify(searchData);
-			
-			$.ajax({
-				url : '/product/search',
-				contentType : 'application/json',
-				data : jsonData,
-				type : 'POST',
-				traditional : true,
-				success : function(result){
-					console.log("성공!");
-					voteCheck();
-					$(".pList").html(result);
-				}
-			}); // ajax
+	
 });
 </script>
 
