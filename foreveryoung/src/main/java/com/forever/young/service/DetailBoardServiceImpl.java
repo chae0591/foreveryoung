@@ -7,7 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.forever.young.entity.Brand;
 import com.forever.young.entity.Product;
+import com.forever.young.repository.BrandRegistRepository;
 import com.forever.young.repository.DetailBoardRepository;
 
 @Service
@@ -18,10 +20,16 @@ public class DetailBoardServiceImpl implements DetailBoardService{
 	
 	@Autowired
 	private DetailBoardRepository repository;
-
+	
 	@Override
-	public List<Product> mainList() throws Exception {
-		
-		return repository.mainList();
+	public Product getDetail(Integer product_no) throws Exception {
+		return repository.getDetail(product_no);
 	}
+	/*
+	 * @Override public List<Product> productList() throws Exception { return
+	 * repository.productList(); }
+	 */
+
 }
+
+

@@ -27,15 +27,22 @@ public class DetailBoardContorller{
 	
 	@Autowired
 	private DetailBoardService service;
-	
-	//보여주기 상세페이지
+		
+	//상세페이지
 	@GetMapping("/detail_main")
-	public String mainList(Model model)throws Exception{
-		log.info("mainList()");
-		model.addAttribute("mainList", service.mainList());
+	public String getDetial(int product_no,Model model)throws Exception{
+		log.info("getDetail()");
+		model.addAttribute("getDetail", service.getDetail(product_no));
 		
 		return "detail_board/detail_main";
 	}
 	
-
+	/*
+	 * //상품 정보받아오기 public String product(Model model)throws Exception{
+	 * log.info("productList()"); model.addAttribute("productList",
+	 * service.productList());
+	 * 
+	 * return "detail_board/detail_main"; }
+	 */
+	
 }

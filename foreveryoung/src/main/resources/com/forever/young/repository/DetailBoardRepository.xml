@@ -5,9 +5,17 @@
 
 <mapper namespace="com.forever.young.repository.DetailBoardRepository">
 	<!--product 리스트 -->
-	<select id="mainList" resultType="Product">
+	<select id="productList" resultType="Product">
   		<![CDATA[
   			  	select * from product
   		]]>
 	</select>
+	
+	<select id="getDetail" resultType="Product">
+		select P.*,B.brand_num,E.event_no from Product P
+			left outer join brand B on P.product_brand = B.brand_num
+			left outer join event E on P.event_no = E.event_no
+			where P.product_no=#{product_no}
+	</select>
+	
 </mapper>
