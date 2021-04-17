@@ -13,15 +13,20 @@
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <style>
 .detail-all{
-	width : 1100px;
 	border : 3px blue solid;
-	align : center;
-	
+	width : 1200px;
+	maring-right : 20%;
+	margin-left : 20%;
+	height : 800px;
 }
-
+.main-img{
+	border : 2px red solid;
+	width : 550px;
+	height : 750px;
+}
 </style>
 <script type="text/javascript">
-
+	
 </script>
 
 <head>
@@ -30,7 +35,43 @@
 <body>
 <jsp:include page="../template/header.jsp"></jsp:include>
 <div class="detail-all">
-
+	<div class="main-img">
+			<c:forEach items="${productList}  var="productList">
+				<table>
+					<tr>
+						<th></th>
+						<th></th>
+					</tr>
+					<tr>
+						<th></th>
+						<th></th>
+					</tr>
+					<tr>
+						<th></th>
+						<th></th>
+					</tr>
+					<tr>
+						<th></th>
+						<th></th>
+					</tr>
+					<tr>
+						<th></th>
+						<th></th>
+					</tr>
+					<tr>
+						<th></th>
+						<th></th>
+					</tr>
+					<tr>
+						<th></th>
+						<th></th>
+					</tr>
+					
+					<tr>
+					</tr>
+				</table>
+			</c:forEach>
+	</div>
 	
 
 </div>
