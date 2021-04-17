@@ -92,7 +92,9 @@
 								<tbody>
 									<c:choose>
 										<c:when test="${empty product_info}">
-											<span>최근 주문 내역이 없습니다.</span>
+											<tr>
+												<th colspan="3"><span>최근 주문 내역이 없습니다.</span></th>
+											</tr>
 										</c:when>
 										<c:otherwise>
 											<c:forEach var="order_product" items="${product_info}">
@@ -126,11 +128,31 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>2021.04.14</td>
-										<td>물건이 안와요~ 확인해주세요</td>
-										<td>처리중</td>
-									</tr>
+									<c:choose>
+										<c:when test="${empty inquiry_info}">
+											<tr>
+												<th colspan="3">최근 문의 사항이 없습니다.</th>
+											</tr>
+										</c:when>
+										<c:otherwise>
+											<c:forEach var="inq" items="${inquiry_info}">
+												<tr>
+													<td><c:out value="${inq.inquiry_regDate}"></c:out></td>
+													<td><c:out value="${inq.inquiry_title}"></c:out></td>
+													<td>
+														<c:choose>
+															<c:when test="${inq.reply_no eq 0}">
+																처리중 
+															</c:when>
+															<c:otherwise>
+																답변 완료
+															</c:otherwise>
+														</c:choose>
+													</td>
+												</tr>
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
 								</tbody>
 							</table>
 						</div>

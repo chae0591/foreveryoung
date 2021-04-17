@@ -122,6 +122,7 @@ public class CustomerController {
 		
 		model.addAttribute("order_info", order_list);
 		model.addAttribute("product_info", service_or.searchListVO((int)session.getAttribute("check")));
+		model.addAttribute("inquiry_info", service.findNumInquiry((int)session.getAttribute("check")));
 		
 		return "member/mypage";
 	}

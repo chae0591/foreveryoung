@@ -41,5 +41,9 @@
 		user_pw = #{change_pw} 
 		where user_num = #{user_num} and user_pw = #{current_pw}
 	</update>
+	
+	<select id="findInquiry" resultType="MyPgInquiryVO">
+		select I.*, R.reply_no from inquiry I left outer join reply R on I.inquiry_no = R.inquiry_no where user_num = #{user_num} order by I.inquiry_regDate
+	</select>
 
 </mapper>

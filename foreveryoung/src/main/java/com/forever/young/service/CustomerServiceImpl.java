@@ -1,10 +1,13 @@
 package com.forever.young.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.forever.young.entity.ChangePwVO;
 import com.forever.young.entity.Customer;
+import com.forever.young.entity.MyPgInquiryVO;
 import com.forever.young.repository.CustomerRepository;
 
 @Service
@@ -42,5 +45,10 @@ public class CustomerServiceImpl implements CustomerService{
 	@Override
 	public void editPw(ChangePwVO changePwVO) throws Exception {
 		repository.editPw(changePwVO);
+	}
+	
+	@Override
+	public List<MyPgInquiryVO> findNumInquiry(int user_num) throws Exception {
+		return repository.findInquiry(user_num);
 	}
 }

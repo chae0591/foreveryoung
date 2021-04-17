@@ -1,7 +1,5 @@
 package com.forever.young.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -10,22 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.forever.young.entity.Inquiry;
-import com.forever.young.entity.Notice;
-import com.forever.young.service.AdminService;
 import com.forever.young.service.ServiceCenterService;
 
 import lombok.extern.java.Log;
-
-import com.forever.young.repository.ServiceCenterRepository;
 
 @Log
 @Controller
@@ -63,12 +54,12 @@ public class ServiceCenterController {
 	public String getInquiryRegister(Inquiry inquiry, Model model) throws Exception {
 		log.info("getInquriyRegister()");
 		
-		return "service_center/noticeRegister";
+		return "service_center/inquiryRegister";
 	}
 	
 	//1:1문의 작성POST
 	@PostMapping("/inquiryRegister")
-	public RedirectView postInquiryRegister(Inquiry inquiry, Model model, HttpSession session) throws Exception {
+	public RedirectView postInquiryRegister(Inquiry inquiry, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
 		log.info("postInquiryRegister()");
 		
 		inquiry.setUser_num((int)session.getAttribute("check"));
@@ -76,8 +67,11 @@ public class ServiceCenterController {
 	    service.inquiryRegister(inquiry);
 	      
 	    model.addAttribute("inquiryRegister", "문의글 등록이 성공적으로 완료되었습니다.");
+	    
+	    RedirectView rv = new RedirectView("inquiryDetail");
+		rv.addStaticAttribute("inquiry_no", service.inquiryRegisterAfter());
 	      
-	    return new RedirectView("inquiryDetail");
+	    return rv;
 	}
 	
 	//1:1문의 상세보기GET
