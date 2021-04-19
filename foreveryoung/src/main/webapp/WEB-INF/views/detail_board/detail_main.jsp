@@ -150,7 +150,6 @@ $(function(){
                   <div>
                   <form name="form" method="get">
                      <span>상품 수량</span>
-                     
                      <input type="hidden" id="sell_price" name="sell_price" value="${getDetail.product_price}">
 
                      <input type="number" style="height: 23pt;width : 120px;"value="1" min="1" max="100" onchange="change();" id="result" name="amount" >
@@ -160,7 +159,7 @@ $(function(){
                      <br>
                      
                      <span>합계금액</span>
-                     <input type="text" style="font-size : 23px; width : 181px;" name="sum" size="11" readonly id="total_amount">원
+                     <input type="text" style="font-size : 23px; width : 181px;" name="sum" size="11" readonly id="total_amount" value="${getDetail.product_price }">원
                   </form>
                  </div>
                  
