@@ -16,9 +16,8 @@ public class Paging {
 	}
 	
 	public Paging(int pageNum, int amount, int total) {
-		// 1페이지 20개
-		this.pageNum = 1;
-		this.amount = 20;
+		this.pageNum = pageNum;
+		this.amount = amount;
 		this.total = total;
 		
 		this.endPage = (int) (Math.ceil(this.pageNum/10.0)) * 10;
