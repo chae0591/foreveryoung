@@ -21,18 +21,25 @@ public interface AdminRepository {
 	public void join(Admin amdin) throws Exception;
 	//관리자 리스트
 	public List<Admin> adminList() throws Exception;
+	public int getCountByAdmin();
 	//브랜드 리스트
 	public List<Brand> brandList() throws Exception;
+	public int getCountByBrand();
 	//고객 리스트
 	public List<Customer> customerList() throws Exception;
+	public int getCountByCustomer();
 	//상품 리스트
-	public List<ProductVO> productList() throws Exception; 
+	public List<ProductVO> productList() throws Exception;
+	public int getCountByProduct();
 	//이벤트 리스트
 	public List<Event> eventList() throws Exception;
+	public int getCountByEvent();
 	//공지사항 리스트
 	public List<Notice> noticeList() throws Exception;
+	public int getCountByNotice();
 	//1:1문의 리스트
 	public List<InquiryVO> inquiryList() throws Exception;
+	public int getCountByInquiry();
 	//이벤트 등록
 	public void eventRegister(Event event) throws Exception;
 	//공지사항 등록

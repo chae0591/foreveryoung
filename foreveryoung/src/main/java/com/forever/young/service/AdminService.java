@@ -18,18 +18,32 @@ public interface AdminService {
 	public void join(Admin amdin) throws Exception;
 	//관리자 리스트
 	public List<Admin> adminList() throws Exception;
+	//관리자 총 개수
+	public int getCountByAdmin();
 	//브랜드 리스트
 	public List<Brand> brandList() throws Exception;
+	//브랜드 총 개수
+	public int getCountByBrand();
 	//고객 리스트
 	public List<Customer> customerList() throws Exception;
+	//고객 총 개수
+	public int getCountByCustomer();
 	//상품 리스트
 	public List<ProductVO> productList() throws Exception;
+	//상품 총 개수
+	public int getCountByProduct();
 	//이벤트 리스트
 	public List<Event> eventList() throws Exception;
+	//이벤트 총 개수
+	public int getCountByEvent();
 	//공지사항 리스트
 	public List<Notice> noticeList() throws Exception;
+	//공지사항 총 개수
+	public int getCountByNotice();
 	//1:1문의 리스트
 	public List<InquiryVO> inquiryList() throws Exception;
+	//1:1문의 총 개수
+	public int getCountByInquiry();
 	//이벤트 등록
 	public void eventRegister(Event event) throws Exception;
 	//공지사항 등록

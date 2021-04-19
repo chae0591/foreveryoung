@@ -113,18 +113,33 @@
 			</div>
 		</div><!--/.row-->
 		
+	<div class="text-center">
+		<ul class="pagination">
+			<c:if test="${page.prev}">
+				<li class="paginate_button previous">
+					<a href="${page.startPage-1}">Prev</a>
+				</li>
+			</c:if>
+			
+			<c:forEach var="num" begin="${page.startPage}" end="${page.endPage}">
+				<li class="paginate_button ${page.pageNum == num ? "active":""} ">
+					<a href="${num}">${num}</a>
+				</li>
+			</c:forEach>
+			
+			<c:if test="${page.next}">
+				<li class="paginate_button next">
+					<a href="${page.endPage+1}">Next</a>
+				</li>
+			</c:if>
+		</ul>
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	</div>
+	<form id='pagingForm' action="/admin/adminList" method="get">
+	<input type="hidden" name="admin" value="${admin}">
+	   	<input type="hidden" name='pageNum' value='${page.pageNum}'>
+	   	<input type="hidden" name='amount' value='${page.amount}'>
+   </form>		
 		
 		
 		

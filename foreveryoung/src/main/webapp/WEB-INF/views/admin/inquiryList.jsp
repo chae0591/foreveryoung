@@ -7,6 +7,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script>
+	$(document).ready(function(){
+		
+		// 페이징
+		var pagingForm = $("#pagingForm");
+		$(".paginate_button a").on("click", function(e) {
+			e.preventDefault();
+			pagingForm.find("input[name='pageNum']").val($(this).attr("href"));
+			pagingForm.submit();
+		});
+	})
+
+</script> 
+
 </head>
 <body>
 
