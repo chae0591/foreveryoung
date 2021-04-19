@@ -25,10 +25,10 @@ public class DetailBoardServiceImpl implements DetailBoardService{
 	public Product getDetail(Integer product_no) throws Exception {
 		return repository.getDetail(product_no);
 	}
-	/*
-	 * @Override public List<Product> productList() throws Exception { return
-	 * repository.productList(); }
-	 */
+	
+	  @Override public List<Product> productList() throws Exception { return
+	  repository.productList(); }
+	 
 
 }
 

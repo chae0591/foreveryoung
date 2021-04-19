@@ -11,5 +11,5 @@ import com.forever.young.entity.Product;
 
 public interface DetailBoardService {
 	public Product getDetail(Integer product_no) throws Exception;
-	//public List<Product> productList()throws Exception;
+	public List<Product> productList()throws Exception;
 }
