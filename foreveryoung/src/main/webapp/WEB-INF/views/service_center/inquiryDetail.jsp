@@ -60,6 +60,71 @@
     font-size: 18px;
     line-height: 30px;
 }
+.inquiryDetail-box {
+	width: 1020px;
+	height: auto;
+	margin: 0 auto;
+	padding: 0;
+	display: block;
+	margin-top: 20px;
+	margin-bottom: 40px;
+	border-top: 2px solid #666;
+	border-bottom: 2px solid #666;
+	position: relative;
+}
+.detailTitle-box {
+	width: 100%;
+	height: 70px;
+	margin: 0;
+	padding: 10px;
+	border-bottom: 1px dashed #e5e5e5;
+}
+.detailTitle-box > .regdate {
+	float: right;
+}
+.detailText-box {
+	width: 100%;
+	height: auto;
+	min-height: 60px;
+	position: relative;
+	padding: 10px;
+}
+.detailServebtns { 
+	width: 1020px;
+	height: auto;
+	background-color: #blue;
+	border-bottom: 1px solid #e5e5e5;
+	position: relative;
+	text-align: center;
+	margin: 0 auto;
+}
+.detailServebtns  button {
+	width: 33%;
+	height: 50px;
+	color: #fff;
+    font-weight: 700;
+    border-radius: 5px;
+    font-size: 18px;
+    line-height: 30px;
+    background-color: #555;
+}
+.last-box {
+	width: 1020px;
+	margin: 0 auto;
+	text-align: center;
+	height: auto;
+	margin-bottom: 40px;
+}
+.inquiryGobtn {
+	width: 150px;
+	height: 50px;
+	color: #fff;
+    font-weight: 700;
+    border-radius: 5px;
+    font-size: 18px;
+    line-height: 30px;
+    background-color: #555;
+}
 </style>
 
 <script>
@@ -67,14 +132,28 @@ $(document).ready(function() {
 		
 	//1:1버튼 클릭시
 	$(".inquiryGobtn").click(function(){
-		var id = "${check}";
-			
-	    if(id == ''){
-	        alert("로그인 후 문의 가능합니다.");
-	        location.href = '/member/login';
-	   	}else{
-	   	 	location.href = '/service_center/inquiryRegister';
-	    }
+	    location.href = '/service_center/inquiryRegister';
+	});
+	
+	//목록으로 버튼 클릭시
+	$(".btnGoList").click(function(){
+		location.href = '/service_center/inquiry';
+	});
+	
+	//수정하기 버튼 클릭시
+	$(".btnModify").click(function(){
+		var inquiry_no = $("#inquiry_no");
+		var inquiry_noVal = inquiry_no.val();
+		self.location = "/service_center/inquiryModify?inquiry_no=" + inquiry_noVal
+	});
+	
+	//삭제하기 버튼 클릭시
+	$(".btnDelete").click(function(){
+		var formObj = $('#inquiryDetail')
+		
+		 window.alert("문의글이 삭제되었습니다.");
+		formObj.attr("action" , "/service_center/inquiryDelete")
+		formObj.submit();				 
 	});
 });
 </script>
@@ -95,40 +174,30 @@ $(document).ready(function() {
 		<a href="/service_center/inquiry"><button class="inquiry-btn">1:1 문의</button></a>
 	</div>
 	
-	<div class="col-lg-12">
-				<form:form modelAttribute="inquiryDetail">
-					<form:hidden path="inquiry_no"/>
-		
-						<table border="1">
-							<tr>
-								<th align="center" width="100">제목</th>
-								<td><form:input path="inquiry_title" readonly="true"/></td>
-							</tr>
-							<tr>
-								<th align="center" width="100">작성자</th>
-								<td><form:input path="user_id" readonly="true"/></td>
-							</tr>
-							<tr>
-								<th align="center" width="100">등록일</th>
-								<td><form:input path="inquiry_regDate" readonly="true"/></td>			
-							</tr>
-							<tr>
-								<th align="center" width="100">문의 내용</th>
-								<td><form:input path="inquiry_content" readonly="true"/></td>			
-							</tr>
-							
-						</table>			
-					<form:hidden path="user_num"/>
-				</form:form>
-		</div>
-		
-		<div>
-			<c:out value="${inquiryDetail.reply_content}"></c:out>
-		</div>
+	<div class="inquiryDetail-box">
+		<form:form modelAttribute="inquiryDetail">
+			<form:hidden path="inquiry_no"/>
+			<div class="detailTitle-box">
+				<p><form:input path="inquiry_title" readonly="true"/></p>
+				<p><form:input path="user_id" readonly="true"/></p>
+				<p class="regdate"><form:input path="inquiry_regDate" readonly="true"/></p>
+			</div>
+	
+			<div class="detailText-box">
+				<p><form:input path="inquiry_content" readonly="true"/></p>
+			</div>	
+			<form:hidden path="user_num"/>
+		 </form:form>
+	</div>
+	
+	<div class="detailServebtns">
+		<button class="btnGoList">목록으로</button>
+		<button class="btnModify">수정</button>
+		<button class="btnDelete">게시글 삭제</button>
+	</div>
+	
 	<div>
-		<button type="submit" id="btnModify">수정</button>
-		<button type="submit" id="btnList">게시글 보기</button>
-		<button type="submit" id="btnRemove">게시글 삭제</button>
+		<c:out value="${inquiryDetail.reply_content}"></c:out>
 	</div>
 	
 	<div class="last-box">

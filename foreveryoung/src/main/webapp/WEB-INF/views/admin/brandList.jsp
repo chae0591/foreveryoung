@@ -17,6 +17,14 @@
 		$("#brand_product").click(function(){
 			//self.location = ""
 		})
+		
+		// 페이징
+		var pagingForm = $("#pagingForm");
+		$(".paginate_button a").on("click", function(e) {
+			e.preventDefault();
+			pagingForm.find("input[name='pageNum']").val($(this).attr("href"));
+			pagingForm.submit();
+		});		
 
 	})
 
@@ -95,6 +103,40 @@
 				</table>
 			</div>
 		</div><!--/.row-->
+		
+	<div class="text-center">
+		<ul class="pagination">
+			<c:if test="${page.prev}">
+				<li class="paginate_button previous">
+					<a href="${page.startPage-1}">Prev</a>
+				</li>
+			</c:if>
+			
+			<c:forEach var="num" begin="${page.startPage}" end="${page.endPage}">
+				<li class="paginate_button ${page.pageNum == num ? "active":""} ">
+					<a href="${num}">${num}</a>
+				</li>
+			</c:forEach>
+			
+			<c:if test="${page.next}">
+				<li class="paginate_button next">
+					<a href="${page.endPage+1}">Next</a>
+				</li>
+			</c:if>
+		</ul>
+		
+	</div>
+	<form id='pagingForm' action="/admin/brandList" method="get">
+	<input type="hidden" name="brand" value="${brand}">
+	   	<input type="hidden" name='pageNum' value='${page.pageNum}'>
+	   	<input type="hidden" name='amount' value='${page.amount}'>
+   </form>			
+		
+		
+		
+		
+		
+		
 		
 		<div class="row">
 			<div class="col-lg-12">

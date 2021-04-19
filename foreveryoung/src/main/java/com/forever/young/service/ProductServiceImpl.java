@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.forever.young.entity.Brand;
 import com.forever.young.entity.Paging;
 import com.forever.young.entity.Product;
+import com.forever.young.entity.ProductFile;
 import com.forever.young.repository.ProductFileUploadRepository;
 import com.forever.young.repository.ProductRepository;
 
@@ -76,15 +77,11 @@ public class ProductServiceImpl implements ProductService{
 		return productRepository.getCountByBrand(brand);
 	}
 
-	@Override
-
-	public Product findByNo(int no) {
-		return productRepository.findByNo(no);
-	}
-	
+	@Override	
 	public List<Product> getBest(String category) {
 		return productRepository.getBest(category);
 	}
+
 	//테스트 - 준식
 	@Override
 	public List<Product> getFindBrandProduct(Product product) {
