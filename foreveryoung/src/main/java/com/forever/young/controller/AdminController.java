@@ -156,6 +156,7 @@ public class AdminController {
 		model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
 		model.addAttribute("product", total);
 		model.addAttribute("productList", service.productList());
+		model.addAttribute("brandList", service.brandList());
 	}
 	
 	

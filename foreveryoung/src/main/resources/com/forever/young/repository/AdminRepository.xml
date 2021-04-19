@@ -68,14 +68,14 @@
 	<select id="productList" resultType="ProductVO">
   		  		<![CDATA[
   			select p.* , b.brand_name from product_table p
-    			left outer join brand b on p.product_seller_num = b.brand_num
+   				 left outer join brand b on p.product_brand = b.brand_num
   		]]>
 	</select>
 	
 	<!-- 상품 총 수 -->
 	<select id="getCountByProduct" resultType="int">
 	<![CDATA[
-		select count(*) from product
+		select count(*) from product_table
 	]]>
 	</select>
 
