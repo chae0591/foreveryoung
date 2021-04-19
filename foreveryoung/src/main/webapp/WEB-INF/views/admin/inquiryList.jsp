@@ -26,8 +26,7 @@
 			<li><a href="/admin/noticeList"><em class="fa fa-clone">&nbsp;</em> 공지사항 관리</a></li>
 			<li class="active"><a href="/admin/inquiryList"><em class="fa fa-clone">&nbsp;</em> 1:1문의 관리</a></li>
 			<li><a href="#"><em class="fa fa-clone">&nbsp;</em> 리뷰신고관리</a></li>
-			<li><a href="/admin/staticCustomer"><em class="fa fa-bar-chart">&nbsp;</em> 통계(고객분석)</a></li>
-			<li><a href="/admin/staticSales"><em class="fa fa-bar-chart">&nbsp;</em> 통계(매출분석)</a></li>
+			<li><a href="/admin/static"><em class="fa fa-bar-chart">&nbsp;</em> 통계</a></li>
 		</ul>
 	</div><!--/.sidebar-->	
 
@@ -42,37 +41,51 @@
 
 		<div class="row">
 			<div class="col-lg-12">
-				<table border="1">
-					<tr>
-						<th align="center" width="100"> 번호</th>
-						<th align="center" width="100">제목</th>
-						<th align="center" width="100">작성자</th>
-						<th align="center" width="100">등록일</th>
-						<th align="center" width="100">상태</th>
 			
-					</tr>
-			
-					<c:choose>
-						<c:when test="${empty inquiryList}">
-							<tr>
-								<td colspan="5">1:1문의가  없습니다.</td>
-							</tr>
-						</c:when>
-						<c:otherwise>s
-							<c:forEach items="${inquiryList}" var="inquiryList">
+				<table  class="table table-hover">
+					<thead>
+						<tr>
+							<th align="center" width="100"> 번호</th>
+							<th align="center" width="100">제목</th>
+							<th align="center" width="100">작성자</th>
+							<th align="center" width="100">등록일</th>
+							<th align="center" width="100">상태</th>
+				
+						</tr>					
+					</thead>
+					
+					<tbody>
+						<c:choose>
+							<c:when test="${empty inquiryList}">
 								<tr>
-									<td align="center">${inquiryList.inquiry_no}</td>
-									<td align="center">${inquiryList.inquiry_title}</td>
-									<td align="center">${inquiryList.user_id}</td>
-									<td align="center">${inquiryList.inquiry_regDate}</td>
-									<td align="center">
-										<a href="/admin/inquiryDetail?inquiry_no=${inquiryList.inquiry_no}">
-										${inquiryList.inquiry_status}</a> 
-									</td>
+									<td colspan="5">1:1문의가  없습니다.</td>
 								</tr>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${inquiryList}" var="inquiryList">
+									<tr>
+										<td align="center">${inquiryList.inquiry_no}</td>
+										<td align="center">${inquiryList.inquiry_title}</td>
+										<td align="center">${inquiryList.user_id}</td>
+										<td align="center">${inquiryList.inquiry_regDate}</td>
+										<td align="center">
+											<a href="/admin/inquiryDetail?inquiry_no=${inquiryList.inquiry_no}">
+												<c:choose>
+													<c:when test="${ inquiryList.reply_no == 0}">답변대기</c:when>
+													<c:otherwise>답변완료</c:otherwise>
+												</c:choose>
+											</a> 
+										</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>					
+					</tbody>
+				
+				
+
+			
+
 				</table>
 			</div>
 		</div><!--/.row-->

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    			
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   			
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,9 +11,13 @@
 	<link href="../css/admin/css/datepicker3.css" rel="stylesheet">
 	<link href="../css/admin/css/styles.css" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	
+<script >
+</script>	
+	
 </head>
-<body>
-			
+<body>	
+
 		<!-- 헤더 -->	
 	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
@@ -24,7 +28,7 @@
 					<span class="icon-bar"></span></button>
 				<a class="navbar-brand" href="#"><span>foreveryoung</span> &nbsp; Admin</a>
 				<a class="navbar-brand" href="/main" style="float:right;">home</a>
-				<a href="/admin/login"><em class="navbar-brand fa fa-power-off" style="float:right;">Logout</em></a>
+						<a href="/admin/logout"><em class="navbar-brand fa fa-power-off" style="float:right;">Logout</em></a>
 			</div>
 		</div><!-- /.container-fluid -->
 	</nav>		
@@ -41,11 +45,20 @@
 			<li><a href="/admin/noticeList"><em class="fa fa-clone">&nbsp;</em> 공지사항 관리</a></li>
 			<li><a href="/admin/inquiryList"><em class="fa fa-clone">&nbsp;</em> 1:1문의 관리</a></li>
 			<li><a href="#"><em class="fa fa-clone">&nbsp;</em> 리뷰신고관리</a></li>
-			<li><a href="/admin/staticCustomer"><em class="fa fa-bar-chart">&nbsp;</em> 통계(고객분석)</a></li>
-			<li><a href="/admin/staticSales"><em class="fa fa-bar-chart">&nbsp;</em> 통계(매출분석)</a></li>
+			<li><a href="/admin/static"><em class="fa fa-bar-chart">&nbsp;</em> 통계</a></li>
 		</ul>
 	</div><!--/.sidebar-->	
 			
+	<script src="../css/admin/js/jquery-1.11.1.min.js"></script>
+	<script src="../css/admin/js/bootstrap.min.js"></script>
+	<script src="../css/admin/js/chart.min.js"></script>
+	<script src="../css/admin/js/chart-data.js"></script>
+	<script src="../css/admin/js/easypiechart.js"></script>
+	<script src="../css/admin/js/easypiechart-data.js"></script>
+	<script src="../css/admin/js/bootstrap-datepicker.js"></script>
+	<script src="../css/admin/js/custom.js"></script>
+
+
 
 </body>
 </html>			     

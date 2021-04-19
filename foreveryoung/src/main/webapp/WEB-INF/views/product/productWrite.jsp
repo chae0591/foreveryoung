@@ -352,7 +352,7 @@
 			<legend class="bold" style="align:center font-size: 25px"> 필수 입력 항목</legend>
 				
 				<div class="form-check checkboxes">
-					<p class="bold" style="align:left" >상품 카테고리</p> <!--control-label = 필수항목 마크  -->
+					<p class="bold control-label" style="align:left" >상품 카테고리</p> <!--control-label = 필수항목 마크  -->
 					<input type="radio" class="form-check_input category" name="product_category" value="skincare" id="skincare" checked>
 					<label class="form-check-label" for="skincare">스킨케어</label>
 					
@@ -374,7 +374,7 @@
 			
 			<hr>
 		
-			<div class="form-group">
+			<div class="form-group control-label">
 				<label class="bold">상품 이름</label>
 				<input class="form-control" type="text" name="product_name" placeholder="상품 이름을 입력하시오." required />
 			</div>
@@ -382,7 +382,7 @@
 		
 		
 			<div>
-				<label class="bold">상품 등록자(브랜드)</label> 
+				<label class="bold control-label">상품 등록자(브랜드)</label> 
 				<br>
 				<select name="product_brand" required>
 					<c:forEach var="brand" items="${brand}">
@@ -394,13 +394,13 @@
 			<br>
 			
 			<div>
-				<label class="bold">상품 가격</label>
+				<label class="bold control-label">상품 가격</label>
 				<input class="form-control" type="text" name="product_price" required placeholder="상품 가격을 입력하시오. 숫자만" size="50">
 			</div>
 			<br>
 			
 			<div>
-				<label class="bold">상품 재고</label>
+				<label class="bold control-label">상품 재고</label>
 				<input class="form-control" type="text" name="product_stock" required placeholder="삼품 재고 입력하시오." size="50">
 			</div>
 			<br>

@@ -62,7 +62,7 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public List<Inquiry> inquiryList() throws Exception {
+	public List<InquiryVO> inquiryList() throws Exception {
 		return repository.inquiryList();
 	}
 
@@ -102,10 +102,45 @@ public class AdminServiceImpl implements AdminService{
 		repository.replyRegister(inquiryVO);
 	}
 
+
+//	@Override
+//	public void inquiryStatusComplete(InquiryVO inquiryVO) throws Exception {
+//		repository.inquiryStatusComplete(inquiryVO);
+//	}
+	
 	@Override
-	public void inquiryStatusComplete(InquiryVO inquiryVO) throws Exception {
-		repository.inquiryStatusComplete(inquiryVO);
+	public Admin adminDetail(Integer admin_no) throws Exception {
+		return repository.adminDetail(admin_no);
 	}
+	
+	@Override
+	public void adminModify(Admin admin) throws Exception {
+		repository.adminModify(admin);
+	}
+
+	@Override
+	public void adminDelete(Integer admin_no) throws Exception {
+		repository.adminDelete(admin_no);
+	}
+
+	@Override
+	public Event eventDetail(Integer event_no) throws Exception {
+		return repository.eventDetail(event_no);
+	}
+
+	@Override
+	public void eventModify(Event event) throws Exception {
+		repository.eventModify(event);
+	}
+
+	@Override
+	public void eventDelete(Integer event_no) throws Exception {
+		repository.eventDelete(event_no);
+	}
+
+
+
+
 
 
 
