@@ -20,13 +20,19 @@
    margin-top : 10px;
    maring-right : 20%;
    margin-left : 20%;
-   height : 750px;
+   height : 510px;
+   position : relative;
 }
 .main-img{
    border : 2px red solid;
    float:left;
    width : 38%;
    height : 500px;
+   margin-left : 15px;
+}
+#product-img{
+	width :445px;
+	height:430px;
 }
 .main-info{
    border : 2px solid green;
@@ -34,6 +40,38 @@
    width : 60%;
    height : 500px;
 }
+.recommend{
+     margin : 0 auto;
+     border : 3px solid aqua;
+     width : 1200px;
+     height : 187px;
+     padding : 5px;
+     padding-top : 5px;   
+     position  : relative;   
+     margin-top : 10px;
+     maring-right : 20%;
+     margin-left : 20%;
+   }
+      *{margin:0;padding:0;}
+          ul,li{list-style:none;}
+          .slide{height:150px;overflow:hidden;position:relative;}
+          .slide li{position:absolute;left:23px;right:23px;top:0;bottom:0;opacity:0;transition:1s;}
+          .slide li:nth-child(1){background:#ECF8E0;}
+          .slide li:nth-child(2){background:#ECF8E0;}
+          .slide li:nth-child(3){background:#ECF8E0;}
+          .slide li:nth-child(4){background:#ECF8E0;}
+          .slide input{display:none;}
+          .slide .bullet{position:absolute;bottom:3px;left:0;right:0;text-align:center;z-index:10;}
+          .slide .bullet label{width:10px;height:10px;border-radius:10px;border:2px solid #666;display:inline-block;background:#fff;font-size:0;transition:0.5s;cursor:pointer;}
+          /* 슬라이드 조작 */
+          #pos1:checked ~ ul li:nth-child(1),
+          #pos2:checked ~ ul li:nth-child(2),
+          #pos3:checked ~ ul li:nth-child(3),
+          #pos4:checked ~ ul li:nth-child(4){opacity:1;}
+          /* bullet 조작 */
+          #pos1:checked ~ .bullet label:nth-child(1),
+          #pos2:checked ~ .bullet label:nth-child(2),
+          #pos3:checked ~ .bullet label:nth-child(3),
 </style>
 <script type="text/javascript">
 $(function(){
@@ -44,14 +82,9 @@ $(function(){
       $("#result").val(result);
       /* 플러스 버튼 처리 이벤트-1. 수량 조절 종료*/
 
-     
-
       /* 플러스 버튼 처리 이벤트-2. 가격 연산 시작*/   
-   
       $("#total_amount").val($("#result").val() * $("#sell_price").val());
-
       /* 플러스 버튼 처리 이벤트-2. 가격 연산 종료*/
-
    });
 
    $("#minus").on("click", function () {
@@ -62,17 +95,13 @@ $(function(){
 
       /*  마이너스 버튼 처리 이벤트-1. 연산 전 validation_check 종료*/
 
-
       /* 마이너스 버튼 처리 이벤트-2. 수량 조절 시작*/
       var result =$("#result").val();
       result--;
       $("#result").val(result);
       /* 마이너스 버튼 처리 이벤트-2. 수량 조절 종료*/
 
-     
-
       /* 마이너스 버튼 처리 이벤트-3. 가격 연산 시작*/   
-   
       $("#total_amount").val($("#result").val() * $("#sell_price").val());
 
       /* 마이너스 버튼 처리 이벤트-3. 가격 연산 종료*/
@@ -81,8 +110,7 @@ $(function(){
 
    $("#nice").on("click", function () {
        /*좋아요 버튼 관련 이벤트 처리 시작*/
-
-         var target = $(this);
+       var target = $(this);
        var user_num = $("input[name='user_num']").val();
        var product_no = $("input[name='product_no']").val();
 
@@ -113,21 +141,76 @@ $(function(){
             }
          }); // ajax
 
-
       }); // end 좋아요
+   $(".bucket").click(function(){
+		var id = "${check}";
+		var auth = "${auth}";
+	
+	//버튼 : 장바구니,바로결제
+		if(id != '' && auth == "customer"){
+			 location.href = '/member/cartList';
+		}else if(id != '' && auth == "seller"){ 	 
+			 alert("일반회원만 사용 가능합니다.");
+			 return false;
+			 
+		}else if(id != '' && auth == "admin"){ 	 
+			 alert("일반회원만 사용 가능합니다.");
+			 return false;
+			 
+		}else{
+			 alert("로그인 후 사용 가능합니다.");
+       	 location.href = '/member/login';
+		}
+	});
+   $(".pay").click(function(){
+		var id = "${check}";
+		var auth = "${auth}";
+		
+		if(id != '' && auth == "customer"){
+			 location.href = '/member/cartList';
+		}else if(id != '' && auth == "seller"){ 	 
+			 alert("일반회원만 사용 가능합니다.");
+			 return false;
+			 
+		}else if(id != '' && auth == "admin"){ 	 
+			 alert("일반회원만 사용 가능합니다.");
+			 return false;
+			 
+		}else{
+			 alert("로그인 후 사용 가능합니다.");
+      	 location.href = '/member/login';
+		}
+	});
+   //main 이미지
+   document.querySelectorAll(".sub-img").forEach(function(e){
+       e.addEventListener("click",function(){
+          document.querySelector("#product-img").setAttribute("src",this.getAttribute("src"))
+       });
+	});
+   
+});//function 끝
 
-
-
-});
 </script>
 
 <body>
 <jsp:include page="../template/header.jsp"></jsp:include>
 <div class="detail-all">
+   <input type="hidden" name="user_num" value="${check}">
+   <input type="hidden" name="product_no" value="${product.product_no}">
       <form:form modelAttribute="getDetail">
       
          <div class="main-img">
-            <p><form:input path="product_no" readonly="true"/></p>
+            <div class="product-img">
+               <img src="https://placeimg.com/445/430/tech" id="product-img">
+            </div>
+            
+            <div class="product-subimg" align="center">
+               <img src="https://placeimg.com/58/58/tech" class="sub-img">
+               <img src="https://placeimg.com/58/58/animals" class="sub-img">
+               <img src="https://placeimg.com/58/58/tech" class="sub-img">
+               <img src="https://placeimg.com/58/58/animals" class="sub-img">
+               <img src="https://placeimg.com/58/58/tech" class="sub-img">
+            </div>
          </div><!--main-img  -->
          
          <div class="main-info">
@@ -164,8 +247,8 @@ $(function(){
                  </div>
                  
                  <div class="btn"> 
-                     <input type="button" value="장바구니" class="bucket" onclick="location.href='장바구니.jsp';">
-                     <input type="button" value="바로 구매" class="pay" onclick="location.href='결재.jsp';">
+                     <input type="button" value="장바구니" class="bucket">
+                     <input type="button" value="바로 구매" class="pay">
                   
                      <button class="nice" id="nice" value="false">
                            <img src="/img/product/unlike.png" id="vote_img" style="width:40px; heigth:35px; " alt="좋아요" class="like">
@@ -175,6 +258,77 @@ $(function(){
          </div><!-- class="main-info" -->
       </form:form>   
 </div>
+
+   <div class="recommend">
+      <span style="font-family :sans-serif; font-size : 18px;">이런 상품은 어떠세요?</span>
+         <div class="slide">
+          <input type="radio" name="pos" id="pos1" checked>
+          <input type="radio" name="pos" id="pos2">
+          <input type="radio" name="pos" id="pos3">
+          <input type="radio" name="pos" id="pos4">
+          <ul>
+            <li>
+               <a href="#">
+                  <img src="https://placeimg.com/270/125/animals">
+               </a>
+               <a href="#">
+                  <img src="https://placeimg.com/270/125/animals">
+               </a>
+               <a href="#">
+                  <img src="https://placeimg.com/270/125/animals">
+               </a>
+               <a href="#">
+                  <img src="https://placeimg.com/270/125/animals">
+               </a>
+            </li>
+            <li>
+               <a href="#">
+                  <img src="https://placeimg.com/270/125/tech">
+               </a>
+               <a href="#">
+                  <img src="https://placeimg.com/270/125/tech">
+               </a>
+               <a href="#">
+                  <img src="https://placeimg.com/270/125/tech">
+               </a>
+               <a href="#">
+                  <img src="https://placeimg.com/270/125/tech">
+               </a>
+            </li>
+            <li>
+               <a href="#">
+                  <img src="https://placeimg.com/270/125/animals">
+               </a>
+               <a href="#">
+                  <img src="https://placeimg.com/270/125/animals">
+               </a>
+               <a href="#">
+                  <img src="https://placeimg.com/270/125/animals">
+               </a>
+               <a href="#">
+                  <img src="https://placeimg.com/270/125/animals">
+               </a>
+            </li>
+            <li>
+               <a href="#">
+                  <img src="https://placeimg.com/270/125/tech">
+               </a>
+               <a href="#">
+                  <img src="https://placeimg.com/270/125/tech">
+               </a>
+               <a href="#">
+                  <img src="https://placeimg.com/270/125/tech">
+               </a>
+            </li>
+          </ul>
+          <p class="bullet">
+            <label for="pos1">1</label>
+            <label for="pos2">2</label>
+            <label for="pos3">3</label>
+            <label for="pos4">4</label>
+          </p>
+        </div>
+   </div><!-- recommend 끝 -->
 <jsp:include page="../template/footer.jsp"></jsp:include>
 </body>
 </html>
