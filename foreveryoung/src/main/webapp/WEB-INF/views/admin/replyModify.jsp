@@ -12,24 +12,17 @@
 
 <script>
 	$(document).ready(function(){
-		var formObj = $('#inquiryDetail')
+		var formObj = $('#replyModify')
+		
+		$("#reply_complete").click(function(){
+			formObj.attr("action", "/admin/replyModify")
+			formObj.attr("method" , "post")
+			formObj.submit();
+		})
 		
 		$('#inquiry_list').click(function(){
 			self.location="/admin/inquiryList"
 		})
-		
-		$('#reply_modify').click(function(){
-			var inquiry_no = $('#inquiry_no');
-			var inquiry_noVal = inquiry_no.val();
-			self.location = "/admin/replyModify?inquiry_no=" +inquiry_noVal
-		})
-		
-		$('#reply_delete').click(function(){
-			window.alert("1:1문의 답변이 삭제되었습니다");
-			formObj.attr("action","/admin/replyDelete")
-			formObj.submit();
-		})
-
 		
 	})
 
@@ -97,45 +90,24 @@
 			</div>
 		</div><!--/.row-->
 		
-		<c:choose>
-			<c:when test="${ inquiryDetail.reply_no == 0}">
-					<!-- 답변등록form -->
-					<div class="row">
-						<div class="col-lg-12">
-							<form action ="replyRegister" method="post">
-					        	<div>
-					        		<h1>답변하기</h1>
-					        	</div>
-					            	
-					            <div>
-					                <textarea name="reply_content" style="width:400px; height:300px; " required="required" ></textarea>
-					                <input type="hidden" name="inquiry_no"  value="${inquiryDetail.inquiry_no}">
-					                <br><br>
-					                <input type="submit"  value="답변등록">
-					                <input type="button" id="inquiry_List" value="1:1문의 목록으로">
-								</div>
-					    	</form>
-						</div>
-					</div><!--/.row-->
-			</c:when>
-			
-			<c:otherwise>
-					<!-- 답변보기form -->
-					<div class="row">
-						<div class="col-lg-12">
-								<div>
-					                <textarea style="width:400px; height:300px; " >
-					                	<c:out value="${inquiryDetail.reply_content}"></c:out>
-					                </textarea>
-					                <br><br>
-					                <input type="button" id="reply_modify" value="답변수정">
-					                <input type="button" id="reply_delete" value="답변삭제">
-								</div>
-						</div>
-					</div><!--/.row-->
-			</c:otherwise>
-		</c:choose>
-	
+		<div class="row">
+			<div class="col-lg-12">
+				<form:form modelAttribute="replyModify" action="replyModify">
+						<form:hidden path="inquiry_no"/>
+						<form:textarea cols="50" rows="5" path="reply_content"/>
+						
+				</form:form>
+				<div>
+					<button type="submit" id="reply_complete">수정 완료</button>
+					<button type="submit" id="inquiry_list">1:1문의리스트 보기</button>
+				</div>
+				
+			</div>
+		</div><!--/.row-->
+
+
+				
+				
 	</div>	<!--/.main-->
 	
 	
