@@ -20,6 +20,7 @@ public class DetailBoardContorller {
 
 	@Autowired
 	private DetailBoardService service;
+	private DetailBoardService reviewservice;
 
 	// 상세페이지(조회)
 	@GetMapping("/detail_main")
@@ -27,6 +28,9 @@ public class DetailBoardContorller {
 		log.info("getDetail()");
 		model.addAttribute("getDetail", service.getDetail(product_no));
 		model.addAttribute("productList",service.productList());
+		//리뷰
+		model.addAttribute("reviewList",service.reviewList(product_no));
+		
 		return "detail_board/detail_main";
 	}
 	

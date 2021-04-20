@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.forever.young.entity.Brand;
 import com.forever.young.entity.Product;
+import com.forever.young.entity.Review;
 import com.forever.young.repository.BrandRegistRepository;
 import com.forever.young.repository.DetailBoardRepository;
 
@@ -26,9 +27,15 @@ public class DetailBoardServiceImpl implements DetailBoardService{
 		return repository.getDetail(product_no);
 	}
 	
-	  @Override public List<Product> productList() throws Exception { return
-	  repository.productList(); }
-	 
+	  @Override public List<Product> productList() throws Exception { 
+		 return repository.productList();
+	  }
+
+	@Override
+	public List<Review> reviewList(int product_no) throws Exception {
+		return repository.reviewList(product_no);
+	}
+
 
 }
 
