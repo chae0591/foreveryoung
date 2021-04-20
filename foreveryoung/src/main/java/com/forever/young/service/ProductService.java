@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.forever.young.entity.Brand;
+import com.forever.young.entity.Paging;
 import com.forever.young.entity.Product;
 import com.forever.young.entity.ProductFile;
 
@@ -17,6 +18,10 @@ public interface ProductService {
 	public List<Product> productList(String category);
 	public List<Product> productListSearch(Map<String, Object> searchData);
 	public int getCount(String category);
+	
+	//페이징
+	public List<Product> categoryListWithPaging(String category, Paging paging);
+	public List<Product> productListSearchWithPaging(Map<String, Object> searchData);
 	
 	// 브랜드
 	public List<Product> brandList(int brand);

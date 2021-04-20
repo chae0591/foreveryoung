@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.forever.young.entity.Brand;
+import com.forever.young.entity.Paging;
 import com.forever.young.entity.Product;
 import com.forever.young.entity.ProductFile;
 import com.forever.young.repository.ProductFileUploadRepository;
@@ -86,4 +87,16 @@ public class ProductServiceImpl implements ProductService{
 	public List<Product> getFindBrandProduct(Product product) {
 		return productRepository.getFindBrandProduct(product);
 	}
+
+	@Override
+	public List<Product> categoryListWithPaging(String category, Paging paging) {
+		return productRepository.categoryListWithPaging(category, paging);
+	}
+
+	@Override
+	public List<Product> productListSearchWithPaging(Map<String, Object> searchData) {
+		return productRepository.productListSearchWithPaging(searchData);
+	}
+	
+	
 }
