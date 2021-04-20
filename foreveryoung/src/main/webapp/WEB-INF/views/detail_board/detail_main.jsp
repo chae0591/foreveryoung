@@ -555,16 +555,13 @@ $(function(){
                   <li>${lists.review_content}</li>
                   <li>${lists.review_date}</li>
                   <li>${lists.review_score}</li>
-                </c:forEach>
-               </ul>
-               
-               <ul>
                   <li>내용</li>
                   <li>사진</li>
                   <li>
                      <button>리뷰 좋아요</button>
                      <button>신고하기</button>
                   </li>
+               </c:forEach>
                </ul>
             </div>
       </div>
