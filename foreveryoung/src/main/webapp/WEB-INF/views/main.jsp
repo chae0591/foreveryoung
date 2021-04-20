@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <style>
 hr {
 	width: 1020px;
@@ -152,7 +153,60 @@ table {
 	width: 100px;
 	heigh: 50px;
 }
+#back-to-top {
+  display: inline-block;
+  background-color: #FF9800;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 30px;
+  position: fixed;
+  bottom: 50%;
+  right: 30px;
+  transition: background-color .3s, 
+    opacity .5s, visibility .5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+}
+#back-to-top::after {
+  content: "TOP";
+  font-family: FontAwesome;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 50px;
+  color: #fff;
+}
+#back-to-top:hover {
+  cursor: pointer;
+  background-color: #333;
+}
+#back-to-top:active {
+  background-color: #555;
+}
+#back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+}
 </style>
+<script type="text/javascript">
+$(function(){
+
+	$('#back-to-top').on('click',function(e){
+	      e.preventDefault();
+	      $('html,body').animate({scrollTop:0},600);
+	  });
+	  
+	  $(window).scroll(function() {
+	    if ($(document).scrollTop() > 100) {
+	      $('#back-to-top').addClass('show');
+	    } else {
+	      $('#back-to-top').removeClass('show');
+	    }
+	  });
+});
+</script>
 </head>
 <body>
 <jsp:include page="template/header.jsp"></jsp:include>
@@ -244,6 +298,8 @@ table {
 	<h2 class="event-title">주목해야 할 신상</h2>
 	<button class="more-btn">더보기</button>
 </div>
+
+<a id="back-to-top"></a>
 
 <jsp:include page="template/footer.jsp"></jsp:include>
 

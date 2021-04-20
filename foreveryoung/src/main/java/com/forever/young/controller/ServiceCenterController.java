@@ -59,11 +59,12 @@ public class ServiceCenterController {
             @RequestParam(defaultValue="") String keyword   //키워드의 기본값을 ""으로 한다.
             )
              throws Exception{
-        
+		
+		log.info("noticeList()");
+		
         //레코드 갯수를 계산
         int count = 1000;
         
-        log.info("noticeList()");
         //페이지 관련 설정, 시작번호와 끝번호를 구해서 각각 변수에 저장한다.
         Pager pager = new Pager(count, curPage);
         int start = pager.getPageBegin();
