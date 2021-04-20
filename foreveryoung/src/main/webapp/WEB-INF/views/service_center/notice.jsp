@@ -94,7 +94,7 @@
 	display: inline-block;
 	float: left;
 }
-.srh-box > .searchInp {
+.srh-box > .keyword {
     float: left;
     position: relative;
 	width: 80%;
@@ -289,6 +289,14 @@ $(function(){
     	}
 	});
 	
+	$(".searchBtn").click(function(){
+		self.location = "list" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());
+	});
+	
+	//원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해
+	function list(page){
+		location.href="${path}/service_center/notice?curPage="+page+"&keyword=${map.keyword}";
+	}
 });
 </script>
 
@@ -312,8 +320,8 @@ $(function(){
 		<label>공지사항 검색</label>
 		<form class="form-inline" action="#" method="post">
 			<div class="srh-box">
-				<input class="searchInp" type="text" placeholder="질문을 검색하세요.">
-				<input class="searchBtn" type="submit" value="검색">
+				<input class="keyword" id="keyword" type="text" placeholder="질문을 검색하세요.">
+				<input class="searchBtn"  id="searchBtn"type="submit" value="${scri.keyword}">
 			</div>
 		</form>
 	</div>
@@ -329,7 +337,7 @@ $(function(){
 	</div>
 	
 	<div class="notice-list">
-		<c:forEach items="${noticeList}" var="noticeList">
+		<c:forEach items="${map.noticeList}" var="noticeList">
 		<input type="hidden" name="notice_no" value="${noticeList.notice_no}">
 		 		<div class="open">
 		 			<ul>
@@ -349,6 +357,45 @@ $(function(){
 		</c:forEach>
 	</div>
 	
+	<!-- 페이징 -->
+		<tr>
+			<td colspan="5">
+				<!-- 처음페이지로 이동 : 현재 페이지가 1보다 크면  [처음]하이퍼링크를 화면에 출력-->
+				<c:if test="${map.noticePager.curBlock > 1}">
+					<a href="javascript:list('1')">[처음]</a>
+				</c:if>
+				
+				<!-- 이전페이지 블록으로 이동 : 현재 페이지 블럭이 1보다 크면 [이전]하이퍼링크를 화면에 출력 -->
+				<c:if test="${map.noticePager.curBlock > 1}">
+					<a href="javascript:list('${map.noticePager.prevPage}')">[이전]</a>
+				</c:if>
+				
+				<!-- **하나의 블럭 시작페이지부터 끝페이지까지 반복문 실행 -->
+				<c:forEach var="num" begin="${map.noticePager.blockBegin}" end="${map.noticePager.blockEnd}">
+					<!-- 현재페이지이면 하이퍼링크 제거 -->
+					<c:choose>
+						<c:when test="${num == map.noticePager.curPage}">
+							<span style="color: red">${num}</span>&nbsp;
+						</c:when>
+						<c:otherwise>
+							<a href="javascript:list('${num}')">${num}</a>&nbsp;
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				
+				<!-- 다음페이지 블록으로 이동 : 현재 페이지 블럭이 전체 페이지 블럭보다 작거나 같으면 [다음]하이퍼링크를 화면에 출력 -->
+				<c:if test="${map.noticePager.curBlock <= map.noticePager.totBlock}">
+					<a href="javascript:list('${map.noticePager.nextPage}')">[다음]</a>
+				</c:if>
+				
+				<!-- 끝페이지로 이동 : 현재 페이지가 전체 페이지보다 작거나 같으면 [끝]하이퍼링크를 화면에 출력 -->
+				<c:if test="${map.noticePager.curPage <= map.noticePager.totPage}">
+					<a href="javascript:list('${map.noticePager.totPage}')">[끝]</a>
+				</c:if>
+			</td>
+		</tr>
+		<!-- 페이징 -->
+
 	<div class="last-box">
 		<button class="inquiryGobtn">1:1 문의하기</button>
 	</div>
