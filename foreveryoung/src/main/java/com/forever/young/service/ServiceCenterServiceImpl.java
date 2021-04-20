@@ -1,6 +1,9 @@
 package com.forever.young.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,6 +58,13 @@ public class ServiceCenterServiceImpl implements ServiceCenterService{
 	@Override
 	public int inquiryRegisterAfter() throws Exception {
 		return repository.inquiryRegisterAfter();
+	}
+	
+	//목록 (페이지 나누기, 검색 기능을 포함)
+    //매개변수는 시작 레코드 번호, 끝번호, 옵션과 키워드가 들어간다.
+	@Override
+	public List<Notice> listAll(String keyword, int start, int end) throws Exception {
+		return repository.listAll(keyword, start, end);
 	}
 
 }
