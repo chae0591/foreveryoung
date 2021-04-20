@@ -6,11 +6,9 @@
 
 <mapper namespace="com.forever.young.repository.ServiceCenterRepository">
 
-	<select id="listAll" resultType="Notice">
-		<!-- 결과는 boardDTO타입이 된 -->
+	<select id="listAll" resultType="NoticeDto">
+		<!-- ref는 다른테이블을 의미한다.  -->
         <include refid="paging_header" /> 
-        
-        <!-- ref는 다른테이블을 의미한다. -->
 
         <!-- 테이블로 부터 검색 -->
             select notice_no, notice_type, notice_title, notice_content, admin_no from notice
@@ -41,7 +39,9 @@
     <sql id="search">
         <choose>
              <when test="keyword != '' ">
-                where #{keyword}||'%'
+                where 
+               		 notice_title like '%'||#{keyword}||'%'  
+                     or  notice_content like '%' || #{keyword}||'%'
             </when>
         </choose>
     </sql>
