@@ -191,7 +191,7 @@
 	margin: 0 auto;
 	display: block;
 	margin-top: 20px;
-	margin-bottom: 40px;
+	margin-bottom: 20px;
 	border-top: 2px solid #666;
 	border-bottom: 2px solid #666;
 	position: relative;
@@ -243,6 +243,12 @@
     font-size: 18px;
     line-height: 30px;
     background-color: #555;
+}
+.page {
+	text-align: center;
+	position: relative;
+	margin: 0 auto;
+	margin-bottom: 40px;
 }
 </style>
 
@@ -320,7 +326,7 @@ $(function(){
 	<div class="serviceSrh-box">
 		<label>공지사항 검색</label>
 		<form class="form-inline" action="notice" method="post">
-			<div class="srh-box">
+			<div class="srh-box">		
 				<input class="keyword" name="keyword" type="text" placeholder="질문을 검색하세요." value="${map.keyword}">
 				<input class="searchBtn" type="submit" value="클릭">
 			</div>
@@ -359,10 +365,11 @@ $(function(){
 	</div>
 	
 	<!-- 페이지 네비게이션 (페이지 알고리즘 관련) 출력 -->
- <tr>
+	<div class="page">
+ 	<tr>
         <td colspan = "7" align = "center">
             <c:if test="${map.pager.curBlock > 1}">
-  <a href="#" onclick="list('1')">[처음]</a>
+ 				 <a href="#" onclick="list('1')">[처음]</a>
             </c:if> <!-- 현재 블록이 1블록보다 크면 (뒤쪽에 있기때문에) 처음으로 갈 수 있도록 링크를 추가 -->
         
             <c:if test="${map.pager.curBlock > 1}">
@@ -396,7 +403,8 @@ $(function(){
             </c:if> <!-- 현재 페이지블록이 총 페이지블록보다 작거나 같으면 끝으로 갈 수 있도록 링크를 추가함-->
             </td>
     </tr>
-
+	</div>
+	
 	<div class="last-box">
 		<button class="inquiryGobtn">1:1 문의하기</button>
 	</div>

@@ -24,7 +24,7 @@ public class ServiceCenterServiceImpl implements ServiceCenterService{
 	
 	@Autowired
 	private ServiceCenterRepository repository;
-
+	
 	@Override
 	public List<Notice> noticeList() throws Exception {
 		return repository.noticeList();
