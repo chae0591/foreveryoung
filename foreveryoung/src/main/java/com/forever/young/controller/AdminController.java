@@ -157,6 +157,7 @@ public class AdminController {
 		model.addAttribute("product", total);
 		model.addAttribute("productList", service.productList());
 		model.addAttribute("brandList", service.brandList());
+		model.addAttribute("eventList", service.eventList());
 	}
 	
 	

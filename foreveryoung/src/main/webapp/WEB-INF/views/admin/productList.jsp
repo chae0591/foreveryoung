@@ -64,6 +64,7 @@
 				<p>통합검색</p>
 					<label>카테고리</label>
 					<select>
+						<option>카테고리 선택</option>
 						<c:forEach items="${productList}" var="productList">
 							<option>${productList.product_category}</option>
 						</c:forEach>
@@ -71,13 +72,14 @@
 					
 					<label>브랜드</label>
 					<select>
+						<option>브랜드 선택</option>
 						<c:forEach items="${brandList}" var="brandList">
 							<option>${brandList.brand_name}</option>
 						</c:forEach>
 					</select>				
 					
 					<label>상품명</label>
-					<input type="text" value="상품명을 입력해 주세요">
+					<input type="text" placeholder="상품명을 입력해 주세요">
 					<button >검색</button>
 			
 			
@@ -113,7 +115,7 @@
 							<c:otherwise>
 								<c:forEach items="${productList}" var="productList">
 									<tr>
-										<td align="center">${productList.product_id}</td>
+										<td align="center">${productList.product_no}</td>
 										<td align="center">${productList.product_name}</td>
 										<td align="center">${productList.product_category}</td>
 										<td align="center">${productList.brand_name}</td>
@@ -142,6 +144,9 @@
 				<p>이벤트 할인적용</p>	
 				<select>
 					<option>이벤트 선택</option>
+						<c:forEach  items="${eventList}" var="eventList">
+							<option>${eventList.event_name}</option>
+						</c:forEach>
 				</select>
 				
 				<input type="button" value="적용">

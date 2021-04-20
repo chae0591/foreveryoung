@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
-    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -106,7 +107,20 @@
 										</td>
 										<td align="center">${eventList.event_discount}%</td>						
 										<td align="center">${eventList.event_target}</td>
-										<td align="center">진행상황</td>
+										<td align="center">
+											<jsp:useBean id="now" class="java.util.Date" />
+											<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+											<c:choose>
+												<c:when test="${eventList.event_start < today and today < eventList.event_end}">
+													<strong style="color:red;">진행중</strong>
+												</c:when>
+												<c:otherwise>
+													<strong>이벤트 종료</strong>
+												</c:otherwise>											
+											</c:choose>
+
+										
+										</td>
 										<td align="center">
 											<a id="event_detail" href="/admin/eventDetail?event_no=${eventList.event_no}">상세보기</a>
 										</td>
@@ -154,7 +168,8 @@
 		
 		<div class="row">
 			<div class="col-lg-12">
-			
+
+
 			</div>
 		</div><!--/.row-->
 
