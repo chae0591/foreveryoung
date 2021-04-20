@@ -23,10 +23,6 @@ public interface ServiceCenterRepository {
 
 	public int inquiryRegisterAfter() throws Exception;
 
-	public List<Notice> noticeAll(int start, int end, String keyword) throws Exception;
-
-	public List<Notice> noticeAll(String string, Map<String, Object> map) throws Exception;
-
-	public int countArticle(String keyword) throws Exception;
+	public List<Notice> listAll(String keyword, int start, int end) throws Exception;
 
 }

@@ -10,8 +10,6 @@ public interface ServiceCenterService {
 
 	public List<Notice> noticeList() throws Exception;
 	
-	public List<Notice> noticeAll(int start, int end, String keyword) throws Exception;
-	
 	public List<Inquiry> inquiryList(Integer user_num) throws Exception;
 	
 	public void inquiryRegister(Inquiry inquiry) throws Exception;
@@ -24,6 +22,6 @@ public interface ServiceCenterService {
 
 	public int inquiryRegisterAfter() throws Exception;
 
-	public int countArticle(String keyword) throws Exception;
+	public List<Notice> listAll(String keyword, int start, int end) throws Exception;
 }
 

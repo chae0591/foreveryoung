@@ -31,17 +31,6 @@ public class ServiceCenterServiceImpl implements ServiceCenterService{
 	}
 	
 	@Override
-	public List<Notice> noticeAll(int start, int end, String keyword) throws Exception {
-		//검색옵션, 키워드 맵에 저장
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("keyword", keyword);
-		//BETWEEN #{start}, #{end}에 입력될 값을 맵에
-		map.put("start", start);
-		map.put("end", end);
-		return repository.noticeAll("notice.listAll", map);
-	}
-	
-	@Override
 	 public List<Inquiry> inquiryList(Integer user_num) throws Exception {
 	      return repository.inquiryList(user_num);
 	 }
@@ -70,10 +59,12 @@ public class ServiceCenterServiceImpl implements ServiceCenterService{
 	public int inquiryRegisterAfter() throws Exception {
 		return repository.inquiryRegisterAfter();
 	}
-
+	
+	//목록 (페이지 나누기, 검색 기능을 포함)
+    //매개변수는 시작 레코드 번호, 끝번호, 옵션과 키워드가 들어간다.
 	@Override
-	public int countArticle(String keyword) throws Exception {
-		return repository.countArticle(keyword);
+	public List<Notice> listAll(String keyword, int start, int end) throws Exception {
+		return repository.listAll(keyword, start, end);
 	}
 
 }

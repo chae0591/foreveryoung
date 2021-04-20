@@ -293,9 +293,10 @@ $(function(){
 		self.location = "list" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());
 	});
 	
-	//원하는 페이지로 이동시 검색조건, 키워드 값을 유지하기 위해
+	//아래쪽에서 이 함수를 호출해서 페이지값을 컨트롤러에 맵핑시킨다
 	function list(page){
-		location.href="${path}/service_center/notice?curPage="+page+"&keyword=${map.keyword}";
+	    console.log("페이지를 이동합니다.");
+	    location.href="notice?curPage="+page;
 	}
 });
 </script>
@@ -318,10 +319,10 @@ $(function(){
 	
 	<div class="serviceSrh-box">
 		<label>공지사항 검색</label>
-		<form class="form-inline" action="#" method="post">
+		<form class="form-inline" action="notice" method="post">
 			<div class="srh-box">
-				<input class="keyword" id="keyword" type="text" placeholder="질문을 검색하세요.">
-				<input class="searchBtn"  id="searchBtn"type="submit" value="${scri.keyword}">
+				<input class="keyword" name="keyword" type="text" placeholder="질문을 검색하세요." value="${map.keyword}">
+				<input class="searchBtn" type="submit" value="클릭">
 			</div>
 		</form>
 	</div>
@@ -357,44 +358,44 @@ $(function(){
 		</c:forEach>
 	</div>
 	
-	<!-- 페이징 -->
-		<tr>
-			<td colspan="5">
-				<!-- 처음페이지로 이동 : 현재 페이지가 1보다 크면  [처음]하이퍼링크를 화면에 출력-->
-				<c:if test="${map.noticePager.curBlock > 1}">
-					<a href="javascript:list('1')">[처음]</a>
-				</c:if>
-				
-				<!-- 이전페이지 블록으로 이동 : 현재 페이지 블럭이 1보다 크면 [이전]하이퍼링크를 화면에 출력 -->
-				<c:if test="${map.noticePager.curBlock > 1}">
-					<a href="javascript:list('${map.noticePager.prevPage}')">[이전]</a>
-				</c:if>
-				
-				<!-- **하나의 블럭 시작페이지부터 끝페이지까지 반복문 실행 -->
-				<c:forEach var="num" begin="${map.noticePager.blockBegin}" end="${map.noticePager.blockEnd}">
-					<!-- 현재페이지이면 하이퍼링크 제거 -->
-					<c:choose>
-						<c:when test="${num == map.noticePager.curPage}">
-							<span style="color: red">${num}</span>&nbsp;
-						</c:when>
-						<c:otherwise>
-							<a href="javascript:list('${num}')">${num}</a>&nbsp;
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-				
-				<!-- 다음페이지 블록으로 이동 : 현재 페이지 블럭이 전체 페이지 블럭보다 작거나 같으면 [다음]하이퍼링크를 화면에 출력 -->
-				<c:if test="${map.noticePager.curBlock <= map.noticePager.totBlock}">
-					<a href="javascript:list('${map.noticePager.nextPage}')">[다음]</a>
-				</c:if>
-				
-				<!-- 끝페이지로 이동 : 현재 페이지가 전체 페이지보다 작거나 같으면 [끝]하이퍼링크를 화면에 출력 -->
-				<c:if test="${map.noticePager.curPage <= map.noticePager.totPage}">
-					<a href="javascript:list('${map.noticePager.totPage}')">[끝]</a>
-				</c:if>
-			</td>
-		</tr>
-		<!-- 페이징 -->
+	<!-- 페이지 네비게이션 (페이지 알고리즘 관련) 출력 -->
+ <tr>
+        <td colspan = "7" align = "center">
+            <c:if test="${map.pager.curBlock > 1}">
+  <a href="#" onclick="list('1')">[처음]</a>
+            </c:if> <!-- 현재 블록이 1블록보다 크면 (뒤쪽에 있기때문에) 처음으로 갈 수 있도록 링크를 추가 -->
+        
+            <c:if test="${map.pager.curBlock > 1}">
+                <a href="#" onclick="list('${map.pager.prevPage}')">[이전]</a>
+            </c:if> <!-- 현재 블록이 1블록보다 크면 이전 블록으로 이동할 수 있도록 링크 추가 -->
+            
+            <c:forEach var="num"
+                begin="${map.pager.blockBegin}"
+                end="${map.pager.blockEnd}">
+                <c:choose>
+                    <c:when test="${num == map.pager.curPage}">
+                    
+                    <!-- 현재 페이지인 경우 하이퍼링크 제거 -->
+                    <!-- 현재 페이지인 경우에는 링크를 빼고 빨간색으로 처리를 한다. -->
+                        <span style="color:red;">${num}</span>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="#" onclick="list('${num}')" >${num}</a>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+            
+            
+            <c:if test="${map.pager.curBlock <= map.pager.totBlock}">
+                <a href="#" onclick="list('${map.pager.nextPage}')">[다음]</a>
+            </c:if> <!-- 현재 페이지블록이 총 페이지블록보다 작으면 다음으로 갈 수있도록 링크를 추가 -->
+            
+            
+            <c:if test="${map.pager.curPage <= map.pager.totPage}">
+                <a href="#" onclick="list('${map.pager.totPage}')">[끝]</a>
+            </c:if> <!-- 현재 페이지블록이 총 페이지블록보다 작거나 같으면 끝으로 갈 수 있도록 링크를 추가함-->
+            </td>
+    </tr>
 
 	<div class="last-box">
 		<button class="inquiryGobtn">1:1 문의하기</button>
