@@ -19,11 +19,65 @@
 	
 	<select id="searchListMyPg" resultType="OrderMypgVO">
 		select O.order_no, O.order_customer, O.order_brand, O.order_product, O.order_amount, O.order_status, 
-		O.order_totalPrice, O.order_time, pb.product_name, pb.product_price, pb.brand_name 
+		O.order_totalPrice, O.order_time, pb.product_name, pb.product_price, pb.brand_name, 
+        pb.image_save_name, pb.image_type, pb.image_name 
 		from order_table O 
-		join (select p.*, b.* from product_table P join brand B on p.product_brand = b.brand_num) pb 
+		join (select p.*, b.*, pi.image_save_name, pi.image_type, pi.image_name from product_table P 
+                join brand B on p.product_brand = b.brand_num 
+                left outer join product_img pi on p.product_no = pi.product_no) pb 
 		on O.order_product = pb.product_no 
-		where O.order_customer = #{user_num}
+		where O.order_customer = #{user_num} 
+		and O.order_time between systimestamp - NUMTODSINTERVAL(#{day_num}, 'DAY') and systimestamp 
+		order by O.order_time desc
 	</select>
 	
+	<select id="searchListMyPgDate" resultType="OrderMypgVO" parameterType="map">
+		select O.order_no, O.order_customer, O.order_brand, O.order_product, O.order_amount, O.order_status, 
+		O.order_totalPrice, O.order_time, pb.product_name, pb.product_price, pb.brand_name, 
+        pb.image_save_name, pb.image_type, pb.image_name 
+		from order_table O 
+		join (select p.*, b.*, pi.image_save_name, pi.image_type, pi.image_name from product_table P 
+                join brand B on p.product_brand = b.brand_num 
+                left outer join product_img pi on p.product_no = pi.product_no) pb 
+		on O.order_product = pb.product_no 
+		<where>
+			<if test="user_num != null and user_num != ''">
+				and O.order_customer = #{user_num} 
+			</if>
+		
+			<if test="(start_date != null and start_date != '') or (end_date != null and end_date != '')">
+				and
+				<choose>
+					<when test="(start_date != null and start_date != '') and (end_date != null and end_date != '')">
+						O.order_time between to_date(${start_date} , 'YYYY-MM-DD HH24:MI:SS') and to_date(${end_date} , 'YYYY-MM-DD HH24:MI:SS') 
+					</when>
+					<when test="start_date != null and start_date != ''">
+						<![CDATA[
+							O.order_time >= to_date(${start_date} , 'YYYY-MM-DD HH24:MI:SS')
+						]]>
+					</when>
+					<otherwise>
+						<![CDATA[
+							O.order_time <= to_date(${end_date} , 'YYYY-MM-DD HH24:MI:SS') 
+						]]>	
+					</otherwise>
+				</choose>
+			</if>
+		</where>
+		order by O.order_time desc
+	</select>
+	
+	<select id="searchListMyPgTarget" parameterType="map" resultType="OrderMypgVO">
+		select O.order_no, O.order_customer, O.order_brand, O.order_product, O.order_amount, O.order_status, 
+		O.order_totalPrice, O.order_time, pb.product_name, pb.product_price, pb.brand_name, 
+        pb.image_save_name, pb.image_type, pb.image_name 
+		from order_table O 
+		join (select p.*, b.*, pi.image_save_name, pi.image_type, pi.image_name from product_table P 
+                join brand B on p.product_brand = b.brand_num 
+                left outer join product_img pi on p.product_no = pi.product_no) pb 
+		on O.order_product = pb.product_no 
+		where O.order_customer = #{user_num}
+        and  (instr(pb.product_name, #{target}) > 0 or instr(pb.brand_name, #{target}) > 0) 
+		order by O.order_time desc
+	</select>
 </mapper>

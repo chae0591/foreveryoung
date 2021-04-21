@@ -94,7 +94,7 @@
 	display: inline-block;
 	float: left;
 }
-.srh-box > .searchInp {
+.srh-box > .keyword {
     float: left;
     position: relative;
 	width: 80%;
@@ -185,13 +185,33 @@
 	 width: 145.7px;
      height: 100%;
 }
+.no-notice {
+	width:100%;
+	height: 400px;
+}
+.no-notice ul {
+	width: 100%;
+	height: 100%;
+}
+.no-notice ul > .img-cover {
+	 background: url( "/resources/img/no_inquiry.png" ) no-repeat center 100px;
+	 background-size: 150px 150px;
+	 width: 100%;
+     height: 100%;
+     text-align: center;
+     color: #888;
+     font-size: 16px;
+     text-align: center;
+     line-height: 20px;
+     padding-top: 280px;
+}
 .notice-list {
 	width: 1020px;
 	height: auto;
 	margin: 0 auto;
 	display: block;
 	margin-top: 20px;
-	margin-bottom: 40px;
+	margin-bottom: 20px;
 	border-top: 2px solid #666;
 	border-bottom: 2px solid #666;
 	position: relative;
@@ -244,6 +264,12 @@
     line-height: 30px;
     background-color: #555;
 }
+.page {
+	text-align: center;
+	position: relative;
+	margin: 0 auto;
+	margin-bottom: 40px;
+}
 </style>
 
 <script>
@@ -289,6 +315,15 @@ $(function(){
     	}
 	});
 	
+	$(".searchBtn").click(function(){
+		self.location = "list" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());
+	});
+	
+	//아래쪽에서 이 함수를 호출해서 페이지값을 컨트롤러에 맵핑시킨다
+	function list(page){
+	    console.log("페이지를 이동합니다.");
+	    location.href="notice?curPage="+page;
+	}
 });
 </script>
 
@@ -310,10 +345,10 @@ $(function(){
 	
 	<div class="serviceSrh-box">
 		<label>공지사항 검색</label>
-		<form class="form-inline" action="#" method="post">
-			<div class="srh-box">
-				<input class="searchInp" type="text" placeholder="질문을 검색하세요.">
-				<input class="searchBtn" type="submit" value="검색">
+		<form class="form-inline" action="notice" method="post">
+			<div class="srh-box">		
+				<input class="keyword" name="keyword" type="text" placeholder="질문을 검색하세요." value="${map.keyword}">
+				<input class="searchBtn" type="submit" value="클릭">
 			</div>
 		</form>
 	</div>
@@ -328,8 +363,17 @@ $(function(){
 			<button class="notice7">기타</button>
 	</div>
 	
+	<c:choose>
+	<c:when test="${empty map.noticeList}">
+		<div class="no-notice">
+				<ul>
+					<li class="img-cover">검색어에 맞는 결과가 없습니다</li>
+				</ul>
+		</div>
+	</c:when>
+	<c:otherwise>
 	<div class="notice-list">
-		<c:forEach items="${noticeList}" var="noticeList">
+		<c:forEach items="${map.noticeList}" var="noticeList">
 		<input type="hidden" name="notice_no" value="${noticeList.notice_no}">
 		 		<div class="open">
 		 			<ul>
@@ -347,7 +391,52 @@ $(function(){
 		 			</ul>
 		 		</div>
 		</c:forEach>
+		</div>
+		<!-- 페이지 네비게이션 (페이지 알고리즘 관련) 출력 -->
+	<div class="page">
+ 	<tr>
+        <td colspan = "7" align = "center">
+            <c:if test="${map.pager.curBlock > 1}">
+ 				 <a href="#" onclick="list('1')">[처음]</a>
+            </c:if> <!-- 현재 블록이 1블록보다 크면 (뒤쪽에 있기때문에) 처음으로 갈 수 있도록 링크를 추가 -->
+        
+            <c:if test="${map.pager.curBlock > 1}">
+                <a href="#" onclick="list('${map.pager.prevPage}')">[이전]</a>
+            </c:if> <!-- 현재 블록이 1블록보다 크면 이전 블록으로 이동할 수 있도록 링크 추가 -->
+            
+            <c:forEach var="num"
+                begin="${map.pager.blockBegin}"
+                end="${map.pager.blockEnd}">
+                <c:choose>
+                    <c:when test="${num == map.pager.curPage}">
+                    
+                    <!-- 현재 페이지인 경우 하이퍼링크 제거 -->
+                    <!-- 현재 페이지인 경우에는 링크를 빼고 빨간색으로 처리를 한다. -->
+                        <span style="color:red;">${num}</span>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="#" onclick="list('${num}')" >${num}</a>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+            
+            
+            <c:if test="${map.pager.curBlock <= map.pager.totBlock}">
+                <a href="#" onclick="list('${map.pager.nextPage}')">[다음]</a>
+            </c:if> <!-- 현재 페이지블록이 총 페이지블록보다 작으면 다음으로 갈 수있도록 링크를 추가 -->
+            
+            
+            <c:if test="${map.pager.curPage <= map.pager.totPage}">
+                <a href="#" onclick="list('${map.pager.totPage}')">[끝]</a>
+            </c:if> <!-- 현재 페이지블록이 총 페이지블록보다 작거나 같으면 끝으로 갈 수 있도록 링크를 추가함-->
+            </td>
+    </tr>
 	</div>
+		</c:otherwise>
+		</c:choose>
+	</div>
+	
+	
 	
 	<div class="last-box">
 		<button class="inquiryGobtn">1:1 문의하기</button>
