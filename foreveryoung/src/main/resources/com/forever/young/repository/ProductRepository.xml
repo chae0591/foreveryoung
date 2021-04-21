@@ -70,7 +70,7 @@
 	</select>
 
 	
-	<!-- 카테고리별 상품조회 + 페이징 -->
+	<!-- categoryList 상품조회 + 페이징 -->
 	<select id="categoryListWithPaging" resultType="com.forever.young.entity.Product">
 		select product_no,
 			product_category,
@@ -97,7 +97,7 @@
 		]]>
 	</select>
 	
-	<!-- 카테고리별 상품조회(인기순) & best상품 -->
+	<!-- categoryList best상품 -->
 	<select id="getBest" resultType="Product">
 		select
 			rn, 
@@ -130,9 +130,61 @@
 			order by rn
 	</select>
 	
-	<!-- 검색 필터링 -->
-	<select id="productListSearch" parameterType="map" resultType="com.forever.young.entity.Product">
+	<!-- categoryList 검색 후 상품 개수 -->
+	<select id="productListSearch" parameterType="map" resultType="int">
+		select count(*) from (
 		select
+			p.*
+		from
+		<choose>
+			<when test="order == 'rank'">
+				(select
+			        rownum rn,
+			        순위,
+			        order_product
+			        from(
+			        select
+			            order_product,
+			            sum(order_amount)total,
+			            dense_rank() over(order by sum(order_amount) desc) 순위
+			        from
+			            order_table
+			        group by
+			            order_product
+			        )
+			    )tmp
+			    inner join product_table p on tmp.order_product = p.product_no
+			</when>
+			<otherwise>
+				product_table P
+			</otherwise>
+		</choose>
+		where
+			product_category = #{category}
+			<if test="type != null">
+				and
+				product_skintype in
+				<foreach item="type" index="i" collection="type" open="(" close=")" separator=",">
+					#{type}
+				</foreach>
+			</if>
+			<if test="brand != null">
+				and
+				product_brand in
+				<foreach item="brand" index="i" collection="brand" open="(" close=")" separator=",">
+					#{brand}
+				</foreach>
+			</if>
+			)
+	</select>
+	
+	<!-- categoryList 검색 및 페이징 상품 리스트 -->
+	<select id="productListSearchWithPaging" parameterType="map" resultType="com.forever.young.entity.Product">
+		select result.* from(
+		select
+	        rownum rn, solt.*
+		from
+		(select
 			p.*, i.image_save_name, i.image_type, i.image_name, b.brand_name
 		from
 		<choose>
@@ -192,81 +244,14 @@
 					product_regdate desc
 				</otherwise>
 			</choose>
-	</select>
-	
-	<!-- 검색 및 페이징 리스트 -->
-	<select id="productListSearchWithPaging" parameterType="map" resultType="com.forever.young.entity.Product">
-		select
-	        result.*
-		from
-		(select
-			rownum rn, p.*, i.image_save_name, i.image_type, i.image_name, b.brand_name
-		from
-		<choose>
-			<when test="order == 'rank'">
-				(select
-			        rownum rn,
-			        순위,
-			        order_product
-			        from(
-			        select
-			            order_product,
-			            sum(order_amount)total,
-			            dense_rank() over(order by sum(order_amount) desc) 순위
-			        from
-			            order_table
-			        group by
-			            order_product
-			        )
-			    )tmp
-			    inner join product_table p on tmp.order_product = p.product_no
-			    inner join product_img I on p.product_no = I.product_no
-				inner join brand B on p.product_brand = B.brand_num
-			</when>
-			<otherwise>
-				product_table P inner join product_img i on p.product_no = i.product_no
-        		inner join brand b on p.product_brand = b.brand_num
-			</otherwise>
-		</choose>
-		where
-			product_category = #{category} and image_type = 'N'
-			and <![CDATA[rownum <= #{paging.pageNum} * #{paging.amount}]]>
-			<if test="type != null">
-				and
-				product_skintype in
-				<foreach item="type" index="i" collection="type" open="(" close=")" separator=",">
-					#{type}
-				</foreach>
-			</if>
-			<if test="brand != null">
-				and
-				product_brand in
-				<foreach item="brand" index="i" collection="brand" open="(" close=")" separator=",">
-					#{brand}
-				</foreach>
-			</if>
-		order by
-			<choose>
-				<when test="order == 'rPrice'">
-					product_price asc
-				</when>
-				<when test="order == 'hPrice'">
-					product_price desc
-				</when>
-				<when test="order == 'rank'">
-					rn
-				</when>
-				<otherwise>
-					product_regdate desc
-				</otherwise>
-			</choose>
+			) solt
 			) result
-			<![CDATA[where rn > (#{paging.pageNum} - 1) * #{paging.amount}]]>
+			<![CDATA[where rn > (#{paging.pageNum} - 1) * #{paging.amount} and rownum <= #{paging.pageNum} * #{paging.amount}]]>
 	</select>
 	
 	<!-- 전체 브랜드 조회 -->
 	<select id="getBrand" resultType="Brand">
-  		select * from brand
+  		select * from brand order by brand_name
 	</select>
 	
 	<!-- 카테고리별 상품 총 개수 -->
@@ -290,15 +275,37 @@
 			product_regdate desc
 	</select>
 	
-	<!-- 검색 필터링 -->
-	<select id="brandListSearch" parameterType="map" resultType="com.forever.young.entity.Product">
+	<!-- brandList 검색 후 상품 개수 -->
+	<select id="brandListSearch" parameterType="map" resultType="int">
+		select count(*) from(
 		select
-			p.*, i.image_save_name, i.image_type, i.image_name
+			p.*
 		from
-        	product_table P inner join product_img i on p.product_no = i.product_no
-        	inner join brand b on p.product_brand = b.brand_num
+        	<choose>
+			<when test="order == 'rank'">
+				(select
+			        rownum rn,
+			        순위,
+			        order_product
+			        from(
+			        select
+			            order_product,
+			            sum(order_amount)total,
+			            dense_rank() over(order by sum(order_amount) desc) 순위
+			        from
+			            order_table
+			        group by
+			            order_product
+			        )
+			    )tmp
+			    inner join product_table p on tmp.order_product = p.product_no
+			</when>
+			<otherwise>
+				product_table P
+			</otherwise>
+		</choose>
 		where
-			p.product_brand = #{brand} and i.image_type = 'N' 
+			p.product_brand = #{brand}
 			<if test="type != null">
 				and
 				p.product_skintype in
@@ -306,30 +313,96 @@
 					#{type}
 				</foreach>
 			</if>
-		order by
-			product_regdate desc
+			)
 	</select>
 	
-	<!-- 브랜드별 상품 총 개수 -->
-	<select id="getCountByBrand" resultType="int">
-	<![CDATA[
-		select count(*) from product_table where product_brand = #{brand}
-	]]>
+	<!-- brandList 기본 상품조회 및 페이징-->
+	<select id="brandListWithPaging" resultType="com.forever.young.entity.Product">
+			select
+				result.*
+			from
+				(select
+					rownum rn, p.*, i.image_save_name, i.image_type, i.image_name, b.brand_name
+				from
+		        	product_table P inner join product_img i on p.product_no = i.product_no
+		        	inner join brand b on p.product_brand = b.brand_num
+				where
+					p.product_brand = #{brand} and image_type = 'N'
+					and <![CDATA[rownum <= #{paging.pageNum} * #{paging.amount}]]>
+				order by
+						product_regdate desc) result
+		<![CDATA[where rn > (#{paging.pageNum} - 1) * #{paging.amount}
+		]]>
 	</select>
 	
-	<!-- 상세게시글-->
-	<select id="findByNo" parameterType="int" resultType="com.forever.young.entity.Product">
-		select * from product_table where product_no=#{no}
+	<!-- brandList 검색 및 페이징 상품 리스트 -->
+	<select id="brandListSearchWithPaging" parameterType="map" resultType="com.forever.young.entity.Product">
+		select
+			result.*
+		from(
+			select
+	        	rownum rn, solt.*
+			from
+				(select
+					p.*, i.image_save_name, i.image_type, i.image_name, b.brand_name
+				from
+					<choose>
+						<when test="order == 'rank'">
+							(select
+						        rownum rn,
+						        순위,
+						        order_product
+						        from(
+						        select
+						            order_product,
+						            sum(order_amount)total,
+						            dense_rank() over(order by sum(order_amount) desc) 순위
+						        from
+						            order_table
+						        group by
+						            order_product
+						        )
+						    )tmp
+						    inner join product_table p on tmp.order_product = p.product_no
+						    inner join product_img I on p.product_no = I.product_no
+							inner join brand B on p.product_brand = B.brand_num
+						</when>
+						<otherwise>
+							product_table P inner join product_img i on p.product_no = i.product_no
+			        		inner join brand b on p.product_brand = b.brand_num
+						</otherwise>
+					</choose>
+				where
+					product_brand = #{brand} and image_type = 'N'
+					<if test="type != null">
+						and
+						product_skintype in
+						<foreach item="type" index="i" collection="type" open="(" close=")" separator=",">
+							#{type}
+						</foreach>
+					</if>
+				order by
+					<choose>
+						<when test="order == 'rPrice'">
+							product_price asc
+						</when>
+						<when test="order == 'hPrice'">
+							product_price desc
+						</when>
+						<when test="order == 'rank'">
+							rn
+						</when>
+						<otherwise>
+							product_regdate desc
+						</otherwise>
+					</choose>
+				) solt
+			) result
+	<![CDATA[where rn > (#{paging.pageNum} - 1) * #{paging.amount} and rownum <= #{paging.pageNum} * #{paging.amount}]]>
 	</select>
 	
-
-	<!-- 상세게시글 이미지 -->
-	<select id="filelist" parameterType="int" resultType="com.forever.young.entity.Product">
-		select * from product_img where product_no=#{no}
-	</select>
-	
-	<!-- best 상품 -->
-	<select id="getBest" resultType="Product">
+	<!-- brandList best 상품 -->
+	<select id="getBrandBest" resultType="Product">
 		select
 			rn, 
 	        p.*,
@@ -349,20 +422,37 @@
 		            dense_rank() over(order by sum(order_amount) desc) 순위
 		        from
 		            order_table
+		        where
+		        	order_brand = #{brand}
 		        group by
 		            order_product
 		        )
-		    where
-		        순위 between 1 and 3
 		    )tmp
 			    inner join product_table p on tmp.order_product = p.product_no
 			    inner join product_img I on p.product_no = I.product_no
 			    inner join brand B on p.product_brand = B.brand_num
 			where
-			    I.image_type='N' and P.product_category = #{category}
+			    I.image_type='N'
+			order by rn
 	</select>
 	
+	<!-- 브랜드별 상품 총 개수 -->
+	<select id="getCountByBrand" resultType="int">
+	<![CDATA[
+		select count(*) from product_table where product_brand = #{brand}
+	]]>
+	</select>
 	
+	<!-- 상세게시글-->
+	<select id="findByNo" parameterType="int" resultType="com.forever.young.entity.Product">
+		select * from product_table where product_no=#{no}
+	</select>
+	
+
+	<!-- 상세게시글 이미지 -->
+	<select id="filelist" parameterType="int" resultType="com.forever.young.entity.Product">
+		select * from product_img where product_no=#{no}
+	</select>
 	
 	<select id="getFindBrandProduct" resultType="Product">
 		select p.product_no, p.product_name, p.product_category, p.product_price, p.product_stock, p.product_regdate from product_table p 

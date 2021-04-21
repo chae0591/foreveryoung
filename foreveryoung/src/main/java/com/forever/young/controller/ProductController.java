@@ -1,6 +1,5 @@
 package com.forever.young.controller;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -114,10 +113,9 @@ public class ProductController {
 	
 	// 검색하기
 	@PostMapping("search")
-	public String search(@RequestBody Map<String, Object> searchData, Paging paging, Model model) throws Exception {
-		List<Product> totalList = service.productListSearch(searchData);
-		int total = totalList.size();
-		
+	public String search(@RequestBody Map<String, Object> searchData, Model model) throws Exception {
+		int total = service.productListSearch(searchData);
+		Paging paging = new Paging();
 		@SuppressWarnings("unchecked")
 		Map<String, Object> map = (Map<String, Object>) searchData.get("paging");
 		paging.setAmount(Integer.parseInt((String) map.get("amount")));
@@ -133,14 +131,18 @@ public class ProductController {
 
 	// 브랜드 리스트
 	@GetMapping("brandList")
-	public String brandList(@RequestParam String brand, Paging paging, Model model) throws Exception {
+	public String brandList(@RequestParam String brand, Model model) throws Exception {
 		int total = service.getCountByBrand(Integer.parseInt(brand));
-		model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+		Paging paging = new Paging(1, 20, total);
 		
-		List<Product> list = service.brandList(Integer.parseInt(brand));
+		model.addAttribute("page", paging);
+		
+		List<Product> list = service.brandListWithPaging(Integer.parseInt(brand), paging);
+		List<Product> best = service.getBrandBest(Integer.parseInt(brand));
 		
 		model.addAttribute("brand", Integer.parseInt(brand));
 		model.addAttribute("list", list);
+		model.addAttribute("best", best);
 		
 		return "product/brandList";
 	}
@@ -148,9 +150,17 @@ public class ProductController {
 	// 검색하기
 	@PostMapping("searchBrandList")
 	public String searchBrandList(@RequestBody Map<String, Object> searchData, Model model) throws Exception {
-		List<Product> list = service.brandListSearch(searchData);
+		int total = service.brandListSearch(searchData);
+		Paging paging = new Paging();
+		@SuppressWarnings("unchecked")
+		Map<String, Object> map = (Map<String, Object>) searchData.get("paging");
+		paging.setAmount(Integer.parseInt((String) map.get("amount")));
+		paging.setPageNum(Integer.parseInt((String)map.get("pageNum")));
+		
+		List<Product> list = service.brandListSearchWithPaging(searchData);
 		model.addAttribute("list", list);
-
+		model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+		
 		return "/product/search";
 	}
-} 
+}

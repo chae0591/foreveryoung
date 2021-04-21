@@ -7,8 +7,8 @@
 		<li>
 			<input type="hidden" name="product_no" value="${lists.product_no}">
 			<a class="detail" href="#">
-					<img class="img-responsive" src="/viewImg?fileName=${lists.image_save_name}&imageType=${lists.image_type}">
-					<label><c:out value="${lists.brand_name}"/></label>
+				<img class="img-responsive" src="/viewImg?fileName=${lists.image_save_name}&imageType=${lists.image_type}">
+				<label  class="brand"><c:out value="${lists.brand_name}"/></label>
 				<label><c:out value="${lists.product_name}" /></label>
 				<label class="price"><fmt:formatNumber value="${lists.product_price}" pattern="###,###,###"/>원</label>
 			</a>
