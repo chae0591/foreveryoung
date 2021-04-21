@@ -1,6 +1,7 @@
 package com.forever.young.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,17 @@ public class OrderServiceImpl implements OrderService{
 	}
 	
 	@Override
-	public List<OrderMypgVO> searchListVO(int user_num) throws Exception {
-		return repository.searchListMyPg(user_num);
+	public List<OrderMypgVO> searchListVO(int user_num, int day_num) throws Exception {
+		return repository.searchListMyPg(user_num, day_num);
+	}
+	
+	@Override
+	public List<OrderMypgVO> searchListVODate(Map<String, Object> param) throws Exception {
+		return repository.searchListMyPgDate(param);
+	}
+	
+	@Override
+	public List<OrderMypgVO> searchListVOTarget(Map<String, Object> param) throws Exception {
+		return repository.searchListMyPgTarget(param);
 	}
 }

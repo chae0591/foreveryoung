@@ -52,9 +52,5 @@
 	<delete id="inquiryDelete">
 		delete from inquiry where inquiry_no = #{inquiry_no}
 	</delete>
-	
-	<select id="inquiryRegisterAfter" resultType="int">
-		select inquiry_seq.currval from dual
-	</select>
 
 </mapper>

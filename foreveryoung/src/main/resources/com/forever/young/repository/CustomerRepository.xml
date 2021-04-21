@@ -43,7 +43,58 @@
 	</update>
 	
 	<select id="findInquiry" resultType="MyPgInquiryVO">
-		select I.*, R.reply_no from inquiry I left outer join reply R on I.inquiry_no = R.inquiry_no where user_num = #{user_num} order by I.inquiry_regDate
+		select I.*, R.reply_no from inquiry I left outer join reply R on I.inquiry_no = R.inquiry_no 
+		where user_num = #{user_num} 
+		and I.inquiry_regDate between systimestamp - NUMTODSINTERVAL(#{day_num}, 'DAY') and systimestamp 
+		order by I.inquiry_regDate desc
+	</select>
+	
+	<select id="myVoteList" resultType="MyPgVoteVO">
+		select V.*, pb.product_name, pb.product_category, pb.product_price, pb.product_stock, 
+        pb.product_brand, pb.product_skintype, pb.event_no, 
+        pb.brand_name, pb.image_name, pb.image_type, pb.image_save_name  
+        from vote V left outer join 
+                (select p.*, b.*, pi.image_save_name, pi.image_type, pi.image_name from product_table P 
+                join brand B on p.product_brand = b.brand_num 
+                left outer join product_img pi on p.product_no = pi.product_no) PB 
+                on v.product_no = pb.product_no
+                where v.user_num = #{user_num} 
+	</select>
+	
+	<select id="searchInquiryDate" resultType="MyPgInquiryVO" parameterType="map">
+		select I.*, R.reply_no from inquiry I left outer join reply R on I.inquiry_no = R.inquiry_no 
+		<where>
+			<if test="user_num != null and user_num != ''">
+				and user_num = #{user_num} 
+			</if>
+		
+			<if test="(start_date != null and start_date != '') or (end_date != null and end_date != '')">
+				and
+				<choose>
+					<when test="(start_date != null and start_date != '') and (end_date != null and end_date != '')">
+						I.inquiry_regDate between to_date(${start_date} , 'YYYY-MM-DD HH24:MI:SS') and to_date(${end_date} , 'YYYY-MM-DD HH24:MI:SS') 
+					</when>
+					<when test="start_date != null and start_date != ''">
+						<![CDATA[
+							I.inquiry_regDate >= to_date(${start_date} , 'YYYY-MM-DD HH24:MI:SS')
+						]]>
+					</when>
+					<otherwise>
+						<![CDATA[
+							I.inquiry_regDate <= to_date(${end_date} , 'YYYY-MM-DD HH24:MI:SS') 
+						]]>	
+					</otherwise>
+				</choose>
+			</if>
+		</where>
+		order by I.inquiry_regDate desc
+	</select>
+	
+	<select id="searchInquirTarget" resultType="MyPgInquiryVO" parameterType="map">
+		select I.*, R.reply_no from inquiry I left outer join reply R on I.inquiry_no = R.inquiry_no 
+		where user_num = #{user_num} 
+		and (instr(I.inquiry_title, #{target}) > 0 or instr(I.inquiry_content, #{target}) > 0) 
+		order by I.inquiry_regDate desc
 	</select>
 
 </mapper>
