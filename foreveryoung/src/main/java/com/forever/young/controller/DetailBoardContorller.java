@@ -1,12 +1,20 @@
 package com.forever.young.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
+
+import com.forever.young.entity.Inquiry;
+import com.forever.young.entity.Review;
 import com.forever.young.service.DetailBoardService;
 
 import lombok.extern.java.Log;
@@ -33,5 +41,26 @@ public class DetailBoardContorller {
 		
 		return "detail_board/detail_main";
 	}
-	
+	//리뷰 작성Get
+	@GetMapping("/reviewRegister")
+	public String getReviewRegister(Review review, Model model, HttpSession session) throws Exception {
+		log.info("getReviewRegister()");
+		
+		review.setUser_num((int)session.getAttribute("check"));
+		
+		return "detail_board/detail_main";
+	}
+	//리뷰 작성 POST
+	@PostMapping("/reviewRegister")
+	  public String postReviewRegister(Review review, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
+		 log.info("postInquiryRegister()");
+	      
+	     review.setUser_num((int)session.getAttribute("check"));
+	         
+	     reviewservice.reviewRegister(review);
+	         
+	      model.addAttribute("reviewRegister", "리뷰가 성공적으로 완료되었습니다.");
+	       
+	      return "detail_board/detail_main";
+	}
 }

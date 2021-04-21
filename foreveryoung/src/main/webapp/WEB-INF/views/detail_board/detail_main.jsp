@@ -284,10 +284,18 @@ $(function(){
 //최신순,인기순 등 review-unit 적용
 	$(function(){
 		$(".order-list").eq(0).click(function(){
-			$()
-		});
+			$.ajax({
+				type : "POST",
+				url : '/detail_board/recent',
+				contentType : 'application/json',
+				data : jsonData,
+				
+			});//ajax 끝
+		});//최신순 끝
 	});
-   
+//리뷰 버튼-작성
+
+	
 });//function 끝
 
 </script>
@@ -548,13 +556,13 @@ $(function(){
          <hr>
             
             <div class="review_filt">
-            
                <ul>
                <c:forEach var = "lists" items="${reviewList}">
-                  <li>${lists.review_title}</li>
-                  <li>${lists.review_content}</li>
-                  <li>${lists.review_date}</li>
-                  <li>${lists.review_score}</li>
+                  <li><span>아이디   </span>${lists.user_num}</li>
+                  <li><span>등록일   </span>${lists.review_date}</li>
+                  <li><span>리뷰 점수   </span>${lists.review_score}</li>
+                  <li><span>제목   </span>${lists.review_title}</li>
+                  <li><span>내용   </span>${lists.review_content}</li>
                   <li>내용</li>
                   <li>사진</li>
                   <li>
