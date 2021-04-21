@@ -27,8 +27,8 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span></button>
 				<a class="navbar-brand" href="#"><span>foreveryoung</span> &nbsp; Admin</a>
-				<a class="navbar-brand" href="/main" style="float:right;">home</a>
-						<a href="/admin/logout"><em class="navbar-brand fa fa-power-off" style="float:right;">Logout</em></a>
+				<a href="/main" style="float:right;"><em class="navbar-brand fa fa-home"></em>&nbsp;</a>
+				<a href="/admin/logout"><em class="navbar-brand fa fa-power-off " style="float:right; margin-right: 20px;"></em></a>
 			</div>
 		</div><!-- /.container-fluid -->
 	</nav>		

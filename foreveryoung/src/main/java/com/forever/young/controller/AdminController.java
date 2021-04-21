@@ -41,13 +41,14 @@ public class AdminController {
 	
 	//대시보드 화면
 	@GetMapping("/dashBoard")
-	public String getDashBoard(Model model1,Model model2, Model model3) throws Exception{
+	public String getDashBoard(Model model) throws Exception{
 		log.info("getDashBoard()");
 		
 		
-		model1.addAttribute("customerList", service.customerList());
-		model2.addAttribute("brandList", service.brandList());
-		model3.addAttribute("productList", service.productList());
+		model.addAttribute("customerList", service.customerList());
+		model.addAttribute("brandList", service.brandList());
+		model.addAttribute("productList", service.productList());
+		model.addAttribute("admintList", service.adminList());
 		
 		return "admin/dashBoard";
 	}
@@ -112,7 +113,7 @@ public class AdminController {
 		
 		int total = service.getCountByAdmin();
 		
-		model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+		//model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
 		model.addAttribute("admin", total);
 		model.addAttribute("adminList", service.adminList());
 		
@@ -126,7 +127,7 @@ public class AdminController {
 		
 		int total = service.getCountByBrand();
 		
-		model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+		//model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
 		model.addAttribute("brand", total);
 		model.addAttribute("brandList", service.brandList());
 		
@@ -140,7 +141,7 @@ public class AdminController {
 		
 		int total = service.getCountByCustomer();
 		
-		model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+		//model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
 		model.addAttribute("customer", total);
 		model.addAttribute("customerList", service.customerList());
 		
@@ -153,7 +154,7 @@ public class AdminController {
 		
 		int total = service.getCountByProduct();
 		
-		model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+		//model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
 		model.addAttribute("product", total);
 		model.addAttribute("productList", service.productList());
 		model.addAttribute("brandList", service.brandList());
@@ -168,7 +169,7 @@ public class AdminController {
 		
 		int total = service.getCountByEvent();
 		
-		model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+		//model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
 		model.addAttribute("event", total);
 		model.addAttribute("eventList", service.eventList());
 	}
@@ -180,7 +181,7 @@ public class AdminController {
 		
 		int total = service.getCountByNotice();
 		
-		model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+		//model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
 		model.addAttribute("notice", total);
 		model.addAttribute("noticeList", service.noticeList());
 	}
@@ -192,7 +193,7 @@ public class AdminController {
 
 		int total = service.getCountByInquiry();
 		
-		model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+		//model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
 		model.addAttribute("inquiry", total);
 		model.addAttribute("inquiryList", service.inquiryList());
 	}

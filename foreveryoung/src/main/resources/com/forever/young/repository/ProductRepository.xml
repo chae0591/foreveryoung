@@ -328,7 +328,7 @@
 		select * from product_img where product_no=#{no}
 	</select>
 	
-	<!-- best 상품 -->
+	<!-- best 상품
 	<select id="getBest" resultType="Product">
 		select
 			rn, 
@@ -360,7 +360,7 @@
 			    inner join brand B on p.product_brand = B.brand_num
 			where
 			    I.image_type='N' and P.product_category = #{category}
-	</select>
+	</select> -->
 	
 	
 	

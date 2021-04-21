@@ -68,7 +68,7 @@
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<input type="button" id="event_register" value="이벤트 등록">
+				<input type="button" id="event_register" class="btn btn-md btn-info" value="이벤트 등록">
 			</div>
 		</div><!--/.row-->
 		
