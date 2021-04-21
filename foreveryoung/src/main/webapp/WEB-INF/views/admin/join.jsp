@@ -9,6 +9,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	$(document).ready(function(){
+
+	})
+
+</script> 
+
+
+
 </head>
 <body>
 
@@ -32,38 +41,45 @@
 	
 	
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-	
+
 		<div class="row">
-			<div class="col-lg-12">
+	      	<div>
+		        <h2>관리자 등록</h2>
+		 	</div>	
+		</div>
+		
+		<div class="row col-lg-3">
+		</div>			
+		<div class="row">
+			<div class="col-lg-6 panel panel-body">
 				<form action ="join" method="post">
-		        	<div>
-		        		<h1>관리자 등록</h1>
-		        	</div>
+	
 		            	
-		            <div>
-		            	<label>ID</label><br><br>
-		                <input type="text"  name="admin_id" id="id" placeholder="아이디를 입력해주세요."><br><br>
+		            <div class="form-group">
+		            	<label>ID</label>
+		                <input type="text" class="form-control"  name="admin_id" id="id" placeholder="6~12자 영문 소문자 또는 숫자" required="required">
 					</div>
 						
-		           	<div>
-		                <label>PASSWORD</label><br><br>
-		            	<input type="password" name="admin_pw" id="password" placeholder="비밀번호를 입력해주세요."><br><br>
+		           	<div class="form-group">
+		                <label>PASSWORD</label>
+		            	<input type="password" name="admin_pw"  class="form-control" id="password" placeholder="6~12자 영문 소문자/대문자/숫자" required="required">
 		            </div>
 		            	
-		            <div>
-		            	<label>NAME</label><br><br>
-		            	<input type="text" name="admin_name" id="name" placeholder="이릅을 입력해주세요"><br><br>
+		            <div class="form-group">
+		            	<label>NAME</label>
+		            	<input type="text" name="admin_name" class="form-control"  id="name" placeholder="한글 2~10자" required="required">
 		       		</div>
 		       			
 		       			
-		       		<div>
-		            	<label>PHONE</label><br><br>
-		            	<input type="text" name="admin_phone" id="phone" placeholder="전화번호를 입력해주세요"><br><br>
+		       		<div class="form-group">
+		            	<label>PHONE</label>
+		            	<input type="text" name="admin_phone" class="form-control"  id="phone" placeholder="000-0000-0000" required="required">
 		            </div>
 		            	
-		            	
+		            <div class="row col-lg-5"></div>	
 		            <div>
-		            	<input type="submit" value="가입하기">
+		            	<input type="submit" class="btn btn-md btn-info" value="가입하기">
+		            	<a href="/admin/adminList" class="btn btn-md btn-default">목록으로</a>
 		        	</div>
 	        	
 	    	</form>

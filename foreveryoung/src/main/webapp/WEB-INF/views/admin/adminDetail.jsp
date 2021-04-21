@@ -61,31 +61,35 @@
 			<div class="col-lg-12">
 				<h2>관리자 상세보기</h2>
 			</div>
-		</div><!--/.row-->
-		
+		</div><!--/.row-->	
 		<div class="row">
-			<div class="col-lg-12">
+			<div class="col-lg-1">
+			</div>
+			<div class="col-lg-10 panel panel-default btn-margins">
+			
+				
+				<div class="panel-heading">관리자 정보</div>
 				<form:form modelAttribute="adminDetail">
-						<table border="1">
+						<table class="table panel-body">
 							<tr>
-								<th align="center" width="100">관리자 번호</th>
-								<td><form:input path="admin_no" readonly="true"/></td>
+								<th align="center">관리자 번호</th>
+								<td><form:hidden path="admin_no" readonly="true"/>${adminDetail.admin_no}</td>
 							</tr>						
 							<tr>
-								<th align="center" width="100">ID</th>
-								<td><form:input path="admin_id" readonly="true"/></td>
+								<th align="center">ID</th>
+								<td>${adminDetail.admin_id}</td>
 							</tr>
 							<tr>
-								<th align="center" width="100">관리자 이름</th>
-								<td><form:input path="admin_name" readonly="true"/></td>
+								<th align="center">관리자 이름</th>
+								<td>${adminDetail.admin_name}</td>
 							</tr>
 							<tr>
-								<th align="center" width="100">관리자 전화번호</th>
-								<td><form:input path="admin_phone" readonly="true"/></td>			
+								<th align="center">관리자 전화번호</th>
+								<td>${adminDetail.admin_phone}</td>			
 							</tr>
 							<tr>
-								<th align="center" width="100">관리자 등록일</th>
-								<td><form:input path="admin_regDate" readonly="true"/></td>			
+								<th align="center">관리자 등록일</th>
+								<td>${adminDetail.admin_regDate}</td>			
 							</tr>							
 						</table>			
 				</form:form>
@@ -94,10 +98,12 @@
 		
 		
 		<div class="row">
-			<div class="col-lg-12">
-				<button id="admin_modify">수정</button>
-				<button id="admin_delete">삭제</button>
-				<button id="admin_list">목록으로</button>
+			<div class="col-lg-5"></div>
+			
+			<div class="col-lg-5">
+				<button id="admin_modify" class="btn btn-md btn-info">수정</button>
+				<button id="admin_delete" class="btn btn-md btn-danger">삭제</button>
+				<button id="admin_list" class="btn btn-md btn-default">목록으로</button>
 			</div>
 		</div><!--/.row-->
 		

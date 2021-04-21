@@ -45,41 +45,51 @@
 	</div><!--/.sidebar-->	
 	
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-	
+
+
 		<div class="row">
-			<div class="col-lg-12">
+		     <div>
+		        <h1>이벤트 등록</h1>
+		     </div>		
+		</div>
+
+		<div class="row col-lg-3">
+		</div>	
+		<div class="row">
+			<div class="col-lg-6  panel panel-body">
 				<form action ="eventRegister" method="post">
-		        	<div>
-		        		<h1>이벤트 등록</h1>
-		        	</div>
-		            	
-		            <div>
+		            <div  class="form-group">
 		            	<label>이벤트명</label><br><br>
-		                <input type="text"  name="event_name" id="event_name" placeholder="이벤트명을 입력해주세요."><br><br>
+		                <input type="text" class="form-control"   name="event_name" id="event_name" placeholder="이벤트명을 입력해주세요."  required="required"><br><br>
 					</div>
 						
-		           	<div>
+		           	<div  class="form-group col-lg-12">
 		                <label>이벤트기간</label><br><br>
-		            	<input type="date" name="event_start" id="event_start"> ~
-		            	<input type="date" name="event_end" id="event_end">
+		                <div class="col-lg-5">
+		                	<input type="date" name="event_start" id="event_start"  class="form-control"  required="required">
+		                </div>
+		                <div class="col-lg-1"> ~ </div>
+		            	<div class="col-lg-5">
+		            		<input type="date" name="event_end" id="event_end" class="form-control"  required="required">
+		            	</div>
 		            	<br><br>
 		            </div>
 		            	
-		            <div>
+		            <div  class="form-group">
 		            	<label>이벤트 할인율</label><br><br>
-		            	<input type="text" name="event_discount" id="event_discount" >%<br><br>
+		            		<input type="text"   class="form-control" name="event_discount" id="event_discount" placeholder="숫자만 입력하세요"  required="required">%
 		       		</div>
 		       			
 		       			
-		       		<div>
+		       		<div  class="form-group">
 		            	<label>이벤트 적용대상</label><br><br>
-		            	<input type="text" name="event_target" id="event_target"><br><br>
+		            	<input type="text"   class="form-control" name="event_target" id="event_target"  required="required">
 		            </div>
 		            	
-		            	
-		            <div>
-		            	<input type="submit"  value="등록">
-		            	<input type="button" class="eventList_btn" value="취소">
+		            <div class="col-lg-5"></div>		
+		            <div class="col-lg-6">
+		            	<input type="submit" class="btn btn-md btn-info"  value="등록">
+		            	<input type="button" class="eventList_btn btn btn-md btn-default" value="취소">
 		        	</div>
 		        	
 		    	</form>
