@@ -294,7 +294,20 @@ $(function(){
 		});//최신순 끝
 	});
 //리뷰 버튼-작성
-
+	$(function(){
+		$("#review_btn").click(function(){
+			var id = "${check}";
+			
+	        if(id == ''){
+	        	 alert("로그인 후 문의 가능합니다.");
+	        	 location.href = '/member/login';
+	   		 }else{
+	   			 
+	   			 var product_no_val = $("input[name=product_no]").val();
+	   			 location.href = '/detail_board/reviewRegister?product_no=' + product_no_val;
+	    	}
+		});
+	});//리뷰버튼-작성 끝
 	
 });//function 끝
 
@@ -304,7 +317,7 @@ $(function(){
 <jsp:include page="../template/header.jsp"></jsp:include>
 <div class="detail-all">
    <input type="hidden" name="user_num" value="${check}">
-   <input type="hidden" name="product_no" value="${product.product_no}">
+   <input type="hidden" name="product_no" value="${getDetail.product_no}">
       <form:form modelAttribute="getDetail">
       
          <div class="main-img">

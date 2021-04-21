@@ -41,6 +41,11 @@ public class DetailBoardServiceImpl implements DetailBoardService{
 		repository.reviewRegister(review);
 	}
 
+	@Override
+	public int reviewRegisterAfter() throws Exception {
+		return repository.reviewRegisterAfter();
+	}
+
 
 }
 

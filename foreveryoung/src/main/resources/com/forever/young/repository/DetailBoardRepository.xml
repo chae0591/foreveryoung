@@ -28,6 +28,10 @@
 	<insert id="reviewRegister">
 		insert into review(product_no,user_num,brand_num,review_num,
 		review_title,review_content,review_date,review_score) values(
-		1,1,1,review_num.nextval,#{review_title},#{user_score})
+		#{product_no},#{user_num},1,review_num.nextval,#{review_title},#{review_content},sysdate,#{review_score})
 	</insert>
+	
+	<select id="reviewRegisterAfter" resultType="int">
+       select review_num.currval from dual
+    </select>
 </mapper>

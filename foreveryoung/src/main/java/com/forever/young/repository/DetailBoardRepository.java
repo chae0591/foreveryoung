@@ -14,4 +14,5 @@ public interface DetailBoardRepository {
 	public List<Product> productList()throws Exception;
 	public List<Review> reviewList(int product_no) throws Exception;
 	public void reviewRegister(Review review)throws Exception;
+	public int reviewRegisterAfter()throws Exception;	
 }
