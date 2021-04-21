@@ -44,4 +44,6 @@ public interface ProductRepository {
 
 	public List<Product> getFindBrandProduct(Product product);
 
+	public void delete(int product_no);
+
 }

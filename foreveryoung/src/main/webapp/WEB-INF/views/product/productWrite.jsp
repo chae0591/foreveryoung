@@ -374,8 +374,8 @@
 			
 			<hr>
 		
-			<div class="form-group control-label">
-				<label class="bold">상품 이름</label>
+			<div class="form-group">
+				<label class="bold control-label">상품 이름</label>
 				<input class="form-control" type="text" name="product_name" placeholder="상품 이름을 입력하시오." required />
 			</div>
 			<br>

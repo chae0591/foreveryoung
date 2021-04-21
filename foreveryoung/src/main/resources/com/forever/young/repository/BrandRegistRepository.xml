@@ -35,4 +35,51 @@
 		order by product_regdate DESC
 	</select> -->
 
+	<!-- 판매자 페이지 상품 페이징 --> 
+	<select id="selectBrandProductList" parameterType="BrandpagePaging" resultType="Product">
+		select 
+			p.product_no, 
+			p.product_name, 
+			p.product_category, 
+			p.product_price, 
+			p.product_stock, 
+			p.product_regdate 
+		from 
+			product_table p 
+		INNER JOIN 
+			brand b on p.product_brand = b.brand_num  
+		order by 
+			product_regdate DESC
+		limit 
+			 #{startPage}, #{recordsPerPage}
+	</select>
+	
+	<select id="selectBrandProductTotalCount" parameterType="BrandpagePaging" resultType="int">
+		select 
+			count(*) 
+		from 
+			product_table p
+		INNER JOIN 
+			brand b on p.product_brand = b.brand_num  
+	</select>
+
+	
+	<update id="update" parameterType="com.forever.young.entity.Product">
+		update product_table 
+			set product_name = #{name}, 
+				product_price = #{price},
+				product_stock = #{stock}
+			where product_no = #{number} 
+	</update>
+	
+	
+	<delete id="deleteProduct">
+		delete 
+			 product_table 
+		where product_no = #{product_no}
+	</delete>
+
+
+
+
 </mapper>
