@@ -98,7 +98,7 @@
 	</select>
 	
 	<!-- 카테고리별 상품조회(인기순) & best상품 -->
-	<select id="getBest" resultType="Product">
+	<!-- <select id="getBest" resultType="Product">
 		select
 			rn, 
 	        p.*,
@@ -129,7 +129,7 @@
 			    I.image_type='N' and P.product_category = #{category}
 			order by rn
 	</select>
-	
+	 -->
 	<!-- 검색 필터링 -->
 	<select id="productListSearch" parameterType="map" resultType="com.forever.young.entity.Product">
 		select
@@ -360,8 +360,7 @@
 			    inner join brand B on p.product_brand = B.brand_num
 			where
 			    I.image_type='N' and P.product_category = #{category}
-	</select>
-	
+	</select> 	
 	
 	
 	<select id="getFindBrandProduct" resultType="Product">
