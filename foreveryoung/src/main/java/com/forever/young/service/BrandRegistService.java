@@ -17,4 +17,11 @@ public interface BrandRegistService {
 	public List<Product> brandList(int brand);
 	public int getCountByBrand(int brand);
 	
+	//판매자 페이지 상품 페이징 
+	public List<Product> listAll(int start, int end, String searchOption, String keyword) throws Exception;
+	
+	//브랜드 상품 수정 및 삭제 
+	public void update(Product product) throws Exception; 
+	public void deleteProduct(int product_no) throws Exception; 
+	
 }

@@ -22,4 +22,6 @@ public interface AddressRepository {
 	public Address selectAddressNum(int address_no) throws Exception;
 	
 	public void addVO(OrderVO orderVO) throws Exception;
+	
+	public Address searchSelAddress(int user_num) throws Exception;
 }

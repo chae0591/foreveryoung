@@ -1,6 +1,8 @@
 package com.forever.young.service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,5 +54,23 @@ public class BrandRegistServiceImpl implements BrandRegistService{
 	public int getCountByBrand(int brand) {
 		return productRepository.getCountByBrand(brand);
 	}
+
+	@Override
+	public List<Product> listAll(int start, int end, String searchOption, String keyword) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	//브랜드 게시글 삭제 및 수정 
+	@Override
+	public void update(Product product) throws Exception {
+		repository.update(product); 
+	}
+
+	@Override
+	public void deleteProduct(int product_no) throws Exception {
+		repository.deleteProduct(product_no);
+	}
+	
 
 }

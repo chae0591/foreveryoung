@@ -10,7 +10,8 @@
 		pb.brand_name, pb.product_skintype, c.cart_count, c.cart_regDate 
 		from cart c join (select p.*, b.* from product_table P join brand B on p.product_brand = b.brand_num) pb 
 		on c.product_no = pb.product_no 
-		where c.user_num = #{user_num}
+		where c.user_num = #{user_num} 
+		order by c.cart_regDate desc
 	</select>
 	
 	<delete id="delCartItem">
@@ -33,7 +34,8 @@
 		where c.cart_no in 
 		<foreach item="item" collection="cartList" index="index" open="(" separator="," close=")">
 			#{item}
-		</foreach>
+		</foreach> 
+		order by c.cart_regDate desc
 	</select>
 	
 	<select id="searchListProNums" resultType="CartListVO">
@@ -44,7 +46,8 @@
 		where pb.product_no in 
 		<foreach item="item" collection="pronumList" index="index" open="(" separator="," close=")">
 			#{item}
-		</foreach>
+		</foreach> 
+		order by c.cart_regDate desc
 	</select>
 	
 	<select id="searchListProNumList" resultType="CartListVO">
@@ -55,6 +58,7 @@
 		where pb.product_no in 
 		<foreach item="item" collection="proList" index="index" open="(" separator="," close=")">
 			#{item}
-		</foreach>
+		</foreach> 
+		order by c.cart_regDate desc
 	</select>
 </mapper>

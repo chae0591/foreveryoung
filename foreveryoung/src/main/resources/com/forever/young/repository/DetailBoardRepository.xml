@@ -18,4 +18,20 @@
 			where P.product_no=#{product_no}
 	</select>
 	
+	<!-- review List -->
+	<select id="reviewList" resultType="Review">
+  		<![CDATA[
+  			  	select * from Review where product_no=#{product_no}
+  		]]>		
+	</select>
+	<!-- review Register -->
+	<insert id="reviewRegister">
+		insert into review(product_no,user_num,brand_num,review_num,
+		review_title,review_content,review_date,review_score) values(
+		#{product_no},#{user_num},1,review_num.nextval,#{review_title},#{review_content},sysdate,#{review_score})
+	</insert>
+	
+	<select id="reviewRegisterAfter" resultType="int">
+       select review_num.currval from dual
+    </select>
 </mapper>

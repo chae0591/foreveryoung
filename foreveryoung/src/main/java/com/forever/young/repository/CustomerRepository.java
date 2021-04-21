@@ -1,9 +1,14 @@
 package com.forever.young.repository;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 import com.forever.young.entity.ChangePwVO;
 import com.forever.young.entity.Customer;
+import com.forever.young.entity.MyPgInquiryVO;
+import com.forever.young.entity.MyPgVoteVO;
 
 @Repository
 public interface CustomerRepository {
@@ -14,4 +19,8 @@ public interface CustomerRepository {
 	public Customer findNum(int user_num) throws Exception;
 	public void editInfo(Customer customer) throws Exception;
 	public void editPw(ChangePwVO changePwVO) throws Exception;
+	public List<MyPgInquiryVO> findInquiry(int user_num, int day_num) throws Exception;
+	public List<MyPgVoteVO> myVoteList(int user_num) throws Exception;
+	public List<MyPgInquiryVO> searchInquiryDate(Map<String, Object> param) throws Exception;
+	public List<MyPgInquiryVO> searchInquirTarget(Map<String, Object> param) throws Exception;
 }

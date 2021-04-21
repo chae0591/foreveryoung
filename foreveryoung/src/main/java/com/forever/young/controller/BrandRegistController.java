@@ -1,6 +1,8 @@
 package com.forever.young.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,10 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.forever.young.entity.Brand;
-import com.forever.young.entity.Paging;
 import com.forever.young.entity.Product;
 import com.forever.young.service.BrandRegistService;
 import com.forever.young.service.ProductService;
@@ -143,7 +145,7 @@ public class BrandRegistController {
 		List<Product> brandProductList = productService.getFindBrandProduct(product);
 		//이미지 
 		List<Product> list = productService.brandList((int)session.getAttribute("check"));
-
+		
 		model.addAttribute("brand_info", brand); 
 		model.addAttribute("product_info", brandProductList); 
 		
@@ -152,5 +154,20 @@ public class BrandRegistController {
 
 		
 		return "member/mypage_brand/mypage_brand_product"; 
+	}
+	
+	
+	//상품 삭제 
+	@GetMapping("product_item_del")
+	@ResponseBody
+	public String getProductItemDel(@RequestParam int product_no) throws Exception{
+		log.info("getProductItemDel()");
+		
+		log.info("product_no : " + product_no);
+		
+		service.deleteProduct(product_no);
+		
+		return "del" + product_no; 
+		
 	}
 }
