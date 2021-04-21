@@ -21,18 +21,25 @@ public interface AdminRepository {
 	public void join(Admin amdin) throws Exception;
 	//관리자 리스트
 	public List<Admin> adminList() throws Exception;
+	public int getCountByAdmin();
 	//브랜드 리스트
 	public List<Brand> brandList() throws Exception;
+	public int getCountByBrand();
 	//고객 리스트
 	public List<Customer> customerList() throws Exception;
+	public int getCountByCustomer();
 	//상품 리스트
-	public List<ProductVO> productList() throws Exception; 
+	public List<ProductVO> productList() throws Exception;
+	public int getCountByProduct();
 	//이벤트 리스트
 	public List<Event> eventList() throws Exception;
+	public int getCountByEvent();
 	//공지사항 리스트
 	public List<Notice> noticeList() throws Exception;
+	public int getCountByNotice();
 	//1:1문의 리스트
 	public List<InquiryVO> inquiryList() throws Exception;
+	public int getCountByInquiry();
 	//이벤트 등록
 	public void eventRegister(Event event) throws Exception;
 	//공지사항 등록
@@ -58,13 +65,14 @@ public interface AdminRepository {
 	//이벤트 수정
 	public void eventModify(Event event) throws Exception;
  	//이벤트 삭제
-	public void eventDelete(Integer event_no) throws Exception;
-	
+	public void eventDelete(Integer event_no) throws Exception;	
+ 	//1:1문의 답변 수정
+	public void replyModify(InquiryVO inquiryVO) throws Exception;
+ 	//1:1문의 답변 삭제
+	public void replyDelete(Integer inquiry_no) throws Exception;
 	
  	//상품 통합검색
  	//상품 이벤트 적용
- 	//1:1문의 답변 수정
- 	//1:1문의 답변 삭제
  	//리뷰신고 목록
  	//리뷰신고 블라인드 처리하기(삭제는 안됨!)
  	//리뷰신고 블라인드 취소하기

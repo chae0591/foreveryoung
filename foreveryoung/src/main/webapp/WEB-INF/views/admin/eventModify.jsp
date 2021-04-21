@@ -18,7 +18,7 @@ $(document).ready(function(){
 		formObj.submit();
 	})
 	
-	$("event_list").click(function(){
+	$("#event_list").click(function(){
 		self.location = "/admin/eventList"
 	})
 	

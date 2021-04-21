@@ -67,7 +67,7 @@
 	padding: 0;
 	display: block;
 	margin-top: 20px;
-	margin-bottom: 40px;
+	margin-bottom: 10px;
 	border-top: 2px solid #666;
 	border-bottom: 2px solid #666;
 	position: relative;
@@ -93,7 +93,6 @@
 	width: 1020px;
 	height: auto;
 	background-color: #blue;
-	border-bottom: 1px solid #e5e5e5;
 	position: relative;
 	text-align: center;
 	margin: 0 auto;
@@ -114,6 +113,7 @@
 	text-align: center;
 	height: auto;
 	margin-bottom: 40px;
+	margin-top: 40px;
 }
 .inquiryGobtn {
 	width: 150px;
@@ -162,18 +162,20 @@ $(document).ready(function() {
 <body>
 <jsp:include page="../template/header.jsp"></jsp:include>
 
-<div class="banner">
+	<div class="banner">
 		<div class="banner-title">
 			<h2>고객센터</h2>
 			<p>무엇을 도와드릴까요?</p>
 		</div>
 	</div>
 		
+	<!-- 공지사항/1:1문의 이동 버튼 -->	
 	<div class="service-btns">
 		<a href="/service_center/notice"><button class="notice-btn">공지사항</button></a>
 		<a href="/service_center/inquiry"><button class="inquiry-btn">1:1 문의</button></a>
 	</div>
 	
+	<!-- 상세글 -->
 	<div class="inquiryDetail-box">
 		<form:form modelAttribute="inquiryDetail">
 			<form:hidden path="inquiry_no"/>
@@ -190,16 +192,19 @@ $(document).ready(function() {
 		 </form:form>
 	</div>
 	
+	<!-- 댓글 박스 -->
+	<div class="inquiryReply-box">
+		<c:out value="${inquiryDetail.reply_content}"></c:out>
+	</div>
+	
+	<!-- 목록/수정/삭제버튼 -->
 	<div class="detailServebtns">
 		<button class="btnGoList">목록으로</button>
 		<button class="btnModify">수정</button>
 		<button class="btnDelete">게시글 삭제</button>
 	</div>
 	
-	<div>
-		<c:out value="${inquiryDetail.reply_content}"></c:out>
-	</div>
-	
+	<!-- 문의작성버튼 -->
 	<div class="last-box">
 		<button class="inquiryGobtn">1:1 문의하기</button>
 	</div>

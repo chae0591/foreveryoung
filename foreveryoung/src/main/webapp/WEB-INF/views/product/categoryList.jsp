@@ -18,6 +18,7 @@ h3 {
 
 .col-lg-12 {
 	margin: 0.5rem;
+	display:inline-block;
 }
 /* best 상품 */
 .slide_list {
@@ -25,6 +26,7 @@ h3 {
 	display: inline-block;
     max-width: 1020px;
     position: relative;
+    min-height : 300px;
 }
 
 .best_product {
@@ -90,6 +92,7 @@ h3 {
 	margin-left: -30%;
 	text-align: center;
 	list-style: none;
+	top : 220px;
 }
 
 .carousel-indicators li{
@@ -136,10 +139,8 @@ background-color: #000 \9;
 
 /* 상품 리스트 */
 .pList {
-	height: auto;
 	display: inline-block;
 	list-style: none;
-    max-width: 1020px;
     border-bottom : 1px solid #dcdcdc;
 }
 .pList > li:hover{
@@ -150,6 +151,7 @@ background-color: #000 \9;
 .pList a {
 	margin-top: 1rem;
 }
+
 .pList a > label{
 	display:inline-block;
 	width: 180px;
@@ -163,7 +165,7 @@ background-color: #000 \9;
 	text-align: center;
 }
 
-.detail > img{
+.detail > img {
 	display: inline-block;
 	width:210px;
 	height:200px;
@@ -172,23 +174,34 @@ background-color: #000 \9;
 .pList li {
 	display: inline-block;
     padding: 10px;
-    margin : 1rem 1.5rem;
+    margin : 1rem auto;
     cursor: pointer;
     position: relative;
-    width : 210px;
-    
+    width : 220px;
 }
 
 .vot_btn {
 	position : absolute;
 	top:160px;
-	left:150px;
+	left:160px;
 	background-color:white;
 }
 
 .vot_btn > img {
 	width:50px;
 	heigth:50px;
+}
+
+.order li{
+	display:inline-block;
+	list-style: none;
+	float:left;
+	padding-left: 10px;
+}
+
+.order li > .active {
+	color: black;
+	font-weight: bold;
 }
 
 
@@ -224,7 +237,7 @@ background-color: #000 \9;
 		
 		var category = $("input[name='category']").val();
 		// 필터링
-		$("input[type='checkbox']").on("change", function(e){
+		function searchAjax(paging) {
 			var brand = new Array();
 			 
 			$(".brand_check input[type='checkbox']:checked").each(function(index, item) {
@@ -248,11 +261,19 @@ background-color: #000 \9;
 					type.push($(item).val());
 				});
 			}
-			
+			if(!paging) {
+				var amount = $("input[name='amount']").val();
+				$("input[name='pageNum']").attr("value", $(".paginate_button .active").attr("href"));
+				var pageNum = $("input[name='pageNum']").val();
+				var paging = {amount : amount, pageNum : pageNum};
+			}
+			var order = $(".order .active").next().val();
 			var searchData = {
 					category : category,
 					type : type,
-					brand : brand
+					brand : brand,
+					order : order,
+					paging : paging
 			}
 			
 			var jsonData = JSON.stringify(searchData);
@@ -266,11 +287,24 @@ background-color: #000 \9;
 				success : function(result){
 					console.log("성공!");
 					voteCheck();
-					$(".pList").html(result);
+					$(".appendHtml").html(result);
+					
 				}
 			}); // ajax
+		}
+		
+		$("input[type='checkbox']").on("change", function(e){
+			searchAjax();
 		}); // end 필터링
 		
+		$(".order a").on("click", function(e){
+			e.preventDefault();
+			if($(".order a").hasClass("active")) {
+				$(".order a").removeClass("active");
+			}
+			$(this).addClass("active");	
+			searchAjax();
+		}); // 순서 피렅링
 		
 		// 좋아요
 		$(document).on('click', '.vot_btn', function(){
@@ -311,17 +345,20 @@ background-color: #000 \9;
 		}); // end 좋아요
 		
 		// 페이징
-		var pagingForm = $("#pagingForm");
-		$(".paginate_button a").on("click", function(e) {
+		$(document).on('click', '.paginate_button a', function(e){
 			e.preventDefault();
-			pagingForm.find("input[name='pageNum']").val($(this).attr("href"));
-			pagingForm.submit();
+			var amount = $("input[name='amount']").val();
+			$("input[name='pageNum']").attr("value", $(this).attr("href"));
+			var pageNum = $("input[name='pageNum']").val();
+			var paging = {amount : amount, pageNum : pageNum};
+			searchAjax(paging);
 		});
 		
 		// 상품 등록 페이지 이동
 		$("#productWrite").on("click", function(e) {
 			location.href = "/product/productWrite" ;
 		});
+		
 		
 	});
 </script>
@@ -363,7 +400,7 @@ background-color: #000 \9;
 			
 			<div class="item">
 				<c:forEach var="best" items="${best}" varStatus="status">
-					<c:if test="${best.rn gt 2}">
+					<c:if test="${best.rn gt 2 and best.rn le 4}">
 						<div class="best_product">
 								<a class="detail" href="#">
 									<img class="img-responsive" src="/viewImg?fileName=${best.image_save_name}&imageType=${best.image_type}">
@@ -452,9 +489,30 @@ background-color: #000 \9;
 			
 	<div class="col-lg-12" id="appendHtml">
 	<h3>상품 리스트</h3>
+	<div class="col-lg-4">
+		<ul class="order">
+			<li>
+				<a href="javascript:;" class="active">최신순</a>
+				<input type="hidden" value="regdate">
+			</li>
+			<li>
+				<a href="javascript:;">인기순</a>
+				<input type="hidden" value="rank">
+			</li>
+			<li>
+				<a href="javascript:;">높은 가격순</a>
+				<input type="hidden" value="hPrice"> 
+			</li>
+			<li>
+				<a href="javascript:;">낮은 가격순</a>
+				<input type="hidden" value="rPrice">
+			</li>
+		</ul>
+	</div>
+	<div class="appendHtml">
 			<ul class="pList">
 				<c:forEach var="lists" items="${list}">
-					<li class="col-sm-3">
+					<li>
 						<input type="hidden" name="product_no" value="${lists.product_no}">
 						<a class="detail" href="#">
  							<img class="img-responsive" src="/viewImg?fileName=${lists.image_save_name}&imageType=${lists.image_type}">
@@ -468,9 +526,8 @@ background-color: #000 \9;
 					</li>
 				</c:forEach>
 			</ul>
-	</div>
 	
-	<div class="text-center">
+	<div class="text-center paging">
 		<ul class="pagination">
 			<c:if test="${page.prev}">
 				<li class="paginate_button previous">
@@ -491,11 +548,10 @@ background-color: #000 \9;
 			</c:if>
 		</ul>
 	</div>
-	<form id='pagingForm' action="/product/categoryList" method="get">
-	<input type="hidden" name="category" value="${category}">
 	   	<input type="hidden" name='pageNum' value='${page.pageNum}'>
 	   	<input type="hidden" name='amount' value='${page.amount}'>
-   </form>
+</div>
+</div>
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/css/product/js/bootstrap.js"></script>
 <jsp:include page="../template/footer.jsp"></jsp:include>

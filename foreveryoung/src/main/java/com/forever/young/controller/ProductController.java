@@ -1,5 +1,6 @@
 package com.forever.young.controller;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -70,18 +71,19 @@ public class ProductController {
 	
 	
 	@GetMapping("categoryList")
-	public String categoryList(@RequestParam String category, Paging paging, Model model) throws Exception {
+	public String categoryList(@RequestParam String category, Model model) throws Exception {
 		int total = service.getCount(category);
-		model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+		Paging paging = new Paging(1, 20, total);
 		
-		List<Product> list = service.productList(category);
+		model.addAttribute("page", paging);
+		
+		List<Product> list = service.categoryListWithPaging(category, paging);
 		List<Brand> brand = service.getBrand();
 		List<Product> best = service.getBest(category);
-		
 		model.addAttribute("brand", brand);
-		model.addAttribute("category", category);
 		model.addAttribute("list", list);
 		model.addAttribute("best", best);
+		model.addAttribute("category", category);
 		String cName = null;
 		switch(category) {
 		case "skincare" :
@@ -112,11 +114,20 @@ public class ProductController {
 	
 	// 검색하기
 	@PostMapping("search")
-	public String search(@RequestBody Map<String, Object> searchData, Model model) throws Exception {
+	public String search(@RequestBody Map<String, Object> searchData, Paging paging, Model model) throws Exception {
+		List<Product> totalList = service.productListSearch(searchData);
+		int total = totalList.size();
 		
-		List<Product> list = service.productListSearch(searchData);
+		@SuppressWarnings("unchecked")
+		Map<String, Object> map = (Map<String, Object>) searchData.get("paging");
+		paging.setAmount(Integer.parseInt((String) map.get("amount")));
+		paging.setPageNum(Integer.parseInt((String)map.get("pageNum")));
+		
+		List<Product> list = service.productListSearchWithPaging(searchData);
+		
+		model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
 		model.addAttribute("list", list);
-	
+		
 		return "/product/search";
 	}
 
@@ -137,11 +148,9 @@ public class ProductController {
 	// 검색하기
 	@PostMapping("searchBrandList")
 	public String searchBrandList(@RequestBody Map<String, Object> searchData, Model model) throws Exception {
-		
 		List<Product> list = service.brandListSearch(searchData);
 		model.addAttribute("list", list);
 
 		return "/product/search";
 	}
-	
 } 
