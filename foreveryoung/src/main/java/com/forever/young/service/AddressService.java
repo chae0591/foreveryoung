@@ -13,4 +13,5 @@ public interface AddressService {
 	public void selectAddressItem(int user_no, int address_no) throws Exception;
 	public Address selectAddressNum(int address_no) throws Exception;
 	public void addVO(OrderVO orderVO) throws Exception;
+	public Address searchSelAddress(int user_num) throws Exception;
 }

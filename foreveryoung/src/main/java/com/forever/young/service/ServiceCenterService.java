@@ -24,4 +24,3 @@ public interface ServiceCenterService {
 
 	public List<Notice> listAll(String keyword, int start, int end) throws Exception;
 }
-

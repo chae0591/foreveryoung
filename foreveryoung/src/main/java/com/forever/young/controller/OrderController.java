@@ -2,7 +2,9 @@ package com.forever.young.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -112,5 +114,50 @@ public class OrderController {
 		
 		return new RedirectView("/member/mypage");
 	}
-
+	
+	@PostMapping("/order_search_by_day")
+	public String searchOrder(@RequestParam int dayval, Model model, HttpSession session) throws Exception {
+		log.info("order_search_by_day_btn()");
+		
+		model.addAttribute("product_info", service.searchListVO((int)session.getAttribute("check"), dayval));
+		
+		return "/order/order_search_by_day";
+	}
+	
+	@PostMapping("/order_search_by_date")
+	public String searchOrderDate(@RequestParam String start_date, @RequestParam String end_date, Model model, HttpSession session) throws Exception {
+		log.info("order_search_by_date_btn()");
+		
+		log.info("date1 : " + start_date);
+		log.info("date2 : " + end_date);
+		
+		if(!start_date.isEmpty()) {
+			start_date = "'".concat(start_date).concat(" 00:00:00'");
+		}
+		
+		if(!end_date.isEmpty()) {
+			end_date = "'".concat(end_date).concat(" 23:59:59'");
+		}
+		
+		Map<String, Object> param = new HashMap<>();
+		param.put("user_num", (int)session.getAttribute("check"));
+		param.put("start_date", start_date);
+		param.put("end_date", end_date);
+		
+		model.addAttribute("product_info", service.searchListVODate(param));
+		
+		return "/order/order_search_by_day";
+	}
+	
+	@PostMapping("/order_search_by_target")
+	public String searchOrderTarget(@RequestParam String target, Model model, HttpSession session) throws Exception {
+		
+		Map<String, Object> param = new HashMap<>();
+		param.put("user_num", (int)session.getAttribute("check"));
+		param.put("target", target);
+		
+		model.addAttribute("product_info", service.searchListVOTarget(param));
+		
+		return "/order/order_search_by_day";
+	}
 }
