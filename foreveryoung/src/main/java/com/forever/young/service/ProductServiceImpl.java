@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.forever.young.entity.Brand;
+import com.forever.young.entity.Paging;
 import com.forever.young.entity.Product;
 import com.forever.young.entity.ProductFile;
 import com.forever.young.repository.ProductFileUploadRepository;
@@ -47,7 +48,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<Product> productListSearch(Map<String, Object> searchData) {
+	public int productListSearch(Map<String, Object> searchData) {
 		return productRepository.productListSearch(searchData);
 	}
 
@@ -67,7 +68,7 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<Product> brandListSearch(Map<String, Object> searchData) {
+	public int brandListSearch(Map<String, Object> searchData) {
 		return productRepository.brandListSearch(searchData);
 	}
 
@@ -86,4 +87,33 @@ public class ProductServiceImpl implements ProductService{
 	public List<Product> getFindBrandProduct(Product product) {
 		return productRepository.getFindBrandProduct(product);
 	}
+
+	// 페이징
+	@Override
+	public List<Product> categoryListWithPaging(String category, Paging paging) {
+		return productRepository.categoryListWithPaging(category, paging);
+	}
+
+	@Override
+	public List<Product> productListSearchWithPaging(Map<String, Object> searchData) {
+		return productRepository.productListSearchWithPaging(searchData);
+	}
+
+	@Override
+	public List<Product> brandListWithPaging(int brand, Paging paging) {
+		return productRepository.brandListWithPaging(brand, paging);
+	}
+
+	@Override
+	public List<Product> brandListSearchWithPaging(Map<String, Object> searchData) {
+		return productRepository.brandListSearchWithPaging(searchData);
+	}
+
+	@Override
+	public List<Product> getBrandBest(int brand) {
+		return productRepository.getBrandBest(brand);
+	}
+	
+	
+	
 }

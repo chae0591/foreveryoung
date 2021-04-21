@@ -12,16 +12,24 @@
 
 <script>
 	$(document).ready(function(){
-		var formObj = $('#inquiryStatusComplete')
-		var formObj1 = $("#replyRegister")
+		var formObj = $('#inquiryDetail')
 		
+		$('#inquiry_list').click(function(){
+			self.location="/admin/inquiryList"
+		})
 		
+		$('#reply_modify').click(function(){
+			var inquiry_no = $('#inquiry_no');
+			var inquiry_noVal = inquiry_no.val();
+			self.location = "/admin/replyModify?inquiry_no=" +inquiry_noVal
+		})
 		
-		$("#completeBtn").click(function(){
-			formObj.attr("action", "/admin/inquiryStatusComplete")
-			formObj.attr("method" , "post")
+		$('#reply_delete').click(function(){
+			window.alert("1:1문의 답변이 삭제되었습니다");
+			formObj.attr("action","/admin/replyDelete")
 			formObj.submit();
 		})
+
 		
 	})
 
@@ -103,8 +111,8 @@
 					                <textarea name="reply_content" style="width:400px; height:300px; " required="required" ></textarea>
 					                <input type="hidden" name="inquiry_no"  value="${inquiryDetail.inquiry_no}">
 					                <br><br>
-					                <input type="submit" id="replyRegisterBtn" value="답변등록">
-					                <input type="button" value="답변삭제">
+					                <input type="submit"  value="답변등록">
+					                <input type="button" id="inquiry_List" value="1:1문의 목록으로">
 								</div>
 					    	</form>
 						</div>
@@ -120,8 +128,8 @@
 					                	<c:out value="${inquiryDetail.reply_content}"></c:out>
 					                </textarea>
 					                <br><br>
-					                <input type="submit" value="답변수정">
-					                <input type="button" value="답변삭제">
+					                <input type="button" id="reply_modify" value="답변수정">
+					                <input type="button" id="reply_delete" value="답변삭제">
 								</div>
 						</div>
 					</div><!--/.row-->

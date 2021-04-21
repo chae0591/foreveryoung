@@ -318,6 +318,7 @@ $(function(){
 <body>
 <jsp:include page="../template/header.jsp"></jsp:include>
 <div class="detail-all">
+
    <input type="hidden" name="user_num" value="${check}">
    <input type="hidden" name="product_no" value="${getDetail.product_no}">
       <form:form modelAttribute="getDetail">
@@ -357,7 +358,7 @@ $(function(){
                   <form name="form" method="get">
                      <span>상품 수량</span>
                      <input type="hidden" id="sell_price" name="sell_price" value="${getDetail.product_price}">
-
+                    
                      <input type="number" style="height: 23pt;width : 120px;"value="1" min="1" max="100" onchange="change();" id="result" name="amount" >
                      <input type="button" style="height: 23pt;width : 24px;" value=" + " id="plus">
                      <input type="button" style="height: 23pt;width : 25px;" value=" - " id="minus">

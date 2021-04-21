@@ -35,10 +35,20 @@ public class AdminServiceImpl implements AdminService{
 	public List<Admin> adminList() throws Exception {
 		return repository.adminList();
 	}
+	
+	@Override
+	public int getCountByAdmin() {
+		return repository.getCountByAdmin();
+	}
 
 	@Override
 	public List<Brand> brandList() throws Exception {
 		return repository.brandList();
+	}
+	
+	@Override
+	public int getCountByBrand() {
+		return repository.getCountByBrand();
 	}
 
 	@Override
@@ -47,23 +57,48 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
+	public int getCountByCustomer() {
+		return repository.getCountByCustomer();
+	}
+	
+	@Override
 	public List<ProductVO> productList() throws Exception {
 		return repository.productList();
+	}
+	
+	@Override
+	public int getCountByProduct() {
+		return repository.getCountByProduct();
 	}
 
 	@Override
 	public List<Event> eventList() throws Exception {
 		return repository.eventList();
 	}
+	
+	@Override
+	public int getCountByEvent() {
+		return repository.getCountByEvent();
+	}
 
 	@Override
 	public List<Notice> noticeList() throws Exception {
 		return repository.noticeList();
 	}
+	
+	@Override
+	public int getCountByNotice() {
+		return repository.getCountByNotice();
+	}
 
 	@Override
 	public List<InquiryVO> inquiryList() throws Exception {
 		return repository.inquiryList();
+	}
+	
+	@Override
+	public int getCountByInquiry() {
+		return repository.getCountByInquiry();
 	}
 
 	@Override
@@ -89,7 +124,6 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public void noticeModify(Notice notice) throws Exception {
 		repository.noticeModify(notice);
-		
 	}
 
 	@Override
@@ -101,12 +135,6 @@ public class AdminServiceImpl implements AdminService{
 	public void replyRegister(InquiryVO inquiryVO) throws Exception {
 		repository.replyRegister(inquiryVO);
 	}
-
-
-//	@Override
-//	public void inquiryStatusComplete(InquiryVO inquiryVO) throws Exception {
-//		repository.inquiryStatusComplete(inquiryVO);
-//	}
 	
 	@Override
 	public Admin adminDetail(Integer admin_no) throws Exception {
@@ -138,14 +166,16 @@ public class AdminServiceImpl implements AdminService{
 		repository.eventDelete(event_no);
 	}
 
+	@Override
+	public void replyModify(InquiryVO inquiryVO) throws Exception {
+		repository.replyModify(inquiryVO);
+	}
 
+	@Override
+	public void replyDelete(Integer inquiry_no) throws Exception {
+		repository.replyDelete(inquiry_no);
+	}
 
-
-
-
-
-
-	
 
 	
 	
