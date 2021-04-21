@@ -34,4 +34,8 @@
 	<insert id="addVO">
 		insert into address values(address_seq.nextval, #{address_name}, #{address_zonecode}, #{address_jibun}, #{address_roadname}, #{address_detail}, #{address_phone}, null, null)
 	</insert>
+	
+	<select id="searchSelAddress" resultType="Address">
+		select ad.* from customer c join address ad on c.address_no = ad.address_no where c.user_num = #{user_num}
+	</select>
 </mapper>

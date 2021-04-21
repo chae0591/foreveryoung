@@ -2,7 +2,9 @@ package com.forever.young.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -23,6 +25,7 @@ import com.forever.young.entity.CartListVO;
 import com.forever.young.entity.ChangePwVO;
 import com.forever.young.entity.Customer;
 import com.forever.young.entity.Order;
+import com.forever.young.service.AddressService;
 import com.forever.young.service.CartService;
 import com.forever.young.service.CustomerService;
 import com.forever.young.service.OrderService;
@@ -40,6 +43,8 @@ public class CustomerController {
 	private OrderService service_or;
 	@Autowired
 	private CartService service_ca;
+	@Autowired
+	private AddressService service_ad;
 	
 	private final Logger log = LoggerFactory.getLogger(CustomerController.class);
 	
@@ -110,10 +115,12 @@ public class CustomerController {
 	public String getMyPage(HttpSession session, Model model) throws Exception {
 		log.info("getMypage()");
 		
+		int user_num = (int)session.getAttribute("check");
 		
-		model.addAttribute("user_info", service.findNum((int)session.getAttribute("check")));
 		
-		List<Order> order_list = service_or.searchUserNum((int)session.getAttribute("check"));
+		model.addAttribute("user_info", service.findNum(user_num));
+		
+		List<Order> order_list = service_or.searchUserNum(user_num);
 		
 		List<Integer> proList = new ArrayList<>();
 		for(Order order : order_list) {
@@ -121,7 +128,9 @@ public class CustomerController {
 		}
 		
 		model.addAttribute("order_info", order_list);
-		model.addAttribute("product_info", service_or.searchListVO((int)session.getAttribute("check")));
+		model.addAttribute("product_info", service_or.searchListVO(user_num, 30));
+		model.addAttribute("inquiry_info", service.findNumInquiry(user_num, 30));
+		model.addAttribute("address_info", service_ad.searchSelAddress(user_num));
 		
 		return "member/mypage";
 	}
@@ -202,7 +211,7 @@ public class CustomerController {
 		}
 		
 		model.addAttribute("order_info", order_list);
-		model.addAttribute("product_info", service_or.searchListVO((int)session.getAttribute("check")));
+		model.addAttribute("product_info", service_or.searchListVO((int)session.getAttribute("check"), 30));
 		
 		return "member/contractList";
 	}
@@ -223,6 +232,70 @@ public class CustomerController {
 		model.addAttribute("user_info", customer);
 		
 		return "member/testpage";
+	}
+	
+	@GetMapping("/my_vote")
+	public String getMyVote(HttpSession session, Model model) throws Exception {
+		log.info("getMyVote()");
+		
+		model.addAttribute("my_vote_list", service.myVoteList((int)session.getAttribute("check")));
+		
+		return "member/my_vote";
+	}
+	
+	@GetMapping("/my_inquiry")
+	public String getMyInquiry(HttpSession session, Model model) throws Exception {
+		log.info("getMyInquiry()");
+		
+		model.addAttribute("inquiry_info", service.findNumInquiry((int)session.getAttribute("check"), 30));
+		
+		return "member/my_inquiry";
+	}
+	
+	@PostMapping("/my_inquiry_search_by_day")
+	public String getSearchMyInquiryDate(@RequestParam int dayval, Model model, HttpSession session) throws Exception {
+		log.info("getsearchInquiryDate()");
+		
+		model.addAttribute("inquiry_info", service.findNumInquiry((int)session.getAttribute("check"), dayval));
+		
+		return "/member/inquiry_search";
+	}
+	
+	@PostMapping("/my_inquiry_search_by_date")
+	public String searchInquiryDate(@RequestParam String start_date, @RequestParam String end_date, Model model, HttpSession session) throws Exception {
+		log.info("inquiry_search_by_date_btn()");
+		
+		log.info("date1 : " + start_date);
+		log.info("date2 : " + end_date);
+		
+		if(!start_date.isEmpty()) {
+			start_date = "'".concat(start_date).concat(" 00:00:00'");
+		}
+		
+		if(!end_date.isEmpty()) {
+			end_date = "'".concat(end_date).concat(" 23:59:59'");
+		}
+		
+		Map<String, Object> param = new HashMap<>();
+		param.put("user_num", (int)session.getAttribute("check"));
+		param.put("start_date", start_date);
+		param.put("end_date", end_date);
+		
+		model.addAttribute("inquiry_info", service.searchInquiryDate(param));
+		
+		return "/member/inquiry_search";
+	}
+	
+	@PostMapping("/inquiry_search_by_target")
+	public String searchOrderTarget(@RequestParam String target, Model model, HttpSession session) throws Exception {
+		
+		Map<String, Object> param = new HashMap<>();
+		param.put("user_num", (int)session.getAttribute("check"));
+		param.put("target", target);
+		
+		model.addAttribute("inquiry_info", service.searchInquirTarget(param));
+		
+		return "/member/inquiry_search";
 	}
 
 }

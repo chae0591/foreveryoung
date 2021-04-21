@@ -14,6 +14,11 @@ public class OrderMypgVO {
 	private String product_name;
 	private int product_price;
 	private String brand_name;
+	
+	private String image_save_name;
+	private String image_type;
+	private String image_name;
+	
 	public int getOrder_no() {
 		return order_no;
 	}
@@ -81,13 +86,35 @@ public class OrderMypgVO {
 		this.brand_name = brand_name;
 	}
 	
+	public String getImage_save_name() {
+		return image_save_name;
+	}
+	public void setImage_save_name(String image_save_name) {
+		this.image_save_name = image_save_name;
+	}
+	public String getImage_type() {
+		return image_type;
+	}
+	public void setImage_type(String image_type) {
+		this.image_type = image_type;
+	}
+	
+	public String getImage_name() {
+		return image_name;
+	}
+	public void setImage_name(String image_name) {
+		this.image_name = image_name;
+	}
+	
 	@Override
 	public String toString() {
 		return "OrderMypgVO [order_no=" + order_no + ", order_customer=" + order_customer + ", order_brand="
 				+ order_brand + ", order_product=" + order_product + ", order_amount=" + order_amount
 				+ ", order_status=" + order_status + ", order_totalPrice=" + order_totalPrice + ", order_time="
 				+ order_time + ", product_name=" + product_name + ", product_price=" + product_price + ", brand_name="
-				+ brand_name + "]";
+				+ brand_name + ", image_save_name=" + image_save_name + ", image_type=" + image_type + ", image_name="
+				+ image_name + "]";
 	}
+	
 	
 }

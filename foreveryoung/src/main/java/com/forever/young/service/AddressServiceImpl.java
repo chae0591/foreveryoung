@@ -49,4 +49,9 @@ public class AddressServiceImpl implements AddressService{
 	public void addVO(OrderVO orderVO) throws Exception {
 		repository.addVO(orderVO);
 	}
+	
+	@Override
+	public Address searchSelAddress(int user_num) throws Exception {
+		return repository.searchSelAddress(user_num);
+	}
 }
