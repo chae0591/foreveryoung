@@ -185,6 +185,26 @@
 	 width: 145.7px;
      height: 100%;
 }
+.no-notice {
+	width:100%;
+	height: 400px;
+}
+.no-notice ul {
+	width: 100%;
+	height: 100%;
+}
+.no-notice ul > .img-cover {
+	 background: url( "/resources/img/no_inquiry.png" ) no-repeat center 100px;
+	 background-size: 150px 150px;
+	 width: 100%;
+     height: 100%;
+     text-align: center;
+     color: #888;
+     font-size: 16px;
+     text-align: center;
+     line-height: 20px;
+     padding-top: 280px;
+}
 .notice-list {
 	width: 1020px;
 	height: auto;
@@ -343,6 +363,15 @@ $(function(){
 			<button class="notice7">기타</button>
 	</div>
 	
+	<c:choose>
+	<c:when test="${empty map.noticeList}">
+		<div class="no-notice">
+				<ul>
+					<li class="img-cover">검색어에 맞는 결과가 없습니다</li>
+				</ul>
+		</div>
+	</c:when>
+	<c:otherwise>
 	<div class="notice-list">
 		<c:forEach items="${map.noticeList}" var="noticeList">
 		<input type="hidden" name="notice_no" value="${noticeList.notice_no}">
@@ -362,9 +391,8 @@ $(function(){
 		 			</ul>
 		 		</div>
 		</c:forEach>
-	</div>
-	
-	<!-- 페이지 네비게이션 (페이지 알고리즘 관련) 출력 -->
+		</div>
+		<!-- 페이지 네비게이션 (페이지 알고리즘 관련) 출력 -->
 	<div class="page">
  	<tr>
         <td colspan = "7" align = "center">
@@ -404,6 +432,11 @@ $(function(){
             </td>
     </tr>
 	</div>
+		</c:otherwise>
+		</c:choose>
+	</div>
+	
+	
 	
 	<div class="last-box">
 		<button class="inquiryGobtn">1:1 문의하기</button>

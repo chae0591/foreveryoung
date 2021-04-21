@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +11,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
 <style>
 hr {
 	width: 1020px;
@@ -234,38 +239,18 @@ $(function(){
 	<h2 class="event-title">이 상품 어때요?</h2>
 	<table>
 		<tr>
+			<c:forEach items="${productList}" var="productList">
 			<td>
+				<input type="hidden" name="product_no" value="${productList.product_no}">
 				<a href="#">
 				<img src="https://placeimg.com/200/200/people">
-				<p class="item-name">제품명</p>
-				<p class="item-explanation">제품설명</p>
-				<p class="item-price">0,000원</p>
+				<p class="item-name">${productList.product_name}</p>
+				<p class="item-explanation">${productList.product_name}</p>
+				<p class="item-price">${productList.product_price}원</p>
+				<p class="item-price">${productList.product_stock}원</p>
 				</a>
 			</td>
-			<td>
-				<a href="#">
-				<img src="https://placeimg.com/200/200/people">
-				<p class="item-name">제품명</p>
-				<p class="item-explanation">제품설명</p>
-				<p class="item-price">0,000원</p>
-				</a>
-			</td>
-			<td>
-				<a href="#">
-				<img src="https://placeimg.com/200/200/people">
-				<p class="item-name">제품명</p>
-				<p class="item-explanation">제품설명</p>
-				<p class="item-price">0,000원</p>
-				</a>
-			</td>
-			<td>
-				<a href="#">
-				<img src="https://placeimg.com/200/200/people">
-				<p class="item-name">제품명</p>
-				<p class="item-explanation">제품설명</p>
-				<p class="item-price">0,000원</p>
-				</a>
-			</td>
+			</c:forEach>
 		</tr>
 	</table>
 	
