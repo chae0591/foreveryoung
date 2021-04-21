@@ -24,9 +24,9 @@
 		        </li>
 		                
 		        <li>
-			        <a href="">내가 쓴 글</a>
+			        <a href="my_inquiry">내가 쓴 글</a>
 			        <ul>
-			        	<li><a href="">1 대 1 상담</a></li>
+			        	<li><a href="my_inquiry">1 대 1 상담</a></li>
 				        <li><a href="">상품 리뷰</a></li>
 			        </ul>
 		        </li>
