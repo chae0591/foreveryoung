@@ -47,8 +47,13 @@ $(document).ready(function () {
 
 		<div>
 		     <label>리뷰점수</label><br><br>
-		     <input type="number" name="review_score" id="review_score">
+		     <input type="radio" name="review_score" value="1" checked/>1점
+		     <input type="radio" name="review_score" value="2"/>2점
+		     <input type="radio" name="review_score" value="3"/>3점
+		     <input type="radio" name="review_score" value="4"/>4점
+		     <input type="radio" name="review_score" value="5"/>5점
 		</div>
+		
 		<div>
 			<button type="submit" id="btnRegister">등록</button>
 			<button type="submit" id="btnCancle">취소</button>

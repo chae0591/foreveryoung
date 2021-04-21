@@ -299,15 +299,17 @@ $(function(){
 			var id = "${check}";
 			
 	        if(id == ''){
-	        	 alert("로그인 후 문의 가능합니다.");
+	        	 alert("로그인 후 리뷰작성이 가능합니다.");
 	        	 location.href = '/member/login';
 	   		 }else{
-	   			 
 	   			 var product_no_val = $("input[name=product_no]").val();
 	   			 location.href = '/detail_board/reviewRegister?product_no=' + product_no_val;
 	    	}
 		});
 	});//리뷰버튼-작성 끝
+	
+//리뷰 버튼-수정
+//리뷰 버튼-삭제
 	
 });//function 끝
 
@@ -578,6 +580,10 @@ $(function(){
                   <li><span>내용   </span>${lists.review_content}</li>
                   <li>내용</li>
                   <li>사진</li>
+                  <li>
+                  	<button id="review-delete">삭제</button>
+                  	<button id="review-modify">수정</button>
+                  </li>
                   <li>
                      <button>리뷰 좋아요</button>
                      <button>신고하기</button>
