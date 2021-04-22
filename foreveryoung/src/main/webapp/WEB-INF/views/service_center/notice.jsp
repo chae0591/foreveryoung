@@ -392,16 +392,17 @@ $(function(){
 		 		</div>
 		</c:forEach>
 		</div>
+		
 		<!-- 페이지 네비게이션 (페이지 알고리즘 관련) 출력 -->
 	<div class="page">
  	<tr>
         <td colspan = "7" align = "center">
             <c:if test="${map.pager.curBlock > 1}">
- 				 <a href="#" onclick="list('1')">[처음]</a>
+ 				 <a href="${map.pager.pageBegin}" onclick="list('1')">[처음]</a>
             </c:if> <!-- 현재 블록이 1블록보다 크면 (뒤쪽에 있기때문에) 처음으로 갈 수 있도록 링크를 추가 -->
         
             <c:if test="${map.pager.curBlock > 1}">
-                <a href="#" onclick="list('${map.pager.prevPage}')">[이전]</a>
+                <a href="${map.pager.prevPage}" onclick="list('${map.pager.prevPage}')">[이전]</a>
             </c:if> <!-- 현재 블록이 1블록보다 크면 이전 블록으로 이동할 수 있도록 링크 추가 -->
             
             <c:forEach var="num"
@@ -415,26 +416,25 @@ $(function(){
                         <span style="color:red;">${num}</span>
                     </c:when>
                     <c:otherwise>
-                        <a href="#" onclick="list('${num}')" >${num}</a>
+                        <a href="${num}" onclick="list('${num}')" >${num}</a>
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
             
             
             <c:if test="${map.pager.curBlock <= map.pager.totBlock}">
-                <a href="#" onclick="list('${map.pager.nextPage}')">[다음]</a>
+                <a href="${map.pager.nextPage}" onclick="list('${map.pager.nextPage}')">[다음]</a>
             </c:if> <!-- 현재 페이지블록이 총 페이지블록보다 작으면 다음으로 갈 수있도록 링크를 추가 -->
             
             
             <c:if test="${map.pager.curPage <= map.pager.totPage}">
-                <a href="#" onclick="list('${map.pager.totPage}')">[끝]</a>
+                <a href="${map.pager.pageEnd}" onclick="list('${map.pager.totPage}')">[끝]</a>
             </c:if> <!-- 현재 페이지블록이 총 페이지블록보다 작거나 같으면 끝으로 갈 수 있도록 링크를 추가함-->
             </td>
     </tr>
 	</div>
 		</c:otherwise>
 		</c:choose>
-	</div>
 	
 	
 	

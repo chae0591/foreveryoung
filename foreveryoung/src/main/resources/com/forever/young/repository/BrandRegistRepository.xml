@@ -36,7 +36,7 @@
 	</select> -->
 
 	<!-- 판매자 페이지 상품 페이징 --> 
-	<!--  <select id="selectBrandProductList" parameterType="BrandpagePaging" resultType="Product">
+<!-- 	<select id="selectBrandProductList" parameterType="BrandpagePaging" resultType="Product">
 		select 
 			p.product_no, 
 			p.product_name, 
@@ -52,18 +52,17 @@
 			product_regdate DESC
 		limit 
 			 #{startPage}, #{recordsPerPage}
-	</select>-->
+	</select>
 	
-	<!--  <select id="selectBrandProductTotalCount" parameterType="BrandpagePaging" resultType="int">
+	<select id="selectBrandProductTotalCount" parameterType="BrandpagePaging" resultType="int">
 		select 
 			count(*) 
 		from 
 			product_table p
 		INNER JOIN 
 			brand b on p.product_brand = b.brand_num  
-	</select>-->
+	</select> -->
 
-	
 	<update id="update" parameterType="com.forever.young.entity.Product">
 		update product_table 
 			set product_name = #{name}, 
@@ -79,7 +78,18 @@
 		where product_no = #{product_no}
 	</delete>
 
-
-
+	<select id="productList" resultType="hashmap" parameterType="hashmap">
+        <![CDATA[
+        	select * 
+        	from 
+        	(select * from product_table order by product_regdate desc )
+        	where rownum between 1 and 10
+		 ]]>
+	</select>
+	
+	<select id="ProductListCnt" resultType="int">
+		select count(*)
+		from product_table
+	</select>
 
 </mapper>
