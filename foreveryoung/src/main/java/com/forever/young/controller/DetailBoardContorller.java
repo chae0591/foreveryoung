@@ -25,73 +25,80 @@ import lombok.extern.java.Log;
 @RequestMapping("/detail_board")
 public class DetailBoardContorller {
 
-	private final Logger log = LoggerFactory.getLogger(DetailBoardContorller.class);
+   private final Logger log = LoggerFactory.getLogger(DetailBoardContorller.class);
 
-	@Autowired
-	private DetailBoardService service;
+   @Autowired
+   private DetailBoardService service;
 
-	// 상세페이지(조회)
-	@GetMapping("/detail_main")
-	public String getDetail(int product_no, Model model) throws Exception {
-		log.info("getDetail()");
-		model.addAttribute("getDetail", service.getDetail(product_no));
-		model.addAttribute("productList",service.productList());
-		//리뷰
-		model.addAttribute("reviewList",service.reviewList(product_no));
-		
-		return "detail_board/detail_main";
-	}
-	//리뷰 작성Get
-	@GetMapping("/reviewRegister")
-	public String getReviewRegister(Review review, Model model, HttpSession session, @RequestParam int product_no) throws Exception {
-		log.info("getReviewRegister()");
-		
-		model.addAttribute("getDetail", service.getDetail(product_no));
-		review.setUser_num((int)session.getAttribute("check"));
-		
-		return "detail_board/reviewRegister";
-	}
-	//리뷰 작성 POST
-	@PostMapping("/reviewRegister")
-	  public  RedirectView postReviewRegister(@ModelAttribute Review review, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
-		 log.info("postReviewRegister()");
-	      
-	     review.setUser_num((int)session.getAttribute("check"));
-	         
-	     service.reviewRegister(review);
-	         
-	      model.addAttribute("reviewRegister", "리뷰가 성공적으로 완료되었습니다.");
-	      RedirectView rv = new RedirectView("detail_main");
-	      rv.addStaticAttribute("product_no", review.getProduct_no());
-	                  
-	       return rv;
-	}
-	//리뷰 수정Get
-	@GetMapping("/reviewModify")
-	public String getReviewModify(Review review, Model model, HttpSession session, @RequestParam Integer review_num) throws Exception{
-		log.info("getReviewModify()");
-		
-		model.addAttribute("review", service.findbyreviewNo(review_num));
-		
-		return "detail_board/reviewModify";
-	}
-	//리뷰 수정 Post
-	@PostMapping("/reviewModify")
-	public RedirectView postReviewModify(@ModelAttribute Review review, Model model,HttpSession session, RedirectAttributes redirectAttributes) throws Exception{
-		log.info("reviewModify()");
-		
-		review.setUser_num((int)session.getAttribute("check"));
-		
-		service.reviewModify(review);
-		
-		model.addAttribute("reviewModify", "리뷰 수정이 완료되었습니다.");
-	    RedirectView rv = new RedirectView("detail_main");
-	    rv.addStaticAttribute("product_no",review.getProduct_no());
-	                  
-	     return rv;		
-	}
+   // 상세페이지(조회)
+   @GetMapping("/detail_main")
+   public String getDetail(int product_no, Model model) throws Exception {
+      log.info("getDetail()");
+      model.addAttribute("getDetail", service.getDetail(product_no));
+      model.addAttribute("productList",service.productList());
+      //리뷰
+      model.addAttribute("reviewList",service.reviewList(product_no));
+      
+      return "detail_board/detail_main";
+   }
+   //리뷰 작성Get
+   @GetMapping("/reviewRegister")
+   public String getReviewRegister(Review review, Model model, HttpSession session, @RequestParam int product_no) throws Exception {
+      log.info("getReviewRegister()");
+      
+      model.addAttribute("getDetail", service.getDetail(product_no));
+      review.setUser_num((int)session.getAttribute("check"));
+      
+      return "detail_board/reviewRegister";
+   }
+   //리뷰 작성 POST
+   @PostMapping("/reviewRegister")
+     public  RedirectView postReviewRegister(@ModelAttribute Review review, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
+       log.info("postReviewRegister()");
+         
+        review.setUser_num((int)session.getAttribute("check"));
+            
+        service.reviewRegister(review);
+            
+         model.addAttribute("reviewRegister", "리뷰가 성공적으로 완료되었습니다.");
+         RedirectView rv = new RedirectView("detail_main");
+         rv.addStaticAttribute("product_no", review.getProduct_no());
+                     
+          return rv;
+   }
+   //리뷰 수정Get
+   @GetMapping("/reviewModify")
+   public String getReviewModify(Review review, Model model, HttpSession session, @RequestParam Integer review_num) throws Exception{
+      log.info("getReviewModify()");
+      
+      model.addAttribute("review", service.findbyreviewNo(review_num));
+      
+      return "detail_board/reviewModify";
+   }
+   //리뷰 수정 Post
+   @PostMapping("/reviewModify")
+   public RedirectView postReviewModify(@ModelAttribute Review review, Model model,HttpSession session, RedirectAttributes redirectAttributes) throws Exception{
+      log.info("reviewModify()");
+      
+      review.setUser_num((int)session.getAttribute("check"));
+      
+      service.reviewModify(review);
+      
+      model.addAttribute("reviewModify", "리뷰 수정이 완료되었습니다.");
+       RedirectView rv = new RedirectView("detail_main");
+       rv.addStaticAttribute("product_no",review.getProduct_no());
+                     
+        return rv;      
+   }
+   //리뷰 삭제
+   @GetMapping("/reviewDelete")
+   public String reviewDelete( Model model, HttpSession session, @RequestParam Integer review_num, @RequestParam Integer product_no) throws Exception{
+      log.info("reviewDelete");
+      
+      service.reviewDelete(review_num);
+       return "redirect:/detail_board/detail_main?product_no="+product_no;
+   }
 }
-
 
 
 

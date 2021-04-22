@@ -56,6 +56,11 @@ public class DetailBoardServiceImpl implements DetailBoardService{
 		return repository.findbyreviewNo(review_num);
 	}
 
+	@Override
+	public void reviewDelete(Integer review_num) throws Exception {
+		repository.reviewDelete(review_num);
+	}
+
 }
 
 

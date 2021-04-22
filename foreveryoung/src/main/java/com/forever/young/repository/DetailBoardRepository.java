@@ -15,5 +15,6 @@ public interface DetailBoardRepository {
 	public void reviewRegister(Review review)throws Exception;
 	public void reviewModify(Review review) throws Exception;
 	public Review findbyreviewNo(Integer review_num)throws Exception;
+	public void reviewDelete(Integer review_num)throws Exception;
 	public int reviewRegisterAfter()throws Exception;	
 }

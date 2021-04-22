@@ -40,10 +40,15 @@
 	<select id="findbyreviewNo" resultType="Review" parameterType="int">
 		select * from review where review_num=#{review_num}
 	</select>
-    
+    <!-- review 수정 -->
     <select id="reviewModify" parameterType="Review">
     	update review set
     		review_title=#{review_title}, review_content=#{review_content}
     			where review_num=#{review_num}
     </select>
+    
+    <!--review delete  -->
+    <delete id="reviewDelete" parameterType="int">
+    	delete from review where review_num=#{review_num}
+    </delete>
 </mapper>

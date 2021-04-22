@@ -178,16 +178,13 @@ $(function(){
          if(user_num == null || user_num == "") {
             location.href="/member/login";
          }
-         
          var url;
          if($(this).attr("value") == "true") {
             url = "/vote/deleteVote";
          } else if ($(this).attr("value") == "false") {
             url = "/vote/insertVote";
          }
-    alert("url = "+url);
-         console.log(url);
-         $.ajax({
+          $.ajax({
             url : url,
             data : {'user_num':user_num, 'product_no':product_no},
             type: 'POST',
@@ -200,7 +197,7 @@ $(function(){
                   $(target).find(".like").attr("src", "/img/product/unlike.png");
                }
             }
-         }); // ajax
+         });  // ajax
 
       }); // end 좋아요
    $(".bucket").click(function(){
@@ -323,6 +320,20 @@ $(function(){
 		});
 	});
 //리뷰 버튼-삭제
+	$(function(){
+		$(".review-delete").click(function(){
+			var id= "${check}";
+			var product_no_val = $("input[name=product_no]").val();
+			
+	        if(id == ''){
+	        	 alert("로그인 후 리뷰작성이 가능합니다.");
+	        	 location.href = '/member/login';
+	   		 }else{
+	   			 var review_num_val = $("input[name=review_num]").val();
+	   			 location.href = '/detail_board/reviewDelete?review_num=' + this.id+"&product_no="+product_no_val;
+	    	}
+		});
+	});//리뷰 버튼-삭제 끝
 	
 });//function 끝
 
