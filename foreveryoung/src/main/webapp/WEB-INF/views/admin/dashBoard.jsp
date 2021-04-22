@@ -54,89 +54,191 @@
 				<h1>대시보드</h1>
 			</div>
 		</div><!--/.row-->
-		
+
 		<div class="row">
 			<div class="col-lg-12">
 				<h2>전체 현황</h2>
-				<table border="1">
-					<tr>
-						<th align="center">회원 수</th>
-						<th align="center">브랜드 수</th>
-						<th align="center">상품 수</th>
-					</tr>
-					<tr>
-						<td align="center">
-							<a href="/admin/customerList">
-								<c:out value="${fn:length(customerList)}"/>
-							</a>
-						</td>
-						<td align="center">
-							<a href="/admin/brandList">
-								<c:out value="${fn:length(brandList)}"></c:out>
-							</a>
-						</td>
-						<td align="center">
-							<a href="/admin/productList">
-								<c:out value="${fn:length(productList)}"></c:out>
-							</a>
-							
-						</td>
-					</tr>
-					
-				</table>
 			</div>
 		</div><!--/.row-->
+		
+		<div class="panel panel-container">
+			<div class="row">
+			
+				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+					<div class="panel panel-teal panel-widget border-right">
+						<div class="row no-padding">
+							<em class="fa fa-xl fa-user  color-teal"></em>
+							<div class="large color-black">
+									<a href="/admin/adminList"  style="color:black;">
+										<c:out value="${fn:length(adminList)}"/>
+									</a>
+							</div>
+							<div class="text-muted">관리자 수 </div>
+						</div>
+					</div>
+				</div>			
+			
+				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+					<div class="panel panel-teal panel-widget border-right">
+						<div class="row no-padding">
+							<em class="fa fa-xl fa-shopping-bag color-blue"></em>
+							<div class="large">
+									<a href="/admin/brandList" style="color:black;">
+										<c:out value="${fn:length(brandList)}"/>
+									</a>
+							</div>
+							<div class="text-muted">브랜드 수</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+					<div class="panel panel-teal panel-widget border-right">
+						<div class="row no-padding">
+							<em class="fa fa-xl fa-users color-orange"></em>
+							<div class="large color-black">
+									<a href="/admin/customerList"  style="color:black;">
+										<c:out value="${fn:length(customerList)}"/>
+									</a>
+							</div>
+							<div class="text-muted">회원 수 </div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+					<div class="panel panel-teal panel-widget border-right">
+						<div class="row no-padding">
+							<em class="fa fa-xl fa-shopping-cart color-red"></em>
+							<div class="large color-black">
+									<a href="/admin/customerList"  style="color:black;">
+										<c:out value="${fn:length(productList)}"/>
+									</a>
+							</div>
+							<div class="text-muted">상품 수 </div>
+						</div>
+					</div>
+				</div>
+				
+
+				
+								
+			</div>		
+		</div>
+
+		
 		
 		<div class="row">
 			<div class="col-lg-12">
 			
 				<h2>주문처리 현황</h2>
 				
-				<table border="1">
-					<tr>
-						<th align="center">입금 대기</th>
-						<th align="center">입금 완료</th>
-						<th align="center">배송 대기</th>
-						<th align="center">배송 대기</th>
-						<th align="center">환불</th>
-						
-					</tr>
-					<tr>
-						<td align="center">아직</td>
-						<td align="center">아직</td>
-						<td align="center">아직</td>
-						<td align="center">아직</td>
-						<td align="center">아직</td>
-		
-					</tr>
-					
-				</table>
+
 			</div>	
 		</div><!--/.row-->
+		
+		<div class="panel panel-container">
+			<div class="row">
+				<div class="col-xs-6 col-md-2 col-lg-2 no-padding">
+					<div class="panel-teal panel-widget border-right">
+						<div class="row no-padding">
+							<div class="color-blue" >입금대기</div>
+							<div class="large color-black">
+									<a href="#"  style="color:black;">
+										<c:out value="${fn:length(adminList)}"/>
+									</a>
+							</div>
+						</div>
+					</div>
+				</div>	
+				<div class="col-xs-6 col-md-2 col-lg-2 no-padding">
+					<div class="panel-teal panel-widget border-right">
+						<div class="row no-padding">
+							<div class="color-blue">입금완료</div>
+							<div class="large color-black">
+									<a href="#"  style="color:black;">
+										<c:out value="${fn:length(adminList)}"/>
+									</a>
+							</div>
+						</div>
+					</div>
+				</div>	
+				<div class="col-xs-6 col-md-2 col-lg-2 no-padding">
+					<div class="panel-teal panel-widget border-right">
+						<div class="row no-padding">
+							<div class="color-blue">배송대기</div>
+							<div class="large color-black">
+									<a href="#"  style="color:black;">
+										<c:out value="${fn:length(adminList)}"/>
+									</a>
+							</div>
+						</div>
+					</div>
+				</div>	
+				<div class="col-xs-6 col-md-2 col-lg-2 no-padding">
+					<div class="panel-teal panel-widget border-right">
+						<div class="row no-padding">
+							<div class="color-blue">배송완료</div>
+							<div class="large color-black">
+									<a href="#"  style="color:black;">
+										<c:out value="${fn:length(adminList)}"/>
+									</a>
+							</div>
+						</div>
+					</div>
+				</div>	
+				<div class="col-xs-6 col-md-2 col-lg-2 no-padding">
+					<div class="panel-teal panel-widget border-right">
+						<div class="row no-padding">
+							<div class="color-blue">교환</div>
+							<div class="large color-black">
+									<a href="#"  style="color:black;">
+										<c:out value="${fn:length(adminList)}"/>
+									</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6 col-md-2 col-lg-2 no-padding">
+					<div class="panel-teal panel-widget border-right">
+						<div class="row no-padding">
+							<div class="color-blue">환불</div>
+							<div class="large color-black">
+									<a href="#"  style="color:black;">
+										<c:out value="${fn:length(adminList)}"/>
+									</a>
+							</div>
+						</div>
+					</div>
+				</div>																	
+			</div>
+		</div>
 		
 		<div class="row">
 			<div class="col-lg-12">
 				<h2>클레임 현황</h2>
+			</div>
+
+			<div class="col-lg-3">
 				
-				<button id="inquiry_list">1:1문의</button>
-				<button id="report_list">상품 리뷰 신고</button>
+				<button id="inquiry_list" class="btn btn-lg btn-primary">1:1문의</button>
+				<button id="report_list"  class="btn btn-lg btn-warning">상품 리뷰 신고</button>
 			</div>	
-		</div><!--/.row-->
-		
+			<div class="col-lg-12">
+				<h2>캘린더</h2>
+			</div>		
 			<div class="col-md-6">
-				<div class="panel panel-default">
+				<div class="panel panel-default" >
 					<div class="panel-heading">
-						Calendar
-					<div class="panel-body">
-						<div id="calendar">
 						
-						</div>
+					</div>	
+					<div class="panel-body">
+						<div id="calendar"></div>
 					</div>
 				</div>
 			</div><!--/.col-->		
+		</div>	
 		
-		
-			<script src="../css/admin/js/jquery-1.11.1.min.js"></script>
+	<script src="../css/admin/js/jquery-1.11.1.min.js"></script>
 	<script src="../css/admin/js/bootstrap.min.js"></script>
 	<script src="../css/admin/js/chart.min.js"></script>
 	<script src="../css/admin/js/chart-data.js"></script>
@@ -146,6 +248,7 @@
 	<script src="../css/admin/js/custom.js"></script>
 		
 	</div>	<!--/.main-->
+	
 	
 </body>
 </html>

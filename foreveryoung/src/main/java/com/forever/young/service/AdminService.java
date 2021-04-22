@@ -6,7 +6,6 @@ import com.forever.young.entity.Admin;
 import com.forever.young.entity.Brand;
 import com.forever.young.entity.Customer;
 import com.forever.young.entity.Event;
-import com.forever.young.entity.Inquiry;
 import com.forever.young.entity.InquiryVO;
 import com.forever.young.entity.Notice;
 import com.forever.young.entity.ProductVO;

@@ -29,6 +29,7 @@
 		where brand_num = #{brand_num} 
 	</update>
 	
+  
 	<!-- <select id="getFindBrandProduct">
 		select product_no, product_category, product_name, product_price, product_stock, product_regdate
 		from product_table where product_brand = #{brand_num} 
@@ -62,6 +63,8 @@
 		INNER JOIN 
 			brand b on p.product_brand = b.brand_num  
 	</select> -->
+
+	
 
 	
 	<update id="update" parameterType="com.forever.young.entity.Product">

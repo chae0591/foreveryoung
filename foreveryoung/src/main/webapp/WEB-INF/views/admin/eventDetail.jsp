@@ -63,44 +63,45 @@
 		</div><!--/.row-->
 	
 		<div class="row">
-			<div class="col-lg-12">
+			<div class="col-lg-1">
+			</div>
+			<div class="col-lg-10 panel panel-default btn-margins">
+			
+			<div class="panel-heading">이벤트 정보</div>
 				<form:form modelAttribute="eventDetail">
-						<table border="1">
+						<table  class="table panel-body">
 							<tr>
-								<th align="center" width="100">이벤트 번호</th>
-								<td><form:input path="event_no" readonly="true"/></td>
+								<th align="center">이벤트 번호</th>
+								<td><form:hidden path="event_no" readonly="true"/>${eventDetail.event_no}</td>
 							</tr>						
 							<tr>
-								<th align="center" width="100">이벤트명</th>
-								<td><form:input path="event_name" readonly="true"/></td>
+								<th align="center">이벤트명</th>
+								<td>${eventDetail.event_name}</td>
 							</tr>
 							<tr>
-								<th align="center" width="100">기간</th>
-								<td><form:input path="event_start" readonly="true"/>
-								~<form:input path="event_end" readonly="true"/></td>
+								<th align="center">기간</th>
+								<td>${eventDetail.event_start} ~ ${eventDetail.event_end}</td>
 							</tr>
 							<tr>
-								<th align="center" width="100">할인율</th>
-								<td><form:input path="event_discount" readonly="true"/></td>			
+								<th align="center">할인율</th>
+								<td>${eventDetail.event_discount}%</td>			
 							</tr>
 							<tr>
-								<th align="center" width="100">이벤트 적용대상</th>
-								<td><form:input path="event_target" readonly="true"/></td>			
-							</tr>
-							<tr>
-								<th align="center" width="100">진행상황</th>
-								<td>진행상황</td>			
-							</tr>							
+								<th align="center">이벤트 적용대상</th>
+								<td>${eventDetail.event_target}</td>			
+							</tr>						
 						</table>			
 				</form:form>
 			</div>
 		</div><!--/.row-->
 		
 		<div class="row">
-			<div class="col-lg-12">
-				<button id="event_modify">수정</button>
-				<button id="event_delete">삭제</button>
-				<button id="event_list">목록으로</button>
+		
+			<div class="col-lg-5"></div>
+			<div class="col-lg-5">
+				<button id="event_modify" class="btn btn-md btn-info">수정</button>
+				<button id="event_delete" class="btn btn-md btn-danger">삭제</button>
+				<button id="event_list" class="btn btn-md btn-default">목록으로</button>
 			</div>
 		</div><!--/.row-->
 	</div>	<!--/.main-->
