@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.forever.young.entity.ChangePwVO;
 import com.forever.young.entity.Customer;
 import com.forever.young.entity.MyPgInquiryVO;
+import com.forever.young.entity.MyPgReviewVO;
 import com.forever.young.entity.MyPgVoteVO;
 
 @Repository
@@ -22,5 +23,8 @@ public interface CustomerRepository {
 	public List<MyPgInquiryVO> findInquiry(int user_num, int day_num) throws Exception;
 	public List<MyPgVoteVO> myVoteList(int user_num) throws Exception;
 	public List<MyPgInquiryVO> searchInquiryDate(Map<String, Object> param) throws Exception;
-	public List<MyPgInquiryVO> searchInquirTarget(Map<String, Object> param) throws Exception;
+	public List<MyPgInquiryVO> searchInquiryTarget(Map<String, Object> param) throws Exception;
+	public List<MyPgReviewVO> myReviewList(int user_num, int day_num) throws Exception;
+	public List<MyPgReviewVO> searchReviewDate(Map<String, Object> param) throws Exception;
+	public List<MyPgReviewVO> searchReviewTarget(Map<String, Object> param) throws Exception;
 }
