@@ -268,6 +268,7 @@ public class AdminController {
 		log.info("getNoticeModify()");
 		
 		model.addAttribute("noticeModify" , service.noticeDetail(notice_no));
+		model.addAttribute("noticeDetail",service.noticeDetail(notice_no));
 	}
 	
 	//공지사항 수정POST

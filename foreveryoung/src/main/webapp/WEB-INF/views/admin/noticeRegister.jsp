@@ -43,17 +43,22 @@
 	
 	
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-	
+
 		<div class="row">
-			<div class="col-lg-12">
+		    <div>
+		        <h1>공지사항 등록</h1>
+		    </div>
+		</div>
+
+		<div class="row col-lg-3">
+		</div>	
+		<div class="row">
+			<div class="col-lg-6 panel panel-body">
 				<form action ="noticeRegister" method="post">
-		        	<div>
-		        		<h1>공지사항 등록</h1>
-		        	</div>
 		            	
-		            <div>
+		            <div  class="form-group">
 		            	<label>분류</label><br><br>
-							<select name="notice_type" id="notice_type">
+							<select name="notice_type" id="notice_type" class="form-control" required="required" >
 							    <option value="">분류선택</option>
 							    <option value="회원">회원</option>
 							    <option value="주문/결제">주문/결제</option>
@@ -65,21 +70,22 @@
 							</select>
 					</div>
 						
-		           	<div>
+		           	<div class="form-group">
 		                <label>제목</label><br><br>
-		            	<input type="text" name="notice_title" id="notice_title">
+		            	<input type="text" name="notice_title" id="notice_title" class="form-control" required="required">
 		
 		            	<br><br>
 		            </div>
 		            	
-		            <div>
+		            <div class="form-group">
 		            	<label>공지글</label><br><br>
-		            	<textarea name="notice_content" id="notice_content"></textarea>
+		            	<textarea name="notice_content" id="notice_content" cols="50" rows="20" class="form-control" required="required"  style="resize: vertical;"></textarea>
 		       		</div>
-		            	
+		            
+		            <div class="row col-lg-5"></div>		
 		            <div>
-		            	<input type="submit"  value="등록">
-		            	<input type="button" class="noticeList_btn" value="취소">
+		            	<input type="submit" class="btn btn-md btn-info" value="등록">
+		            	<input type="button" class="noticeList_btn btn btn-md btn-default" value="취소">
 		        	</div>
 		        	
 		    	</form>
@@ -93,19 +99,6 @@
 			</div>
 		</div><!--/.row-->
 		
-		
-		<div class="row">
-			<div class="col-lg-12">
-			
-			</div>
-		</div><!--/.row-->
-		
-		
-		<div class="row">
-			<div class="col-lg-12">
-			
-			</div>
-		</div><!--/.row-->
 	</div>	<!--/.main-->	
 
 
