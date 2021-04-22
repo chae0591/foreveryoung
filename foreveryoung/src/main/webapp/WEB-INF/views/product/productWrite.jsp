@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -384,11 +386,20 @@
 			<div>
 				<label class="bold control-label">상품 등록자(브랜드)</label> 
 				<br>
-				<select name="product_brand" required>
-					<c:forEach var="brand" items="${brand}">
+				<table>
+				<tr>
+					<td class="bold" style="display:none">판매자 번호: <c:out value="${brand_info.brand_num}"></c:out> </td>
+				</tr>
+				<tr>
+					<td class="bold"><c:out value="${brand_info.brand_name}"></c:out></td>
+				</tr>
+				</table>
+					
+					<%-- <c:forEach var="brand" items="${brand}">
 						<option value="${brand.brand_num}">${brand.brand_name}</option>
-					</c:forEach>
-				</select>
+					</c:forEach> --%>
+	<!-- 				<select name="product_brand" required>
+					</select> -->
 				<!-- <input class="form-control" type="text" name="product_brand" placeholder=" 판매자(브랜드)명이 들어감" required> -->
 			</div>
 			<br>

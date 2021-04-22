@@ -3,6 +3,8 @@ package com.forever.young.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,18 +40,22 @@ public class ProductController {
 	private final Logger log = LoggerFactory.getLogger(ProductController.class);
 	
 	@GetMapping("productWrite")
-	public String getproductWrite(Model model) {
+	public String getproductWrite(HttpSession session, Model model) throws Exception {
 		log.info("getProductWrite()");
 		List<Brand> brand = service.getBrand();
 		
 		model.addAttribute("brand", brand);
 		
+		Brand brandName = brandService.findNum((int)session.getAttribute("check"));
+
+		model.addAttribute("brand_info", brandName);
+
 		return "product/productWrite";
 		
 	}
 	
 	@PostMapping("productWrite")
-	public String postProductWrite(@ModelAttribute Product product) throws Exception {
+	public String postProductWrite(@ModelAttribute Product product, Model model) throws Exception {
 		log.info("postProductWrite()");
 		
 		System.out.println(product.toString());
