@@ -178,16 +178,13 @@ $(function(){
          if(user_num == null || user_num == "") {
             location.href="/member/login";
          }
-         
          var url;
          if($(this).attr("value") == "true") {
             url = "/vote/deleteVote";
          } else if ($(this).attr("value") == "false") {
             url = "/vote/insertVote";
          }
-    alert("url = "+url);
-         console.log(url);
-         $.ajax({
+          $.ajax({
             url : url,
             data : {'user_num':user_num, 'product_no':product_no},
             type: 'POST',
@@ -200,7 +197,7 @@ $(function(){
                   $(target).find(".like").attr("src", "/img/product/unlike.png");
                }
             }
-         }); // ajax
+         });  // ajax
 
       }); // end 좋아요
    $(".bucket").click(function(){
@@ -309,7 +306,34 @@ $(function(){
 	});//리뷰버튼-작성 끝
 	
 //리뷰 버튼-수정
+	$(function(){
+		$(".review-modify").click(function(){
+			var id = "${check}";
+
+	        if(id == ''){
+	        	 alert("로그인 후 리뷰작성이 가능합니다.");
+	        	 location.href = '/member/login';
+	   		 }else{
+	   			 var review_num_val = $("input[name=review_num]").val();
+	   			 location.href = '/detail_board/reviewModify?review_num=' + this.id;
+	    	}
+		});
+	});
 //리뷰 버튼-삭제
+	$(function(){
+		$(".review-delete").click(function(){
+			var id= "${check}";
+			var product_no_val = $("input[name=product_no]").val();
+			
+	        if(id == ''){
+	        	 alert("로그인 후 리뷰작성이 가능합니다.");
+	        	 location.href = '/member/login';
+	   		 }else{
+	   			 var review_num_val = $("input[name=review_num]").val();
+	   			 location.href = '/detail_board/reviewDelete?review_num=' + this.id+"&product_no="+product_no_val;
+	    	}
+		});
+	});//리뷰 버튼-삭제 끝
 	
 });//function 끝
 
@@ -318,7 +342,6 @@ $(function(){
 <body>
 <jsp:include page="../template/header.jsp"></jsp:include>
 <div class="detail-all">
-
    <input type="hidden" name="user_num" value="${check}">
    <input type="hidden" name="product_no" value="${getDetail.product_no}">
       <form:form modelAttribute="getDetail">
@@ -358,7 +381,7 @@ $(function(){
                   <form name="form" method="get">
                      <span>상품 수량</span>
                      <input type="hidden" id="sell_price" name="sell_price" value="${getDetail.product_price}">
-                    
+
                      <input type="number" style="height: 23pt;width : 120px;"value="1" min="1" max="100" onchange="change();" id="result" name="amount" >
                      <input type="button" style="height: 23pt;width : 24px;" value=" + " id="plus">
                      <input type="button" style="height: 23pt;width : 25px;" value=" - " id="minus">
@@ -582,8 +605,8 @@ $(function(){
                   <li>내용</li>
                   <li>사진</li>
                   <li>
-                  	<button id="review-delete">삭제</button>
-                  	<button id="review-modify">수정</button>
+                  	<button class="review-delete" id="${lists.review_num}">삭제</button>
+                  	<button class="review-modify" id="${lists.review_num}">수정</button>
                   </li>
                   <li>
                      <button>리뷰 좋아요</button>

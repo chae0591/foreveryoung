@@ -90,4 +90,20 @@ public class DetailBoardContorller {
                      
         return rv;      
    }
+   //리뷰 삭제
+   @GetMapping("/reviewDelete")
+   public String reviewDelete( Model model, HttpSession session, @RequestParam Integer review_num, @RequestParam Integer product_no) throws Exception{
+      log.info("reviewDelete");
+      
+      service.reviewDelete(review_num);
+       return "redirect:/detail_board/detail_main?product_no="+product_no;
+   }
 }
+
+
+
+
+
+
+
+
