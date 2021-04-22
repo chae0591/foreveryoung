@@ -11,8 +11,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../css/admin/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/admin/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
 
 <script>
@@ -42,8 +42,10 @@ $(document).ready(function(){
 
 
 <body>
-	<h2>foreveryoung</h2>
-	<a class="navbar-brand" href="/main" style="float:right;">home</a>
+	<h2 style="display: inline-block;">foreveryoung</h2>
+	<a class="navbar-brand" href="/main" style="display: inline-block;float:right;">
+		main
+	</a>
 
 	<div class="container text-center">
     	<form action ="login" method="post">
@@ -61,7 +63,6 @@ $(document).ready(function(){
         	</div> 
     	</form>	
 	</div>
-
 
 
 </body>

@@ -2,8 +2,10 @@
 package com.forever.young.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.forever.young.entity.Brand;
+import com.forever.young.entity.BrandProductCriteria;
 import com.forever.young.entity.Product;
 
 public interface BrandRegistService {
@@ -17,4 +19,12 @@ public interface BrandRegistService {
 	public List<Product> brandList(int brand);
 	public int getCountByBrand(int brand);
 	
+	//브랜드 상품 수정 및 삭제 
+	public void update(Product product) throws Exception; 
+	public void deleteProduct(int product_no) throws Exception; 
+	
+	//페이징 
+	public List<Map<String,Object>> productList(BrandProductCriteria cri) throws Exception;
+	public int ProductListCnt() throws Exception; 
+
 }

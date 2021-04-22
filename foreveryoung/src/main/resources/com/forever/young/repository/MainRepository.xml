@@ -6,8 +6,62 @@
 
 <mapper namespace="com.forever.young.repository.MainRepository">
 
-	<select id="productList" resultType="Product">
-		select*from product_table
-    </select>
-   
+	<!-- 랜덤 상품조회 -->
+	<select id="randomList" resultType="Product">
+		select
+			p.*, i.image_save_name, i.image_type, i.image_name
+		from
+        	product_table P
+        	inner join product_img i on p.product_no = i.product_no
+		where
+			image_type = 'N'
+		order by
+			dbms_random.random
+	</select>
+	
+	<!-- 베스트 상품조회 -->
+	<select id="bestList" resultType="Product">
+		select
+			rn, 
+	        p.*,
+	        I.image_save_name,
+	        I.image_type,
+	        I.image_name
+		from(
+		    select
+		        rownum rn,
+		        순위,
+		        order_product
+		    from(
+		        select
+		            order_product,
+		            sum(order_amount)total,
+		            dense_rank() over(order by sum(order_amount) desc) 순위
+		        from
+		            order_table
+		        group by
+		            order_product
+		        )
+		    where
+		        순위 between 1 and 3
+		    )tmp
+			    inner join product_table p on tmp.order_product = p.product_no
+			    inner join product_img I on p.product_no = I.product_no
+			where
+			    I.image_type='N'
+	</select>
+	
+	<!-- 신제품 상품조회 -->
+	<select id="newList" resultType="Product">
+		select
+			p.*, i.image_save_name, i.image_type, i.image_name
+		from
+        	product_table P
+        	inner join product_img i on p.product_no = i.product_no
+		where
+			image_type = 'N'
+		order by
+			product_regdate desc
+	</select>
+	
 </mapper>

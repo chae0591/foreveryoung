@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.forever.young.entity.Admin;
+import com.forever.young.entity.Brand;
 import com.forever.young.entity.Product;
 import com.forever.young.repository.MainRepository;
 import com.forever.young.repository.ServiceCenterRepository;
@@ -20,11 +22,22 @@ public class MainServiceImpl implements MainService {
 	
 	@Autowired
 	private MainRepository repository;
-
+	
 	@Override
-	public List<Product> productList() throws Exception {
-		return repository.productList();
+	public List<Product> mainList() throws Exception {
+		return repository.mainList();
 	}
 
+	public List<Product> randomList() throws Exception {
+		return repository.randomList();
+	}
 	
+	public List<Product> bestList() throws Exception {
+		return repository.bestList();
+	}
+	
+	public List<Product> newList() throws Exception {
+		return repository.newList();
+	}
+
 }

@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>   
-    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,9 +54,6 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<h2>고객 리스트</h2>
-				<!-- 고객수 -->
-				<c:set var="customerCount" value="${fn:length(customerList)}" />
-				<c:out value="${customerCount}"/>
 			</div>
 		</div><!--/.row-->
 		
@@ -92,8 +89,14 @@
 										<td align="center">${customerList.user_id}</td>
 										<td align="center">${customerList.user_name}</td>
 										<td align="center">${customerList.user_phone}</td>
-										<td align="center">${customerList.user_birth}</td>
-										<td align="center">${customerList.user_regDate}</td>
+										<td align="center">
+											<fmt:formatDate value="${customerList.user_birth}" pattern="yyyy-MM-dd" var="user_birth" />
+											<c:out value="${user_birth}"/>
+										</td>
+										<td align="center">
+											<fmt:formatDate value="${customerList.user_regDate}" pattern="yyyy-MM-dd" var="user_regDate" />
+											<c:out value="${user_regDate}"/>
+										</td>
 									</tr>
 								</c:forEach>
 							</c:otherwise>
