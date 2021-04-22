@@ -24,6 +24,7 @@
   			  	select * from Review where product_no=#{product_no}
   		]]>		
 	</select>
+	
 	<!-- review Register -->
 	<insert id="reviewRegister">
 		insert into review(product_no,user_num,brand_num,review_num,
@@ -33,5 +34,16 @@
 	
 	<select id="reviewRegisterAfter" resultType="int">
        select review_num.currval from dual
+    </select>
+    
+	<!-- review 단일조회 -->
+	<select id="findbyreviewNo" resultType="Review" parameterType="int">
+		select * from review where review_num=#{review_num}
+	</select>
+    
+    <select id="reviewModify" parameterType="Review">
+    	update review set
+    		review_title=#{review_title}, review_content=#{review_content}
+    			where review_num=#{review_num}
     </select>
 </mapper>

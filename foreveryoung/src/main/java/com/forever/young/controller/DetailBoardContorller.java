@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.forever.young.entity.Inquiry;
 import com.forever.young.entity.Review;
 import com.forever.young.service.DetailBoardService;
 
@@ -67,4 +66,37 @@ public class DetailBoardContorller {
 	                  
 	       return rv;
 	}
+	//리뷰 수정Get
+	@GetMapping("/reviewModify")
+	public String getReviewModify(Review review, Model model, HttpSession session, @RequestParam Integer review_num) throws Exception{
+		log.info("getReviewModify()");
+		
+		model.addAttribute("review", service.findbyreviewNo(review_num));
+		
+		return "detail_board/reviewModify";
+	}
+	//리뷰 수정 Post
+	@PostMapping("/reviewModify")
+	public RedirectView postReviewModify(@ModelAttribute Review review, Model model,HttpSession session, RedirectAttributes redirectAttributes) throws Exception{
+		log.info("reviewModify()");
+		
+		review.setUser_num((int)session.getAttribute("check"));
+		
+		service.reviewModify(review);
+		
+		model.addAttribute("reviewModify", "리뷰 수정이 완료되었습니다.");
+	    RedirectView rv = new RedirectView("detail_main");
+	    rv.addStaticAttribute("product_no",review.getProduct_no());
+	                  
+	     return rv;		
+	}
 }
+
+
+
+
+
+
+
+
+

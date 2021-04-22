@@ -309,6 +309,19 @@ $(function(){
 	});//리뷰버튼-작성 끝
 	
 //리뷰 버튼-수정
+	$(function(){
+		$(".review-modify").click(function(){
+			var id = "${check}";
+
+	        if(id == ''){
+	        	 alert("로그인 후 리뷰작성이 가능합니다.");
+	        	 location.href = '/member/login';
+	   		 }else{
+	   			 var review_num_val = $("input[name=review_num]").val();
+	   			 location.href = '/detail_board/reviewModify?review_num=' + this.id;
+	    	}
+		});
+	});
 //리뷰 버튼-삭제
 	
 });//function 끝
@@ -581,8 +594,8 @@ $(function(){
                   <li>내용</li>
                   <li>사진</li>
                   <li>
-                  	<button id="review-delete">삭제</button>
-                  	<button id="review-modify">수정</button>
+                  	<button class="review-delete" id="${lists.review_num}">삭제</button>
+                  	<button class="review-modify" id="${lists.review_num}">수정</button>
                   </li>
                   <li>
                      <button>리뷰 좋아요</button>
