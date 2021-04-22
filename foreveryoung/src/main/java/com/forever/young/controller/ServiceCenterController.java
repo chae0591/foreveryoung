@@ -86,7 +86,6 @@ public class ServiceCenterController {
         mav.setViewName("service_center/notice");    //자료를 넘길 뷰의 이름
         
         return mav;    //게시판 페이지로 이동
-    
     }
 	
 	//1:1문의 리스트GET
