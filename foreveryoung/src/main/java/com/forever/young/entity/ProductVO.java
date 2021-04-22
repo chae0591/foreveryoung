@@ -3,25 +3,27 @@ package com.forever.young.entity;
 import java.sql.Date;
 
 public class ProductVO {
-	private int product_id;
+	private int product_no;
 	private String product_category;
 	private String product_name; 
-	private String product_img; 
 	private int product_price;
 	private int product_stock;
 	private Date product_regDate;
-	private int product_seller_num;
-	private String product_user;
+	private int product_brand;
+	private String product_skintype;
+	private int rn;
+	
 	private int type_no;
 	private int event_no;
+	
 	private int brand_num;
 	private String brand_id;
 	private String brand_name;
-	public int getProduct_id() {
-		return product_id;
+	public int getProduct_no() {
+		return product_no;
 	}
-	public void setProduct_id(int product_id) {
-		this.product_id = product_id;
+	public void setProduct_no(int product_no) {
+		this.product_no = product_no;
 	}
 	public String getProduct_category() {
 		return product_category;
@@ -34,12 +36,6 @@ public class ProductVO {
 	}
 	public void setProduct_name(String product_name) {
 		this.product_name = product_name;
-	}
-	public String getProduct_img() {
-		return product_img;
-	}
-	public void setProduct_img(String product_img) {
-		this.product_img = product_img;
 	}
 	public int getProduct_price() {
 		return product_price;
@@ -59,17 +55,23 @@ public class ProductVO {
 	public void setProduct_regDate(Date product_regDate) {
 		this.product_regDate = product_regDate;
 	}
-	public int getProduct_seller_num() {
-		return product_seller_num;
+	public int getProduct_brand() {
+		return product_brand;
 	}
-	public void setProduct_seller_num(int product_seller_num) {
-		this.product_seller_num = product_seller_num;
+	public void setProduct_brand(int product_brand) {
+		this.product_brand = product_brand;
 	}
-	public String getProduct_user() {
-		return product_user;
+	public String getProduct_skintype() {
+		return product_skintype;
 	}
-	public void setProduct_user(String product_user) {
-		this.product_user = product_user;
+	public void setProduct_skintype(String product_skintype) {
+		this.product_skintype = product_skintype;
+	}
+	public int getRn() {
+		return rn;
+	}
+	public void setRn(int rn) {
+		this.rn = rn;
 	}
 	public int getType_no() {
 		return type_no;
@@ -103,13 +105,12 @@ public class ProductVO {
 	}
 	@Override
 	public String toString() {
-		return "productVO [product_id=" + product_id + ", product_category=" + product_category + ", product_name="
-				+ product_name + ", product_img=" + product_img + ", product_price=" + product_price
-				+ ", product_stock=" + product_stock + ", product_regDate=" + product_regDate + ", product_seller_num="
-				+ product_seller_num + ", product_user=" + product_user + ", type_no=" + type_no + ", event_no="
-				+ event_no + ", brand_num=" + brand_num + ", brand_id=" + brand_id + ", brand_name=" + brand_name + "]";
+		return "ProductVO [product_no=" + product_no + ", product_category=" + product_category + ", product_name="
+				+ product_name + ", product_price=" + product_price + ", product_stock=" + product_stock
+				+ ", product_regDate=" + product_regDate + ", product_brand=" + product_brand + ", product_skintype="
+				+ product_skintype + ", rn=" + rn + ", type_no=" + type_no + ", event_no=" + event_no + ", brand_num="
+				+ brand_num + ", brand_id=" + brand_id + ", brand_name=" + brand_name + "]";
 	}
-	
-	
+
 	
 }
