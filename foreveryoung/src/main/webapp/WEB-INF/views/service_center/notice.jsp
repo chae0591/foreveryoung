@@ -322,7 +322,7 @@ $(function(){
 	//아래쪽에서 이 함수를 호출해서 페이지값을 컨트롤러에 맵핑시킨다
 	function list(page){
 	    console.log("페이지를 이동합니다.");
-	    location.href="service_center/notice?curPage="+page;
+	    location.href="notice?curPage="+page;
 	}
 });
 </script>

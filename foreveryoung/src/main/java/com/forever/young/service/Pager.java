@@ -1,7 +1,5 @@
 package com.forever.young.service;
 
-import org.springframework.web.util.UriComponentsBuilder;
-
 public class Pager {
 	public static final int PAGE_SCALE=10;    //페이지당 게시물수
     public static final int BLOCK_SCALE=5;    //화면당 페이지수
@@ -139,5 +137,4 @@ public class Pager {
         this.blockEnd = blockEnd;
     }
  
-
 }
