@@ -110,7 +110,7 @@
 						<div class="row no-padding">
 							<em class="fa fa-xl fa-shopping-cart color-red"></em>
 							<div class="large color-black">
-									<a href="/admin/customerList"  style="color:black;">
+									<a href="/admin/productList"  style="color:black;">
 										<c:out value="${fn:length(productList)}"/>
 									</a>
 							</div>
@@ -144,7 +144,7 @@
 							<div class="color-blue" >입금대기</div>
 							<div class="large color-black">
 									<a href="#"  style="color:black;">
-										<c:out value="${fn:length(adminList)}"/>
+										<c:out value="${fn:length(#)}"/>
 									</a>
 							</div>
 						</div>
@@ -156,7 +156,7 @@
 							<div class="color-blue">입금완료</div>
 							<div class="large color-black">
 									<a href="#"  style="color:black;">
-										<c:out value="${fn:length(adminList)}"/>
+										<c:out value="${fn:length(#)}"/>
 									</a>
 							</div>
 						</div>
@@ -168,7 +168,7 @@
 							<div class="color-blue">배송대기</div>
 							<div class="large color-black">
 									<a href="#"  style="color:black;">
-										<c:out value="${fn:length(adminList)}"/>
+										<c:out value="${fn:length(#)}"/>
 									</a>
 							</div>
 						</div>
@@ -180,7 +180,7 @@
 							<div class="color-blue">배송완료</div>
 							<div class="large color-black">
 									<a href="#"  style="color:black;">
-										<c:out value="${fn:length(adminList)}"/>
+										<c:out value="${fn:length(#)}"/>
 									</a>
 							</div>
 						</div>
@@ -192,7 +192,7 @@
 							<div class="color-blue">교환</div>
 							<div class="large color-black">
 									<a href="#"  style="color:black;">
-										<c:out value="${fn:length(adminList)}"/>
+										<c:out value="${fn:length(#)}"/>
 									</a>
 							</div>
 						</div>
@@ -204,7 +204,7 @@
 							<div class="color-blue">환불</div>
 							<div class="large color-black">
 									<a href="#"  style="color:black;">
-										<c:out value="${fn:length(adminList)}"/>
+										<c:out value="${fn:length(#)}"/>
 									</a>
 							</div>
 						</div>

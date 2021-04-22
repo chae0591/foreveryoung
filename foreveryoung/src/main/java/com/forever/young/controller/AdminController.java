@@ -48,7 +48,7 @@ public class AdminController {
 		model.addAttribute("customerList", service.customerList());
 		model.addAttribute("brandList", service.brandList());
 		model.addAttribute("productList", service.productList());
-		model.addAttribute("admintList", service.adminList());
+		model.addAttribute("adminList", service.adminList());
 		
 		return "admin/dashBoard";
 	}
