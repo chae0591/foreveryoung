@@ -2,39 +2,53 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/product/css/bootstrap.css">
 <jsp:include page="../template/header.jsp"></jsp:include>
 <style>
 .outbox {
-	width : 1020px;
+	width : 1200px;
 	color : black;
 }
 
 h3 {
-	color : black;
+	color : #323232;
 	font-family : "굴림";
+	padding-bottom : 1rem;
 }
 
 .col-lg-12 {
 	margin: 0.5rem;
+	display:inline-block;
+	width:1000px;
 }
 /* best 상품 */
 .slide_list {
-	text-align:center;
+	position: relative;
+	width: 100%;
 	display: inline-block;
-    max-width: 1020px;
-    position: relative;
+	padding-bottm : 5px;
 }
 
 .best_product {
     display: inline-block;
     padding: 10px;
-    margin : 1rem 1.5rem;
+    margin : 3px;
     cursor: pointer;
     position: relative;
-    width : 210px;
+    width : 190px;
+    height: 280px;
 } 
+
+.img_rank {
+	width: 60px;
+	height: 55px;
+	position: absolute;
+	top:-7px;
+	left:-10px;
+	z-index:9999;
+}
 
 .item.active {
 	margin: 2rem;
@@ -45,32 +59,40 @@ h3 {
 
 .left {
 	position: absolute;
-	top : 50%;
-	left:5%;
+	top: 50%;
+	left: 0%;
 }
 
 .right {
 	position: absolute;
-	left: 95%;
+	left: 100%;
 	top : 50%;
+}
+.carousel-inner {
+	background-color : #dcdcdc;
+	text-align:center;
+    width: 1050px;
+    margin: 0 auto;
 }
 
 .carousel-inner > .item.next,
   .carousel-inner > .item.active.right {
-    left: -1000px;
+    left: -1300px;
 }
 
  .carousel-inner > .item.prev,
   .carousel-inner > .item.active.left {
-    left: -1000px;
-    }
+    left: -1300px;
+}
+
 
 .best_product a > label{
 	display:inline-block;
 	width: 180px;
 	text-decoration:none;
-	padding-top: 5px;
+	padding:5px;
 	font-size:15px;
+	height: 20px;
 }
 
 .best_product:hover{
@@ -78,7 +100,7 @@ h3 {
 	background-color: #E1F6FA;
 }
 #carousel-generic {
- width: 1000px;
+	width: auto;
 }
 .carousel-indicators {
 	position: absolute;
@@ -90,10 +112,11 @@ h3 {
 	margin-left: -30%;
 	text-align: center;
 	list-style: none;
+	top : 280px;
 }
 
 .carousel-indicators li{
-background-color: #000 \9;
+  background-color: #000 \9;
   background-color: rgba(0, 0, 0, 0);
   border: 1px solid black;
 }
@@ -108,20 +131,17 @@ background-color: #000 \9;
 	display: inline-block;
 	float : left;
     font-size: 17px;
-	width: 10%;    
-    background-color: #3296D7;
     color : white;
+    background-color: #3296D7;
     text-align: center;
     padding: 15px;
-    font-weight: bold;
     margin: 0 auto;
+    width: 100px;
 }
 
 .checkbox-ul {
-	
-	width: 90%;
-	padding: 5px 5px;
 	float:left;
+	padding-left: 5px;
 	margin: 0 auto;
 }
 
@@ -133,13 +153,45 @@ background-color: #000 \9;
     width: 100px;
 }
 
+.col-lg-12.ck_search {
+	width: 86%;
+	margin : 0px auto;
+	padding-left: 0px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	display:inline-block;
+}
+.check_header.search_brand {
+	height: 86px;
+	padding-top: 25px;
+}
+.check_header.search_type {
+	margin-top:0;
+}
+.col-lg-12.ck_search.search_brand {
+	max-height: 86px;
+	overFlow : auto;
+	background-color : #EBFBFF;
+	border-bottom: 2px solid #dcdcdc;
+}
+.col-lg-12.ck_search.search_type {
+	background-color : #EBFBFF;
+}
+.row.check {
+	width: 1020px;
+	margin: 30px auto;
+}
 
 /* 상품 리스트 */
+.appendHtml {
+	margin-top: 50px;
+	float:left;
+	width : 1200px;
+}
 .pList {
-	height: auto;
 	display: inline-block;
 	list-style: none;
-    max-width: 1020px;
+	width: 1200px;
     border-bottom : 1px solid #dcdcdc;
 }
 .pList > li:hover{
@@ -148,50 +200,77 @@ background-color: #000 \9;
 }
 
 .pList a {
-	margin-top: 1rem;
+	margin: 1rem auto;
 }
+
 .pList a > label{
 	display:inline-block;
-	width: 180px;
+	width: 200px;
 	text-decoration:none;
-	padding-top: 5px;
 	font-size:15px;
+	height:20px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 .price {
 	color: #FF4646;
 	font-size: 20px;
 	text-align: center;
+	margin-top : 1rem;
 }
 
-.detail > img{
+.brand {
+	color : #50B4F5;
+	text-align: center;
+}
+
+.detail > img {
 	display: inline-block;
-	width:210px;
-	height:200px;
+	width:170px;
+	height:170px;
 }
 
 .pList li {
 	display: inline-block;
     padding: 10px;
-    margin : 1rem 1.5rem;
+    margin : 10px;
     cursor: pointer;
     position: relative;
-    width : 210px;
-    
+    width : 190px;
+    height: 300px;
 }
 
 .vot_btn {
 	position : absolute;
-	top:160px;
-	left:150px;
+	top:135px;
+	left:135px;
 	background-color:white;
 }
 
 .vot_btn > img {
-	width:50px;
-	heigth:50px;
+	width:45px;
+	heigth:45px;
+}
+.order {
+	margin: 40px;
+	position: absolute;
+	width: 1000px;
+	top: -50px;
+	left: 650px;
+}
+.order li{
+	display:inline-block;
+	list-style: none;
+	float:left;
+	padding: 10px 20px;
+	border-top : 2px solid #3296D7;
+	border-bottom : 2px solid #3296D7;
 }
 
-
+.order li > .active {
+	color: black;
+	font-weight: bold;
+}
 
 </style>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -224,7 +303,7 @@ background-color: #000 \9;
 		
 		var category = $("input[name='category']").val();
 		// 필터링
-		$("input[type='checkbox']").on("change", function(e){
+		function searchAjax(paging) {
 			var brand = new Array();
 			 
 			$(".brand_check input[type='checkbox']:checked").each(function(index, item) {
@@ -248,11 +327,19 @@ background-color: #000 \9;
 					type.push($(item).val());
 				});
 			}
-			
+			if(!paging) {
+				var amount = $("input[name='amount']").val();
+				$("input[name='pageNum']").attr("value", $(".paginate_button .active").attr("href"));
+				var pageNum = $("input[name='pageNum']").val();
+				var paging = {amount : amount, pageNum : pageNum};
+			}
+			var order = $(".order .active").next().val();
 			var searchData = {
 					category : category,
 					type : type,
-					brand : brand
+					brand : brand,
+					order : order,
+					paging : paging
 			}
 			
 			var jsonData = JSON.stringify(searchData);
@@ -264,13 +351,25 @@ background-color: #000 \9;
 				type : 'POST',
 				traditional : true,
 				success : function(result){
-					console.log("성공!");
 					voteCheck();
-					$(".pList").html(result);
+					$(".appendHtml").html(result);
 				}
 			}); // ajax
+		}
+		
+		
+		$("input[type='checkbox']").on("change", function(e){
+			searchAjax();
 		}); // end 필터링
 		
+		$(".order a").on("click", function(e){
+			e.preventDefault();
+			if($(".order a").hasClass("active")) {
+				$(".order a").removeClass("active");
+			}
+			$(this).addClass("active");	
+			searchAjax();
+		}); // 순서 피렅링
 		
 		// 좋아요
 		$(document).on('click', '.vot_btn', function(){
@@ -279,6 +378,7 @@ background-color: #000 \9;
 			var product_no = $(this).data("no");
 			if(user_num == null || user_num == "") {
 				location.href="/member/login";
+				return false;
 			}
 			
 			var url;
@@ -293,7 +393,6 @@ background-color: #000 \9;
 				data : {'user_num':user_num, 'product_no':product_no},
 				type: 'POST',
 				success : function(result) {
-					
 					$(target).attr("value", result);
 					if(result == "true") {
 						$(target).find(".like").attr("src", "/img/product/like.png");
@@ -311,17 +410,20 @@ background-color: #000 \9;
 		}); // end 좋아요
 		
 		// 페이징
-		var pagingForm = $("#pagingForm");
-		$(".paginate_button a").on("click", function(e) {
+		$(document).on('click', '.paginate_button a', function(e){
 			e.preventDefault();
-			pagingForm.find("input[name='pageNum']").val($(this).attr("href"));
-			pagingForm.submit();
+			var amount = $("input[name='amount']").val();
+			$("input[name='pageNum']").attr("value", $(this).attr("href"));
+			var pageNum = $("input[name='pageNum']").val();
+			var paging = {amount : amount, pageNum : pageNum};
+			searchAjax(paging);
 		});
 		
 		// 상품 등록 페이지 이동
 		$("#productWrite").on("click", function(e) {
 			location.href = "/product/productWrite" ;
 		});
+		
 		
 	});
 </script>
@@ -335,21 +437,24 @@ background-color: #000 \9;
 </div>
 
 	<div class="slide_list">
-		<h3>${cName} BEST </h3>		
+		<h3 style="text-align:center;">${cName} BEST </h3>		
 		<div id="carousel-generic" class="carousel slide">
-			<ol class="carousel-indicators">
-				<li data-target="#carousel-generic" data-slide-to="0" class="active"></li>
-				<li data-target="#carousel-generic" data-slide-to="1"></li>
-			</ol>
-			
+			<c:if test="${fn:length(best) gt 5}">
+				<ol class="carousel-indicators">
+					<li data-target="#carousel-generic" data-slide-to="0" class="active"></li>
+					<li data-target="#carousel-generic" data-slide-to="1"></li>
+				</ol>
+			</c:if>
 			<div class="carousel-inner" role="listbox">
 			<div class="item active">
 				<c:forEach var="best" items="${best}" varStatus="status">
-					<c:if test="${best.rn le 2}">
+					<c:if test="${best.rn le 5}">
+						
 						<div class="best_product">
+						<img class="img_rank" src="../img/product/${best.rn}.png">
 						<a class="detail" href="#">
 							<img class="img-responsive" src="/viewImg?fileName=${best.image_save_name}&imageType=${best.image_type}">
-							<label><c:out value="${best.brand_name}"/></label>
+							<label class="brand"><c:out value="${best.brand_name}"/></label>
 							<label><c:out value="${best.product_name}" /></label>
 							<label class="price"><fmt:formatNumber value="${best.product_price}" pattern="###,###,###"/>원</label>
 						</a>
@@ -363,12 +468,13 @@ background-color: #000 \9;
 			
 			<div class="item">
 				<c:forEach var="best" items="${best}" varStatus="status">
-					<c:if test="${best.rn gt 2}">
+					<c:if test="${best.rn gt 5 and best.rn le 10}">
 						<div class="best_product">
+						<img class="img_rank" src="../img/product/${best.rn}.png">
 								<a class="detail" href="#">
 									<img class="img-responsive" src="/viewImg?fileName=${best.image_save_name}&imageType=${best.image_type}">
 									<label><c:out value="${best.brand_name}"/></label>
-									<label><c:out value="${best.product_name}" /></label>
+									<label class="brand"><c:out value="${best.product_name}" /></label>
 									<label class="price"><fmt:formatNumber value="${best.product_price}" pattern="###,###,###"/>원</label>
 								</a>
 								<button class="vot_btn" data-no="${best.product_no}" value="false">
@@ -381,14 +487,14 @@ background-color: #000 \9;
 			</div> <!-- carousel -->
 	</div> <!-- slide_list -->
 			
-			
-			<a class="left" href="#carousel-generic" role="button" data-slide="prev">
-				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-			</a>
-			<a class="right" href="#carousel-generic" role="button" data-slide="next">
-				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-			</a>
-
+			<c:if test="${fn:length(best) gt 5}">
+				<a class="left" href="#carousel-generic" role="button" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				</a>
+				<a class="right" href="#carousel-generic" role="button" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				</a>
+			</c:if>
 	</div>
 	<script>
 	$(function(){
@@ -408,10 +514,10 @@ background-color: #000 \9;
 
 
 	</script>
-	<div class="col-lg-12">
-		<h3>상품 찾아보기</h3>
-		<div class="ck_search">
-				<span class="check_header">브랜드</span>	
+		<div class="row check">
+		<h3 style="text-align:center;">${cName} 상품을 둘러보세요</h3>
+		<span class="check_header search_brand">브랜드</span>	
+		<div class="col-lg-12 ck_search search_brand">
 				<ul class="brand_check checkbox-ul">
 					<c:forEach var="brand" items="${brand}">
 						<li>
@@ -421,7 +527,9 @@ background-color: #000 \9;
 						</li>
 					</c:forEach>
 				</ul>
-				<span class="check_header">피부타입</span>
+				</div>
+				<span class="check_header search_type">피부타입</span>
+			<div class="col-lg-12 ck_search search_type">
 				<ul class="typeCheck checkbox-ul">
 					<li>
 						<label class="checkbox-inline" >
@@ -448,17 +556,36 @@ background-color: #000 \9;
 					</li>
 				</ul>
 				</div>
+				</div>
+	<div class="row">
+	<div class="col-lg-4">
+		<ul class="order">
+			<li>
+				<a href="javascript:;" class="active">최신순</a>
+				<input type="hidden" value="regdate">
+			</li>
+			<li>
+				<a href="javascript:;">인기순</a>
+				<input type="hidden" value="rank">
+			</li>
+			<li>
+				<a href="javascript:;">높은 가격순</a>
+				<input type="hidden" value="hPrice"> 
+			</li>
+			<li>
+				<a href="javascript:;">낮은 가격순</a>
+				<input type="hidden" value="rPrice">
+			</li>
+		</ul>
 	</div>
-			
-	<div class="col-lg-12" id="appendHtml">
-	<h3>상품 리스트</h3>
+	<div class="appendHtml">
 			<ul class="pList">
 				<c:forEach var="lists" items="${list}">
-					<li class="col-sm-3">
+					<li>
 						<input type="hidden" name="product_no" value="${lists.product_no}">
 						<a class="detail" href="#">
  							<img class="img-responsive" src="/viewImg?fileName=${lists.image_save_name}&imageType=${lists.image_type}">
- 							<label><c:out value="${lists.brand_name}"/></label>
+ 							<label class="brand"><c:out value="${lists.brand_name}"/></label>
 							<label><c:out value="${lists.product_name}" /></label>
 							<label class="price"><fmt:formatNumber value="${lists.product_price}" pattern="###,###,###"/>원</label>
 						</a>
@@ -468,9 +595,8 @@ background-color: #000 \9;
 					</li>
 				</c:forEach>
 			</ul>
-	</div>
 	
-	<div class="text-center">
+	<div class="text-center paging">
 		<ul class="pagination">
 			<c:if test="${page.prev}">
 				<li class="paginate_button previous">
@@ -491,11 +617,10 @@ background-color: #000 \9;
 			</c:if>
 		</ul>
 	</div>
-	<form id='pagingForm' action="/product/categoryList" method="get">
-	<input type="hidden" name="category" value="${category}">
 	   	<input type="hidden" name='pageNum' value='${page.pageNum}'>
 	   	<input type="hidden" name='amount' value='${page.amount}'>
-   </form>
+</div>
+</div>
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/css/product/js/bootstrap.js"></script>
 <jsp:include page="../template/footer.jsp"></jsp:include>

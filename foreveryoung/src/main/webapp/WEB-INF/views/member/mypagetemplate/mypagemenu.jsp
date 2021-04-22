@@ -20,19 +20,14 @@
 		        </li>
 		                
 		        <li>
-		        	<a href="">관심등록</a>
-		        	<ul>
-			            <li><a href="">관심 상품</a></li>
-			            <li><a href="">관심 브랜드</a></li>
-		            </ul>
+		        	<a href="my_vote">관심등록</a>
 		        </li>
 		                
 		        <li>
-			        <a href="">내가 쓴 글</a>
+			        <a href="my_inquiry">내가 쓴 글</a>
 			        <ul>
+			        	<li><a href="my_inquiry">1 대 1 상담</a></li>
 				        <li><a href="">상품 리뷰</a></li>
-				        <li><a href="">Q & A</a></li>
-				        <li><a href="">1 대 1 상담</a></li>
 			        </ul>
 		        </li>
 		                
@@ -40,7 +35,7 @@
 			        <a href="mypage_edit">내 설정</a>
 			        <ul>
 				        <li><a href="mypage_edit">회원 정보 변경</a></li>
-				        <li><a href="">주소록 변경</a></li>
+				        <li><a href="addressList">주소록 보기</a></li>
 			        </ul>
 		        </li>
 			</ul>

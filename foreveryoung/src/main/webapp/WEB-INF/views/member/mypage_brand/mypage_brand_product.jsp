@@ -18,9 +18,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/product/productCommon.css">
 
 <!--  DatePicker-->
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <!-- 부트스트랩 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/product/css/bootstrap.css">
@@ -51,7 +49,7 @@
 	}
 
 	.title{
-		padding-top:50px; 
+		padding-top:30px; 
 		padding-left:50px;
 	}
 
@@ -107,10 +105,8 @@
 	
 	
 	.productImg{
-		width:150px; 
-		height:100px; 
-		/* border-radius: 8px; */ 
-		
+		width:150px;  
+		height:100px;  
 	}
 	
 	
@@ -122,52 +118,28 @@
 </style>
 
 <script>
-$(".menu a").click(function() {
-    $(".menu a.active").removeClass("active");
-    $(this).addClass("active");
-})
-
-
-/* DatePicker */
-   $(document).ready(function () {
-            $.datepicker.setDefaults($.datepicker.regional['ko']); 
-            $( "#startDate" ).datepicker({
-                 changeMonth: true, 
-                 changeYear: true,
-                 nextText: '다음 달',
-                 prevText: '이전 달', 
-                 dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
-                 dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], 
-                 monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                 monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                 dateFormat: "yymmdd",
-                 maxDate: 0,                       // 선택할수있는 최소날짜, ( 0 : 오늘 이후 날짜 선택 불가)
-                 onClose: function( selectedDate ) {    
-                      //시작일(startDate) datepicker가 닫힐때
-                      //종료일(endDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
-                     $("#endDate").datepicker( "option", "minDate", selectedDate );
-                 }    
- 
-            });
-            $( "#endDate" ).datepicker({
-                 changeMonth: true, 
-                 changeYear: true,
-                 nextText: '다음 달',
-                 prevText: '이전 달', 
-                 dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
-                 dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], 
-                 monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                 monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                 dateFormat: "yymmdd",
-                 maxDate: 0,                       // 선택할수있는 최대날짜, ( 0 : 오늘 이후 날짜 선택 불가)
-                 onClose: function( selectedDate ) {    
-                     // 종료일(endDate) datepicker가 닫힐때
-                     // 시작일(startDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 시작일로 지정
-                     $("#startDate").datepicker( "option", "maxDate", selectedDate );
-                 }    
- 
-            });    
-    });
+	$(document).ready(function(){
+		
+		$(".delete_btn").click(function(){
+			if(confirm("정말로 삭제하시겠습니까?")) {
+				var product_no = $(this).prev().text(); 
+				var del_row = $(this).parent().parent(); 
+				
+				$.ajax({
+					url : "../product_item_del",
+					type : "get",
+					data : {
+						product_no : product_no 
+					},
+					success : function(resp) {
+						del_row.remove();
+					}
+				});
+			}
+		});
+		
+	});
+	
 </script>
 </head>
 <body>
@@ -190,28 +162,34 @@ $(".menu a").click(function() {
 
 <section>
 	<div class="center title">
-		<h2>판매상품 관리 페이지</h2>
+		<h2> <c:out value="${brand_info.brand_name}" />님의 판매상품 관리 페이지</h2>
 	</div>
 	
 	
 	
-	<div class="search center">
-		<!--Date Picker   -->
+	<div class="search center title" style="margin-left: 40px;">
 		<div class="calendarForm">
+			<!--Date Picker   -->
 			<label class="calendarLabel">날짜입력</label>
 			<input class="calendarInput" type="text" id="startDate">
 			<label class="calendarLabel">부터</label> 
 			<input class="calendarInput" type="text" id="endDate">
 			<label class="calendarLabel">까지</label> 
-		</div><br>
-	
-		<!-- 검색창 -->
-		<div class="center searchBar">
-			<input class="searchInput" type="text" placeholder="상품명을 입력해주세요">
-			<button class="searchButton">검색</button>
+			
+			<!-- 검색창 -->
+			<div class="center searchBar" style="margin-left: 150px;">
+				<input class="searchInput" type="text" placeholder="상품명을 입력해주세요">
+				<button class="searchButton">검색</button>
+			</div>
 		</div>
-	</div><br>
-	
+	</div>
+	<!-- 상품 등록 버튼  -->
+	<div  style="padding_left: 225px">
+		 <a href="${pageContext.request.contextPath}/product/productWrite">
+	 		<button>상품 등록 하러가기</button>
+		 </a>
+	</div>
+	<br>
 	
 		<table class="table table-hover m-2" >
 			<thead>
@@ -224,7 +202,7 @@ $(".menu a").click(function() {
 					<th scope="col" class="text-center">상품 가격</th>
 					<th scope="col" class="text-center">상품 재고</th>
 					<th scope="col" class="text-center">상품 등록 날짜</th>
-					<th scope="col" class="text-center">수정 / 삭제</th>
+					<th scope="col" class="text-center">상품 삭제</th>
 				</tr>
 			</thead>
 		
@@ -235,57 +213,36 @@ $(".menu a").click(function() {
 					<td class="col-md-1">
 						<c:out value="${lists.product_no}" />
 					</td>
-					<td>
+					<td class="col-md-1">
 						<img class="productImg" src="/viewImg?fileName=${lists.image_save_name}&imageType=${lists.image_type}">
 					</td>
 					<td class="col-md-1">
 						<c:out value="${lists.product_category}" />
 					</td>
-					<td class="col-md-1"> 
+					<td>
 						<c:out value="${brand_info.brand_name}" />
-					 </td>
+					</td>
 					<td class="col-md-1">
 						<c:out value="${lists.product_name}" />
 					</td>
 					<td class="col-md-1">
-						<label class="price"><fmt:formatNumber value="${lists.product_price}" pattern="###,###,###"/>원</label>
+						<label class="price"><fmt:formatNumber value="${lists.product_price}"/>원</label>
 					</td>
 					<td class="col-md-1">
-						<label class="stock"><fmt:formatNumber value="${lists.product_stock}" pattern="###,###,###"/>개</label>
+						<label class="stock"><fmt:formatNumber value="${lists.product_stock}"/>개</label>
 					</td>
 					<td class="col-md-1">
 						<c:out value="${lists.product_regDate}" />
 					</td>
 					<td class="col-md-1">
-						<div>
-							<button>수정하기</button>
-							<button>삭제하기</button>
-						</div>
-					<td>	
+						<span style="display: none;" >${lists.product_no}</span>
+						<input type="button" class="delete_btn" value="삭제하기">
+					</td>
 				<tr>
 				</c:forEach>
 			</tbody>
 		</table>
 </section>
-	
-	<%-- 
-		<a class="detail" href="#">
-						
-								<label></label>
-								
-								<label><c:out value="${lists.product_category}" /></label>
-								<label><c:out value="${lists.brand_name}"/></label>
-							<label><c:out value="${lists.product_name}" /></label>
-							<label class="price"><fmt:formatNumber value="${lists.product_price}" pattern="###,###,###"/>원</label>
-							<label class="stock"><fmt:formatNumber value="${lists.product_stock}" pattern="###,###,###"/>개</label>
-							<label><c:out value="${lists.product_regDate}" /></label>
-						</a>
-						<button>샹품 삭제</button>
-						<br>
-	
-	<div class="center" style="padding-top: 10px; ">
-	</div> --%>
-	
 		
 <!--  부트스트랩을 사용하기위한 js설정 입력 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/css/product/js/bootstrap.js"></script>
