@@ -14,10 +14,6 @@
 	$(document).ready(function(){
 		var formObj = $('#inquiryDetail')
 		
-		$('#inquiry_list').click(function(){
-			self.location="/admin/inquiryList"
-		})
-		
 		$('#reply_modify').click(function(){
 			var inquiry_no = $('#inquiry_no');
 			var inquiry_noVal = inquiry_no.val();
@@ -68,28 +64,32 @@
 		
 		
 		<div class="row">
-			<div class="col-lg-12">
+			<div class="col-lg-1">
+			</div>
+			<div class="col-lg-10 panel panel-default btn-margins">
+				<div class="panel-heading">1:1문의</div>
+				
 				<form:form modelAttribute="inquiryDetail">
-						<table border="1">
+						<table class="table panel-body">
 							<tr>
-								<th align="center" width="100">1:1문의 번호</th>
-								<td><form:input path="inquiry_no" readonly="true"/></td>
+								<th align="center">1:1문의 번호</th>
+								<td><form:hidden path="inquiry_no" readonly="true"/>${inquiryDetail.inquiry_no}</td>
 							</tr>
 							<tr>
-								<th align="center" width="100">제목</th>
-								<td><form:input path="inquiry_title" readonly="true"/></td>
+								<th align="center">제목</th>
+								<td>${inquiryDetail.inquiry_title}</td>
 							</tr>
 							<tr>
-								<th align="center" width="100">작성자</th>
-								<td><form:input path="user_id" readonly="true"/></td>
+								<th align="center">작성자</th>
+								<td>${inquiryDetail.user_id}</td>
 							</tr>
 							<tr>
-								<th align="center" width="100">등록일</th>
-								<td><form:input path="inquiry_regDate" readonly="true"/></td>			
+								<th align="center">등록일</th>
+								<td>${inquiryDetail.inquiry_regDate}</td>			
 							</tr>
 							<tr>
-								<th align="center" width="100">문의 내용</th>
-								<td><form:input path="inquiry_content" readonly="true"/></td>			
+								<th align="center">문의 내용</th>
+								<td>${inquiryDetail.inquiry_content}</td>			
 							</tr>
 							
 						</table>			
@@ -100,36 +100,49 @@
 		<c:choose>
 			<c:when test="${ inquiryDetail.reply_no == 0}">
 					<!-- 답변등록form -->
-					<div class="row">
-						<div class="col-lg-12">
-							<form action ="replyRegister" method="post">
-					        	<div>
-					        		<h1>답변하기</h1>
-					        	</div>
-					            	
-					            <div>
-					                <textarea name="reply_content" style="width:400px; height:300px; " required="required" ></textarea>
-					                <input type="hidden" name="inquiry_no"  value="${inquiryDetail.inquiry_no}">
-					                <br><br>
-					                <input type="submit"  value="답변등록">
-					                <input type="button" id="inquiry_List" value="1:1문의 목록으로">
-								</div>
-					    	</form>
+				<div class="row">
+						<div class="col-lg-1"></div>
+						<div class="col-lg-10 panel panel-default btn-margins">
+						
+							<div class="panel-heading">답변등록</div>
+							
+							<div class="panel-body">
+								<form action ="replyRegister" method="post">
+						            <div>
+						                <textarea name="reply_content"  cols="50" rows="20" class="form-control" required="required" ></textarea>
+						                <input type="hidden" name="inquiry_no"  value="${inquiryDetail.inquiry_no}">
+						                <br><br>
+						                <div class="col-lg-5"></div>
+						                <div  class="col-lg-5">
+							                <input type="submit" class="btn btn-md btn-info"  value="답변등록">
+							                <a href="/admin/inquiryList" class="btn btn-md btn-default">목록으로</a>					                
+						                </div>
+									</div>
+						    	</form>
+							</div>
 						</div>
 					</div><!--/.row-->
 			</c:when>
-			
+
 			<c:otherwise>
 					<!-- 답변보기form -->
-					<div class="row">
-						<div class="col-lg-12">
-								<div>
-					                <textarea style="width:400px; height:300px; " >
-					                	<c:out value="${inquiryDetail.reply_content}"></c:out>
+				<div class="row">
+						<div class="col-lg-1"></div>
+						<div class="col-lg-10 panel panel-default btn-margins">
+						
+							<div class="panel-heading">답변</div>
+							
+							<div class="panel-body">
+					                <textarea cols="50" rows="20" class="form-control"  readonly="readonly"  style="resize: vertical;">
+					                	${inquiryDetail.reply_content}
 					                </textarea>
 					                <br><br>
-					                <input type="button" id="reply_modify" value="답변수정">
-					                <input type="button" id="reply_delete" value="답변삭제">
+					                <div class="col-lg-5"></div>
+						            <div  class="col-lg-5">
+						                <input type="button" id="reply_modify" class="btn btn-md btn-info" value="답변수정">
+						                <input type="button" id="reply_delete"  class="btn btn-md btn-danger" value="답변삭제">
+						                <a href="/admin/inquiryList" class="btn btn-md btn-default">목록으로</a>	
+									</div>
 								</div>
 						</div>
 					</div><!--/.row-->

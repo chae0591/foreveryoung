@@ -7,6 +7,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	.red{
+		color:red;
+	}
+	
+	.blue{
+		color:#87cefa;
+	}
+	a:hover{text-decoration: none;}
+
+</style>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
 <script>
@@ -85,10 +96,14 @@
 										<td align="center">${inquiryList.user_id}</td>
 										<td align="center">${inquiryList.inquiry_regDate}</td>
 										<td align="center">
-											<a href="/admin/inquiryDetail?inquiry_no=${inquiryList.inquiry_no}">
+											<a href="/admin/inquiryDetail?inquiry_no=${inquiryList.inquiry_no}" style="text-decoration: none;">
 												<c:choose>
-													<c:when test="${ inquiryList.reply_no == 0}">답변대기</c:when>
-													<c:otherwise>답변완료</c:otherwise>
+													<c:when test="${ inquiryList.reply_no == 0}">
+														<p class="red">답변대기</p>
+													</c:when>
+													<c:otherwise>
+														<p class="blue">답변완료</p>
+													</c:otherwise>
 												</c:choose>
 											</a> 
 										</td>

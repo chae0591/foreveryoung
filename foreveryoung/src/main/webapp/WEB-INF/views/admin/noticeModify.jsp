@@ -20,9 +20,6 @@
 			formObj.attr("action", "/admin/noticeModify")
 			formObj.attr("method" , "post")
 			formObj.submit();
-			
-			
-			
 		})
 		
 		$("#noticeList").click(function(){
@@ -63,54 +60,57 @@
 		</div><!--/.row-->
 		
 		<div class="row">
-			<div class="col-lg-12">
+			<div class="col-lg-1">
+			</div>
+			<div class="col-lg-10 panel panel-default btn-margins">
+				<div class="panel-heading"></div>
 				<form:form modelAttribute="noticeModify" action="noticeModify" >
 					<form:hidden path="notice_no"/>
 					
-					<table>
+					<table class="table panel-body">
+					
 						<tr>
-							<td>분류</td>
-							<td><form:select path="notice_type">
-								<form:option value="회원" label="회원"></form:option>
-								<form:option value="주문/결제" label="주문/결제"></form:option>
-								<form:option value="배송" label="배송"></form:option>
-								<form:option value="교환/환불/반품" label="교환/환불/반품"></form:option>
-								<form:option value="이벤트/쿠폰" label="이벤트/쿠폰"></form:option>
-								<form:option value="판매자" label="판매자"></form:option>
-								<form:option value="기타" label="기타"></form:option>
-							</form:select></td>
+							<th align="center">공지사항 번호</th>
+							<td>${noticeDetail.notice_no}</td>
+						</tr>	
+						<tr>
+							<td align="center">분류</td>
+							<td>
+								<form:select path="notice_type" class="form-control">
+									<form:option value="회원" label="회원"></form:option>
+									<form:option value="주문/결제" label="주문/결제"></form:option>
+									<form:option value="배송" label="배송"></form:option>
+									<form:option value="교환/환불/반품" label="교환/환불/반품"></form:option>
+									<form:option value="이벤트/쿠폰" label="이벤트/쿠폰"></form:option>
+									<form:option value="판매자" label="판매자"></form:option>
+									<form:option value="기타" label="기타"></form:option>
+								</form:select>
+							</td>
 						</tr>
 						<tr>
-							<td>제목</td>
-							<td><form:input path="notice_title"/></td>
+							<td align="center">제목</td>
+							<td><form:input path="notice_title" class="form-control"/></td>
 						</tr>
 						<tr>
-							<td>공지사항 내용</td>
-							<td><form:textarea cols="50" rows="5" path="notice_content"/></td>
+							<td align="center">공지사항 내용</td>
+							<td><form:textarea cols="50" rows="20" path="notice_content" class="form-control"  style="resize: vertical;"/></td>
 						</tr>
 					</table>
 				</form:form>
+				</div>
+			</div><!--/.row-->
 				
-				<div>
-					<button type="submit" id="notice_complete">수정 완료</button>
-					<button type="submit" id="noticeList">공지사항 보기</button>
+			<div class="row">
+				<div class="col-lg-5"></div>
+			
+				<div class="col-lg-5">
+					<button type="submit" id="notice_complete"  class="btn btn-md btn-info">수정 완료</button>
+					<button type="submit" id="noticeList" class="btn btn-md btn-default">목록으로</button>
 				</div>
 			
 			</div>
-		</div><!--/.row-->
-		
-		
-		<div class="row">
-			<div class="col-lg-12">
-			
-			</div>
-		</div><!--/.row-->
-		
-		<div class="row">
-			<div class="col-lg-12">
-			
-			</div>
-		</div><!--/.row-->
+
+	
 	</div>	<!--/.main-->	
 	
 </body>

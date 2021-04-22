@@ -90,11 +90,69 @@
 		order by I.inquiry_regDate desc
 	</select>
 	
-	<select id="searchInquirTarget" resultType="MyPgInquiryVO" parameterType="map">
+	<select id="searchInquiryTarget" resultType="MyPgInquiryVO" parameterType="map">
 		select I.*, R.reply_no from inquiry I left outer join reply R on I.inquiry_no = R.inquiry_no 
 		where user_num = #{user_num} 
 		and (instr(I.inquiry_title, #{target}) > 0 or instr(I.inquiry_content, #{target}) > 0) 
 		order by I.inquiry_regDate desc
+	</select>
+	
+	<select id="myReviewList" resultType="MyPgReviewVO">
+		select R.*, pb.product_name, pb.product_price, pb.brand_name, 
+        pb.image_save_name, pb.image_type, pb.image_name 
+        from review R left outer join (select p.*, b.*, pi.image_save_name, pi.image_type, pi.image_name from product_table P 
+                join brand B on p.product_brand = b.brand_num 
+                left outer join product_img pi on p.product_no = pi.product_no) pb
+                on R.product_no = pb.product_no
+                where R.user_num = #{user_num} 
+                and R.review_date between systimestamp - NUMTODSINTERVAL(#{day_num}, 'DAY') and systimestamp 
+                order by R.review_date desc
+	</select>
+	
+	<select id="searchReviewDate" resultType="MyPgReviewVO" parameterType="map">
+		select R.*, pb.product_name, pb.product_price, pb.brand_name, 
+        pb.image_save_name, pb.image_type, pb.image_name 
+        from review R left outer join (select p.*, b.*, pi.image_save_name, pi.image_type, pi.image_name from product_table P 
+                join brand B on p.product_brand = b.brand_num 
+                left outer join product_img pi on p.product_no = pi.product_no) pb
+                on R.product_no = pb.product_no
+                <where>
+					<if test="user_num != null and user_num != ''">
+						and user_num = #{user_num} 
+					</if>
+				
+					<if test="(start_date != null and start_date != '') or (end_date != null and end_date != '')">
+						and
+						<choose>
+							<when test="(start_date != null and start_date != '') and (end_date != null and end_date != '')">
+								R.review_date between to_date(${start_date} , 'YYYY-MM-DD HH24:MI:SS') and to_date(${end_date} , 'YYYY-MM-DD HH24:MI:SS') 
+							</when>
+							<when test="start_date != null and start_date != ''">
+								<![CDATA[
+									R.review_date >= to_date(${start_date} , 'YYYY-MM-DD HH24:MI:SS')
+								]]>
+							</when>
+							<otherwise>
+								<![CDATA[
+									R.review_date <= to_date(${end_date} , 'YYYY-MM-DD HH24:MI:SS') 
+								]]>	
+							</otherwise>
+						</choose>
+					</if>
+				</where>
+                order by R.review_date desc
+	</select>
+	
+	<select id="searchReviewTarget" resultType="MyPgReviewVO" parameterType="map">
+		select R.*, pb.product_name, pb.product_price, pb.brand_name, 
+        pb.image_save_name, pb.image_type, pb.image_name 
+        from review R left outer join (select p.*, b.*, pi.image_save_name, pi.image_type, pi.image_name from product_table P 
+                join brand B on p.product_brand = b.brand_num 
+                left outer join product_img pi on p.product_no = pi.product_no) pb
+                on R.product_no = pb.product_no
+                where R.user_num = #{user_num} 
+                and (instr(R.review_title, #{target}) > 0 or instr(R.review_content, #{target}) > 0) or instr(pb.product_name, #{target}) > 0) 
+                order by R.review_date desc
 	</select>
 
 </mapper>

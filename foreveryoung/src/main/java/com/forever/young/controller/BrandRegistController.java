@@ -1,6 +1,5 @@
 package com.forever.young.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,10 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.forever.young.entity.Brand;
+import com.forever.young.entity.BrandProductCriteria;
+import com.forever.young.entity.BrandProductPaging;
 import com.forever.young.entity.Product;
 import com.forever.young.service.BrandRegistService;
 import com.forever.young.service.ProductService;
@@ -137,7 +137,7 @@ public class BrandRegistController {
 	
 	//판매자 등록 상품 관리 get
 	@GetMapping("/mypage_brand/mypage_brand_product")
-	public String getMypage_brand_product(HttpSession session, Model model, Product product) throws Exception {
+	public String getMypage_brand_product(HttpSession session, BrandProductCriteria cri,  Model model, Product product) throws Exception {
 		log.info("getMypage_brand_product");
 		
 		Brand brand = service.findNum((int)session.getAttribute("check"));
@@ -145,6 +145,25 @@ public class BrandRegistController {
 		List<Product> brandProductList = productService.getFindBrandProduct(product);
 		//이미지 
 		List<Product> list = productService.brandList((int)session.getAttribute("check"));
+		
+
+		//페이징 - 시작 
+		//전체글 갯수
+		int ProductListCnt = service.ProductListCnt(); 
+		
+		//페이징 객체
+		BrandProductPaging paging = new BrandProductPaging();  
+		paging.setCri(cri);
+		paging.setTotalCount(ProductListCnt);
+		
+		List<Map<String, Object>> productList = service.productList(cri); 
+		model.addAttribute("productList", productList);
+		model.addAttribute("paging", paging); 
+		//페이징 - 끝  
+		
+		System.out.println(cri.getPageStart());
+		System.out.println(cri.getPerPageNum());
+		
 		
 		model.addAttribute("brand_info", brand); 
 		model.addAttribute("product_info", brandProductList); 

@@ -61,28 +61,32 @@
 		
 		
 		<div class="row">
-			<div class="col-lg-12">
+			<div class="col-lg-1">
+			</div>
+			<div class="col-lg-10 panel panel-default btn-margins">
+				<div class="panel-heading">1:1문의</div>
+				
 				<form:form modelAttribute="inquiryDetail">
-						<table border="1">
+						<table class="table panel-body">
 							<tr>
-								<th align="center" width="100">1:1문의 번호</th>
-								<td><form:input path="inquiry_no" readonly="true"/></td>
+								<th align="center">1:1문의 번호</th>
+								<td><form:hidden path="inquiry_no" readonly="true"/>${inquiryDetail.inquiry_no}</td>
 							</tr>
 							<tr>
-								<th align="center" width="100">제목</th>
-								<td><form:input path="inquiry_title" readonly="true"/></td>
+								<th align="center">제목</th>
+								<td>${inquiryDetail.inquiry_title}</td>
 							</tr>
 							<tr>
-								<th align="center" width="100">작성자</th>
-								<td><form:input path="user_id" readonly="true"/></td>
+								<th align="center">작성자</th>
+								<td>${inquiryDetail.user_id}</td>
 							</tr>
 							<tr>
-								<th align="center" width="100">등록일</th>
-								<td><form:input path="inquiry_regDate" readonly="true"/></td>			
+								<th align="center">등록일</th>
+								<td>${inquiryDetail.inquiry_regDate}</td>			
 							</tr>
 							<tr>
-								<th align="center" width="100">문의 내용</th>
-								<td><form:input path="inquiry_content" readonly="true"/></td>			
+								<th align="center">문의 내용</th>
+								<td>${inquiryDetail.inquiry_content}</td>			
 							</tr>
 							
 						</table>			
@@ -91,17 +95,25 @@
 		</div><!--/.row-->
 		
 		<div class="row">
-			<div class="col-lg-12">
-				<form:form modelAttribute="replyModify" action="replyModify">
-						<form:hidden path="inquiry_no"/>
-						<form:textarea cols="50" rows="5" path="reply_content"/>
-						
-				</form:form>
-				<div>
-					<button type="submit" id="reply_complete">수정 완료</button>
-					<button type="submit" id="inquiry_list">1:1문의리스트 보기</button>
-				</div>
+			<div class="col-lg-1">
+			</div>
+			<div class="col-lg-10 panel panel-default btn-margins">
+				<div class="panel-heading"></div>
 				
+				<div class="panel-heading">답변수정</div>
+				<div class="panel-body" >
+					<form:form modelAttribute="replyModify" action="replyModify">
+							<form:hidden path="inquiry_no"/>
+							<form:textarea name="reply_content"  cols="50" rows="20" class="form-control" required="required" path="reply_content"/>
+					</form:form>
+					
+					
+					<div class="col-lg-5"></div>
+					<div  class="col-lg-5">
+						<button type="submit" id="reply_complete" class="btn btn-md btn-info" >수정 완료</button>
+						<button type="submit" id="inquiry_list"  class="btn btn-md btn-default">목록으로</button>
+					</div>
+				</div>
 			</div>
 		</div><!--/.row-->
 

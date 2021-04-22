@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -238,20 +237,28 @@ $(function(){
 <div class="first-box">
 	<h2 class="event-title">이 상품 어때요?</h2>
 	<table>
-		<tr>
-			<c:forEach items="${productList}" var="productList">
-			<td>
-				<input type="hidden" name="product_no" value="${productList.product_no}">
-				<a href="#">
-				<img src="https://placeimg.com/200/200/people">
-				<p class="item-name">${productList.product_name}</p>
-				<p class="item-explanation">${productList.product_name}</p>
-				<p class="item-price">${productList.product_price}원</p>
-				<p class="item-price">${productList.product_stock}원</p>
-				</a>
-			</td>
-			</c:forEach>
-		</tr>
+		<c:choose>
+			<c:when test="${!empty randomList}">
+				<c:forEach items="${randomList}" var="randomList">
+				<tr>
+				<td>
+					<input type="hidden" name="product_no" value="${randomList.product_no}">
+					<a href="#">
+					<p class="item-img">${randomList.product_img}</p>
+					<p class="item-name">${randomList.product_name}</p>
+					<p class="item-price">${randomList.product_price}원</p>
+					<p class="item-stock">${randomList.product_stock}원</p>
+					</a>
+				</td>
+				</tr>
+				</c:forEach>
+			</c:when>
+			<c:otherwise> 
+					<tr> 
+						<td colspan="4">조회된 결과가 없습니다.</td>
+					</tr>
+				 </c:otherwise>
+			</c:choose>
 	</table>
 	
 	<button class="more-btn">더보기</button>
@@ -266,13 +273,14 @@ $(function(){
 	<ul>
 		<li><a href="#">전체</a></li>
 		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=skincare">스킨케어</a></li>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=skincare">메이크업</a></li>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=skincare">바디케어</a></li>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=skincare">헤어케어</a></li>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=skincare">향수/디퓨저</a></li>
-		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=skincare">남성케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=makeup">메이크업</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=bodycare">바디케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=haircare">헤어케어</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=perfume">향수/디퓨저</a></li>
+		<li><a href="${pageContext.request.contextPath}/product/categoryList?category=manscare">남성케어</a></li>
 	</ul>
 	</div>
+	
 	<button class="more-btn">더보기</button>
 	
 </div>

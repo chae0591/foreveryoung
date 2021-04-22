@@ -19,7 +19,7 @@ $(document).ready(function(){
 		formObj.attr("action", "/admin/adminModify")
 		formObj.attr("method", "post")
 		formObj.submit();
-	})
+	}) 
 	
 		$("#admin_list").click(function(){
 			self.location ="/admin/adminList"
@@ -59,52 +59,48 @@ $(document).ready(function(){
 		</div><!--/.row-->
 		
 		<div class="row">
-			<div class="col-lg-12">
+			<div class="col-lg-1">
+			</div>
+			<div class="col-lg-10 panel panel-default btn-margins">
+				<div class="panel-heading"></div>
 				<form:form modelAttribute="adminModify" action="adminModify">
 				<form:hidden path="admin_no"/>
-					<table>
+					<table class="table panel-body">
 							<tr>
-								<th align="center" width="100">관리자 번호</th>
+								<th align="center">관리자 번호</th>
 								<td>${adminDetail.admin_no}</td>
 							</tr>						
 							<tr>
-								<th align="center" width="100">ID</th>
+								<th align="center">ID</th>
 								<td>${adminDetail.admin_id}</td>
 							</tr>
 							<tr>
-								<th align="center" width="100">관리자 이름</th>
-								<td><form:input path="admin_name" /></td>
+								<th align="center">관리자 이름</th>
+								<td><form:input path="admin_name"  class="form-control"/></td>
 							</tr>
 							<tr>
-								<th align="center" width="100">관리자 전화번호</th>
-								<td><form:input path="admin_phone" /></td>			
+								<th align="center">관리자 전화번호</th>
+								<td><form:input path="admin_phone"  class="form-control"/></td>			
 							</tr>
 							<tr>
-								<th align="center" width="100">관리자 등록일</th>
+								<th align="center">관리자 등록일</th>
 								<td>${adminDetail.admin_regDate}</td>			
 							</tr>
 					</table>
 				</form:form>
 				
-				<div>
-					<button type="submit" id="admin_complete">수정 완료</button>
-					<button id="admin_list">목록으로</button>
+		</div>
+	</div><!--/.row-->
+
+			<div>
+				<div class="col-lg-5"></div>
+			
+				<div class="col-lg-5">
+					<button type="submit" id="admin_complete" class="btn btn-md btn-info">수정 완료</button>
+					<button id="admin_list" class="btn btn-md btn-default">목록으로</button>
 				</div>				
 			</div>
-		</div><!--/.row-->
-		
-		
-		<div class="row">
-			<div class="col-lg-12">
-			
-			</div>
-		</div><!--/.row-->
-		
-		<div class="row">
-			<div class="col-lg-12">
-			
-			</div>
-		</div><!--/.row-->
+
 	</div>	<!--/.main-->	
 	
 </body>

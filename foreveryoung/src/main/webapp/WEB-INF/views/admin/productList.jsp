@@ -60,33 +60,42 @@
 		</div><!--/.row-->
 		
 		<div class="row">
-			<div class="col-lg-12">
+			<div class="col-lg-3"></div>	
+			<div class="col-lg-6">
 				<p>통합검색</p>
-					<label>카테고리</label>
-					<select>
-						<c:forEach items="${productList}" var="productList">
-							<option>${productList.product_category}</option>
-						</c:forEach>
-					</select>
+						<label>카테고리</label>
+						<select class="form-control">
+							<option>카테고리 선택</option>
+							<c:forEach items="${productList}" var="productList">
+								<option>${productList.product_category}</option>
+							</c:forEach>
+						</select>
+
+
+						<label>브랜드</label>
+						<select class="form-control">
+							<option>브랜드 선택</option>
+							<c:forEach items="${brandList}" var="brandList">
+								<option>${brandList.brand_name}</option>
+							</c:forEach>
+						</select>
+
+						<label>상품명</label>
+						<input class="form-control" type="text" placeholder="상품명을 입력해 주세요" style="disply: inline-block;">
 					
-					<label>브랜드</label>
-					<select>
-						<c:forEach items="${brandList}" var="brandList">
-							<option>${brandList.brand_name}</option>
-						</c:forEach>
-					</select>				
-					
-					<label>상품명</label>
-					<input type="text" value="상품명을 입력해 주세요">
-					<button >검색</button>
-			
-			
+						
+					<div>
+						<button  class="form-control btn btn-md btn-info">검색</button>
+					</div>
 			</div>
 		</div><!--/.row-->
+
+
 		
 		<div class="row">
-			<div class="col-lg-12">
-				<table  class="table table-hover">
+			<div class="col-lg-12 ">
+				<div class="panel-heading"></div>
+				<table  class="table table-hover panel-body">
 					<thead>
 						<tr>
 							<th align="center" width="100">상품 번호</th>
@@ -113,7 +122,7 @@
 							<c:otherwise>
 								<c:forEach items="${productList}" var="productList">
 									<tr>
-										<td align="center">${productList.product_id}</td>
+										<td align="center">${productList.product_no}</td>
 										<td align="center">${productList.product_name}</td>
 										<td align="center">${productList.product_category}</td>
 										<td align="center">${productList.brand_name}</td>
@@ -128,24 +137,25 @@
 							</c:otherwise>
 						</c:choose>
 					</tbody>
-				
-				
-						
-					
-
 				</table>
 			</div>
 		</div><!--/.row-->
 		
+		
 		<div class="row">
 			<div class="col-lg-12">
-				<p>이벤트 할인적용</p>	
-				<select>
-					<option>이벤트 선택</option>
-				</select>
+				<p>이벤트 할인적용</p>
+				<div class="col-lg-4">
+					<select  class="form-control">
+						<option>이벤트 선택</option>
+							<c:forEach  items="${eventList}" var="eventList">
+								<option>${eventList.event_name}</option>
+							</c:forEach>
+					</select>				
+				</div>	
 				
-				<input type="button" value="적용">
-				<input type="button" value="미적용"> 
+				<input type="button" class="btn btn-md btn-info" value="적용">
+				<input type="button" class="btn btn-md btn-default" value="미적용"> 
 			</div>
 		</div><!--/.row-->
 		

@@ -8,15 +8,14 @@
 
 	<select id="listAll" resultType="NoticeDto">
 		<!-- ref는 다른테이블을 의미한다.  -->
-        <include refid="paging_header" /> 
-
+    <include refid="paging_header" />  
         <!-- 테이블로 부터 검색 -->
             select notice_no, notice_type, notice_title, notice_content, admin_no from notice
             <!-- notice_no의 내림차순으로 검색 -->
             <!-- where절은 (조건)은 include 태그를 이용했음 -->
         <include refid="search" />
             order by notice_no desc
-        <include refid="paging_footer" />        
+ 		<include refid="paging_footer" />        
     </select>
     
     <sql id="paging_header">
