@@ -29,7 +29,6 @@
 		where brand_num = #{brand_num} 
 	</update>
 	
-  
 	<!-- <select id="getFindBrandProduct">
 		select product_no, product_category, product_name, product_price, product_stock, product_regdate
 		from product_table where product_brand = #{brand_num} 
@@ -64,9 +63,6 @@
 			brand b on p.product_brand = b.brand_num  
 	</select> -->
 
-	
-
-	
 	<update id="update" parameterType="com.forever.young.entity.Product">
 		update product_table 
 			set product_name = #{name}, 
@@ -82,7 +78,18 @@
 		where product_no = #{product_no}
 	</delete>
 
-
-
+	<select id="productList" resultType="hashmap" parameterType="hashmap">
+        <![CDATA[
+        	select * 
+        	from 
+        	(select * from product_table order by product_regdate desc )
+        	where rownum between 1 and 10
+		 ]]>
+	</select>
+	
+	<select id="ProductListCnt" resultType="int">
+		select count(*)
+		from product_table
+	</select>
 
 </mapper>

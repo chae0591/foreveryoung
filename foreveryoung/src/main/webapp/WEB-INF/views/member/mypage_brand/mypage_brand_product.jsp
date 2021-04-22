@@ -242,6 +242,24 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		
+	<form>
+	
+	</form>
+	<ul class="paging center">
+	    <c:if test="${paging.prev}">
+	        <span><a href='<c:url value="/member/mypage_brand/mypage_brand_product?page=${paging.startPage-1}"/>'>이전</a></span>
+	    </c:if>
+	    <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
+	        <span><a href='<c:url value="/member/mypage_brand/mypage_brand_product?page=${num}"/>'>${num}</a></span>
+	    </c:forEach>
+	    <c:if test="${paging.next && paging.endPage>0}">
+	        <span><a href='<c:url value="/member/mypage_brand/mypage_brand_product?page=${paging.endPage+1}"/>'>다음</a></span>
+	    </c:if>
+	</ul>
+	
+	
+		
 </section>
 		
 <!--  부트스트랩을 사용하기위한 js설정 입력 -->

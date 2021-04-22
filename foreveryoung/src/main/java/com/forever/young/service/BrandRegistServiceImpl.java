@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.forever.young.entity.Brand;
+import com.forever.young.entity.BrandProductCriteria;
 import com.forever.young.entity.Product;
 import com.forever.young.repository.BrandRegistRepository;
 import com.forever.young.repository.ProductRepository;
@@ -55,11 +56,6 @@ public class BrandRegistServiceImpl implements BrandRegistService{
 		return productRepository.getCountByBrand(brand);
 	}
 
-	@Override
-	public List<Product> listAll(int start, int end, String searchOption, String keyword) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	//브랜드 게시글 삭제 및 수정 
 	@Override
@@ -70,6 +66,16 @@ public class BrandRegistServiceImpl implements BrandRegistService{
 	@Override
 	public void deleteProduct(int product_no) throws Exception {
 		repository.deleteProduct(product_no);
+	}
+
+	@Override
+	public List<Map<String, Object>> productList(BrandProductCriteria cri) throws Exception {
+		return repository.productList(cri);
+	}
+
+	@Override
+	public int ProductListCnt() throws Exception {
+		return repository.ProductListCnt();
 	}
 	
 
