@@ -89,6 +89,7 @@ public class DetailBoardContorller {
 	    rv.addStaticAttribute("product_no",review.getProduct_no());
 	                  
 	     return rv;		
+		
 	}
 }
 
