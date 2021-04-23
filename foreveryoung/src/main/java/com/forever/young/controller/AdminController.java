@@ -113,7 +113,11 @@ public class AdminController {
 		
 		int total = service.getCountByAdmin();
 		
-		//model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+//		if(paging == null) {
+			model.addAttribute("page", new Paging(1 ,10, total));
+//		}else {
+//			model.addAttribute("page", new Paging(paging.getPageNum(),10, total));
+//		}
 		model.addAttribute("admin", total);
 		model.addAttribute("adminList", service.adminList());
 		
@@ -141,7 +145,7 @@ public class AdminController {
 		
 		int total = service.getCountByCustomer();
 		
-		//model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+		//model.addAttribute("page", new Paging(paging.getPageNum(),10, total));
 		model.addAttribute("customer", total);
 		model.addAttribute("customerList", service.customerList());
 		
@@ -426,8 +430,7 @@ public class AdminController {
 		
 		return new RedirectView("inquiryList");
 	}
-	
-	
+
 	
 	
 	

@@ -22,12 +22,22 @@
 		#{admin_name},sysdate,#{admin_phone})
 	</insert>
 
-	<!-- 관리자 리스트 -->
+ 	<!-- 관리자 리스트 -->
 	<select id="adminList" resultType="Admin">
-  		<![CDATA[
-  			select * from admin
-  		]]>
+		select * from (
+   		 	select rownum rn, A.* from  admin A
+    		order by A.admin_regDate asc )A
+    	where rn between 1 and 10
 	</select>
+ 
+	<!-- 페이징+ 관리자 리스트 -->
+	<!--  <select id="adminList" resultType="Admin">
+		select * from (
+   		 	select rownum rn, A.* from  admin A
+    		order by A.admin_regDate asc )A
+    	where rn between (#{page.pageNum}-1)*10-1 and #{page.pageNum}*10
+	</select>-->
+
 	
 	<!-- 관리자 총 수 -->
 	<select id="getCountByAdmin" resultType="int">
@@ -220,6 +230,9 @@
 		<delete id="replyDelete">
 			 delete from reply where inquiry_no = #{inquiry_no}
 		</delete>
+		
+	
+		
 </mapper>
  
 
