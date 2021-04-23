@@ -17,34 +17,45 @@ hr {
 	text-align: center;
 	margin: 0 auto;
 }
-.swiper-container {
+.index_01 {
 	width: 1020px;
-	height: auto;
-	min-height: 100px;
+	height: 500px;
 	text-align: center;
 	margin: 0 auto;
-	display:inline-block;
+}
+.index_01 > .index_slide1 {
+	width: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+.index_slide > ul > li{
+	display: inline-block;
+}
+.index_btn {
+	width: 1020px;
+	height: auto;
+	text-align: center;
+	margin: o auto;
 }
 
-    .swiper-slide {
-      text-align: center;
-      font-size: 18px;
-      background: #fff;
-
-      /* Center slide text vertically */
-      display: -webkit-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-box-pack: center;
-      -ms-flex-pack: center;
-      -webkit-justify-content: center;
-      justify-content: center;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      -webkit-align-items: center;
-      align-items: center;
-    }
+.index_btn ul {
+	width: 300px;
+	height: 100%;
+	text-align: center;
+	float: left;
+}
+.index_btn ul > li {
+	width: 33%;
+	height: 100%;
+	float: left;
+	display: inline-block;
+}
+.index_btn ul > li > button {
+	width: 100%;
+	height: 50px;
+	float: left;
+	display: inline-block;
+}
 .second-box {
 	width: 1020px;
 	height: 500px;
@@ -57,12 +68,8 @@ hr {
 	text-align: center;
 	margin: 0 auto;
 }
-table {
-	width: 1020px;
-	margin: 0;
-	padding: 0;
-}
-.event-title {
+
+.index_title {
    padding-top: 20px;
    padding-bottom: 20px;
    color: #222;
@@ -99,41 +106,7 @@ table {
     letter-spacing: -.24px;
     color: #222;
 }
-.item-name{
-    display: block;
-    font-size: 14px;
-    line-height: 20px;
-    font-weight: 500;
-    letter-spacing: -.21px;
-    color: #222;
-    display: -webkit-box;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    white-space: normal;
-    cursor: pointer;
-}
-.item-explanation {
-	display: block;
-    font-size: 12px;
-    line-height: 18px;
-    font-weight: 100;
-    letter-spacing: -.18px;
-    color: #222;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.item-price {
-    display: inline-block;
-    font-size: 14px;
-    line-height: 20px;
-    font-weight: 500;
-    letter-spacing: -.21px;
-    color: #222;
-    vertical-align: middle;
-}
+
 .slide {
 	height: 300px;
     min-width: 1020px;
@@ -168,11 +141,6 @@ table {
     #pos3:checked ~ .bullet label:nth-child(3),
     #pos4:checked ~ .bullet label:nth-child(4){background:#666;}
     
-.more-btn {
-	width: 100px;
-	heigh: 50px;
-}
-
 /* 상품 리스트 */
 .price {
 	color: #FF4646;
@@ -219,12 +187,43 @@ $(function(){
 	    }
 	  });
 
-	  var swiper = new Swiper('.swiper-container', {
-	      navigation: {
-	        nextEl: '.swiper-button-next',
-	        prevEl: '.swiper-button-prev',
-	      },
-	    });
+		
+	//처음에 내용 숨기기
+	$(".index_slide>ul>li").hide();
+	$(".index_slide>ul>li:first-child").show();
+	
+	//버튼 클릭시 내용 나오도록
+	$(".event_btn1").click(function(){
+	        if($(".slide1").css('display') == 'none'){
+	        	$(".slide1").show();
+	        	$(".slide1").next().next().hide();
+	       		$(".slide1").next().hide();
+	   		 }else{
+	   			$(".slide1").hide();
+	    	}
+	});
+	
+	$(".event_btn2").click(function(){
+        if($(".slide2").css('display') == 'none'){
+        	$(".slide2").show();
+        	$(".slide2").prev().hide();
+       		$(".slide2").next().hide();
+   		 }else{
+   			$(".slide2").hide();
+    	}
+	});
+	
+	$(".event_btn3").click(function(){
+        if($(".slide3").css('display') == 'none'){
+        	$(".slide3").show();
+        	$(".slide3").prev().hide();
+        	$(".slide3").prev().prev().hide();
+   		 }else{
+   			$(".slide3").hide();
+    	}
+	});
+
+		
 });
 </script>
 </head>
@@ -250,29 +249,26 @@ $(function(){
     </p>
 </div>
 
-<div class="swiper-container">
-	<h2 class="event-title">이 상품 어때요?</h2>
-	 <div class="swiper-wrapper">
-		<c:forEach var="randomList" items="${randomList}">
-			<div class="swiper-slide">
-				<input type="hidden" name="product_no" value="${randomList.product_no}">
-				<a class="detail" href="#">
- 					<img class="img-responsive" src="/viewImg?fileName=${randomList.image_save_name}&imageType=${randomList.image_type}">
- 					<label><c:out value="${randomList.brand_name}"/></label>
-					<label><c:out value="${randomList.product_name}" /></label>
-					<label class="price"><fmt:formatNumber value="${randomList.product_price}" pattern="###,###,###"/>원</label>
-				</a>
-				<button class="vot_btn" data-no="${randomList.product_no}" value="false">
-				<img src="/img/product/unlike.png" id="vote_img" alt="좋아요" class="like">
-				</button>
-			</div>
-			</c:forEach>
-		  </div>
-	<!-- Add Arrows -->
-    <div class="swiper-button-next">이전</div>
-    <div class="swiper-button-prev">다음</div>
-   
+<div class="index_01">
+	<div class="index_header">
+		<h2 class="index_title">이 상품은 어떤가요?</h2>
+	</div>
+	<div class="index_slide">
+		<ul>
+			<li class="slide1"><a href="#">슬라이드1</a></li>
+			<li class="slide2"><a href="#">슬라이드2</a></li>
+			<li class="slide3"><a href="#">슬라이드3</a></li>
+		</ul>
+	</div>
+	<div class="index_btn">
+		<ul>
+			<li><button class="event_btn1">1</button></li>
+			<li><button class="event_btn2">2</button></li>
+			<li><button class="event_btn3">3</button></li>
+		</ul>
+	</div>
 </div>
+
 
 <hr>
 
