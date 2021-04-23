@@ -7,17 +7,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+</head>
 <script>
 $(function(){
-		var formObj=$('#reviewRegister')
+	var formObj=$('#review')
 	
       $("#btnCancle").on("click", function () {
     	  history.go(-1);
       });
-      $("#btnRegister").on("click", function () {
-          formObj.attr("action", "/detail_board/reviewRegister")
+      $("#btnModify").on("click", function () {
+          formObj.attr("action", "/detail_board/reviewModify")
           formObj.attr("method", "post")
           formObj.submit();
     });
@@ -25,21 +25,23 @@ $(function(){
 </script>
 <body>
 <jsp:include page="../template/header.jsp"></jsp:include>
-   <form action ="reviewRegister" method="post" id="reviewRegister">
-    <input type="hidden" name="user_num" value="${check}">
-       <input type="hidden" name="product_no" value="${getDetail.product_no}">
-      <div>
-           <h1>리뷰 작성</h1>
-      </div>
-             
+
+	<form:form modelAttribute ="review" action="reviewModify">
+	 <form:hidden path="user_num"/>
+	 <input type="hidden" name="review_num" value="${review.review_num}">
+	 <input type="hidden" name="product_no" value="${review.product_no}">
+		<div>
+		     <h1>리뷰 수정</h1>
+		</div>
+		       
       <div>
            <label>제목</label><br><br>
-           <input type="text" name="review_title" id="review_title">
+           	<p><form:input path="review_title"/></p>
       </div>
                      
       <div>
            <label>리뷰내용</label><br><br>
-           <textarea  cols="50" rows="5" name="review_content" id="review_content"></textarea>
+           <p><form:textarea cols="50" rows="5" path="review_content"/></p>
       </div>
 
       <div>
@@ -50,12 +52,13 @@ $(function(){
            <input type="radio" name="review_score" value="4"/>4점
            <input type="radio" name="review_score" value="5"/>5점
       </div>
+   </form:form>
       
       <div>
-         <button type="submit" id="btnRegister">등록</button>
+         <button type="submit" id="btnModify">수정</button>
          <button type="button" id="btnCancle">취소</button>
       </div>         
-   </form>
+	
 <jsp:include page="../template/footer.jsp"></jsp:include>
 </body>
 </html>
