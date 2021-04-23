@@ -17,12 +17,34 @@ hr {
 	text-align: center;
 	margin: 0 auto;
 }
-.first-box {
+.swiper-container {
 	width: 1020px;
-	height: 500px;
+	height: auto;
+	min-height: 100px;
 	text-align: center;
 	margin: 0 auto;
+	display:inline-block;
 }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
 .second-box {
 	width: 1020px;
 	height: 500px;
@@ -45,14 +67,7 @@ table {
    padding-bottom: 20px;
    color: #222;
 }
-.first-box a {
-    color: #000;
-    padding: 20px;
-    ling-height: 44px;
-    font-size: 16px;
-    font-weight: 700;
-    font-style: normal;
-}
+
 .category-box {
 	width: 100%;
 	height: 47px;
@@ -157,41 +172,35 @@ table {
 	width: 100px;
 	heigh: 50px;
 }
-#back-to-top {
-  display: inline-block;
-  background-color: #FF9800;
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  border-radius: 30px;
-  position: fixed;
-  bottom: 50%;
-  right: 30px;
-  transition: background-color .3s, 
-    opacity .5s, visibility .5s;
-  opacity: 0;
-  visibility: hidden;
-  z-index: 1000;
+
+/* 상품 리스트 */
+.price {
+	color: #FF4646;
+	font-size: 20px;
+	text-align: center;
 }
-#back-to-top::after {
-  content: "TOP";
-  font-family: FontAwesome;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 16px;
-  line-height: 50px;
-  color: #fff;
+.detail > img{
+	display: inline-block;
+	width:210px;
+	height:200px;
 }
-#back-to-top:hover {
-  cursor: pointer;
-  background-color: #333;
+.pList li {
+	display: inline-block;
+    padding: 10px;
+    margin : 1rem 1.5rem;
+    cursor: pointer;
+    position: relative;
+    width : 210px;
 }
-#back-to-top:active {
-  background-color: #555;
+.vot_btn {
+	position : absolute;
+	top:160px;
+	left:150px;
+	background-color:white;
 }
-#back-to-top.show {
-  opacity: 1;
-  visibility: visible;
+.vot_btn > img {
+	width:50px;
+	heigth:50px;
 }
 </style>
 <script type="text/javascript">
@@ -209,6 +218,13 @@ $(function(){
 	      $('#back-to-top').removeClass('show');
 	    }
 	  });
+
+	  var swiper = new Swiper('.swiper-container', {
+	      navigation: {
+	        nextEl: '.swiper-button-next',
+	        prevEl: '.swiper-button-prev',
+	      },
+	    });
 });
 </script>
 </head>
@@ -234,35 +250,28 @@ $(function(){
     </p>
 </div>
 
-<div class="first-box">
+<div class="swiper-container">
 	<h2 class="event-title">이 상품 어때요?</h2>
-	<table>
-		<c:choose>
-			<c:when test="${!empty randomList}">
-				<c:forEach items="${randomList}" var="randomList">
-				<tr>
-				<td>
-					<input type="hidden" name="product_no" value="${randomList.product_no}">
-					<a href="#">
-					<p class="item-img">${randomList.product_img}</p>
-					<p class="item-name">${randomList.product_name}</p>
-					<p class="item-price">${randomList.product_price}원</p>
-					<p class="item-stock">${randomList.product_stock}원</p>
-					</a>
-				</td>
-				</tr>
-				</c:forEach>
-			</c:when>
-			<c:otherwise> 
-					<tr> 
-						<td colspan="4">조회된 결과가 없습니다.</td>
-					</tr>
-				 </c:otherwise>
-			</c:choose>
-	</table>
-	
-	<button class="more-btn">더보기</button>
-	
+	 <div class="swiper-wrapper">
+		<c:forEach var="randomList" items="${randomList}">
+			<div class="swiper-slide">
+				<input type="hidden" name="product_no" value="${randomList.product_no}">
+				<a class="detail" href="#">
+ 					<img class="img-responsive" src="/viewImg?fileName=${randomList.image_save_name}&imageType=${randomList.image_type}">
+ 					<label><c:out value="${randomList.brand_name}"/></label>
+					<label><c:out value="${randomList.product_name}" /></label>
+					<label class="price"><fmt:formatNumber value="${randomList.product_price}" pattern="###,###,###"/>원</label>
+				</a>
+				<button class="vot_btn" data-no="${randomList.product_no}" value="false">
+				<img src="/img/product/unlike.png" id="vote_img" alt="좋아요" class="like">
+				</button>
+			</div>
+			</c:forEach>
+		  </div>
+	<!-- Add Arrows -->
+    <div class="swiper-button-next">이전</div>
+    <div class="swiper-button-prev">다음</div>
+   
 </div>
 
 <hr>

@@ -14,4 +14,5 @@ public interface MainService {
 	public List<Product> bestList() throws Exception;
 	public List<Product> newList() throws Exception;
 
+	public List<Product> searchList(String keyword) throws Exception;
 }

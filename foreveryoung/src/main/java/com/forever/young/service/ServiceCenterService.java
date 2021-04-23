@@ -23,5 +23,6 @@ public interface ServiceCenterService {
 	public int inquiryRegisterAfter() throws Exception;
 
 	public List<Notice> listAll(String keyword, int start, int end) throws Exception;
+
 }
 

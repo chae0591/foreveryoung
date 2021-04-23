@@ -98,7 +98,7 @@ background-color: #000 \9;
   border: 1px solid black;
 }
 
-.carousel-indicators .active {
+.carousel-indicators .active {     
 	background-color: black;
 }
 
