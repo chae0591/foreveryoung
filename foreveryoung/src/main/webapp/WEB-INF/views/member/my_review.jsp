@@ -10,7 +10,8 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member/css/bootstrap.css">
 <style>
 .pro-img{
-	height: 25px;
+	height: 50px;
+	width: 50px;
 }
 </style>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -125,7 +126,16 @@ $(document).ready(function(){
 										<tr>
 											<td><span><fmt:formatDate value="${review.review_date}" pattern="yyyy-MM-dd"/></span></td>
 											<td style="width: 40%">${review.review_title}</td>
-											<td><!-- <img class="pro-img img img-responsive" src="/viewImg?fileName=${review.image_save_name}&imageType=${review.image_type}"> --></td>
+											<c:choose>
+												<c:when test="${empty review.image_save_name}">
+													<td><img src="https://dummyimage.com/50x50/000/fff&text=foreveryoung"></td>
+												</c:when>
+												<c:otherwise>
+													<td>
+													<img class="pro-img img img-responsive" src="/viewImg?fileName=${review.image_save_name}&imageType=${review.image_type}">
+													</td>
+												</c:otherwise>
+											</c:choose>
 											<td style="width: 40%">
 												브랜드 : ${review.brand_name} <br> 
 												<a href="/detail_board/detail_main?product_no=${review.product_no}">상품 : ${review.product_name}</a>
