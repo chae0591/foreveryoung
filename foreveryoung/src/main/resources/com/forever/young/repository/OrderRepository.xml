@@ -14,7 +14,10 @@
 	</select>
 	
 	<select id="searchproVO" resultType="OrderProductVO">
-		select p.*, b.* from product_table P join brand B on p.product_brand = b.brand_num where product_no = #{product_no}
+		select p.*, b.*, pi.image_save_name, pi.image_type, pi.image_name  
+        from product_table P join brand B on p.product_brand = b.brand_num 
+        left outer join product_img pi on p.product_no = pi.product_no 
+		where product_no = #{product_no}
 	</select>
 	
 	<select id="searchListMyPg" resultType="OrderMypgVO">

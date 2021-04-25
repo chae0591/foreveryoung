@@ -10,7 +10,8 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member/css/bootstrap.css">
 <style>
 .pro-img{
-	height: 25px;
+	height: 50px;
+	width: 50px;
 }
 </style>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -106,9 +107,16 @@
 										<c:forEach var="order_product" items="${product_info}">
 										<tr>
 											<td><span><fmt:formatDate value="${order_product.order_time}" pattern="yyyy-MM-dd"/></span></td>
-											<td>
-												<!-- <img class="pro-img img img-responsive" src="/viewImg?fileName=${order_product.image_save_name}&imageType=${order_product.image_type}"> -->
-											</td>
+											<c:choose>
+												<c:when test="${empty order_product.image_save_name}">
+													<td><img src="https://dummyimage.com/50x50/000/fff&text=foreveryoung"></td>
+												</c:when>
+												<c:otherwise>
+													<td>
+													<img class="pro-img img img-responsive" src="/viewImg?fileName=${order_product.image_save_name}&imageType=${order_product.image_type}">
+													</td>
+												</c:otherwise>
+											</c:choose>
 											<td>
 												브랜드 : <span><c:out value="${order_product.brand_name}"></c:out> 
 												상품 : <c:out value="${order_product.product_name}"></c:out><br>

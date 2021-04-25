@@ -69,7 +69,7 @@ public class CustomerController {
 		
 		service.regist(customer);
 		
-		return new RedirectView("success?test=1");
+		return new RedirectView("/main");
 	}
 	
 	@GetMapping("/login")
@@ -89,7 +89,7 @@ public class CustomerController {
 			session.setAttribute("check", checkLogin.getUser_num());
 			session.setAttribute("auth", "customer");
 			log.info("loginSuccess");
-			return new RedirectView("success?test=3");
+			return new RedirectView("mypage");
 		}
 		else {
 			log.info("loginFail");
@@ -166,7 +166,7 @@ public class CustomerController {
 		log.info(customer.toString());
 		service.editInfo(customer);
 		
-		return "member/success";
+		return "member/mypage";
 	}
 	
 	@GetMapping("/mypage_edit_pw")
@@ -186,7 +186,7 @@ public class CustomerController {
 		
 		service.editPw(changePwVO);
 		
-		return "member/success";
+		return "member/mypage";
 	}
 	
 	@GetMapping("/logout")
