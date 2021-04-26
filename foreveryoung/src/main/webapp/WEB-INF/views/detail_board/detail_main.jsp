@@ -161,22 +161,57 @@ $(function(){
       $("#total_amount").val($("#result").val() * $("#sell_price").val());
       /* 마이너스 버튼 처리 이벤트-3. 가격 연산 종료*/
    });
-   $("#nice").on("click", function () {
-       /*좋아요 버튼 관련 이벤트 처리 시작*/
+   
+   /*좋아요 불러오기*/
+	$(document).ready(function(){
+		var product_no = $("input[name='product_no']").val();
+		var user_num = $("input[name='user_num']").val();
+		var target = $(this);
+		if(user_num != "") {
+			voteCheck();
+		}
+		
+		function voteCheck() {
+			if(user_num == "") {
+				return false;
+			}else {
+			
+				$.ajax({
+					url : '/vote/checkVote',
+					type: 'GET',
+					data : {'user_num':user_num, 'product_no':product_no},
+					success : function(result) {
+						if(result=="yes"){
+							$("#nice").attr("value","true")
+							$("#vote_img").attr("src", "/img/product/like.png");
+						}else{
+							$("#nice").attr("value","false")
+							$("#vote_img").attr("src", "/img/product/unlike.png");
+						}
+					}
+				});// ajax
+			}
+		}
+	}) //end votecheck 
+		
+/*좋아요 버튼 관련 이벤트 처리 시작*/
+   $("#nice").on("click", function (e) {
+	   e.preventDefault()
        var target = $(this);
        var user_num = $("input[name='user_num']").val();
        var product_no = $("input[name='product_no']").val();
+       
          if(user_num == null || user_num == "") {
             location.href="/member/login";
          }
-         var url;
+         var target_url;
          if($(this).attr("value") == "true") {
-            url = "/vote/deleteVote";
+        	 target_url = "/vote/deleteVote";
          } else if ($(this).attr("value") == "false") {
-            url = "/vote/insertVote";
+        	 target_url = "/vote/insertVote";
          }
           $.ajax({
-            url : url,
+            url : target_url,
             data : {'user_num':user_num, 'product_no':product_no},
             type: 'POST',
             success : function(result) {
@@ -190,6 +225,7 @@ $(function(){
             }
          });  // ajax
       }); // end 좋아요
+      
    $(".bucket").click(function(){
 		var id = "${check}";
 		var auth = "${auth}";
@@ -267,6 +303,7 @@ $(function(){
         $(".qna").show();
      });
 });//menu 끝   
+
 //최신순,인기순 등 review-unit 적용
 	$(function(){
 		$(".order-list").eq(0).click(function(){
@@ -322,7 +359,6 @@ $(function(){
 	    	}
 		});
 	});//리뷰 버튼-삭제 끝
-	
 });//function 끝
 </script>
 <body>

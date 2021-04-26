@@ -2,9 +2,6 @@ package com.forever.young.repository;
 
 import java.util.List;
 
-import org.springframework.ui.Model;
-
-import com.forever.young.entity.Brand;
 import com.forever.young.entity.Product;
 import com.forever.young.entity.Review;
 

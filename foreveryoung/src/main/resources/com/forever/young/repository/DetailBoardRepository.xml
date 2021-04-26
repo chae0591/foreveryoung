@@ -49,4 +49,6 @@
     <delete id="reviewDelete" parameterType="int">
     	delete from review where review_num=#{review_num}
     </delete>
+    
+    
 </mapper>
