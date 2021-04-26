@@ -1,5 +1,6 @@
 package com.forever.young.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -136,44 +137,93 @@ public class BrandRegistController {
 //	
 	
 	//판매자 등록 상품 관리 get
-	@GetMapping("/mypage_brand/mypage_brand_product")
-	public String getMypage_brand_product(HttpSession session, BrandProductCriteria cri,  Model model, Product product) throws Exception {
-		log.info("getMypage_brand_product");
-		
-		Brand brand = service.findNum((int)session.getAttribute("check"));
-		
-		List<Product> brandProductList = productService.getFindBrandProduct(product);
-		//이미지 
-		List<Product> list = productService.brandList((int)session.getAttribute("check"));
-		
+//	@GetMapping("/mypage_brand/mypage_brand_product")
+//	public String getMypage_brand_product(HttpSession session, BrandProductCriteria cri,  Model model, Product product) throws Exception {
+//		log.info("getMypage_brand_product");
+//		
+//		Brand brand = service.findNum((int)session.getAttribute("check"));
+//		
+//		List<Product> brandProductList = productService.getFindBrandProduct(product);
+//		//이미지 
+//		List<Product> list = productService.brandList((int)session.getAttribute("check"));
+//		
+//
+//		//페이징 - 시작 
+//		//전체글 갯수
+//		int ProductListCnt = service.ProductListCnt(); 
+//		
+//		//페이징 객체
+//		BrandProductPaging paging = new BrandProductPaging();  
+//		paging.setCri(cri);
+//		paging.setTotalCount(ProductListCnt);
+//		
+//		List<Map<String, Object>> productList = service.productList(cri); 
+//		model.addAttribute("productList", productList);
+//		model.addAttribute("paging", paging); 
+//		//페이징 - 끝  
+//		
+//		System.out.println(cri.getPageStart());
+//		System.out.println(cri.getPerPageNum());
+//		
+//		
+//		model.addAttribute("brand_info", brand); 
+//		model.addAttribute("product_info", brandProductList); 
+//		
+//		
+//		model.addAttribute("list", list);
+//
+//		
+//		return "member/mypage_brand/mypage_brand_product"; 
+//	}
+	
+	//판매자 등록 상품 관리 get
+		@GetMapping("/mypage_brand/mypage_brand_product")
+		public String getMypage_brand_product(HttpSession session, BrandProductCriteria cri,
+					@RequestParam(defaultValue="product_name") String search_option, 
+					@RequestParam(defaultValue="") String keyword, 
+					Model model, Product product
+					) 
+					throws Exception {
+			
+			log.info("getMypage_brand_product");
+			
+			//Brand brand = service.findNum((int)session.getAttribute("check"));
+			Brand brand = service.findNum(121);
+			List<Product> brandProductList = productService.getFindBrandProduct(product);
+			//이미지 
+			//List<Product> list = productService.brandList((int)session.getAttribute("check"));
+			List<Product> list = productService.brandList(121);
 
-		//페이징 - 시작 
-		//전체글 갯수
-		int ProductListCnt = service.ProductListCnt(); 
-		
-		//페이징 객체
-		BrandProductPaging paging = new BrandProductPaging();  
-		paging.setCri(cri);
-		paging.setTotalCount(ProductListCnt);
-		
-		List<Map<String, Object>> productList = service.productList(cri); 
-		model.addAttribute("productList", productList);
-		model.addAttribute("paging", paging); 
-		//페이징 - 끝  
-		
-		System.out.println(cri.getPageStart());
-		System.out.println(cri.getPerPageNum());
-		
-		
-		model.addAttribute("brand_info", brand); 
-		model.addAttribute("product_info", brandProductList); 
-		
-		
-		model.addAttribute("list", list);
-
-		
-		return "member/mypage_brand/mypage_brand_product"; 
-	}
+			//페이징 - 시작 
+			//전체글 갯수
+			int ProductListCnt = service.ProductListCnt(); 
+			//페이징 객체
+			BrandProductPaging paging = new BrandProductPaging();  
+			paging.setCri(cri);
+			paging.setTotalCount(ProductListCnt);
+			System.out.println(cri);
+			Map<String, Object> map = new HashMap<>();
+			map.put("cri", cri);
+			map.put("brand", 121);
+			map.put("search_option", search_option);
+			map.put("keyword", keyword);
+			List<Product> productList = service.productList(map); //search_option, keyword
+			System.out.println(productList);
+			
+			model.addAttribute("productList", productList);
+			model.addAttribute("paging", paging); 
+			//페이징 - 끝  
+			
+			System.out.println(cri.getPageStart());
+			System.out.println(cri.getPerPageNum());
+			
+			model.addAttribute("brand_info", brand); 
+			model.addAttribute("product_info", brandProductList); 
+			
+			
+			return "member/mypage_brand/mypage_brand_product"; 
+		}
+	
 	
 	
 	//상품 삭제 

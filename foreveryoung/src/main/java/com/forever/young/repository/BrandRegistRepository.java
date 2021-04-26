@@ -25,6 +25,8 @@ public interface BrandRegistRepository {
 	public void deleteProduct(int product_no) throws Exception; 
 	
 	//페이징 
-	public List<Map<String,Object>> productList(BrandProductCriteria cri) throws Exception;
+	public List<Product> productList(Map<String, Object> map) throws Exception;
 	public int ProductListCnt() throws Exception; 
+	
+	
 }

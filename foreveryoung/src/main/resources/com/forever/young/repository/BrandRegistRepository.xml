@@ -78,18 +78,58 @@
 		where product_no = #{product_no}
 	</delete>
 
-	<select id="productList" resultType="hashmap" parameterType="hashmap">
+	<!-- <select id="productList" resultType="hashmap" parameterType="hashmap">
         <![CDATA[
         	select * 
         	from 
         	(select * from product_table order by product_regdate desc )
         	where rownum between 1 and 10
 		 ]]>
+	</select> -->
+	
+	<select id="productList" resultType="Product" parameterType="hashmap">
+		 select
+				result.*
+			from
+				(select
+					rownum rn, p.*, i.image_save_name, i.image_type, i.image_name, b.brand_name
+				from
+		        	product_table P inner join product_img i on p.product_no = i.product_no
+		        	inner join brand b on p.product_brand = b.brand_num
+				where
+					image_type = 'N'
+					and brand_num = #{brand}
+					and <![CDATA[rownum <= #{cri.perPageNum} * #{cri.page}]]>
+					and <include refid="search" /> 
+				order by
+						product_regdate desc) result
+			<![CDATA[where rn > #{cri.pageStart}
+			]]>
 	</select>
 	
+	<sql id="search">
+		<choose>
+			<when test="search_option == 'product_name' ">
+				product_name like '%' || #{keyword} || '%'
+			</when>
+			<otherwise>
+				${search_option} like '%' ||#{keyword}||'%'
+			</otherwise>
+		</choose>
+	</sql>
+	
+	
+	
+	<!-- 
 	<select id="ProductListCnt" resultType="int">
 		select count(*)
 		from product_table
+	</select> -->
+	
+	<select id="ProductListCnt" resultType="int">
+		select count(*)
+		from product_table where product_brand = 121
 	</select>
+	
 
 </mapper>
