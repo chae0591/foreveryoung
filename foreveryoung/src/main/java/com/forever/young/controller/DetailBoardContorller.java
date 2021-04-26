@@ -71,7 +71,7 @@ public class DetailBoardContorller {
    public String getReviewModify(Review review, Model model, HttpSession session, @RequestParam Integer review_num) throws Exception{
       log.info("getReviewModify()");
       
-      //model.addAttribute("review", service.findbyreviewNo(review_num));
+      model.addAttribute("review", service.findbyreviewNo(review_num));
       
       return "detail_board/reviewModify";
    }
@@ -82,7 +82,7 @@ public class DetailBoardContorller {
       
       review.setUser_num((int)session.getAttribute("check"));
       
-     // service.reviewModify(review);
+      service.reviewModify(review);
       
       model.addAttribute("reviewModify", "리뷰 수정이 완료되었습니다.");
        RedirectView rv = new RedirectView("detail_main");
@@ -90,4 +90,19 @@ public class DetailBoardContorller {
                      
         return rv;      
    }
+   //리뷰 삭제
+   @GetMapping("/reviewDelete")
+   public String reviewDelete( Model model, HttpSession session, @RequestParam Integer review_num, @RequestParam Integer product_no) throws Exception{
+      log.info("reviewDelete");
+      
+      service.reviewDelete(review_num);
+       return "redirect:/detail_board/detail_main?product_no="+product_no;
+   }
 }
+
+
+
+
+
+
+

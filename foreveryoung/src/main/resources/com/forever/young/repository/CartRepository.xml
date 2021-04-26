@@ -7,8 +7,11 @@
 	
 	<select id="searchListUser" resultType="CartListVO">
 		select c.cart_no, pb.product_no, pb.product_brand, pb.product_name, pb.product_category, pb.product_price, 
-		pb.brand_name, pb.product_skintype, c.cart_count, c.cart_regDate 
-		from cart c join (select p.*, b.* from product_table P join brand B on p.product_brand = b.brand_num) pb 
+		pb.brand_name, pb.product_skintype, c.cart_count, c.cart_regDate, 
+        pb.image_save_name, pb.image_type, pb.image_name 
+		from cart c join (select p.*, b.*, pi.image_save_name, pi.image_type, pi.image_name  
+        from product_table P join brand B on p.product_brand = b.brand_num 
+        left outer join product_img pi on p.product_no = pi.product_no) pb 
 		on c.product_no = pb.product_no 
 		where c.user_num = #{user_num} 
 		order by c.cart_regDate desc
@@ -28,8 +31,11 @@
 	
 	<select id="searchList" resultType="CartListVO">
 		select c.cart_no, pb.product_no, pb.product_brand, pb.product_name, pb.product_category, pb.product_price, 
-		pb.brand_name, pb.product_skintype, c.cart_count, c.cart_regDate 
-		from cart c join (select p.*, b.* from product_table P join brand B on p.product_brand = b.brand_num) pb 
+		pb.brand_name, pb.product_skintype, c.cart_count, c.cart_regDate, 
+		pb.image_save_name, pb.image_type, pb.image_name 
+		from cart c join (select p.*, b.*, pi.image_save_name, pi.image_type, pi.image_name  
+		from product_table P join brand B on p.product_brand = b.brand_num 
+		left outer join product_img pi on p.product_no = pi.product_no) pb 
 		on c.product_no = pb.product_no 
 		where c.cart_no in 
 		<foreach item="item" collection="cartList" index="index" open="(" separator="," close=")">
@@ -40,8 +46,11 @@
 	
 	<select id="searchListProNums" resultType="CartListVO">
 		select c.cart_no, pb.product_no, pb.product_brand, pb.product_name, pb.product_category, pb.product_price, 
-		pb.brand_name, pb.product_skintype, c.cart_count, c.cart_regDate 
-		from cart c join (select p.*, b.* from product_table P join brand B on p.product_brand = b.brand_num) pb 
+		pb.brand_name, pb.product_skintype, c.cart_count, c.cart_regDate, 
+		pb.image_save_name, pb.image_type, pb.image_name 
+		from cart c join (select p.*, b.*, pi.image_save_name, pi.image_type, pi.image_name  
+		from product_table P join brand B on p.product_brand = b.brand_num 
+		left outer join product_img pi on p.product_no = pi.product_no) pb 
 		on c.product_no = pb.product_no 
 		where pb.product_no in 
 		<foreach item="item" collection="pronumList" index="index" open="(" separator="," close=")">
@@ -52,8 +61,11 @@
 	
 	<select id="searchListProNumList" resultType="CartListVO">
 		select c.cart_no, pb.product_no, pb.product_brand, pb.product_name, pb.product_category, pb.product_price, 
-		pb.brand_name, pb.product_skintype, c.cart_count, c.cart_regDate 
-		from cart c join (select p.*, b.* from product_table P join brand B on p.product_brand = b.brand_num) pb 
+		pb.brand_name, pb.product_skintype, c.cart_count, c.cart_regDate, 
+		pb.image_save_name, pb.image_type, pb.image_name 
+		from cart c join (select p.*, b.*, pi.image_save_name, pi.image_type, pi.image_name  
+		from product_table P join brand B on p.product_brand = b.brand_num 
+		left outer join product_img pi on p.product_no = pi.product_no) pb 
 		on c.product_no = pb.product_no 
 		where pb.product_no in 
 		<foreach item="item" collection="proList" index="index" open="(" separator="," close=")">

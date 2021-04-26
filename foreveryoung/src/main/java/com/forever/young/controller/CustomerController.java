@@ -69,7 +69,7 @@ public class CustomerController {
 		
 		service.regist(customer);
 		
-		return new RedirectView("success?test=1");
+		return new RedirectView("/main");
 	}
 	
 	@GetMapping("/login")
@@ -89,7 +89,7 @@ public class CustomerController {
 			session.setAttribute("check", checkLogin.getUser_num());
 			session.setAttribute("auth", "customer");
 			log.info("loginSuccess");
-			return new RedirectView("success?test=3");
+			return new RedirectView("mypage");
 		}
 		else {
 			log.info("loginFail");
@@ -166,7 +166,7 @@ public class CustomerController {
 		log.info(customer.toString());
 		service.editInfo(customer);
 		
-		return "member/success";
+		return "member/mypage";
 	}
 	
 	@GetMapping("/mypage_edit_pw")
@@ -186,7 +186,7 @@ public class CustomerController {
 		
 		service.editPw(changePwVO);
 		
-		return "member/success";
+		return "member/mypage";
 	}
 	
 	@GetMapping("/logout")
@@ -253,8 +253,8 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/my_inquiry_search_by_day")
-	public String getSearchMyInquiryDate(@RequestParam int dayval, Model model, HttpSession session) throws Exception {
-		log.info("getsearchInquiryDate()");
+	public String getSearchMyInquiryDay(@RequestParam int dayval, Model model, HttpSession session) throws Exception {
+		log.info("getsearchInquiryDay()");
 		
 		model.addAttribute("inquiry_info", service.findNumInquiry((int)session.getAttribute("check"), dayval));
 		
@@ -287,15 +287,70 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/inquiry_search_by_target")
-	public String searchOrderTarget(@RequestParam String target, Model model, HttpSession session) throws Exception {
+	public String searchInquiryTarget(@RequestParam String target, Model model, HttpSession session) throws Exception {
 		
 		Map<String, Object> param = new HashMap<>();
 		param.put("user_num", (int)session.getAttribute("check"));
 		param.put("target", target);
 		
-		model.addAttribute("inquiry_info", service.searchInquirTarget(param));
+		model.addAttribute("inquiry_info", service.searchInquiryTarget(param));
 		
 		return "/member/inquiry_search";
+	}
+	
+	@GetMapping("/my_review")
+	public String getMyReview(HttpSession session, Model model) throws Exception {
+		log.info("getMyReview()");
+		
+		model.addAttribute("review_info", service.myReviewList((int)session.getAttribute("check"), 30));
+		
+		return "member/my_review";
+	}
+	
+	@PostMapping("/my_review_search_by_day")
+	public String getSearchMyReviewDay(@RequestParam int dayval, Model model, HttpSession session) throws Exception {
+		log.info("getsearchReviewDay()");
+		
+		model.addAttribute("review_info", service.myReviewList((int)session.getAttribute("check"), dayval));
+		
+		return "/member/review_search";
+	}
+	
+	@PostMapping("/my_review_search_by_date")
+	public String searchReviewDate(@RequestParam String start_date, @RequestParam String end_date, Model model, HttpSession session) throws Exception {
+		log.info("review_search_by_date_btn()");
+		
+		log.info("date1 : " + start_date);
+		log.info("date2 : " + end_date);
+		
+		if(!start_date.isEmpty()) {
+			start_date = "'".concat(start_date).concat(" 00:00:00'");
+		}
+		
+		if(!end_date.isEmpty()) {
+			end_date = "'".concat(end_date).concat(" 23:59:59'");
+		}
+		
+		Map<String, Object> param = new HashMap<>();
+		param.put("user_num", (int)session.getAttribute("check"));
+		param.put("start_date", start_date);
+		param.put("end_date", end_date);
+		
+		model.addAttribute("review_info", service.searchReviewDate(param));
+		
+		return "/member/review_search";
+	}
+	
+	@PostMapping("/review_search_by_target")
+	public String searchReviewTarget(@RequestParam String target, Model model, HttpSession session) throws Exception {
+		
+		Map<String, Object> param = new HashMap<>();
+		param.put("user_num", (int)session.getAttribute("check"));
+		param.put("target", target);
+		
+		model.addAttribute("review_info", service.searchReviewTarget(param));
+		
+		return "/member/review_search";
 	}
 
 }

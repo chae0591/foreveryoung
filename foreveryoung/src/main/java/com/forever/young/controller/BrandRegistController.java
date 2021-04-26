@@ -68,7 +68,7 @@ public class BrandRegistController {
 		if(checkLogin != null) {
 			session.setAttribute("check", checkLogin.getBrand_num());
 			session.setAttribute("auth", "seller");
-			return new RedirectView("success?test=3");
+			return new RedirectView("mypage_brand/mypage_brand_main");
 		}
 		else {
 			return new RedirectView("login?error");

@@ -20,13 +20,13 @@
 $(document).ready(function(){
 	search_day = function(dayvalue){
 		$.ajax({
-			url : '/order/order_search_by_day',
+			url : '/member/my_review_search_by_day',
 			data : {dayval : dayvalue},
 			type : 'POST',
 			success : function(result){
 				console.log("검색");
 				
-				$(".contract-table").html(result);
+				$(".reviw-table").html(result);
 			}
 		});
 	}
@@ -46,7 +46,7 @@ $(document).ready(function(){
 	
 	$("#date-search-btn").click(function(){
 		$.ajax({
-			url : '/order/order_search_by_date',
+			url : '/member/my_review_search_by_date',
 			data : {
 				start_date : $("input[name=date1]").val(), 
 				end_date : $("input[name=date2]").val()
@@ -55,14 +55,14 @@ $(document).ready(function(){
 			success : function(result){
 				console.log("검색");
 				
-				$(".contract-table").html(result);
+				$(".review-table").html(result);
 			}
 		});
 	});
 	
 	$("#search-btn").click(function(){
 		$.ajax({
-			url : '/order/order_search_by_target',
+			url : '/member/review_search_by_target',
 			data : {
 				target : $("input[name=target]").val()
 				},
@@ -70,13 +70,13 @@ $(document).ready(function(){
 			success : function(result){
 				console.log("검색");
 				
-				$(".contract-table").html(result);
+				$(".review-table").html(result);
 			}
 		});
 	})
-	
 });
 </script>
+
 </head>
 <body>
 <header>
@@ -88,9 +88,9 @@ $(document).ready(function(){
 			<jsp:include page="mypagetemplate/mypagemenu.jsp"></jsp:include>
 			<div class="col-md-10 col-lg-6">
 				<div class="contentbox">
-					<h2>결제 목록</h2>
+					<h2>리뷰 목록</h2>
 					<div class="outbox">
-						<div>
+					<div>
 							<div>
 								<button id="1day-btn">1일</button>
 								<button id="7day-btn">1주일</button>
@@ -104,62 +104,54 @@ $(document).ready(function(){
 							<div><button id="date-search-btn">조회하기</button></div>
 						</div>
 						
-						<table class="table contract-table">
+						<table class="table review-table">
 							<thead>
 								<tr>
 									<th>날짜</th>
+									<th style="width: 30%">제목</th>
 									<th></th>
-									<th>상품정보</th>
-									<th>상태</th>
-									<th>확인신청</th>
+									<th style="width: 30%">상품</th>
+									<th>별점</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:choose>
-									<c:when test="${empty product_info}">
-									<tr>
-										<td colspan="5">주문 내역이 없습니다.</td>
-									</tr>
+									<c:when test="${empty review_info}">
+										<tr>
+											<th colspan="5">남기신 리뷰가 없습니다.</th>
+										</tr>
 									</c:when>
 									<c:otherwise>
-										<c:forEach var="order_product" items="${product_info}">
-											<tr>
-											<td>
-												<span><fmt:formatDate value="${order_product.order_time}" pattern="yyyy-MM-dd"/></span>
-											</td>
+										<c:forEach var="review" items="${review_info}">
+										<tr>
+											<td><span><fmt:formatDate value="${review.review_date}" pattern="yyyy-MM-dd"/></span></td>
+											<td style="width: 40%">${review.review_title}</td>
 											<c:choose>
-												<c:when test="${empty order_product.image_save_name}">
+												<c:when test="${empty review.image_save_name}">
 													<td><img src="https://dummyimage.com/50x50/000/fff&text=foreveryoung"></td>
 												</c:when>
 												<c:otherwise>
 													<td>
-													<img class="pro-img img img-responsive" src="/viewImg?fileName=${order_product.image_save_name}&imageType=${order_product.image_type}">
+													<img class="pro-img img img-responsive" src="/viewImg?fileName=${review.image_save_name}&imageType=${review.image_type}">
 													</td>
 												</c:otherwise>
 											</c:choose>
-											<td>
-												<span>
-													브랜드 : <c:out value="${order_product.brand_name}"></c:out> 
-													상품 : <c:out value="${order_product.product_name}"></c:out><br>
-													수량 : <c:out value="${order_product.order_amount}"></c:out> 
-													결제 금액 :<fmt:formatNumber value="${order_product.order_totalPrice}" pattern="###,###,###"/>
-												</span>
+											<td style="width: 40%">
+												브랜드 : ${review.brand_name} <br> 
+												<a href="/detail_board/detail_main?product_no=${review.product_no}">상품 : ${review.product_name}</a>
 											</td>
-											<td>
-												<span><c:out value="${order_product.order_status}"></c:out></span>
-											</td>
-											<td><button>확인신청</button></td>
-											</tr>
+											<td>${review.review_score} / 5</td>
+										</tr>
 										</c:forEach>
 									</c:otherwise>
 								</c:choose>
 							</tbody>
-						</table>
+						</table>	
 						<div class="row">
 							<div class="col-lg-offset-6 col-lg-6">
 								<input type="text" name="target"> <button id="search-btn">검색</button>
 							</div>
-						</div>
+						</div>	
 					</div>
 				</div>
 			</div>
@@ -170,5 +162,4 @@ $(document).ready(function(){
 <jsp:include page="../template/footer.jsp"></jsp:include>
 </footer>
 </body>
-
-</html>		
+</html>
