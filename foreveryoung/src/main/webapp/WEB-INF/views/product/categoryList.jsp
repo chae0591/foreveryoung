@@ -353,6 +353,7 @@ h3 {
 				success : function(result){
 					voteCheck();
 					$(".appendHtml").html(result);
+					$("input[name='pageNum']").attr("value", 1);
 				}
 			}); // ajax
 		}

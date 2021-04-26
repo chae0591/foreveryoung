@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.forever.young.entity.Brand;
+import com.forever.young.entity.BrandBanner;
 import com.forever.young.entity.Paging;
 import com.forever.young.entity.Product;
+import com.forever.young.service.BrandBannerService;
 import com.forever.young.service.BrandRegistService;
 import com.forever.young.service.ProductService;
 
@@ -33,7 +35,10 @@ public class ProductController {
 	private ProductService service;
 	
 	@Autowired
-	private BrandRegistService brandService;
+	private BrandRegistService Brandservice;
+	
+	@Autowired
+	private BrandBannerService bannerService;
 	
 	private final Logger log = LoggerFactory.getLogger(ProductController.class);
 	
@@ -132,17 +137,20 @@ public class ProductController {
 	// 브랜드 리스트
 	@GetMapping("brandList")
 	public String brandList(@RequestParam String brand, Model model) throws Exception {
-		int total = service.getCountByBrand(Integer.parseInt(brand));
+		int brand_num = Integer.parseInt(brand);
+		int total = service.getCountByBrand(brand_num);
 		Paging paging = new Paging(1, 20, total);
 		
 		model.addAttribute("page", paging);
 		
-		List<Product> list = service.brandListWithPaging(Integer.parseInt(brand), paging);
-		List<Product> best = service.getBrandBest(Integer.parseInt(brand));
-		
-		model.addAttribute("brand", Integer.parseInt(brand));
+		List<Product> list = service.brandListWithPaging(brand_num, paging);
+		List<Product> best = service.getBrandBest(brand_num);
+		Brand getBrand = Brandservice.findNum(brand_num);
+		BrandBanner banner = bannerService.getBan(brand_num);
+		model.addAttribute("brand", getBrand);
 		model.addAttribute("list", list);
 		model.addAttribute("best", best);
+		model.addAttribute("banner", banner);
 		
 		return "product/brandList";
 	}

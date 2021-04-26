@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.forever.young.entity.Brand;
+import com.forever.young.entity.BrandBanner;
 import com.forever.young.entity.BrandProductCriteria;
 import com.forever.young.entity.BrandProductPaging;
 import com.forever.young.entity.Product;
+import com.forever.young.service.BrandBannerService;
 import com.forever.young.service.BrandRegistService;
 import com.forever.young.service.ProductService;
 
@@ -36,6 +38,9 @@ public class BrandRegistController {
 	
 	@Autowired 
 	private ProductService productService;
+	
+	@Autowired
+	private BrandBannerService banService;
 	
 	private final Logger log = LoggerFactory.getLogger(CustomerController.class);
 	
@@ -188,5 +193,28 @@ public class BrandRegistController {
 		
 		return "del" + product_no; 
 		
+	}
+	
+	//브랜드관 배너, 브랜드 설명페이지
+	@GetMapping("/mypage_brand/banner_page")
+	public String banner_page(HttpSession session, Model model) {
+		//brandImgCk 로 session 으로 imgfilename 구해서 보내주기
+		int brand_num = (int)session.getAttribute("check");
+		BrandBanner ban = banService.getBan(brand_num);
+		
+		model.addAttribute("banner", ban);
+		return "member/mypage_brand/banner_page";
+	}
+	
+	@PostMapping("/mypage_brand/banner_page")
+	public String banner_page(HttpSession session, BrandBanner ban) {
+		int brand = (int)session.getAttribute("check");
+		ban.setBrand_num(brand);
+		if(banService.getBan(brand) != null) {
+			banService.upBan(ban);
+		} else {
+			banService.banInsert(ban);
+		}
+		return "member/mypage_brand/mypage_brand_main";
 	}
 }
