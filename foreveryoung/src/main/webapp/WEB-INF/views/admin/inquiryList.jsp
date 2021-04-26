@@ -7,6 +7,33 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	.red{
+		color:red;
+	}
+	
+	.blue{
+		color:#87cefa;
+	}
+	a:hover{text-decoration: none;}
+
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script>
+	$(document).ready(function(){
+		
+		// 페이징
+		var pagingForm = $("#pagingForm");
+		$(".paginate_button a").on("click", function(e) {
+			e.preventDefault();
+			pagingForm.find("input[name='pageNum']").val($(this).attr("href"));
+			pagingForm.submit();
+		});
+	})
+
+</script> 
+
 </head>
 <body>
 
@@ -69,10 +96,14 @@
 										<td align="center">${inquiryList.user_id}</td>
 										<td align="center">${inquiryList.inquiry_regDate}</td>
 										<td align="center">
-											<a href="/admin/inquiryDetail?inquiry_no=${inquiryList.inquiry_no}">
+											<a href="/admin/inquiryDetail?inquiry_no=${inquiryList.inquiry_no}" style="text-decoration: none;">
 												<c:choose>
-													<c:when test="${ inquiryList.reply_no == 0}">답변대기</c:when>
-													<c:otherwise>답변완료</c:otherwise>
+													<c:when test="${ inquiryList.reply_no == 0}">
+														<p class="red">답변대기</p>
+													</c:when>
+													<c:otherwise>
+														<p class="blue">답변완료</p>
+													</c:otherwise>
 												</c:choose>
 											</a> 
 										</td>
@@ -82,13 +113,43 @@
 						</c:choose>					
 					</tbody>
 				
-				
-
-			
-
 				</table>
 			</div>
 		</div><!--/.row-->
+		
+		
+		<div class="text-center">
+		<ul class="pagination">
+			<c:if test="${page.prev}">
+				<li class="paginate_button previous">
+					<a href="${page.startPage-1}">Prev</a>
+				</li>
+			</c:if>
+			
+			<c:forEach var="num" begin="${page.startPage}" end="${page.endPage}">
+				<li class="paginate_button ${page.pageNum == num ? "active":""} ">
+					<a href="${num}">${num}</a>
+				</li>
+			</c:forEach>
+			
+			<c:if test="${page.next}">
+				<li class="paginate_button next">
+					<a href="${page.endPage+1}">Next</a>
+				</li>
+			</c:if>
+		</ul>
+		
+	</div>
+	<form id='pagingForm' action="/admin/inquiryList" method="get">
+	<input type="hidden" name="inquiry" value="${inquiry}">
+	   	<input type="hidden" name='pageNum' value='${page.pageNum}'>
+	   	<input type="hidden" name='amount' value='${page.amount}'>
+   </form>			
+		
+		
+		
+		
+		
 		
 		<div class="row">
 			<div class="col-lg-12">

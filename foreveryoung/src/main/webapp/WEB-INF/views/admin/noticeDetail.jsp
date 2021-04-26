@@ -25,6 +25,11 @@
 			formObj.submit();				 
 		})
 		
+		$("#notice_list").click(function(){
+			self.location ="/admin/noticeList"
+		})
+
+		
 	})
 
 </script> 
@@ -61,24 +66,32 @@
 		</div><!--/.row-->
 		
 		<div class="row">
-			<div class="col-lg-12">
+			<div class="col-lg-1">
+			</div>
+			<div class="col-lg-10 panel panel-default btn-margins">
+			
+				<div class="panel-heading">공지사항 정보</div>
 				<form:form modelAttribute="noticeDetail">
-						<table border="1">
+						<table class="table panel-body">
 							<tr>
-								<th align="center" width="100">공지글 번호</th>
-								<td><form:input path="notice_no" readonly="true"/></td>
+								<th align="center">공지글 번호</th>
+								<td><form:hidden path="notice_no" readonly="true"/>${noticeDetail.notice_no}</td>
 							</tr>
 							<tr>
-								<th align="center" width="100">분류</th>
-								<td><form:input path="notice_type" readonly="true"/></td>
+								<th align="center">분류</th>
+								<td>${noticeDetail.notice_type}</td>
 							</tr>
 							<tr>
-								<th align="center" width="100">제목</th>
-								<td><form:input path="notice_title" readonly="true"/></td>
+								<th align="center">제목</th>
+								<td>${noticeDetail.notice_title}</td>
 							</tr>
 							<tr>
-								<th align="center" width="100">공지글 내용</th>
-								<td><form:input path="notice_content" readonly="true"/></td>			
+								<th>공지글 내용</th>
+								<td>
+									<textarea cols="50" rows="20" class="form-control"  readonly="readonly"  style="resize: vertical;">
+										${noticeDetail.notice_content}
+									</textarea>
+								</td>			
 							</tr>
 						</table>			
 					<form:hidden path="admin_no"/>
@@ -88,9 +101,12 @@
 		
 		
 		<div class="row">
-			<div class="col-lg-12">
-				<button id="notice_modify">수정</button>
-				<button id="notice_delete">삭제</button>
+			<div class="col-lg-5"></div>
+			
+			<div class="col-lg-5">
+				<button id="notice_modify" class="btn btn-md btn-info">수정</button>
+				<button id="notice_delete"  class="btn btn-md btn-danger">삭제</button>
+				<button id="notice_list"  class="btn btn-md btn-default">목록으로</button>
 			</div>
 		</div><!--/.row-->
 		

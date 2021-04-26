@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
-    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,15 +20,15 @@
 		$("#event_register").click(function(){
 			self.location = "/admin/eventRegister"
 		})
-		$("#event_modify").click(function(){
-			//self.location = "/admin/"
-		})
-		$("#event_delete").click(function(){
-			//self.location = "/admin/"
-		})
 
 		
-		
+		// 페이징
+		var pagingForm = $("#pagingForm");
+		$(".paginate_button a").on("click", function(e) {
+			e.preventDefault();
+			pagingForm.find("input[name='pageNum']").val($(this).attr("href"));
+			pagingForm.submit();
+		});		
 		
 		
 	})
@@ -67,7 +68,7 @@
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<input type="button" id="event_register" value="이벤트 등록">
+				<input type="button" id="event_register" class="btn btn-md btn-info" value="이벤트 등록">
 			</div>
 		</div><!--/.row-->
 		
@@ -106,7 +107,20 @@
 										</td>
 										<td align="center">${eventList.event_discount}%</td>						
 										<td align="center">${eventList.event_target}</td>
-										<td align="center">진행상황</td>
+										<td align="center">
+											<jsp:useBean id="now" class="java.util.Date" />
+											<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+											<c:choose>
+												<c:when test="${eventList.event_start < today and today < eventList.event_end}">
+													<strong style="color:red;">진행중</strong>
+												</c:when>
+												<c:otherwise>
+													<strong>이벤트 종료</strong>
+												</c:otherwise>											
+											</c:choose>
+
+										
+										</td>
 										<td align="center">
 											<a id="event_detail" href="/admin/eventDetail?event_no=${eventList.event_no}">상세보기</a>
 										</td>
@@ -122,9 +136,40 @@
 			</div>
 		</div><!--/.row-->
 		
+		
+	<div class="text-center">
+		<ul class="pagination">
+			<c:if test="${page.prev}">
+				<li class="paginate_button previous">
+					<a href="${page.startPage-1}">Prev</a>
+				</li>
+			</c:if>
+			
+			<c:forEach var="num" begin="${page.startPage}" end="${page.endPage}">
+				<li class="paginate_button ${page.pageNum == num ? "active":""} ">
+					<a href="${num}">${num}</a>
+				</li>
+			</c:forEach>
+			
+			<c:if test="${page.next}">
+				<li class="paginate_button next">
+					<a href="${page.endPage+1}">Next</a>
+				</li>
+			</c:if>
+		</ul>
+		
+	</div>
+	<form id='pagingForm' action="/admin/eventList" method="get">
+	<input type="hidden" name="event" value="${event}">
+	   	<input type="hidden" name='pageNum' value='${page.pageNum}'>
+	   	<input type="hidden" name='amount' value='${page.amount}'>
+   </form>			
+				
+		
 		<div class="row">
 			<div class="col-lg-12">
-			
+
+
 			</div>
 		</div><!--/.row-->
 

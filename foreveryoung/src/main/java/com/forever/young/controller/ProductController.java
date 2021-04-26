@@ -3,6 +3,8 @@ package com.forever.young.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.forever.young.entity.Brand;
+import com.forever.young.entity.BrandBanner;
 import com.forever.young.entity.Paging;
 import com.forever.young.entity.Product;
+import com.forever.young.service.BrandBannerService;
 import com.forever.young.service.BrandRegistService;
 import com.forever.young.service.ProductService;
 
@@ -35,21 +39,28 @@ public class ProductController {
 	@Autowired
 	private BrandRegistService brandService;
 	
+	@Autowired
+	private BrandBannerService bannerService;
+	
 	private final Logger log = LoggerFactory.getLogger(ProductController.class);
 	
 	@GetMapping("productWrite")
-	public String getproductWrite(Model model) {
+	public String getproductWrite(HttpSession session, Model model) throws Exception {
 		log.info("getProductWrite()");
 		List<Brand> brand = service.getBrand();
 		
 		model.addAttribute("brand", brand);
 		
+		Brand brandName = brandService.findNum((int)session.getAttribute("check"));
+
+		model.addAttribute("brand_info", brandName);
+
 		return "product/productWrite";
 		
 	}
 	
 	@PostMapping("productWrite")
-	public String postProductWrite(@ModelAttribute Product product) throws Exception {
+	public String postProductWrite(@ModelAttribute Product product, Model model) throws Exception {
 		log.info("postProductWrite()");
 		
 		System.out.println(product.toString());
@@ -70,18 +81,19 @@ public class ProductController {
 	
 	
 	@GetMapping("categoryList")
-	public String categoryList(@RequestParam String category, Paging paging, Model model) throws Exception {
+	public String categoryList(@RequestParam String category, Model model) throws Exception {
 		int total = service.getCount(category);
-		model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+		Paging paging = new Paging(1, 20, total);
 		
-		List<Product> list = service.productList(category);
+		model.addAttribute("page", paging);
+		
+		List<Product> list = service.categoryListWithPaging(category, paging);
 		List<Brand> brand = service.getBrand();
 		List<Product> best = service.getBest(category);
-		
 		model.addAttribute("brand", brand);
-		model.addAttribute("category", category);
 		model.addAttribute("list", list);
 		model.addAttribute("best", best);
+		model.addAttribute("category", category);
 		String cName = null;
 		switch(category) {
 		case "skincare" :
@@ -113,23 +125,38 @@ public class ProductController {
 	// 검색하기
 	@PostMapping("search")
 	public String search(@RequestBody Map<String, Object> searchData, Model model) throws Exception {
+		int total = service.productListSearch(searchData);
+		Paging paging = new Paging();
+		@SuppressWarnings("unchecked")
+		Map<String, Object> map = (Map<String, Object>) searchData.get("paging");
+		paging.setAmount(Integer.parseInt((String) map.get("amount")));
+		paging.setPageNum(Integer.parseInt((String)map.get("pageNum")));
 		
-		List<Product> list = service.productListSearch(searchData);
+		List<Product> list = service.productListSearchWithPaging(searchData);
+		
+		model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
 		model.addAttribute("list", list);
-	
+		
 		return "/product/search";
 	}
 
 	// 브랜드 리스트
 	@GetMapping("brandList")
-	public String brandList(@RequestParam String brand, Paging paging, Model model) throws Exception {
-		int total = service.getCountByBrand(Integer.parseInt(brand));
-		model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+	public String brandList(@RequestParam String brand, Model model) throws Exception {
+		int brand_num = Integer.parseInt(brand);
+		int total = service.getCountByBrand(brand_num);
+		Paging paging = new Paging(1, 20, total);
 		
-		List<Product> list = service.brandList(Integer.parseInt(brand));
+		model.addAttribute("page", paging);
 		
-		model.addAttribute("brand", Integer.parseInt(brand));
+		List<Product> list = service.brandListWithPaging(brand_num, paging);
+		List<Product> best = service.getBrandBest(brand_num);
+		Brand getBrand = brandService.findNum(brand_num);
+		BrandBanner banner = bannerService.getBan(brand_num);
+		model.addAttribute("brand", getBrand);
 		model.addAttribute("list", list);
+		model.addAttribute("best", best);
+		model.addAttribute("banner", banner);
 		
 		return "product/brandList";
 	}
@@ -137,11 +164,17 @@ public class ProductController {
 	// 검색하기
 	@PostMapping("searchBrandList")
 	public String searchBrandList(@RequestBody Map<String, Object> searchData, Model model) throws Exception {
+		int total = service.brandListSearch(searchData);
+		Paging paging = new Paging();
+		@SuppressWarnings("unchecked")
+		Map<String, Object> map = (Map<String, Object>) searchData.get("paging");
+		paging.setAmount(Integer.parseInt((String) map.get("amount")));
+		paging.setPageNum(Integer.parseInt((String)map.get("pageNum")));
 		
-		List<Product> list = service.brandListSearch(searchData);
+		List<Product> list = service.brandListSearchWithPaging(searchData);
 		model.addAttribute("list", list);
-
+		model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+		
 		return "/product/search";
 	}
-	
-} 
+}

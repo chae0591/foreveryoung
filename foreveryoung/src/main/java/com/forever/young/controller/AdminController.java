@@ -17,6 +17,7 @@ import com.forever.young.entity.Admin;
 import com.forever.young.entity.Event;
 import com.forever.young.entity.InquiryVO;
 import com.forever.young.entity.Notice;
+import com.forever.young.entity.Paging;
 import com.forever.young.service.AdminService;
 
 import lombok.extern.java.Log;
@@ -40,13 +41,14 @@ public class AdminController {
 	
 	//대시보드 화면
 	@GetMapping("/dashBoard")
-	public String getDashBoard(Model model1,Model model2, Model model3) throws Exception{
+	public String getDashBoard(Model model) throws Exception{
 		log.info("getDashBoard()");
 		
 		
-		model1.addAttribute("customerList", service.customerList());
-		model2.addAttribute("brandList", service.brandList());
-		model3.addAttribute("productList", service.productList());
+		model.addAttribute("customerList", service.customerList());
+		model.addAttribute("brandList", service.brandList());
+		model.addAttribute("productList", service.productList());
+		model.addAttribute("adminList", service.adminList());
 		
 		return "admin/dashBoard";
 	}
@@ -106,61 +108,93 @@ public class AdminController {
 	
 	//관리자리스트
 	@GetMapping("/adminList")
-	public void adminList(Model model) throws Exception{
+	public String adminList(Paging paging, Model model) throws Exception{
 		log.info("adminList()");
 		
+		int total = service.getCountByAdmin();
+		
+		//model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+		model.addAttribute("admin", total);
 		model.addAttribute("adminList", service.adminList());
 		
+		return "admin/adminList";
 	}
 	
 	//브랜드리스트
 	@GetMapping("/brandList")
-	public void brandList(Model model) throws Exception{
+	public String brandList(Paging paging, Model model) throws Exception{
 		log.info("brandList()");
 		
+		int total = service.getCountByBrand();
+		
+		//model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+		model.addAttribute("brand", total);
 		model.addAttribute("brandList", service.brandList());
 		
+		return "admin/brandList";
 	}
 	
 	//고객리스트
 	@GetMapping("/customerList")
-	public void customerList(Model model) throws Exception{
+	public void customerList(Paging paging, Model model) throws Exception{
 		log.info("customerList()");
 		
+		int total = service.getCountByCustomer();
+		
+		//model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+		model.addAttribute("customer", total);
 		model.addAttribute("customerList", service.customerList());
 		
 	}
 	
 	//상품리스트
 	@GetMapping("/productList")
-	public void productList(Model model) throws Exception{
+	public void productList(Paging paging, Model model) throws Exception{
 		log.info("productList()");
 		
+		int total = service.getCountByProduct();
+		
+		//model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+		model.addAttribute("product", total);
 		model.addAttribute("productList", service.productList());
+		model.addAttribute("brandList", service.brandList());
+		model.addAttribute("eventList", service.eventList());
 	}
 	
 	
 	//이벤트리스트
 	@GetMapping("/eventList")
-	public void eventList(Model model) throws Exception{
+	public void eventList(Paging paging, Model model) throws Exception{
 		log.info("eventList()");
 		
+		int total = service.getCountByEvent();
+		
+		//model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+		model.addAttribute("event", total);
 		model.addAttribute("eventList", service.eventList());
 	}
 	
 	//공지사항리스트
 	@GetMapping("/noticeList")
-	public void noticeList(Model model) throws Exception{
+	public void noticeList(Paging paging, Model model) throws Exception{
 		log.info("noticeList()");
 		
+		int total = service.getCountByNotice();
+		
+		//model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+		model.addAttribute("notice", total);
 		model.addAttribute("noticeList", service.noticeList());
 	}
 	
 	//1:1문의 리스트
 	@GetMapping("/inquiryList")
-	public void inquiryList(Model model) throws Exception{
+	public void inquiryList(Paging paging, Model model) throws Exception{
 		log.info("inquiryList()");
+
+		int total = service.getCountByInquiry();
 		
+		//model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+		model.addAttribute("inquiry", total);
 		model.addAttribute("inquiryList", service.inquiryList());
 	}
 	
@@ -234,6 +268,7 @@ public class AdminController {
 		log.info("getNoticeModify()");
 		
 		model.addAttribute("noticeModify" , service.noticeDetail(notice_no));
+		model.addAttribute("noticeDetail",service.noticeDetail(notice_no));
 	}
 	
 	//공지사항 수정POST
@@ -272,20 +307,6 @@ public class AdminController {
 		return new RedirectView("inquiryList");
 		
 	}
-	
-	//1:1문의 답변완료로 상태변경
-//	@PostMapping("/inquiryStatusComplete")
-//	public RedirectView postInquiryStatusComplete(InquiryVO inquiryVO, Model model) throws Exception{
-//		log.info("postInquiryStatusComplete()");
-//		
-//		service.inquiryStatusComplete(inquiryVO);
-//		
-//		
-//		model.addAttribute("inquiryStatusComplete" , "1:1문의 답변완료");
-//		
-//		return new RedirectView("inquiryList");
-//		
-//	}
 	
 	//관리자 상세보기GET
 	@GetMapping("/adminDetail")
@@ -370,6 +391,42 @@ public class AdminController {
 		
 		return "redirect:/admin/eventList";
 	}
+	
+	//1:1문의 답변 수정GET
+	@GetMapping("/replyModify")
+	public void getReplyModify(int inquiry_no, Model model,Model model1) throws Exception{
+		log.info("getReplyModify()");
+		
+		model.addAttribute("replyModify", service.inquiryDetail(inquiry_no));
+		model1.addAttribute("inquiryDetail", service.inquiryDetail(inquiry_no));
+		
+	}
+	
+	//1:1문의 답변 수정POST
+	@PostMapping("/replyModify")
+	public RedirectView postReplyModify(InquiryVO inquiryVO, Model model) throws Exception{
+		log.info("postreplyModify()");
+		
+		service.replyModify(inquiryVO);
+		
+		model.addAttribute("replyModify", "1:1문의 답변 수정 완료");
+		
+		return new RedirectView("inquiryList");
+		
+	}
+	
+	//1:1문의 답변 삭제
+	@PostMapping("/replyDelete")
+	public RedirectView  replyDelete(int inquiry_no, Model model) throws Exception{
+		log.info("replyDelete()");
+		
+		service.replyDelete(inquiry_no);
+		
+		model.addAttribute("inquiryDelete" , "1:1문의 답변 삭제");
+		
+		return new RedirectView("inquiryList");
+	}
+	
 	
 	
 	

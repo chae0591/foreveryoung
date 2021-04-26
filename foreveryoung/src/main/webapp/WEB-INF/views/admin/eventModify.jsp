@@ -18,7 +18,7 @@ $(document).ready(function(){
 		formObj.submit();
 	})
 	
-	$("event_list").click(function(){
+	$("#event_list").click(function(){
 		self.location = "/admin/eventList"
 	})
 	
@@ -54,44 +54,51 @@ $(document).ready(function(){
 		</div><!--/.row-->	
 	
 		<div class="row">
-			<div class="col-lg-12">
+			<div class="col-lg-1">
+			</div>
+			<div class="col-lg-10 panel panel-default btn-margins">
+				<div class="panel-heading"></div>
 				<form:form modelAttribute="eventModify" action="eventModify">
 				<form:hidden path="event_no"/>
-					<table>
+					<table class="table panel-body">
 							<tr>
-								<th align="center" width="100">이벤트 번호</th>
+								<th align="center">이벤트 번호</th>
 								<td>${eventDetail.event_no}</td>
 							</tr>						
 							<tr>
-								<th align="center" width="100">이벤트명</th>
-								<td><form:input path="event_name" /></td>
+								<th align="center">이벤트명</th>
+								<td><form:input path="event_name" class="form-control"/></td>
 							</tr>
 							<tr>
-								<th align="center" width="100">기간</th>
-								<td><form:input path="event_start" />
-								~<form:input path="event_end" /></td>
+								<th align="center">기간</th>
+								<td>
+									<div  class="form-group col-lg-12">
+										<div class="col-lg-5"><form:input type="date" path="event_start"  class="form-control" /></div>
+										<div class="col-lg-1">~</div>
+										<div class="col-lg-5"><form:input type="date" path="event_end"  class="form-control" /></div>
+									</div>
+								</td>
 							</tr>
 							<tr>
-								<th align="center" width="100">할인율</th>
-								<td><form:input path="event_discount" /></td>			
+								<th align="center">할인율</th>
+								<td><form:input path="event_discount" class="form-control"/></td>			
 							</tr>
 							<tr>
-								<th align="center" width="100">이벤트 적용대상</th>
-								<td><form:input path="event_target" /></td>			
+								<th align="center">이벤트 적용대상</th>
+								<td><form:input path="event_target" class="form-control"/></td>			
 							</tr>
 					</table>
 				</form:form>
-				
-				<div>
-					<button type="submit" id="event_complete">수정 완료</button>
-					<button type="submit" id="event_list">이벤트리스트 보기</button>
-				</div>				
+							
 			</div>
 		</div><!--/.row-->
 		
 		<div class="row">
-			<div class="col-lg-12">
-			
+		
+			<div class="col-lg-5"></div>
+			<div class="col-lg-5">
+				<button id="event_complete" class="btn btn-md btn-info">수정 완료</button>
+				<button  id="event_list" class="btn btn-md btn-default">목록으로</button>
 			</div>
 		</div><!--/.row-->
 	</div>	<!--/.main-->	

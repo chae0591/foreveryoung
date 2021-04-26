@@ -8,6 +8,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member/css/bootstrap.css">
+<style>
+.pro-img{
+	height: 50px;
+	width: 50px;
+}
+</style>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="${pageContext.request.contextPath}/css/member/js/bootstrap.js"></script>
 <script>
@@ -93,9 +99,9 @@
 			var sum_price = 0;
 			checkCountval = $('input[class="cartitemcheck"]:checked').length;
 			$('input[class="cartitemcheck"]:checked').each(function(){
-				var price_temp = $(this).parent().next().children(".pp").children().text();
+				var price_temp = $(this).parent().next().next().children(".pp").children().text();
 				var product_price = stringNumberToInt(price_temp);
-				var cart_count = $(this).parent().next().children(".cc").children().text();
+				var cart_count = $(this).parent().next().next().children(".cc").children().text();
 				sum_price += product_price * cart_count;
 			});
 			total_price = sum_price - sale_price;
@@ -141,12 +147,23 @@
 									<th></th>
 									<th></th>
 									<th></th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach var="cartItem" items="${userCartList}">
 									<tr>
 										<td><input type="checkbox" class="cartitemcheck" name="cartList" value="${cartItem.cart_no}"></td>
+										<c:choose>
+											<c:when test="${empty cartItem.image_save_name}">
+												<td><img src="https://dummyimage.com/50x50/000/fff&text=foreveryoung"></td>
+											</c:when>
+											<c:otherwise>
+												<td>
+												<img class="pro-img img img-responsive" src="/viewImg?fileName=${cartItem.image_save_name}&imageType=${cartItem.image_type}">
+												</td>
+											</c:otherwise>
+										</c:choose>
 										<td colspan="5">
 											<span>${cartItem.brand_name}</span>
 											<span>${cartItem.product_name}</span>

@@ -9,38 +9,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- 사이드 매뉴 -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
 
 <!-- Common Design Link -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/product/productCommon.css">
-
-<!--  DatePicker-->
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-
-<!-- 부트스트랩 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/product/css/bootstrap.css">
-
 <title>판매상품 관리 페이지</title>
 <style>
 	nav, section {
 		padding:10px;
-		
 	}
-
-
 	section {
 		width:1450px;
 		float:right; 
-	 
 	}
-	
-	
-	
 	.menu a:hover {
 	    background:#e9d319;
 	    color: #000;
@@ -49,244 +31,249 @@
 	    background:#e9d319;
 	    color: #000;
 	}
-
 	.title{
-		padding-top:50px; 
+		padding-top:30px; 
 		padding-left:50px;
 	}
 
-	/* placeholder 색상  */
-	input:-ms-input-placeholder {color: #a8a8a8; }
-	input:-webkit-input-placeholder {color: #a8a8a8; }
-	input:-moz-placeholder {color: #a8a8a8; }
 	
-	.searchBar{
-		height:40px;
-		width:400px;
-		border: 1px solid #1b5ac2;
-		background: #ffffff;
-		
-		margin:0 auto;
-	}
-
-	.searchInput{
-		font-size: 16px;
-		width:325px;
-		padding:7px;
-		border: 0px;
-		outline: none;
-		float:left; 
-	}
+	/* 사이드 바 디자인  */
 	
-	.searchButton{
-		width:50px;
-		height:100%;
-		border: 0px;
-		background: #1b5ac2;
-		outline: none;
-		float: right;
-		color: #ffffff;
-	}
-	
-	
-	.calendarForm{
-		display:flex; 
-		flex-direction: row;
-		
-	   display: flex;
-	  justify-content: center;	
-	}
-	
-	.calendarInput{
-		display: block;
-	}
-	
-	.calendarLabel{
-		display: block;
-	}
-	
-	
-	.productImg{
-		width:150px; 
-		height:100px; 
-		/* border-radius: 8px; */ 
-		
-	}
-	
-	
-	.search{
-		display: inline-block; 
-		margin:10px;
-	}
+	/* 사이드바 래퍼 스타일 */
+  #page-wrapper {
+    padding-left: 250px;
+  }
+  
+  #sidebar-wrapper {
+    position: fixed;
+    width: 250px;
+    height: 100%;
+    margin-left: -250px;
+    background: #000;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  #page-content-wrapper {
+    width: 100%;
+    padding: 20px;
+  }
+  /* 사이드바 스타일 */
+  
+  .sidebar-nav {
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .sidebar-nav li {
+    text-indent: 1.5em;
+    line-height: 2.8em;
+  }
+  
+  .sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999;
+  }
+  
+  .sidebar-nav li a:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .sidebar-nav > .sidebar-brand {
+    font-size: 1.3em;
+    line-height: 3em;
+  }
+  
+  .active {
+  	background-color: #666;
+  }
+  /* 서치바  */
+  #searchinput { 
+  	width: 200px; 
+  } 
+  #searchclear { 
+	position: absolute;
+	right: 5px;
+	top: 0;
+	bottom: 0;
+	height: 14px;
+	margin: auto;
+	font-size: 14px; 
+	cursor: pointer; 
+	color: #ccc; 
+ }
+ 
+ .searchBar{
+ 	display: flex;
+  	justify-content: center;
+ }
 
 </style>
 
 <script>
-$(".menu a").click(function() {
-    $(".menu a.active").removeClass("active");
-    $(this).addClass("active");
-})
+	$(document).ready(function(){
+		
+		$(".delete_btn").click(function(){
+			if(confirm("정말로 삭제하시겠습니까?")) {
+				var product_no = $(this).prev().text(); 
+				var del_row = $(this).parent().parent(); 
+				
+				$.ajax({
+					url : "../product_item_del",
+					type : "get",
+					data : {
+						product_no : product_no 
+					},
+					success : function(resp) {
+						del_row.remove();
+					}
+				});
+			}
+		});
+		
+		$("#searchclear").click(function(){ $("#searchinput").val(''); });	
+		
+		/* $(document).on('click', '#btnSearch', function(e){
+			e.preventDefault();
+			var url = "${pageContext.request.contextPath}/member/mypage_brand/mypage_brand_product";
+			url = url + "&keyword=" + $('#keyword').val();
+			location.href = url;
+			console.log(url);
+		});	 */
+	});
+	
+	
 
-
-/* DatePicker */
-   $(document).ready(function () {
-            $.datepicker.setDefaults($.datepicker.regional['ko']); 
-            $( "#startDate" ).datepicker({
-                 changeMonth: true, 
-                 changeYear: true,
-                 nextText: '다음 달',
-                 prevText: '이전 달', 
-                 dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
-                 dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], 
-                 monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                 monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                 dateFormat: "yymmdd",
-                 maxDate: 0,                       // 선택할수있는 최소날짜, ( 0 : 오늘 이후 날짜 선택 불가)
-                 onClose: function( selectedDate ) {    
-                      //시작일(startDate) datepicker가 닫힐때
-                      //종료일(endDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
-                     $("#endDate").datepicker( "option", "minDate", selectedDate );
-                 }    
- 
-            });
-            $( "#endDate" ).datepicker({
-                 changeMonth: true, 
-                 changeYear: true,
-                 nextText: '다음 달',
-                 prevText: '이전 달', 
-                 dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
-                 dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'], 
-                 monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                 monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                 dateFormat: "yymmdd",
-                 maxDate: 0,                       // 선택할수있는 최대날짜, ( 0 : 오늘 이후 날짜 선택 불가)
-                 onClose: function( selectedDate ) {    
-                     // 종료일(endDate) datepicker가 닫힐때
-                     // 시작일(startDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 시작일로 지정
-                     $("#startDate").datepicker( "option", "maxDate", selectedDate );
-                 }    
- 
-            });    
-    });
 </script>
 </head>
 <body>
-	<!-- <div id="left"> -->
-		<!-- Sidebar/menu -->
-		<nav class="menu w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
-		  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
-		  <div class="w3-container">
-		    <h3 class="w3-padding-64"><b>포에버영<br>판메자 페이지</b></h3>
-		  </div>
-		  
-		  <div class="w3-bar-block">
-		    <a href="mypage_brand_main" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">판매자 메인</a> 
-		    <a href="mypage_brand_buyer" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">구매자 관리</a> 
-		    <a href="mypage_brand_product" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">판매 상품관리</a> 
-		    <a href="mypage_brand_order" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">주문 관리</a> 
-		    <a href="mypage_brand_chart" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">통계</a> 
-		  </div>
-		</nav>
 
-<section>
-	<div class="center title">
-		<h2>판매상품 관리 페이지</h2>
-	</div>
-	
-	
-	
-	<div class="search center">
-		<!--Date Picker   -->
-		<div class="calendarForm">
-			<label class="calendarLabel">날짜입력</label>
-			<input class="calendarInput" type="text" id="startDate">
-			<label class="calendarLabel">부터</label> 
-			<input class="calendarInput" type="text" id="endDate">
-			<label class="calendarLabel">까지</label> 
-		</div><br>
-	
-		<!-- 검색창 -->
-		<div class="center searchBar">
-			<input class="searchInput" type="text" placeholder="상품명을 입력해주세요">
-			<button class="searchButton">검색</button>
+ <div id="page-wrapper">
+  <!-- 사이드바 -->
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <a href="#">포에버영 판매자 페이지</a>
+      </li>
+      <li><a href="mypage_brand_main"> 판매자 메인</a></li>
+      <li><a href="mypage_brand_buyer">구매자 관리</a></li>
+      <li class="active"><a href="mypage_brand_product">판매상품 관리</a></li>
+      <li><a href="mypage_brand_order">주문 관리</a></li>
+      <li><a href="mypage_brand_chart">통계</a> </li>
+    </ul>
+  </div>
+  <!-- /사이드바 -->
+
+  <!-- 본문 -->
+  <div id="page-content-wrapper">
+    <div class="container-fluid">
+    		<!-- 상품 등록 버튼  -->
+		<div  style="float:right">
+			 <a href="${pageContext.request.contextPath}/product/productWrite">
+		 		<button type="button" class="btn btn-secondary" style="color:black">상품 등록 하러가기</button>
+			 </a>
 		</div>
-	</div><br>
-	
-	
-		<table class="table table-hover m-2" >
-			<thead>
-				<tr>
-					<th scope="col" class="text-center">상품 번호</th>
-					<th scope="col" class="text-center">이미지</th>
-					<th scope="col" class="text-center">상품 카테고리</th>
-					<th scope="col" class="text-center">상품 등록자</th>
-					<th scope="col" class="text-center">상품 이름</th>
-					<th scope="col" class="text-center">상품 가격</th>
-					<th scope="col" class="text-center">상품 재고</th>
-					<th scope="col" class="text-center">상품 등록 날짜</th>
-					<th scope="col" class="text-center">수정 / 삭제</th>
-				</tr>
-			</thead>
+    	
+    	
+ 		<!--본문 내용-->
+        <div style="text-align:center;">
+			<h2> <c:out value="${brand_info.brand_name}" />님의 판매상품 관리 페이지</h2>
+		</div>
+		<br>
 		
-			<tbody>
+		<!-- 서치바 -->
+		<form name="form" method="get" action="../mypage_brand/mypage_brand_product">
+			<select name="search_option" style="float:left;">
+		        <option value="product_name"
+				<c:if test="${map.search_option == 'product_name'}">selected</c:if>
+				   >상품 이름</option>
+		   </select>
+			<div class="btn-group" style="float:left;">
+				<div class="searchBar">
+					<input id="searchinput" type="search" class="form-control" placeholder="상품 이름을 입력하시오" name="keyword" value="${map.keyword}">
+					<span id="searchclear" class="glyphicon glyphicon-remove-circle"></span>
+				</div>
+		 	</div>
+	 		<div style="float:left; width: 33%;">
+					<button type="submit" class="btn btn-sm btn-secondary" style="color:black">검색</button>
+			</div>
+		</form>
+		<br>
+		
+			<table class="table" >
+				<thead>
+					<tr>
+						<th scope="col" class="text-center">상품 번호</th>
+						<th scope="col" class="text-center">이미지</th>
+						<th scope="col" class="text-center">상품 카테고리</th>
+						<th scope="col" class="text-center">상품 등록자</th>
+						<th scope="col" class="text-center">상품 이름</th>
+						<th scope="col" class="text-center">상품 가격</th>
+						<th scope="col" class="text-center">상품 재고</th>
+						<th scope="col" class="text-center">상품 등록 날짜</th>
+						<th scope="col" class="text-center">상품 삭제</th>
+					</tr>
+				</thead>
 			
-				<c:forEach var="lists" items="${list}">
-				<tr>
-					<td class="col-md-1">
-						<c:out value="${lists.product_no}" />
-					</td>
-					<td>
-						<img class="productImg" src="/viewImg?fileName=${lists.image_save_name}&imageType=${lists.image_type}">
-					</td>
-					<td class="col-md-1">
-						<c:out value="${lists.product_category}" />
-					</td>
-					<td class="col-md-1"> 
-						<c:out value="${brand_info.brand_name}" />
-					 </td>
-					<td class="col-md-1">
-						<c:out value="${lists.product_name}" />
-					</td>
-					<td class="col-md-1">
-						<label class="price"><fmt:formatNumber value="${lists.product_price}" pattern="###,###,###"/>원</label>
-					</td>
-					<td class="col-md-1">
-						<label class="stock"><fmt:formatNumber value="${lists.product_stock}" pattern="###,###,###"/>개</label>
-					</td>
-					<td class="col-md-1">
-						<c:out value="${lists.product_regDate}" />
-					</td>
-					<td class="col-md-1">
-						<div>
-							<button>수정하기</button>
-							<button>삭제하기</button>
-						</div>
-					<td>	
-				<tr>
-				</c:forEach>
-			</tbody>
-		</table>
-</section>
-	
-	<%-- 
-		<a class="detail" href="#">
-						
-								<label></label>
-								
-								<label><c:out value="${lists.product_category}" /></label>
-								<label><c:out value="${lists.brand_name}"/></label>
-							<label><c:out value="${lists.product_name}" /></label>
-							<label class="price"><fmt:formatNumber value="${lists.product_price}" pattern="###,###,###"/>원</label>
-							<label class="stock"><fmt:formatNumber value="${lists.product_stock}" pattern="###,###,###"/>개</label>
-							<label><c:out value="${lists.product_regDate}" /></label>
-						</a>
-						<button>샹품 삭제</button>
-						<br>
-	
-	<div class="center" style="padding-top: 10px; ">
-	</div> --%>
-	
+				<tbody>
+				<c:forEach var="lists" items="${productList}">
+					<tr>
+						<td class="col-md-1">
+							<c:out value="${lists.product_no}" />
+						</td>
+						<td class="col-md-1">
+							<img class="productImg" src="/viewImg?fileName=${lists.image_save_name}&imageType=${lists.image_type}">
+						</td>
+						<td class="col-md-1">
+							<c:out value="${lists.product_category}" />
+						</td>
+						<td>
+							<c:out value="${brand_info.brand_name}" />
+						</td>
+						<td class="col-md-1">
+							<c:out value="${lists.product_name}" />
+						</td>
+						<td class="col-md-1">
+							<label class="price"><fmt:formatNumber value="${lists.product_price}"/>원</label>
+						</td>
+						<td class="col-md-1">
+							<label class="stock"><fmt:formatNumber value="${lists.product_stock}"/>개</label>
+						</td>
+						<td class="col-md-1">
+							<c:out value="${lists.product_regDate}" />
+						</td>
+						<td class="col-md-1">
+							<span style="display: none;" >${lists.product_no}</span>
+							<input type="button" class="delete_btn" value="삭제하기">
+						</td>
+					<tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			
+		<form>
 		
+		</form>
+		<ul class="paging center"  style="color:black;">
+		    <c:if test="${paging.prev}">
+		        <span><a href='<c:url value="/member/mypage_brand/mypage_brand_product?page=${paging.startPage-1}"/>'>이전</a></span>
+		    </c:if>
+		    <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
+		        <span><a href='<c:url value="/member/mypage_brand/mypage_brand_product?page=${num}"/>'>${num}</a></span>
+		    </c:forEach>
+		    <c:if test="${paging.next && paging.endPage>0}">
+		        <span><a href='<c:url value="/member/mypage_brand/mypage_brand_product?page=${paging.endPage+1}"/>'>다음</a></span>
+		    </c:if>
+		</ul>
+    </div>
+  </div>
+  <!-- /본문 -->
+</div>
+ 
 <!--  부트스트랩을 사용하기위한 js설정 입력 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/css/product/js/bootstrap.js"></script>
 </body>

@@ -1,10 +1,12 @@
 package com.forever.young.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
 import com.forever.young.entity.Brand;
+import com.forever.young.entity.BrandProductCriteria;
 import com.forever.young.entity.Product;
 
 @Repository
@@ -17,4 +19,14 @@ public interface BrandRegistRepository {
 
 	//브랜드 판매 상품 리스트 
 	public List<Product> getFindBrandProduct(Product product); 
+			
+	//브랜드 상품 삭제 및 수정 
+	public void update(Product product) throws Exception; 
+	public void deleteProduct(int product_no) throws Exception; 
+	
+	//페이징 
+	public List<Product> productList(Map<String, Object> map) throws Exception;
+	public int ProductListCnt() throws Exception; 
+	
+	
 }

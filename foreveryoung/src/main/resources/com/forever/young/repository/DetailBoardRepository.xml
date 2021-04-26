@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.forever.young.repository.DetailBoardRepository">
+	<!--product 리스트 -->
+	<select id="productList" resultType="Product">
+  		<![CDATA[
+  			  	select * from product
+  		]]>
+	</select>
+	
+	<select id="getDetail" resultType="Product">
+		select P.*,B.brand_num,E.event_no from Product P
+			left outer join brand B on P.product_brand = B.brand_num
+			left outer join event E on P.event_no = E.event_no
+			where P.product_no=#{product_no}
+	</select>
+	
+	<!-- review List -->
+	<select id="reviewList" resultType="Review">
+  		<![CDATA[
+  			  	select * from Review where product_no=#{product_no}
+  		]]>		
+	</select>
+	
+	<!-- review Register -->
+	<insert id="reviewRegister">
+		insert into review(product_no,user_num,brand_num,review_num,
+		review_title,review_content,review_date,review_score) values(
+		#{product_no},#{user_num},1,review_num.nextval,#{review_title},#{review_content},sysdate,#{review_score})
+	</insert>
+	
+	<select id="reviewRegisterAfter" resultType="int">
+       select review_num.currval from dual
+    </select>
+    
+	<!-- review 단일조회 -->
+	<select id="findbyreviewNo" resultType="Review" parameterType="int">
+		select * from review where review_num=#{review_num}
+	</select>
+    <!-- review 수정 -->
+    <select id="reviewModify" parameterType="Review">
+    	update review set
+    		review_title=#{review_title}, review_content=#{review_content}
+    			where review_num=#{review_num}
+    </select>
+    
+    <!--review delete  -->
+    <delete id="reviewDelete" parameterType="int">
+    	delete from review where review_num=#{review_num}
+    </delete>
+</mapper>

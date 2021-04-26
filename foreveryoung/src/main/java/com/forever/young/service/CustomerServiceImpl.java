@@ -1,10 +1,16 @@
 package com.forever.young.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.forever.young.entity.ChangePwVO;
 import com.forever.young.entity.Customer;
+import com.forever.young.entity.MyPgInquiryVO;
+import com.forever.young.entity.MyPgReviewVO;
+import com.forever.young.entity.MyPgVoteVO;
 import com.forever.young.repository.CustomerRepository;
 
 @Service
@@ -42,5 +48,40 @@ public class CustomerServiceImpl implements CustomerService{
 	@Override
 	public void editPw(ChangePwVO changePwVO) throws Exception {
 		repository.editPw(changePwVO);
+	}
+	
+	@Override
+	public List<MyPgInquiryVO> findNumInquiry(int user_num, int day_num) throws Exception {
+		return repository.findInquiry(user_num, day_num);
+	}
+	
+	@Override
+	public List<MyPgVoteVO> myVoteList(int user_num) throws Exception {
+		return repository.myVoteList(user_num);
+	}
+	
+	@Override
+	public List<MyPgInquiryVO> searchInquiryDate(Map<String, Object> param) throws Exception {
+		return repository.searchInquiryDate(param);
+	}
+	
+	@Override
+	public List<MyPgInquiryVO> searchInquiryTarget(Map<String, Object> param) throws Exception {
+		return repository.searchInquiryTarget(param);
+	}
+	
+	@Override
+	public List<MyPgReviewVO> myReviewList(int user_num, int day_num) throws Exception {
+		return repository.myReviewList(user_num, day_num);
+	}
+	
+	@Override
+	public List<MyPgReviewVO> searchReviewDate(Map<String, Object> param) throws Exception {
+		return repository.searchReviewDate(param);
+	}
+	
+	@Override
+	public List<MyPgReviewVO> searchReviewTarget(Map<String, Object> param) throws Exception {
+		return repository.searchReviewTarget(param);
 	}
 }

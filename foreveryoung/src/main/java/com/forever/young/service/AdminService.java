@@ -6,7 +6,6 @@ import com.forever.young.entity.Admin;
 import com.forever.young.entity.Brand;
 import com.forever.young.entity.Customer;
 import com.forever.young.entity.Event;
-import com.forever.young.entity.Inquiry;
 import com.forever.young.entity.InquiryVO;
 import com.forever.young.entity.Notice;
 import com.forever.young.entity.ProductVO;
@@ -18,18 +17,32 @@ public interface AdminService {
 	public void join(Admin amdin) throws Exception;
 	//관리자 리스트
 	public List<Admin> adminList() throws Exception;
+	//관리자 총 개수
+	public int getCountByAdmin();
 	//브랜드 리스트
 	public List<Brand> brandList() throws Exception;
+	//브랜드 총 개수
+	public int getCountByBrand();
 	//고객 리스트
 	public List<Customer> customerList() throws Exception;
+	//고객 총 개수
+	public int getCountByCustomer();
 	//상품 리스트
 	public List<ProductVO> productList() throws Exception;
+	//상품 총 개수
+	public int getCountByProduct();
 	//이벤트 리스트
 	public List<Event> eventList() throws Exception;
+	//이벤트 총 개수
+	public int getCountByEvent();
 	//공지사항 리스트
 	public List<Notice> noticeList() throws Exception;
+	//공지사항 총 개수
+	public int getCountByNotice();
 	//1:1문의 리스트
 	public List<InquiryVO> inquiryList() throws Exception;
+	//1:1문의 총 개수
+	public int getCountByInquiry();
 	//이벤트 등록
 	public void eventRegister(Event event) throws Exception;
 	//공지사항 등록
@@ -44,8 +57,6 @@ public interface AdminService {
  	public void noticeDelete(Integer notice_no) throws Exception;
  	//1:1문의 답변 등록
  	public void replyRegister(InquiryVO inquiryVO) throws Exception;
- 	//1:1문의 답변상태-답변완료(테이블 수정으로 삭제 예정)
-// 	public void inquiryStatusComplete(InquiryVO inquiryVO) throws Exception;
  	//관리자 상세보기
  	public Admin adminDetail(Integer admin_no) throws Exception;
  	//관리자 수정
@@ -58,16 +69,18 @@ public interface AdminService {
  	public void eventModify(Event event) throws Exception;
  	//이벤트 삭제	
  	public void eventDelete(Integer event_no) throws Exception;
+ 	//1:1문의 답변 수정
+ 	public void replyModify(InquiryVO inquiryVO) throws Exception;
+ 	//1:1문의 답변 삭제
+ 	public void replyDelete(Integer inquiry_no) throws Exception;
  	
  	//상품 통합검색
  	//상품 이벤트 적용
- 	//1:1문의 답변 수정
- 	//1:1문의 답변 삭제
  	//리뷰신고 목록
  	//리뷰신고 블라인드 처리하기(삭제는 안됨!)
  	//리뷰신고 블라인드 취소하기
- 	//통계(고객분석)
- 	//통계 (매출분석)
+ 	//통계
+
  	
  	
 

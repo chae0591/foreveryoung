@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,20 +19,14 @@
 		$("#admin_join").click(function(){
 			self.location = "/admin/join"
 		})
-		$("#admin_modify").click(function(){
-			//self.location = "/admin/"
-		})
-		$("#admin_delete").click(function(){
+		
+		// 페이징
+		var pagingForm = $("#pagingForm");
+		$(".paginate_button a").on("click", function(e) {
 			e.preventDefault();
-			
-			var check = window.confirm("관리자 계정을 삭제하시겠습니까?");
-			if(check){
-				location.href=$(this).attr("href");
-			}
-		})
-		
-
-		
+			pagingForm.find("input[name='pageNum']").val($(this).attr("href"));
+			pagingForm.submit();
+		});
 	})
 
 </script> 
@@ -66,10 +61,9 @@
 				<h2>관리자 리스트</h2>
 			</div>
 		</div><!--/.row-->
-		
 		<div class="row">
 			<div class="col-lg-12">
-				<input type="button" id="admin_join" value="관리자 등록">
+				<input type="button" class="btn btn-md btn-info" id="admin_join" value="관리자 등록">
 			</div>
 		</div><!--/.row-->
 		
@@ -118,6 +112,36 @@
 				</table>
 			</div>
 		</div><!--/.row-->
+		
+	<div class="text-center">
+		<ul class="pagination">
+			<c:if test="${page.prev}">
+				<li class="paginate_button previous">
+					<a href="${page.startPage-1}">Prev</a>
+				</li>
+			</c:if>
+			
+			<c:forEach var="num" begin="${page.startPage}" end="${page.endPage}">
+				<li class="paginate_button ${page.pageNum == num ? "active":""} ">
+					<a href="${num}">${num}</a>
+				</li>
+			</c:forEach>
+			
+			<c:if test="${page.next}">
+				<li class="paginate_button next">
+					<a href="${page.endPage+1}">Next</a>
+				</li>
+			</c:if>
+		</ul>
+		
+	</div>
+	<form id='pagingForm' action="/admin/adminList" method="get">
+	<input type="hidden" name="admin" value="${admin}">
+	   	<input type="hidden" name='pageNum' value='${page.pageNum}'>
+	   	<input type="hidden" name='amount' value='${page.amount}'>
+   </form>		
+		
+		
 		
 		<div class="row">
 			<div class="col-lg-12">
