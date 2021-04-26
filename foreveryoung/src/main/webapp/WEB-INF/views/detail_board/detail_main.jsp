@@ -304,14 +304,14 @@ $(function(){
      });
 });//menu 끝   
 
-//최신순,인기순 등 review-unit 적용
+//최신순,인기순 등 순서정렬
 	$(function(){
 		$(".order-list").eq(0).click(function(){
 			$.ajax({
 				type : "POST",
 				url : '/detail_board/recent',
 				contentType : 'application/json',
-				data : jsonData,
+				data : 
 				
 			});//ajax 끝
 		});//최신순 끝
@@ -604,10 +604,6 @@ $(function(){
 		        <span class="order-list">평점 높은순 |</span>
 		        <span class="order-list">평점 낮은순 |</span>				
 			</div>
-	        <div>
-				<input type="radio" name="order" value="포토리뷰" checked="checked">포토리뷰
-				<input type="radio" name="order" value="일반리뷰">일반리뷰
-	        </div>
 	    </div>    
     
          <hr>

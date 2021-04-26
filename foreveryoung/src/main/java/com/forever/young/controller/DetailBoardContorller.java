@@ -44,17 +44,21 @@ public class DetailBoardContorller {
    //리뷰 작성Get
    @GetMapping("/reviewRegister")
    public String getReviewRegister(Review review, Model model, HttpSession session, @RequestParam int product_no) throws Exception {
-      model.addAttribute("getDetail", service.getDetail(product_no));
+
+	   model.addAttribute("getDetail", service.getDetail(product_no));
+
       review.setUser_num((int)session.getAttribute("check"));
+
       return "detail_board/reviewRegister";
    }
    //리뷰 작성 POST
    @PostMapping("/reviewRegister")
      public  RedirectView postReviewRegister(@ModelAttribute Review review, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
-         
+	    log.info("post reviewRegister()");
         review.setUser_num((int)session.getAttribute("check"));
+
         service.reviewRegister(review);
-            
+
          model.addAttribute("reviewRegister", "리뷰가 성공적으로 완료되었습니다.");
          RedirectView rv = new RedirectView("detail_main");
          rv.addStaticAttribute("product_no", review.getProduct_no());
