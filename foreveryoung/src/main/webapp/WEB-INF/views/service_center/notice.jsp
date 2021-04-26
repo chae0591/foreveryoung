@@ -321,7 +321,7 @@ $(function(){
 	
 	//아래쪽에서 이 함수를 호출해서 페이지값을 컨트롤러에 맵핑시킨다
 	function list(page){
-	    console.log("페이지를 이동합니다.");
+	    alert("${map.pager.curPage}");
 	    location.href="notice?curPage="+page;
 	}
 });
@@ -428,7 +428,7 @@ $(function(){
             
             
             <c:if test="${map.pager.curPage <= map.pager.totPage}">
-                <a href="${map.pager.pageEnd}" onclick="list('${map.pager.totPage}')">[끝]</a>
+                <a href="${map.pager.totPage}" onclick="list('${map.pager.totPage}')">[끝]</a>
             </c:if> <!-- 현재 페이지블록이 총 페이지블록보다 작거나 같으면 끝으로 갈 수 있도록 링크를 추가함-->
             </td>
     </tr>

@@ -121,7 +121,7 @@ h3 {
   border: 1px solid black;
 }
 
-.carousel-indicators .active {
+.carousel-indicators .active {     
 	background-color: black;
 }
 
@@ -353,6 +353,7 @@ h3 {
 				success : function(result){
 					voteCheck();
 					$(".appendHtml").html(result);
+					$("input[name='pageNum']").attr("value", 1);
 				}
 			}); // ajax
 		}

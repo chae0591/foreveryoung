@@ -9,6 +9,11 @@ public class OrderProductVO {
 	private String brand_name;
 	private String product_skintype;
 	private int cart_count;
+	
+	private String image_save_name;
+	private String image_type;
+	private String image_name; 
+	
 	public int getProduct_no() {
 		return product_no;
 	}
@@ -58,11 +63,33 @@ public class OrderProductVO {
 		this.cart_count = cart_count;
 	}
 	
+	public String getImage_save_name() {
+		return image_save_name;
+	}
+	public void setImage_save_name(String image_save_name) {
+		this.image_save_name = image_save_name;
+	}
+	public String getImage_type() {
+		return image_type;
+	}
+	public void setImage_type(String image_type) {
+		this.image_type = image_type;
+	}
+	public String getImage_name() {
+		return image_name;
+	}
+	public void setImage_name(String image_name) {
+		this.image_name = image_name;
+	}
+	
 	@Override
 	public String toString() {
 		return "OrderProductVO [product_no=" + product_no + ", product_brand=" + product_brand + ", product_name="
 				+ product_name + ", product_category=" + product_category + ", product_price=" + product_price
 				+ ", brand_name=" + brand_name + ", product_skintype=" + product_skintype + ", cart_count=" + cart_count
+				+ ", image_save_name=" + image_save_name + ", image_type=" + image_type + ", image_name=" + image_name
 				+ "]";
 	}
+	
+	
 }

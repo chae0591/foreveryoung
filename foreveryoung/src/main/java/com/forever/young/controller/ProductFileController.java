@@ -40,11 +40,11 @@ public class ProductFileController {
 
 		// ***경로 수정***
 		if(image_type.equals("N")) {
-			uploadFolder = "D:/foreveryoung/upload";
+			uploadFolder = "/Users/yujin/Documents/upload";
 		} else if(image_type.equals("D")) {
-			uploadFolder = "D:/foreveryoung/upload/detail";
+			uploadFolder = "/Users/yujin/Documents/upload/detail";
 		} else if(image_type.equals("P")) {
-			uploadFolder = "/D:/foreveryoung/upload/product";
+			uploadFolder = "/Users/yujin/Documents/upload/product";
 		}
 	
 		for(MultipartFile multipartFile : uploadFile) {
@@ -101,11 +101,11 @@ public class ProductFileController {
 		// ***경로 수정***
 		File file = null;
 		if(imageType.equals("N")) {
-			file = new File("D:/foreveryoung/upload/" + fileName);
+			file = new File("/Users/yujin/Documents/upload/" + fileName);
 		} else if(imageType.equals("D")) {
-			file = new File("D:/foreveryoung/upload/detail/" + fileName);
+			file = new File("/Users/yujin/Documents/upload/detail/" + fileName);
 		} else if(imageType.equals("P")) {
-			file = new File("D:/foreveryoung/upload/product/" + fileName);
+			file = new File("/Users/yujin/Documents/upload/product/" + fileName);
 		}
 		
 		ResponseEntity<byte[]> result =null;

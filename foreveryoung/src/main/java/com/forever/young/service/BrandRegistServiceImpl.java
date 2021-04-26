@@ -67,10 +67,11 @@ public class BrandRegistServiceImpl implements BrandRegistService{
 	public void deleteProduct(int product_no) throws Exception {
 		repository.deleteProduct(product_no);
 	}
-
+	
+//	public List<Map<String, Object>> productList(BrandProductCriteria cri) throws Exception {
 	@Override
-	public List<Map<String, Object>> productList(BrandProductCriteria cri) throws Exception {
-		return repository.productList(cri);
+	public List<Product> productList(Map<String, Object> map) throws Exception {
+		return repository.productList(map);
 	}
 
 	@Override

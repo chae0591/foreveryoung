@@ -8,6 +8,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/member/common.css">
+<style>
+.pro-img{
+	height: 50px;
+	width: 50px;
+}
+</style>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -156,6 +162,14 @@ $(document).ready(function(){
 		<div class="row">
 		<fieldset>
 			<legend>주문 상품 정보</legend>
+			<c:choose>
+				<c:when test="${empty product.image_save_name}">
+					<img src="https://dummyimage.com/50x50/000/fff&text=foreveryoung">
+				</c:when>
+				<c:otherwise>
+					<img class="pro-img img img-responsive" src="/viewImg?fileName=${product.image_save_name}&imageType=${product.image_type}">
+				</c:otherwise>
+			</c:choose>
 			<input type="hidden" name="order_product" value="${product.product_no}">
 			<input type="hidden" name="order_brand" value="${product.product_brand}">
 			제품명 : <input class="input" type="text" value="${product.product_name}" readonly>
