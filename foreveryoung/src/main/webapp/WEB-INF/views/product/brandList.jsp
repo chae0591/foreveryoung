@@ -272,6 +272,27 @@ h3 {
 	font-weight: bold;
 }
 
+
+.brand_page_banner {
+	margin: 0 auto;
+	width: 1050px;
+	height: 350px;
+	display: inline-block;
+}
+
+.brand_page_banner img {
+	width: 1050px;
+	height: 280px;
+	margin-bottom : 10px;
+}
+
+.brand_page_banner p {
+	max-width: 800px;
+	max-height: 50px;
+	font-size: 40px;
+	font-weight: bold;
+}
+
 </style>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script>
@@ -414,7 +435,16 @@ $(document).ready(function(){
 	
 });
 </script>
+
 <div class="container">
+<c:if test="${banner ne null}">
+<div class="col-lg-12">
+	<div class="brand_page_banner">
+		<img src="/bannerImgCk?fileName=${banner.ban_img.image_save_name}">
+		<p><c:out value="${banner.text}" /></p>		
+	</div>
+</div>
+</c:if>
 <input type="hidden" name="brand" value="${brand}">
 <input type="hidden" name="user_num"value="${check}">
 <div class="col-lg-12">
@@ -424,7 +454,7 @@ $(document).ready(function(){
 </div>
 
 <div class="slide_list">
-	<h3 style="text-align:center;"> BEST </h3>
+	<h3 style="text-align:center;"> ${brand.brand_name} BEST </h3>
 				
 	<div id="carousel-generic" class="carousel slide">
 		<c:if test="${fn:length(best) gt 5}">

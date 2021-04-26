@@ -83,7 +83,7 @@
         	select * 
         	from 
         	(select * from product_table order by product_regdate desc )
-        	where rownum between 1 and 10
+        	where rn > 0 and rn <= 10;
 		 ]]>
 	</select>
 	

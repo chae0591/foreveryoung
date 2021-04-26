@@ -287,7 +287,7 @@
 	    <%-- <a href="mypage_brand_product?brand=${brand_info.brand_num}" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">판매 상품관리</a> --%> 
 	   <a href="mypage_brand_product" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">판매 상품관리</a>  
 	    <a href="mypage_brand_order" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">주문 관리</a> 
-	    <a href="mypage_brand_chart" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">통계</a> 
+	    <a href="mypage_brand_chart" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">통계</a>
 	  </div>
 	</nav>
 </div>
