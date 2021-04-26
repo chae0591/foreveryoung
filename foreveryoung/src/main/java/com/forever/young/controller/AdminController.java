@@ -131,6 +131,12 @@ public class AdminController {
 		
 		int total = service.getCountByBrand();
 		
+//		if(paging == null) {
+			model.addAttribute("page", new Paging(1 ,10, total));
+//		}else {
+//			model.addAttribute("page", new Paging(paging.getPageNum(),10, total));
+//		}
+		
 		//model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
 		model.addAttribute("brand", total);
 		model.addAttribute("brandList", service.brandList());
@@ -145,6 +151,11 @@ public class AdminController {
 		
 		int total = service.getCountByCustomer();
 		
+//		if(paging == null) {
+			model.addAttribute("page", new Paging(1 ,10, total));
+//		}else {
+//			model.addAttribute("page", new Paging(paging.getPageNum(),10, total));
+//		}
 		//model.addAttribute("page", new Paging(paging.getPageNum(),10, total));
 		model.addAttribute("customer", total);
 		model.addAttribute("customerList", service.customerList());
@@ -158,7 +169,11 @@ public class AdminController {
 		
 		int total = service.getCountByProduct();
 		
-		//model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+//		if(paging == null) {
+			model.addAttribute("page", new Paging(1 ,10, total));
+//		}else {
+//			model.addAttribute("page", new Paging(paging.getPageNum(),10, total));
+//		}
 		model.addAttribute("product", total);
 		model.addAttribute("productList", service.productList());
 		model.addAttribute("brandList", service.brandList());
@@ -173,7 +188,11 @@ public class AdminController {
 		
 		int total = service.getCountByEvent();
 		
-		//model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+//		if(paging == null) {
+			model.addAttribute("page", new Paging(1 ,10, total));
+//		}else {
+//			model.addAttribute("page", new Paging(paging.getPageNum(),10, total));
+//		}
 		model.addAttribute("event", total);
 		model.addAttribute("eventList", service.eventList());
 	}
@@ -185,7 +204,11 @@ public class AdminController {
 		
 		int total = service.getCountByNotice();
 		
-		//model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+//		if(paging == null) {
+			model.addAttribute("page", new Paging(1 ,10, total));
+//		}else {
+//			model.addAttribute("page", new Paging(paging.getPageNum(),10, total));
+//		}
 		model.addAttribute("notice", total);
 		model.addAttribute("noticeList", service.noticeList());
 	}
@@ -197,7 +220,11 @@ public class AdminController {
 
 		int total = service.getCountByInquiry();
 		
-		//model.addAttribute("page", new Paging(paging.getPageNum(), paging.getAmount(), total));
+//		if(paging == null) {
+			model.addAttribute("page", new Paging(1 ,10, total));
+//		}else {
+//			model.addAttribute("page", new Paging(paging.getPageNum(),10, total));
+//		}
 		model.addAttribute("inquiry", total);
 		model.addAttribute("inquiryList", service.inquiryList());
 	}
