@@ -9,14 +9,14 @@
 	<!-- 랜덤 상품조회 -->
 	<select id="randomList" resultType="Product">
 		select
-			p.*, i.image_save_name, i.image_type, i.image_name
+			p.*, i.image_save_name, i.image_type, i.image_name, b.brand_name
 		from
-        	product_table P
-        	inner join product_img i on p.product_no = i.product_no
+        	product_table P inner join product_img i on p.product_no = i.product_no
+        	inner join brand b on p.product_brand = b.brand_num
 		where
 			image_type = 'N'
 		order by
-			dbms_random.random
+			product_regdate desc
 	</select>
 	
 	<!-- 베스트 상품조회 -->
@@ -64,4 +64,18 @@
 			product_regdate desc
 	</select>
 	
+	<select id="searchList" resultType="Product">
+             select
+			p.*, i.image_save_name, i.image_type, i.image_name
+		from
+        	product_table P
+        	inner join product_img i on p.product_no = i.product_no
+		 where 
+            notice_title like '%'||#{keyword}||'%'  
+            or  notice_content like '%' || #{keyword}||'%'
+		order by
+			product_regdate desc
+    </select>
+   
+    
 </mapper>

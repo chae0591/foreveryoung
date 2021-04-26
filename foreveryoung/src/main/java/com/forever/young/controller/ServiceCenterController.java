@@ -82,7 +82,6 @@ public class ServiceCenterController {
         map.put("keyword", keyword);
         mav.addObject("map", map);                           //modelandview에 map를 저장
         
-        System.out.println("map : "+map);
         mav.setViewName("service_center/notice");    //자료를 넘길 뷰의 이름
         
         return mav;    //게시판 페이지로 이동
