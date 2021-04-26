@@ -142,39 +142,30 @@ $(function(){
       result++;
       $("#result").val(result);
       /* 플러스 버튼 처리 이벤트-1. 수량 조절 종료*/
-
       /* 플러스 버튼 처리 이벤트-2. 가격 연산 시작*/   
       $("#total_amount").val($("#result").val() * $("#sell_price").val());
       /* 플러스 버튼 처리 이벤트-2. 가격 연산 종료*/
    });
-
    $("#minus").on("click", function () {
       /* 마이너스 버튼 처리 이벤트-1. 연산 전 validation_check 시작*/
       if($("#result").val() ==1){
    return alert("수량은 1 미만일 수 없습니다.");
       }
-
       /*  마이너스 버튼 처리 이벤트-1. 연산 전 validation_check 종료*/
-
       /* 마이너스 버튼 처리 이벤트-2. 수량 조절 시작*/
       var result =$("#result").val();
       result--;
       $("#result").val(result);
       /* 마이너스 버튼 처리 이벤트-2. 수량 조절 종료*/
-
       /* 마이너스 버튼 처리 이벤트-3. 가격 연산 시작*/   
       $("#total_amount").val($("#result").val() * $("#sell_price").val());
-
       /* 마이너스 버튼 처리 이벤트-3. 가격 연산 종료*/
    });
-
-
    $("#nice").on("click", function () {
        /*좋아요 버튼 관련 이벤트 처리 시작*/
        var target = $(this);
        var user_num = $("input[name='user_num']").val();
        var product_no = $("input[name='product_no']").val();
-
          if(user_num == null || user_num == "") {
             location.href="/member/login";
          }
@@ -198,7 +189,6 @@ $(function(){
                }
             }
          });  // ajax
-
       }); // end 좋아요
    $(".bucket").click(function(){
 		var id = "${check}";
@@ -277,7 +267,6 @@ $(function(){
         $(".qna").show();
      });
 });//menu 끝   
-
 //최신순,인기순 등 review-unit 적용
 	$(function(){
 		$(".order-list").eq(0).click(function(){
@@ -309,7 +298,6 @@ $(function(){
 	$(function(){
 		$(".review-modify").click(function(){
 			var id = "${check}";
-
 	        if(id == ''){
 	        	 alert("로그인 후 리뷰작성이 가능합니다.");
 	        	 location.href = '/member/login';
@@ -336,9 +324,7 @@ $(function(){
 	});//리뷰 버튼-삭제 끝
 	
 });//function 끝
-
 </script>
-
 <body>
 <jsp:include page="../template/header.jsp"></jsp:include>
 <div class="detail-all">
@@ -366,12 +352,10 @@ $(function(){
                      <span>상품이름</span>
                      <span>${getDetail.product_name} </span>
                   </div>
-
                   <div>
                      <span>상품가격</span>
                      <span>${getDetail.product_price}원 </span>
                   </div>
-
                   <div>
                      <span>배송정보</span>
                      <span>일반배송 | 3,000원 (15,000 원 이상 무료배송 )</span>
@@ -381,7 +365,6 @@ $(function(){
                   <form name="form" method="get">
                      <span>상품 수량</span>
                      <input type="hidden" id="sell_price" name="sell_price" value="${getDetail.product_price}">
-
                      <input type="number" style="height: 23pt;width : 120px;"value="1" min="1" max="100" onchange="change();" id="result" name="amount" >
                      <input type="button" style="height: 23pt;width : 24px;" value=" + " id="plus">
                      <input type="button" style="height: 23pt;width : 25px;" value=" - " id="minus">
@@ -405,7 +388,6 @@ $(function(){
          </div><!-- class="main-info" -->
       </form:form>   
 </div>
-
 <div class="recommend">
    <span style="font-family :sans-serif; font-size : 18px;">이런 상품은 어떠세요?</span>
       <div class="slide">

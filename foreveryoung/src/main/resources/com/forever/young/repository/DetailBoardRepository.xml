@@ -20,16 +20,14 @@
 	
 	<!-- review List -->
 	<select id="reviewList" resultType="Review">
-  		<![CDATA[
-  			  	select * from Review where product_no=#{product_no}
-  		]]>		
+  			  	select * from review where product_no=#{product_no}
 	</select>
 	
 	<!-- review Register -->
 	<insert id="reviewRegister">
 		insert into review(product_no,user_num,brand_num,review_num,
 		review_title,review_content,review_date,review_score) values(
-		#{product_no},#{user_num},1,review_num.nextval,#{review_title},#{review_content},sysdate,#{review_score})
+		#{product_no},#{user_num},1,review_num_seq.nextval,#{review_title},#{review_content},sysdate,#{review_score})
 	</insert>
 	
 	<select id="reviewRegisterAfter" resultType="int">
@@ -43,7 +41,7 @@
     <!-- review 수정 -->
     <select id="reviewModify" parameterType="Review">
     	update review set
-    		review_title=#{review_title}, review_content=#{review_content}
+    		review_title=#{review_title}, review_content=#{review_content},review_score=#{review_score}
     			where review_num=#{review_num}
     </select>
     

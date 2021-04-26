@@ -40,11 +40,11 @@ public class ProductFileController {
 
 		// ***경로 수정***
 		if(image_type.equals("N")) {
-			uploadFolder = "D:/foreveryoung/upload";
+			uploadFolder = "C:/foreveryoung/upload";
 		} else if(image_type.equals("D")) {
-			uploadFolder = "D:/foreveryoung/upload/detail";
+			uploadFolder = "C:/foreveryoung/upload/detail";
 		} else if(image_type.equals("P")) {
-			uploadFolder = "/D:/foreveryoung/upload/product";
+			uploadFolder = "C:/foreveryoung/upload/product";
 		}
 	
 		for(MultipartFile multipartFile : uploadFile) {
@@ -101,11 +101,11 @@ public class ProductFileController {
 		// ***경로 수정***
 		File file = null;
 		if(imageType.equals("N")) {
-			file = new File("D:/foreveryoung/upload/" + fileName);
+			file = new File("C:/foreveryoung/upload/" + fileName);
 		} else if(imageType.equals("D")) {
-			file = new File("D:/foreveryoung/upload/detail/" + fileName);
+			file = new File("C:/foreveryoung/upload/detail/" + fileName);
 		} else if(imageType.equals("P")) {
-			file = new File("D:/foreveryoung/upload/product/" + fileName);
+			file = new File("C:/foreveryoung/upload/product/" + fileName);
 		}
 		
 		ResponseEntity<byte[]> result =null;
@@ -135,11 +135,11 @@ public class ProductFileController {
 			// ***경로 수정***
 			// 파일명에 특수문자가 있을 수 있으니 디코더 처리
 			if(imageType.equals("N")) {
-				file = new File("D:/foreveryoung/upload/" + URLDecoder.decode(fileName, "UTF-8"));
+				file = new File("C:/foreveryoung/upload/" + URLDecoder.decode(fileName, "UTF-8"));
 			} else if(imageType.equals("D")) {
-				file = new File("D:/foreveryoung/upload/detail/" + URLDecoder.decode(fileName, "UTF-8"));
+				file = new File("C:/foreveryoung/upload/detail/" + URLDecoder.decode(fileName, "UTF-8"));
 			} else if(imageType.equals("P")) {
-				file = new File("D:/foreveryoung/upload/product/" + URLDecoder.decode(fileName, "UTF-8"));
+				file = new File("C:/foreveryoung/upload/product/" + URLDecoder.decode(fileName, "UTF-8"));
 			}
 			
 			file.delete();
