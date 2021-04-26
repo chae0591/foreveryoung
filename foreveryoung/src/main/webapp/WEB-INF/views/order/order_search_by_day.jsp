@@ -25,9 +25,16 @@
 				<td>
 					<span><fmt:formatDate value="${order_product.order_time}" pattern="yyyy-MM-dd"/></span>
 				</td>
-				<td>
-					<!-- <img class="pro-img img img-responsive" src="/viewImg?fileName=${order_product.image_save_name}&imageType=${order_product.image_type}"> -->
-				</td>
+				<c:choose>
+					<c:when test="${empty order_product.image_save_name}">
+						<td><img src="https://dummyimage.com/50x50/000/fff&text=foreveryoung"></td>
+					</c:when>
+					<c:otherwise>
+						<td>
+						<img class="pro-img img img-responsive" src="/viewImg?fileName=${order_product.image_save_name}&imageType=${order_product.image_type}">
+						</td>
+					</c:otherwise>
+				</c:choose>
 				<td>
 					<span>
 						브랜드 : <c:out value="${order_product.brand_name}"></c:out> 
