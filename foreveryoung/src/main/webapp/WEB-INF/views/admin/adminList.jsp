@@ -138,7 +138,6 @@
 	<form id='pagingForm' action="/admin/adminList" method="get">
 	<input type="hidden" name="admin" value="${admin}">
 	   	<input type="hidden" name='pageNum' value='${page.pageNum}'>
-	   	<input type="hidden" name='amount' value='${page.amount}'>
    </form>		
 		
 		

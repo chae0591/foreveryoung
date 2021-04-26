@@ -53,46 +53,58 @@ var randomScalingFactor = function(){ return Math.round(Math.random()*1000)};
 				value: 4,
 				color:"#30a5ff",
 				highlight: "#62b9fb",
-				label: "M"
+				label: "Male"
 			},
 			{
 				value: 5,
 				color: "#ffb53e",
 				highlight: "#fac878",
-				label: "F"
+				label: "Female"
 			}
 		];
 			
 	var doughnutData = [
 				{
-					value: 300,
+					value: 30,
 					color:"#30a5ff",
 					highlight: "#62b9fb",
 					label: "Blue"
 				},
 				{
-					value: 50,
+					value: 5,
 					color: "#ffb53e",
 					highlight: "#fac878",
 					label: "Orange"
 				},
 				{
-					value: 100,
+					value: 10,
 					color: "#1ebfae",
 					highlight: "#3cdfce",
 					label: "Teal"
 				},
 				{
-					value: 120,
+					value: 20,
 					color: "#f9243f",
 					highlight: "#f6495f",
 					label: "Red"
+				}
+				{
+					value: 11,
+					color: "#a814e7",
+					highlight: "#ce69e7",
+					label: "purple"
+				}
+				{
+					value: 15,
+					color: "#8b5927",
+					highlight: "#b98e69",
+					label: "brown"
 				}
 
 			];
 			
 	var radarData = {
-	    labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
+	    labels: ["makeup", "manscare", "bodycare", "haircare", "perfume", "skincare"],
 	    datasets: [
 	        {
 	            label: "My First dataset",
@@ -102,7 +114,7 @@ var randomScalingFactor = function(){ return Math.round(Math.random()*1000)};
 	            pointStrokeColor: "#fff",
 	            pointHighlightFill: "#fff",
 	            pointHighlightStroke: "rgba(220,220,220,1)",
-	            data: [65, 59, 90, 81, 56, 55, 40]
+	            data: [65, 59, 90, 81, 56, 55]
 	        },
 	        {
 	            label: "My Second dataset",
@@ -112,7 +124,7 @@ var randomScalingFactor = function(){ return Math.round(Math.random()*1000)};
 	            pointStrokeColor : "#fff",
 	            pointHighlightFill : "#fff",
 	            pointHighlightStroke : "rgba(48, 164, 255, 1)",
-	            data: [28, 48, 40, 19, 96, 27, 100]
+	            data: [28, 48, 40, 19, 96, 27]
 	        }
 	    ]
 	};

@@ -22,12 +22,22 @@
 		#{admin_name},sysdate,#{admin_phone})
 	</insert>
 
-	<!-- 관리자 리스트 -->
+ 	<!-- 관리자 리스트:10개씩..? -->
 	<select id="adminList" resultType="Admin">
-  		<![CDATA[
-  			select * from admin
-  		]]>
+		select * from (
+   		 	select rownum rn, A.* from  admin A
+    		order by A.admin_regDate asc )A
+    	where rn between 1 and 10
 	</select>
+ 
+	<!-- 페이징+ 관리자 리스트 -->
+	<!--  <select id="adminList" resultType="Admin">
+		select * from (
+   		 	select rownum rn, A.* from  admin A
+    		order by A.admin_regDate asc )A
+    	where rn between (#{page.pageNum}-1)*10-1 and #{page.pageNum}*10
+	</select>-->
+
 	
 	<!-- 관리자 총 수 -->
 	<select id="getCountByAdmin" resultType="int">
@@ -38,9 +48,10 @@
 	
 	<!-- 브랜드 리스트 -->
 	<select id="brandList" resultType="Brand">
-  		<![CDATA[
-  			select * from brand
-  		]]>
+		select * from (
+		    select rownum rn, B.* from brand B
+		    order by B.brand_regDate asc) B
+		where rn between 1 and 10
 	</select>
 	
 	<!-- 브랜드 총 수 -->
@@ -52,9 +63,10 @@
 
 	<!-- 고객 리스트 -->
 	<select id="customerList" resultType="Customer">
-  		<![CDATA[
-  			select * from customer
-  		]]>
+		select * from ( 
+		    select rownum rn, C.* from customer C
+		    order by C.user_regDate asc) C
+		    where rn between 1 and 10
 	</select>
 	
 	<!-- 고객 총 수 -->
@@ -66,10 +78,11 @@
 	
 	<!-- 상품 리스트 -->
 	<select id="productList" resultType="ProductVO">
-  		  		<![CDATA[
-  			select p.* , b.brand_name from product_table p
-   				 left outer join brand b on p.product_brand = b.brand_num
-  		]]>
+		select * from (
+		        select rownum rn, p.* , b.brand_name from product_table p
+		        left outer join brand b on p.product_brand = b.brand_num
+		        order by P.product_no desc)P
+		    where rn between 1 and 10
 	</select>
 	
 	<!-- 상품 총 수 -->
@@ -81,9 +94,10 @@
 
 	<!-- 이벤트 리스트 -->
 	<select id="eventList" resultType="Event">
-  		<![CDATA[
-  			select * from event
-  		]]>
+		select * from (
+		    select rownum rn, E.* from event E
+		    order by E.event_no asc) E
+		where rn between 1 and 10
 	</select>
 	
 	<!-- 이벤트 총 수 -->
@@ -95,9 +109,10 @@
 
 	<!-- 공지사항 리스트 -->
 	<select id="noticeList" resultType="Notice">
-  		<![CDATA[
-  			select * from notice
-  		]]>
+		select * from (
+		    select rownum rn, N.* from notice N
+		    order by N.notice_no asc) N
+		where rn between 1 and 10
 	</select>
 	
 	<!-- 공지사항 총 수 -->
@@ -109,11 +124,12 @@
 
 	<!-- 1:1문의 리스트 -->
 	<select id="inquiryList" resultType="InquiryVO">
-  		<![CDATA[
-  			  	select I.* , C.user_id, R.reply_no from inquiry I
- 				left outer join customer C on C.user_num = I.user_num
- 				left outer join reply R on R.inquiry_no = I.inquiry_no
-  		]]>
+		select * from (
+		    select rownum rn, I.* , C.user_id, R.reply_no from inquiry I
+		        left outer join customer C on C.user_num = I.user_num
+		        left outer join reply R on R.inquiry_no = I.inquiry_no
+		    order by I.inquiry_no desc) I
+		 where rn between 1 and 10
 	</select>
 	
 	<!-- 1:1문의 총 수 -->
@@ -220,6 +236,9 @@
 		<delete id="replyDelete">
 			 delete from reply where inquiry_no = #{inquiry_no}
 		</delete>
+		
+	
+		
 </mapper>
  
 
