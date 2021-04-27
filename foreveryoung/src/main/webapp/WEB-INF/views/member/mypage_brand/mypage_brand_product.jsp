@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
@@ -111,6 +110,23 @@
  	display: flex;
   	justify-content: center;
  }
+ 
+  /* 상품 등록 버튼  */
+	 .button{
+	 	display:inline-block;
+	 	transition-duration:0.4s;
+	 	cursor:pointer;
+	 }
+	 
+	.button1{
+		border: 2px solid black;
+		background: rgba(255, 255, 255, 0.2);
+	}
+	 
+	.button1:hover{
+		background-color: #C0C0C0;
+	}
+	/* 상품 등록 버튼 - 끝  */
 
 </style>
 
@@ -174,7 +190,7 @@
     		<!-- 상품 등록 버튼  -->
 		<div  style="float:right">
 			 <a href="${pageContext.request.contextPath}/product/productWrite">
-		 		<button type="button" class="btn btn-secondary" style="color:black">상품 등록 하러가기</button>
+		 		<button type="button" class="btn btn-secondary button button1" style="color:black">상품 등록 하러가기</button>
 			 </a>
 		</div>
     	
