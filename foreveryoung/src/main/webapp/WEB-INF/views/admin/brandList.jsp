@@ -92,7 +92,7 @@
 										<td align="center">${brandList.brand_phone}</td>
 										<td align="center">${brandList.brand_regDate}</td>
 										<td align="center">
-											<input type="button" id="brand_product" class="btn btn-md btn-primary" value="상품목록">
+											<input type="button" id="brand_product" href="mypage_brand_product"  class="btn btn-md btn-primary" value="상품목록">
 										</td>
 									</tr>
 								</c:forEach>

@@ -17,11 +17,44 @@ hr {
 	text-align: center;
 	margin: 0 auto;
 }
-.first-box {
+.index_01 {
 	width: 1020px;
 	height: 500px;
 	text-align: center;
 	margin: 0 auto;
+}
+.index_01 > .index_slide1 {
+	width: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+.index_slide > ul > li{
+	display: inline-block;
+}
+.index_btn {
+	width: 1020px;
+	height: auto;
+	text-align: center;
+	margin: o auto;
+}
+
+.index_btn ul {
+	width: 300px;
+	height: 100%;
+	text-align: center;
+	float: left;
+}
+.index_btn ul > li {
+	width: 33%;
+	height: 100%;
+	float: left;
+	display: inline-block;
+}
+.index_btn ul > li > button {
+	width: 100%;
+	height: 50px;
+	float: left;
+	display: inline-block;
 }
 .second-box {
 	width: 1020px;
@@ -35,24 +68,13 @@ hr {
 	text-align: center;
 	margin: 0 auto;
 }
-table {
-	width: 1020px;
-	margin: 0;
-	padding: 0;
-}
-.event-title {
+
+.index_title {
    padding-top: 20px;
    padding-bottom: 20px;
    color: #222;
 }
-.first-box a {
-    color: #000;
-    padding: 20px;
-    ling-height: 44px;
-    font-size: 16px;
-    font-weight: 700;
-    font-style: normal;
-}
+
 .category-box {
 	width: 100%;
 	height: 47px;
@@ -84,41 +106,7 @@ table {
     letter-spacing: -.24px;
     color: #222;
 }
-.item-name{
-    display: block;
-    font-size: 14px;
-    line-height: 20px;
-    font-weight: 500;
-    letter-spacing: -.21px;
-    color: #222;
-    display: -webkit-box;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    white-space: normal;
-    cursor: pointer;
-}
-.item-explanation {
-	display: block;
-    font-size: 12px;
-    line-height: 18px;
-    font-weight: 100;
-    letter-spacing: -.18px;
-    color: #222;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.item-price {
-    display: inline-block;
-    font-size: 14px;
-    line-height: 20px;
-    font-weight: 500;
-    letter-spacing: -.21px;
-    color: #222;
-    vertical-align: middle;
-}
+
 .slide {
 	height: 300px;
     min-width: 1020px;
@@ -153,45 +141,34 @@ table {
     #pos3:checked ~ .bullet label:nth-child(3),
     #pos4:checked ~ .bullet label:nth-child(4){background:#666;}
     
-.more-btn {
-	width: 100px;
-	heigh: 50px;
+/* 상품 리스트 */
+.price {
+	color: #FF4646;
+	font-size: 20px;
+	text-align: center;
 }
-#back-to-top {
-  display: inline-block;
-  background-color: #FF9800;
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  border-radius: 30px;
-  position: fixed;
-  bottom: 50%;
-  right: 30px;
-  transition: background-color .3s, 
-    opacity .5s, visibility .5s;
-  opacity: 0;
-  visibility: hidden;
-  z-index: 1000;
+.detail > img{
+	display: inline-block;
+	width:210px;
+	height:200px;
 }
-#back-to-top::after {
-  content: "TOP";
-  font-family: FontAwesome;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 16px;
-  line-height: 50px;
-  color: #fff;
+.pList li {
+	display: inline-block;
+    padding: 10px;
+    margin : 1rem 1.5rem;
+    cursor: pointer;
+    position: relative;
+    width : 210px;
 }
-#back-to-top:hover {
-  cursor: pointer;
-  background-color: #333;
+.vot_btn {
+	position : absolute;
+	top:160px;
+	left:150px;
+	background-color:white;
 }
-#back-to-top:active {
-  background-color: #555;
-}
-#back-to-top.show {
-  opacity: 1;
-  visibility: visible;
+.vot_btn > img {
+	width:50px;
+	heigth:50px;
 }
 </style>
 <script type="text/javascript">
@@ -209,6 +186,44 @@ $(function(){
 	      $('#back-to-top').removeClass('show');
 	    }
 	  });
+
+		
+	//처음에 내용 숨기기
+	$(".index_slide>ul>li").hide();
+	$(".index_slide>ul>li:first-child").show();
+	
+	//버튼 클릭시 내용 나오도록
+	$(".event_btn1").click(function(){
+	        if($(".slide1").css('display') == 'none'){
+	        	$(".slide1").show();
+	        	$(".slide1").next().next().hide();
+	       		$(".slide1").next().hide();
+	   		 }else{
+	   			$(".slide1").hide();
+	    	}
+	});
+	
+	$(".event_btn2").click(function(){
+        if($(".slide2").css('display') == 'none'){
+        	$(".slide2").show();
+        	$(".slide2").prev().hide();
+       		$(".slide2").next().hide();
+   		 }else{
+   			$(".slide2").hide();
+    	}
+	});
+	
+	$(".event_btn3").click(function(){
+        if($(".slide3").css('display') == 'none'){
+        	$(".slide3").show();
+        	$(".slide3").prev().hide();
+        	$(".slide3").prev().prev().hide();
+   		 }else{
+   			$(".slide3").hide();
+    	}
+	});
+
+		
 });
 </script>
 </head>
@@ -234,36 +249,26 @@ $(function(){
     </p>
 </div>
 
-<div class="first-box">
-	<h2 class="event-title">이 상품 어때요?</h2>
-	<table>
-		<c:choose>
-			<c:when test="${!empty randomList}">
-				<c:forEach items="${randomList}" var="randomList">
-				<tr>
-				<td>
-					<input type="hidden" name="product_no" value="${randomList.product_no}">
-					<a href="#">
-					<p class="item-img">${randomList.product_img}</p>
-					<p class="item-name">${randomList.product_name}</p>
-					<p class="item-price">${randomList.product_price}원</p>
-					<p class="item-stock">${randomList.product_stock}원</p>
-					</a>
-				</td>
-				</tr>
-				</c:forEach>
-			</c:when>
-			<c:otherwise> 
-					<tr> 
-						<td colspan="4">조회된 결과가 없습니다.</td>
-					</tr>
-				 </c:otherwise>
-			</c:choose>
-	</table>
-	
-	<button class="more-btn">더보기</button>
-	
+<div class="index_01">
+	<div class="index_header">
+		<h2 class="index_title">이 상품은 어떤가요?</h2>
+	</div>
+	<div class="index_slide">
+		<ul>
+			<li class="slide1"><a href="#">슬라이드1</a></li>
+			<li class="slide2"><a href="#">슬라이드2</a></li>
+			<li class="slide3"><a href="#">슬라이드3</a></li>
+		</ul>
+	</div>
+	<div class="index_btn">
+		<ul>
+			<li><button class="event_btn1">1</button></li>
+			<li><button class="event_btn2">2</button></li>
+			<li><button class="event_btn3">3</button></li>
+		</ul>
+	</div>
 </div>
+
 
 <hr>
 

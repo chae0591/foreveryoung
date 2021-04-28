@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.forever.young.entity.Admin;
 import com.forever.young.entity.Brand;
+import com.forever.young.entity.Notice;
 import com.forever.young.entity.Product;
 import com.forever.young.repository.MainRepository;
 import com.forever.young.repository.ServiceCenterRepository;
@@ -40,4 +41,9 @@ public class MainServiceImpl implements MainService {
 		return repository.newList();
 	}
 
+	//목록 (검색 기능을 포함)
+	@Override
+	public List<Product> searchList(String keyword) throws Exception {
+		return repository.searchList(keyword);
+	}
 }
