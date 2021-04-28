@@ -70,7 +70,7 @@ $(document).ready(function () {
 <div class="container">
 	<div class="row">
 		<jsp:include page="mypagetemplate/mypagemenu.jsp"></jsp:include>
-		<div class="col-md-10 col-lg-6">
+		<div class="col-md-8">
 			<h2>배송지 추가</h2>
 			<form action="addressAdd" method="post">
 				<div class="outbox" style="width: 500px">

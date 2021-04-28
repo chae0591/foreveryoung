@@ -23,13 +23,14 @@
 	<select id="searchListMyPg" resultType="OrderMypgVO">
 		select O.order_no, O.order_customer, O.order_brand, O.order_product, O.order_amount, O.order_status, 
 		O.order_totalPrice, O.order_time, pb.product_name, pb.product_price, pb.brand_name, 
-        pb.image_save_name, pb.image_type, pb.image_name 
+        pb.image_save_name, pb.image_type, pb.image_name, A.address_jibun, A.address_detail  
 		from order_table O 
 		join (select p.*, b.*, pi.image_save_name, pi.image_type, pi.image_name from product_table P 
                 join brand B on p.product_brand = b.brand_num 
                 left outer join product_img pi on p.product_no = pi.product_no) pb 
 		on O.order_product = pb.product_no 
-		where O.order_customer = #{user_num} 
+        join Address A on O.order_address = A.address_no 
+		where O.order_customer = #{user_num}  
 		and O.order_time between systimestamp - NUMTODSINTERVAL(#{day_num}, 'DAY') and systimestamp 
 		order by O.order_time desc
 	</select>
@@ -37,12 +38,13 @@
 	<select id="searchListMyPgDate" resultType="OrderMypgVO" parameterType="map">
 		select O.order_no, O.order_customer, O.order_brand, O.order_product, O.order_amount, O.order_status, 
 		O.order_totalPrice, O.order_time, pb.product_name, pb.product_price, pb.brand_name, 
-        pb.image_save_name, pb.image_type, pb.image_name 
+        pb.image_save_name, pb.image_type, pb.image_name, A.address_jibun, A.address_detail   
 		from order_table O 
 		join (select p.*, b.*, pi.image_save_name, pi.image_type, pi.image_name from product_table P 
                 join brand B on p.product_brand = b.brand_num 
                 left outer join product_img pi on p.product_no = pi.product_no) pb 
 		on O.order_product = pb.product_no 
+		join Address A on O.order_address = A.address_no 
 		<where>
 			<if test="user_num != null and user_num != ''">
 				and O.order_customer = #{user_num} 
@@ -73,12 +75,13 @@
 	<select id="searchListMyPgTarget" parameterType="map" resultType="OrderMypgVO">
 		select O.order_no, O.order_customer, O.order_brand, O.order_product, O.order_amount, O.order_status, 
 		O.order_totalPrice, O.order_time, pb.product_name, pb.product_price, pb.brand_name, 
-        pb.image_save_name, pb.image_type, pb.image_name 
+        pb.image_save_name, pb.image_type, pb.image_name, A.address_jibun, A.address_detail   
 		from order_table O 
 		join (select p.*, b.*, pi.image_save_name, pi.image_type, pi.image_name from product_table P 
                 join brand B on p.product_brand = b.brand_num 
                 left outer join product_img pi on p.product_no = pi.product_no) pb 
 		on O.order_product = pb.product_no 
+		join Address A on O.order_address = A.address_no 
 		where O.order_customer = #{user_num}
         and  (instr(pb.product_name, #{target}) > 0 or instr(pb.brand_name, #{target}) > 0) 
 		order by O.order_time desc
