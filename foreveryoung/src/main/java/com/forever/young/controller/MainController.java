@@ -20,7 +20,6 @@ import com.forever.young.entity.Notice;
 import com.forever.young.entity.Paging;
 import com.forever.young.entity.Product;
 import com.forever.young.service.MainService;
-import com.forever.young.service.Pager;
 import com.forever.young.service.ProductService;
 
 import lombok.extern.java.Log;
