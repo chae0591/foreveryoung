@@ -33,9 +33,11 @@
 	
 	
 	<!-- 1:1문의 리스트 -->
-	<select id="inquiryList" resultType="Inquiry">
+	<select id="inquiryList" resultType="InquiryVO">
   		<![CDATA[
-		select I.* , C.user_id from inquiry I left outer join customer C on I.user_num = C.user_num 
+		select I.* , C.user_id, R.reply_no from inquiry I
+ 		left outer join customer C on C.user_num = I.user_num
+ 		left outer join reply R on R.inquiry_no = I.inquiry_no
 		where C.user_num = #{user_num} 
 		and I.inquiry_regDate between systimestamp - numtoyminterval(#{monthval}, 'MONTH') and systimestamp 
 		order by I.inquiry_regDate desc

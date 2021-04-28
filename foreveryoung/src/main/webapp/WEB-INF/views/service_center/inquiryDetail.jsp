@@ -125,6 +125,25 @@
     line-height: 30px;
     background-color: #555;
 }
+.inquiryNoReply-box {
+	width: 1020px;
+	height: 100px;
+	margin: 0 auto;
+	background-color: #e5e5e5;
+	margin-top: 10px; 
+	margin-bottom: 10px; 
+	padding-left: 10px;
+}
+.inquiryReply-box {
+	width: 1020px;
+	height: auto;
+	margin: 0 auto;
+	min-height: 100px;
+	background-color: #e5e5e5;
+	margin-top: 10px; 
+	margin-bottom: 10px; 
+	padding-left: 10px;
+}
 </style>
 
 <script>
@@ -180,22 +199,32 @@ $(document).ready(function() {
 		<form:form modelAttribute="inquiryDetail">
 			<form:hidden path="inquiry_no"/>
 			<div class="detailTitle-box">
-				<p><form:input path="inquiry_title" readonly="true"/></p>
-				<p><form:input path="user_id" readonly="true"/></p>
-				<p class="regdate"><form:input path="inquiry_regDate" readonly="true"/></p>
+				<p>${inquiryDetail.inquiry_title}</td></p>
+				<p>${inquiryDetail.user_id}</p>
+				<p class="regdate">${inquiryDetail.inquiry_regDate}</p>
 			</div>
 	
 			<div class="detailText-box">
-				<p><form:input path="inquiry_content" readonly="true"/></p>
+				<p>${inquiryDetail.inquiry_content}</p>
 			</div>	
 			<form:hidden path="user_num"/>
 		 </form:form>
 	</div>
 	
 	<!-- 댓글 박스 -->
-	<div class="inquiryReply-box">
-		<c:out value="${inquiryDetail.reply_content}"></c:out>
+	<c:choose>
+	<c:when test="${empty inquiryDetail.reply_content}">
+	<div class="inquiryNoReply-box">
+		<p>답변대기중입니다</p>
 	</div>
+	</c:when>
+	<c:otherwise>
+	<div class="inquiryReply-box">
+		<p>답변</p>
+		<p>${inquiryDetail.reply_content}</p>
+	</div>
+	</c:otherwise>
+	</c:choose>
 	
 	<!-- 목록/수정/삭제버튼 -->
 	<div class="detailServebtns">
@@ -203,7 +232,7 @@ $(document).ready(function() {
 		<button class="btnModify">수정</button>
 		<button class="btnDelete">게시글 삭제</button>
 	</div>
-	
+
 	<!-- 문의작성버튼 -->
 	<div class="last-box">
 		<button class="inquiryGobtn">1:1 문의하기</button>
