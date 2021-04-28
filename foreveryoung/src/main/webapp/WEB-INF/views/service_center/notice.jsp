@@ -205,6 +205,11 @@
      line-height: 20px;
      padding-top: 280px;
 }
+.noticeList-box {
+	width:1020px;
+	height: auto;
+	margin: 0 auto;
+}
 .notice-list {
 	width: 1020px;
 	height: auto;
@@ -273,7 +278,47 @@
 </style>
 
 <script>
-$(function(){
+$(document).ready(function(){
+	type_notice = function(typevalue){
+		$.ajax({
+			url : '/service_center/noticeType',
+			data : {typeval:typevalue},
+			type : 'POST',
+			success : function(result){
+				console.log("검색");
+				
+				$(".noticeList-box").html(result);
+			}
+		});
+	}
+	
+	$(".notice1").click(function(){
+		type_notice("회원");
+	});
+	$(".notice2").click(function(){
+		type_notice("주문/결제");
+	});
+	$(".notice3").click(function(){
+		type_notice("배송");
+	});
+	$(".notice4").click(function(){
+		type_notice("교환/환불/반품");
+	});
+	$(".notice5").click(function(){
+		type_notice("이벤트/쿠폰");
+	});
+	$(".notice6").click(function(){
+		type_notice("판매자");
+	});
+	$(".notice7").click(function(){
+		type_notice("기타");
+	});
+	
+	// 상품 등록 페이지 이동
+	$("#productWrite").on("click", function(e) {
+		location.href = "/product/productWrite" ;
+	});
+	
 	//처음에 내용 숨기기
 	$(".hide").hide();
 	
@@ -319,11 +364,6 @@ $(function(){
 		self.location = "list" + '${pageMaker.makeQuery(1)}' + "&searchType=" + $("select option:selected").val() + "&keyword=" + encodeURIComponent($('#keywordInput').val());
 	});
 	
-	//아래쪽에서 이 함수를 호출해서 페이지값을 컨트롤러에 맵핑시킨다
-	function list(page){
-	    alert("${map.pager.curPage}");
-	    location.href="notice?curPage="+page;
-	}
 });
 </script>
 
@@ -363,6 +403,7 @@ $(function(){
 			<button class="notice7">기타</button>
 	</div>
 	
+	<div class="noticeList-box">
 	<c:choose>
 	<c:when test="${empty map.noticeList}">
 		<div class="no-notice">
@@ -392,51 +433,9 @@ $(function(){
 		 		</div>
 		</c:forEach>
 		</div>
-		
-		<!-- 페이지 네비게이션 (페이지 알고리즘 관련) 출력 -->
-	<div class="page">
- 	<tr>
-        <td colspan = "7" align = "center">
-            <c:if test="${map.pager.curBlock > 1}">
- 				 <a href="${map.pager.pageBegin}" onclick="list('1')">[처음]</a>
-            </c:if> <!-- 현재 블록이 1블록보다 크면 (뒤쪽에 있기때문에) 처음으로 갈 수 있도록 링크를 추가 -->
-        
-            <c:if test="${map.pager.curBlock > 1}">
-                <a href="${map.pager.prevPage}" onclick="list('${map.pager.prevPage}')">[이전]</a>
-            </c:if> <!-- 현재 블록이 1블록보다 크면 이전 블록으로 이동할 수 있도록 링크 추가 -->
-            
-            <c:forEach var="num"
-                begin="${map.pager.blockBegin}"
-                end="${map.pager.blockEnd}">
-                <c:choose>
-                    <c:when test="${num == map.pager.curPage}">
-                    
-                    <!-- 현재 페이지인 경우 하이퍼링크 제거 -->
-                    <!-- 현재 페이지인 경우에는 링크를 빼고 빨간색으로 처리를 한다. -->
-                        <span style="color:red;">${num}</span>
-                    </c:when>
-                    <c:otherwise>
-                        <a href="${num}" onclick="list('${num}')" >${num}</a>
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
-            
-            
-            <c:if test="${map.pager.curBlock <= map.pager.totBlock}">
-                <a href="${map.pager.nextPage}" onclick="list('${map.pager.nextPage}')">[다음]</a>
-            </c:if> <!-- 현재 페이지블록이 총 페이지블록보다 작으면 다음으로 갈 수있도록 링크를 추가 -->
-            
-            
-            <c:if test="${map.pager.curPage <= map.pager.totPage}">
-                <a href="${map.pager.totPage}" onclick="list('${map.pager.totPage}')">[끝]</a>
-            </c:if> <!-- 현재 페이지블록이 총 페이지블록보다 작거나 같으면 끝으로 갈 수 있도록 링크를 추가함-->
-            </td>
-    </tr>
-	</div>
 		</c:otherwise>
 		</c:choose>
-	
-	
+	</div>
 	
 	<div class="last-box">
 		<button class="inquiryGobtn">1:1 문의하기</button>

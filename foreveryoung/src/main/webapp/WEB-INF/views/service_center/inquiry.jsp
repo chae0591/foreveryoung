@@ -187,8 +187,33 @@
 </style>
 
 <script>
-$(function(){
-
+$(document).ready(function(){
+	search_month = function(monthvalue){
+		$.ajax({
+			url : '/service_center/inquiry_search_month',
+			data : {monthval : monthvalue},
+			type : 'POST',
+			success : function(result){
+				console.log("검색");
+				
+				$(".inquiry-list").html(result);
+			}
+		});
+	}
+	
+	$(".month1").click(function(){
+		search_month(1);
+	});
+	$(".month3").click(function(){
+		search_month(3);
+	});
+	$(".month6").click(function(){
+		search_month(6);
+	});
+	$(".month12").click(function(){
+		search_month(12);
+	});
+	
 	//공지사항으로 이동
 	$(".notice-btn").click(function(){
    			location.href = '/service_center/notice';
@@ -210,7 +235,6 @@ $(function(){
 	$(".inquiryGobtn").click(function(){
    			location.href = '/service_center/inquiryRegister';
 	});
-	
 	
 });
 </script>
