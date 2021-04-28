@@ -50,5 +50,51 @@
     	delete from review where review_num=#{review_num}
     </delete>
     
+    <!-- review recent -->
+    <select id="reviewRecent" resultType="Review" parameterType="int">
+    	select * from Review order by review_date asc
+    </select>
     
+    <!-- review old -->
+    <select id="reviewOld" resultType="Review" parameterType="int">
+    	select * from Review order by review_date desc
+    </select>
+    
+    <!-- review high -->
+    <select id="reviewHigh" resultType="Review" parameterType="int">
+    	select *from Review order by review_score desc
+    </select>
+    
+    <!-- review low -->
+    <select id="reviewLow" resultType="Review" parameterType="int">
+    	select *from Review order by review_score asc
+    </select>    
+    
+    <!-- qnaList-->
+    <select id="qnaList" resultType="Qna">
+		<![CDATA[
+  			  	select * from detail_qna     
+  		]]> 
+    </select>
+    
+    <!-- qnaReplyLIst -->
+    <select id="qnaReplyList" resultType="QnaReply">
+		<![CDATA[
+  			  	select * from detail_qna_reply    
+  		]]>     
+  	</select>
+  	
+ 	<!--qna Register -->
+	<insert id="qnaRegister">
+		insert into detail_qna(detail_qna_no,product_no,user_num,write_title,
+		write_context,qna_state,write_date) values(
+		detail_qna_no.nextval,#{product_no},#{user_num},#{write_title},#{write_context},#{qna_state},sysdate)
+	</insert>
+	
+	<!-- qnaReply -->
+	<insert id="qnaReply">
+		insert into detail_qna_reply(detail_reply_no,detail_qna_no,user_num,reply_context,reply_date) values(
+		detail_reply_no.nextval,#{detail_qna_no},#{user_num},#{reply_context},sysdate)
+	</insert>
+	
 </mapper>
