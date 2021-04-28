@@ -63,7 +63,7 @@ $(document).ready(function () {
 <div class="container">
 	<div class="row">
 		<jsp:include page="mypagetemplate/mypagemenu.jsp"></jsp:include>
-		<div class="col-md-10 col-lg-6">
+		<div class="col-md-8">
 		<div class="contentbox">
 			<form id="edit_pw_form" action="mypage_edit_pw" method="post">
 			

@@ -47,7 +47,7 @@ $(document).ready(function(){
 	<div class="container">
 		<div class="row">
 			<jsp:include page="mypagetemplate/mypagemenu.jsp"></jsp:include>
-			<div class="col-md-10 col-lg-6">
+			<div class="col-md-8">
 				<div class="contentbox">	
 					<h2>관심 등록</h2>
 					<table class="table">
