@@ -113,6 +113,16 @@
 	height : 37px;
 	padding :5px;
 }
+.order-list{
+	cursor:pointer;
+}
+#qna_title{
+	 margin-top : 10px;
+	 font-size : 23px;
+}
+.qna_main{
+	cursor:pointer;
+}
       *{margin:0;padding:0;}
           ul,li{list-style:none;}
           .slide{height:150px;overflow:hidden;position:relative;}
@@ -142,50 +152,76 @@ $(function(){
       result++;
       $("#result").val(result);
       /* 플러스 버튼 처리 이벤트-1. 수량 조절 종료*/
-
       /* 플러스 버튼 처리 이벤트-2. 가격 연산 시작*/   
       $("#total_amount").val($("#result").val() * $("#sell_price").val());
       /* 플러스 버튼 처리 이벤트-2. 가격 연산 종료*/
    });
-
    $("#minus").on("click", function () {
       /* 마이너스 버튼 처리 이벤트-1. 연산 전 validation_check 시작*/
       if($("#result").val() ==1){
    return alert("수량은 1 미만일 수 없습니다.");
       }
-
       /*  마이너스 버튼 처리 이벤트-1. 연산 전 validation_check 종료*/
-
       /* 마이너스 버튼 처리 이벤트-2. 수량 조절 시작*/
       var result =$("#result").val();
       result--;
       $("#result").val(result);
       /* 마이너스 버튼 처리 이벤트-2. 수량 조절 종료*/
-
       /* 마이너스 버튼 처리 이벤트-3. 가격 연산 시작*/   
       $("#total_amount").val($("#result").val() * $("#sell_price").val());
-
       /* 마이너스 버튼 처리 이벤트-3. 가격 연산 종료*/
    });
-
-
-   $("#nice").on("click", function () {
-       /*좋아요 버튼 관련 이벤트 처리 시작*/
+   
+   /*좋아요 불러오기*/
+	$(document).ready(function(){
+		var product_no = $("input[name='product_no']").val();
+		var user_num = $("input[name='user_num']").val();
+		var target = $(this);
+		if(user_num != "") {
+			voteCheck();
+		}
+		
+		function voteCheck() {
+			if(user_num == "") {
+				return false;
+			}else {
+			
+				$.ajax({
+					url : '/vote/checkVote',
+					type: 'GET',
+					data : {'user_num':user_num, 'product_no':product_no},
+					success : function(result) {
+						if(result=="yes"){
+							$("#nice").attr("value","true")
+							$("#vote_img").attr("src", "/img/product/like.png");
+						}else{
+							$("#nice").attr("value","false")
+							$("#vote_img").attr("src", "/img/product/unlike.png");
+						}
+					}
+				});// ajax
+			}
+		}
+	}) //end votecheck 
+		
+/*좋아요 버튼 관련 이벤트 처리 시작*/
+   $("#nice").on("click", function (e) {
+	   e.preventDefault()
        var target = $(this);
        var user_num = $("input[name='user_num']").val();
        var product_no = $("input[name='product_no']").val();
-
+       
          if(user_num == null || user_num == "") {
             location.href="/member/login";
          }
-         var url;
+         var target_url;
          if($(this).attr("value") == "true") {
-            url = "/vote/deleteVote";
+        	 target_url = "/vote/deleteVote";
          } else if ($(this).attr("value") == "false") {
-            url = "/vote/insertVote";
+        	 target_url = "/vote/insertVote";
          }
           $.ajax({
-            url : url,
+            url : target_url,
             data : {'user_num':user_num, 'product_no':product_no},
             type: 'POST',
             success : function(result) {
@@ -198,8 +234,8 @@ $(function(){
                }
             }
          });  // ajax
-
       }); // end 좋아요
+      
    $(".bucket").click(function(){
 		var id = "${check}";
 		var auth = "${auth}";
@@ -278,18 +314,96 @@ $(function(){
      });
 });//menu 끝   
 
-//최신순,인기순 등 review-unit 적용
-	$(function(){
+//최신순,인기순 등 순서정렬
+//최신순
+$(function(){
 		$(".order-list").eq(0).click(function(){
+			var product_no = $("input[name='product_no']").val();
 			$.ajax({
+				url : '/detail_board/recentReview',
+				data : {'product_no':product_no},
 				type : "POST",
-				url : '/detail_board/recent',
-				contentType : 'application/json',
-				data : jsonData,
-				
+				success: function(result){
+					$(".review_filt").empty();
+					for(var i =0; i< result.length; i++){
+						document.createElement("div");
+						$(".review_filt").append("<ul><li><span>"+"아이디"+result[i].user_num+"</span></li></ul>");
+						$(".review_filt").append("<ul><li><span>"+"등록 날짜"+result[i].review_date+"</span></li></ul>");
+						$(".review_filt").append("<ul><li><span>"+"제목"+result[i].review_title+"</span></li></ul>");
+						$(".review_filt").append("<ul><li><span>"+"내용"+result[i].review_content+"</span></li></ul>");
+						$(".review_filt").append("<ul><li><span>"+"점수"+result[i].review_score+"</span></li></ul>");
+					}
+				}
 			});//ajax 끝
 		});//최신순 끝
-	});
+//오래된순
+	$(".order-list").eq(1).click(function(){
+		var target = $(this);
+		var product_no = $("input[name='product_no']").val();
+		$.ajax({
+			url : '/detail_board/oldReview',
+			data : {'product_no':product_no},
+			type : "POST",
+			success : function(result){
+				$(".review_filt").empty();
+				for(var i =0; i< result.length; i++){
+					document.createElement("div");
+					$(".review_filt").append("<ul><li><span>"+"아이디"+result[i].user_num+"</span></li></ul>");
+					$(".review_filt").append("<ul><li><span>"+"등록 날짜"+result[i].review_date+"</span></li></ul>");
+					$(".review_filt").append("<ul><li><span>"+"제목"+result[i].review_title+"</span></li></ul>");
+					$(".review_filt").append("<ul><li><span>"+"내용"+result[i].review_content+"</span></li></ul>");
+					$(".review_filt").append("<ul><li><span>"+"점수"+result[i].review_score+"</span></li></ul>");
+				}
+			}
+		});//ajax 끝
+	});//오래된 순 끝
+	
+//평점 좋은순	
+	$(".order-list").eq(2).click(function(){
+		var target = $(this);
+		var product_no = $("input[name='product_no']").val();
+		$.ajax({
+			url : '/detail_board/highReview',
+			data : {'product_no':product_no},
+			type : "POST",
+			success : function(result){
+				$(".review_filt").empty();
+				for(var i =0; i< result.length; i++){
+					document.createElement("div");
+					$(".review_filt").append("<ul><li><span>"+"아이디"+result[i].user_num+"</span></li></ul>");
+					$(".review_filt").append("<ul><li><span>"+"등록 날짜"+result[i].review_date+"</span></li></ul>");
+					$(".review_filt").append("<ul><li><span>"+"제목"+result[i].review_title+"</span></li></ul>");
+					$(".review_filt").append("<ul><li><span>"+"내용"+result[i].review_content+"</span></li></ul>");
+					$(".review_filt").append("<ul><li><span>"+"점수"+result[i].review_score+"</span></li></ul>");
+				}
+			}
+		});//ajax 끝
+	});//평점 좋은순 끝
+	
+	//평점 낮은순	
+	$(".order-list").eq(3).click(function(){
+		var target = $(this);
+		var product_no = $("input[name='product_no']").val();
+		$.ajax({
+			url : '/detail_board/lowReview',
+			data : {'product_no':product_no},
+			type : "POST",
+			success : function(result){
+				$(".review_filt").empty();
+				for(var i =0; i< result.length; i++){
+					document.createElement("div");
+					$(".review_filt").append("<ul><li><span>"+"아이디"+result[i].user_num+"</span></li></ul>");
+					$(".review_filt").append("<ul><li><span>"+"등록 날짜"+result[i].review_date+"</span></li></ul>");
+					$(".review_filt").append("<ul><li><span>"+"제목"+result[i].review_title+"</span></li></ul>");
+					$(".review_filt").append("<ul><li><span>"+"내용"+result[i].review_content+"</span></li></ul>");
+					$(".review_filt").append("<ul><li><span>"+"점수"+result[i].review_score+"</span></li></ul>");
+				}
+			}
+		});//ajax 끝
+	});//평점 낮은순 끝
+});
+	
+	
 //리뷰 버튼-작성
 	$(function(){
 		$("#review_btn").click(function(){
@@ -309,7 +423,6 @@ $(function(){
 	$(function(){
 		$(".review-modify").click(function(){
 			var id = "${check}";
-
 	        if(id == ''){
 	        	 alert("로그인 후 리뷰작성이 가능합니다.");
 	        	 location.href = '/member/login';
@@ -335,14 +448,51 @@ $(function(){
 		});
 	});//리뷰 버튼-삭제 끝
 	
+//qna질문 클릭시 답변 나올 수 있도록 변환
+ 	$(document).ready(function(){
+		$(".qna_sub").hide();
+		$(".qna_main").click(function(){
+			$(".qna_sub").show();
+		});
+	}); 
+//qna등록
+	$(function(){
+		$("#btn_qnaRegister").click(function(){
+			var id = "${check}";
+			
+	        if(id == ''){
+	        	 alert("로그인 후 리뷰작성이 가능합니다.");
+	        	 location.href = '/member/login';
+	   		 }else{
+	   			 var product_no_val = $("input[name=product_no]").val();
+	   			 location.href = '/detail_board/qnaRegister?product_no=' + product_no_val;
+	    	}
+		});
+	});//qna버튼-작성 끝
+	
+//qna 답변쓰기
+	$(function(){
+		var id = "${check}";
+		var auth = "${auth}";
+		
+		$(".btn_qnaReply").click(function(){
+			if(id = ''){
+		        	 alert("로그인 후 리뷰작성이 가능합니다.");
+		        	 location.href = '/member/login';    	  
+		      }else{
+	   			 var product_no_val = $("input[name=product_no]").val();
+	   			 location.href = '/detail_board/qnaReply?product_no=' + product_no_val;
+		      }
+		});
+	});
+//qna
 });//function 끝
-
 </script>
-
 <body>
 <jsp:include page="../template/header.jsp"></jsp:include>
 <div class="detail-all">
    <input type="hidden" name="user_num" value="${check}">
+   <input type="hidden" name="auth" value="${auth}">
    <input type="hidden" name="product_no" value="${getDetail.product_no}">
       <form:form modelAttribute="getDetail">
       
@@ -366,12 +516,10 @@ $(function(){
                      <span>상품이름</span>
                      <span>${getDetail.product_name} </span>
                   </div>
-
                   <div>
                      <span>상품가격</span>
                      <span>${getDetail.product_price}원 </span>
                   </div>
-
                   <div>
                      <span>배송정보</span>
                      <span>일반배송 | 3,000원 (15,000 원 이상 무료배송 )</span>
@@ -381,7 +529,6 @@ $(function(){
                   <form name="form" method="get">
                      <span>상품 수량</span>
                      <input type="hidden" id="sell_price" name="sell_price" value="${getDetail.product_price}">
-
                      <input type="number" style="height: 23pt;width : 120px;"value="1" min="1" max="100" onchange="change();" id="result" name="amount" >
                      <input type="button" style="height: 23pt;width : 24px;" value=" + " id="plus">
                      <input type="button" style="height: 23pt;width : 25px;" value=" - " id="minus">
@@ -405,7 +552,6 @@ $(function(){
          </div><!-- class="main-info" -->
       </form:form>   
 </div>
-
 <div class="recommend">
    <span style="font-family :sans-serif; font-size : 18px;">이런 상품은 어떠세요?</span>
       <div class="slide">
@@ -586,17 +732,13 @@ $(function(){
 		        <span class="order-list">평점 높은순 |</span>
 		        <span class="order-list">평점 낮은순 |</span>				
 			</div>
-	        <div>
-				<input type="radio" name="order" value="포토리뷰" checked="checked">포토리뷰
-				<input type="radio" name="order" value="일반리뷰">일반리뷰
-	        </div>
 	    </div>    
     
          <hr>
             
             <div class="review_filt">
-               <ul>
                <c:forEach var = "lists" items="${reviewList}">
+               <ul>
                   <li><span>아이디   </span>${lists.user_num}</li>
                   <li><span>등록일   </span>${lists.review_date}</li>
                   <li><span>리뷰 점수   </span>${lists.review_score}</li>
@@ -612,13 +754,37 @@ $(function(){
                      <button>리뷰 좋아요</button>
                      <button>신고하기</button>
                   </li>
-               </c:forEach>
                </ul>
+               </c:forEach>
             </div>
       </div>
       
       <div class="qna">
-      4
+      	<span id="qna_title">★상품 문의사항이 아닌 반품/교환 관련 문의는 고객센터 1:1 문의를 이용해 주세요</span>
+     	<input type="button" value="QnA작성" id="btn_qnaRegister" style="float : right">
+      <hr>
+      
+      <div class="qna_state">
+      		<c:forEach var ="lists" items="${qnaList}">
+      			<div class="qna_main">
+      				<span>${lists.qna_state}</span>
+      				<span>${lists.user_num}</span>
+      				<span>${lists.write_title}</span>
+      				<div class="qna_sub">
+      				<span>${lists.write_context}</span>
+      				<span>${lists.write_date}</span>
+      				</div>
+      			</div>
+      			<input type="button" value="답변하기" class="btn_qnaReply">
+      		</c:forEach>
+      		
+      		<c:forEach var ="replylists" items="${qnaReplyList}">
+      			<div class="qna_sub">
+      				<span>${replylists.reply_context}</span>
+      				<span>${replylists.reply_date}</span>
+      			</div>
+      		</c:forEach>
+      </div>
       </div>
    </div>   <!-- 상세정보 끝 -->
 <jsp:include page="../template/footer.jsp"></jsp:include>

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.forever.young.entity.Brand;
 import com.forever.young.entity.Product;
+import com.forever.young.entity.Qna;
+import com.forever.young.entity.QnaReply;
 import com.forever.young.entity.Review;
 import com.forever.young.repository.BrandRegistRepository;
 import com.forever.young.repository.DetailBoardRepository;
@@ -61,6 +63,43 @@ public class DetailBoardServiceImpl implements DetailBoardService{
 		repository.reviewDelete(review_num);
 	}
 
+	@Override
+	public List<Review> reviewRecent(int product_no) throws Exception {
+		return repository.reviewRecent(product_no);
+	}
+
+	@Override
+	public List<Review> reviewOld(int product_no) throws Exception {
+		return repository.reviewOld(product_no);
+	}
+
+	@Override
+	public List<Review> reviewHigh(int product_no) throws Exception {
+		return repository.reviewHigh(product_no);
+	}
+
+	@Override
+	public List<Review> reviewLow(int product_no) throws Exception {
+		return repository.reviewLow(product_no);
+	}
+
+	@Override
+	public List<Qna> qnaList(int product_no) throws Exception {
+		return repository.qnaList(product_no);
+	}
+
+	@Override
+	public List<QnaReply> qnaReplyList(int product_no) throws Exception {
+		return repository.qnaReplyList(product_no);
+	}
+
+	@Override
+	public void qnaRegister(Qna qna) throws Exception {
+		repository.qnaRegister(qna);
+	}
+
+	@Override
+	public void qnaReply(QnaReply qnaReply) throws Exception {
+		repository.qnaReply(qnaReply);
+	}
 }
-
-
