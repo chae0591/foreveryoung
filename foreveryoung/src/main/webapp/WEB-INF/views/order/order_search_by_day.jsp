@@ -8,16 +8,16 @@
 		<th>날짜</th>
 		<th></th>
 		<th>상품정보</th>
+		<th>배송지</th>
 		<th>상태</th>
-		<th>확인신청</th>
 	</tr>
 </thead>
 <tbody>
 	<c:choose>
 		<c:when test="${empty product_info}">
-			<tr>
-				<td colspan="5">주문 내역이 없습니다.</td>
-			</tr>
+		<tr>
+			<td colspan="5">주문 내역이 없습니다.</td>
+		</tr>
 		</c:when>
 		<c:otherwise>
 			<c:forEach var="order_product" items="${product_info}">
@@ -44,9 +44,12 @@
 					</span>
 				</td>
 				<td>
-					<span><c:out value="${order_product.order_status}"></c:out></span>
+					<c:out value="${order_product.address_jibun}"/>
+					<c:if test="${!empty order_product.address_detail}">
+					,<c:out value="${order_product.address_detail}"/>
+					</c:if>
 				</td>
-				<td><button>확인신청</button></td>
+				<td><span><c:out value="${order_product.order_status}"></c:out></span></td>
 				</tr>
 			</c:forEach>
 		</c:otherwise>

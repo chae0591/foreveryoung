@@ -82,6 +82,9 @@ $(document).ready(function(){
 		}
 	});
 	
+	$(".addAddress-btn").click(function(){
+		location.href="/member/addressAdd";
+	});
 })
 </script>
 </head>
@@ -93,7 +96,7 @@ $(document).ready(function(){
 <div class="container">
 	<div class="row">
 		<jsp:include page="mypagetemplate/mypagemenu.jsp"></jsp:include>
-		<div class="col-md-10 col-lg-6">
+		<div class="col-md-8">
 			<div class="outbox" style="width: 700px">
 				<h2>배송지 목록</h2>
 				<c:choose>
@@ -128,6 +131,8 @@ $(document).ready(function(){
 						</table>
 					</c:otherwise>
 				</c:choose>
+				
+				<input class="input btn btn-primary addAddress-btn" type="button" value="새 배송지 등록">
 			</div>
 		</div>
 	</div>

@@ -1,6 +1,7 @@
 
 package com.forever.young.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.forever.young.entity.Brand;
+import com.forever.young.entity.Notice;
 import com.forever.young.entity.Paging;
 import com.forever.young.entity.Product;
 import com.forever.young.service.MainService;
@@ -34,12 +36,34 @@ public class MainController {
 	
 	
 	//메인화면(상품리스트 불러오기)
-		@GetMapping("/main")
-		public void mainList(Model model) throws Exception{
-			log.info("mainList()");
+	@GetMapping("main")
+	public void mainList(Model model) throws Exception{
+		log.info("mainList()");
 			
-			model.addAttribute("adminList", service.randomList());
+		List<Product> randomList = service.randomList();
+		
+		model.addAttribute("randomList", service.randomList());
 			
 		}
+	
+	//메인화면(검색 후 페이지 이동)
+	@RequestMapping("search/searchResults")
+    public ModelAndView searchList( @RequestParam(defaultValue="") String keyword) throws Exception{
+		log.info("searchList()");
+		
+        //map에 저장하기 위해 list를 만들어서 검색옵션과 키워드를 저장한다.
+        List<Product> searchList = service.searchList(keyword);
+        
+        ModelAndView mav = new ModelAndView();
+        Map<String,Object> map = new HashMap<>();    //넘길 데이터가 많기 때문에 해쉬맵에 저장한 후에 modelandview로 값을 넣고 페이지를 지정
+        
+        map.put("searchList", searchList);                     //map에 list(게시글 목록)을 list라는 이름의 변수로 자료를 저장함.
+        map.put("keyword", keyword);
+        mav.addObject("map", map);                           //modelandview에 map를 저장
+        
+        mav.setViewName("search/searchResults");    //자료를 넘길 뷰의 이름
+        
+        return mav;    //게시판 페이지로 이동
+    }
 
 }

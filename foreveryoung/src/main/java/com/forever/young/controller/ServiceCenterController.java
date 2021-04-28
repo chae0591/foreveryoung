@@ -26,8 +26,8 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.forever.young.entity.Inquiry;
 import com.forever.young.entity.Notice;
+import com.forever.young.entity.Paging;
 import com.forever.young.service.AdminService;
-import com.forever.young.service.Pager;
 import com.forever.young.service.ServiceCenterService;
 
 import lombok.extern.java.Log;
@@ -53,49 +53,66 @@ public class ServiceCenterController {
 	 * 
 	 * }
 	 */
-	@RequestMapping("notice")
+	@RequestMapping("/notice")
     public ModelAndView noticeList(//RequestParam으로 옵션, 키워드, 페이지의 기본값을 각각 설정해준다.
-            @RequestParam(defaultValue="1") int curPage,
             @RequestParam(defaultValue="") String keyword   //키워드의 기본값을 ""으로 한다.
             )
              throws Exception{
 		
 		log.info("noticeList()");
-		
-        //레코드 갯수를 계산
-        int count = 1000;
-        
-        //페이지 관련 설정, 시작번호와 끝번호를 구해서 각각 변수에 저장한다.
-        Pager pager = new Pager(count, curPage);
-        int start = pager.getPageBegin();
-        int end =  pager.getPageEnd();
              
         //map에 저장하기 위해 list를 만들어서 검색옵션과 키워드를 저장한다.
-        List<Notice> noticeList = service.listAll(keyword, start, end);
+        List<Notice> noticeList = service.listAll(keyword, "회원");
         
         ModelAndView mav = new ModelAndView();
         Map<String,Object> map = new HashMap<>();    //넘길 데이터가 많기 때문에 해쉬맵에 저장한 후에 modelandview로 값을 넣고 페이지를 지정
         
         map.put("noticeList", noticeList);                     //map에 list(게시글 목록)을 list라는 이름의 변수로 자료를 저장함.
-        map.put("pager", pager);
-        map.put("count", count);
         map.put("keyword", keyword);
         mav.addObject("map", map);                           //modelandview에 map를 저장
         
-        System.out.println("map : "+map);
         mav.setViewName("service_center/notice");    //자료를 넘길 뷰의 이름
         
         return mav;    //게시판 페이지로 이동
     }
+	//공지사항 타입별 필터링
+	@PostMapping("/noticeType")
+	public ModelAndView noticeTypeList(
+			@RequestParam String typeval, 
+			@RequestParam(defaultValue="") String keyword) throws Exception {
+	
+		  //map에 저장하기 위해 list를 만들어서 검색옵션과 키워드를 저장한다.
+        List<Notice> noticeList = service.listAll(keyword, typeval);
+        
+        ModelAndView mav = new ModelAndView();
+        Map<String,Object> map = new HashMap<>();    //넘길 데이터가 많기 때문에 해쉬맵에 저장한 후에 modelandview로 값을 넣고 페이지를 지정
+        
+        map.put("noticeList", noticeList);                     //map에 list(게시글 목록)을 list라는 이름의 변수로 자료를 저장함.
+        map.put("keyword", keyword);
+        mav.addObject("map", map);                           //modelandview에 map를 저장
+        
+        mav.setViewName("service_center/noticeType");    //자료를 넘길 뷰의 이름
+        
+        return mav;    //게시판 페이지로 이동
+	}
 	
 	//1:1문의 리스트GET
 	@GetMapping("/inquiry")
 	public String inquiryList(Model model, HttpSession session) throws Exception {
 		log.info("inquiryList()");
 		
-		model.addAttribute("inquiryList", service.inquiryList((int)session.getAttribute("check")));
+		model.addAttribute("inquiryList", service.inquiryList((int)session.getAttribute("check"), 24));
 		
 		return "service_center/inquiry";
+	}
+	//1:1문의 리스트 달별 필터링
+	@PostMapping("/inquiry_search_month")
+	public String getSearchMonth(@RequestParam int monthval, Model model, HttpSession session) throws Exception {
+		log.info("getSearchMonth()");
+		
+		model.addAttribute("inquiryList", service.inquiryList((int)session.getAttribute("check"), monthval));
+		
+		return "service_center/inquiry_search";
 	}
 	
 	//1:1문의 작성GET

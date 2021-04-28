@@ -138,7 +138,7 @@
 	display: block;
 	border-bottom: 1px solid #e5e5e5;
 }
-.inquiry-list > .check-inquiry > ul > li > .row1 {
+.inquiry-list > .check-inquiry > ul > li > .onReply {
 	width: 15%;
 	height: 100%;
 	float: left;
@@ -146,14 +146,26 @@
 	padding-top: 20px;
 	padding-left: 50px;
 }
-.inquiry-list > .check-inquiry > ul > li > .row2 {
-	width: 85%;
+.inquiry-list > .check-inquiry > ul > li > .offReply {
+	width: 15%;
 	height: 100%;
 	float: left;
 	display: inline-block;
 	padding-top: 20px;
+	padding-left: 50px;
 }
-.inquiry-list > .check-inquiry > ul > li > .row1 > strong {
+.inquiry-list > .check-inquiry > ul > li > .onReply > strong {
+	display: inline-block;
+    width: 70px;
+    height: 20px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    line-height: 20px;
+    background: #00C8F5;
+}
+.inquiry-list > .check-inquiry > ul > li > .offReply > strong {
 	display: inline-block;
     width: 70px;
     height: 20px;
@@ -163,6 +175,13 @@
     text-align: center;
     line-height: 20px;
     background: #555;
+}
+.inquiry-list > .check-inquiry > ul > li > .row2 {
+	width: 85%;
+	height: 100%;
+	float: left;
+	display: inline-block;
+	padding-top: 20px;
 }
 .inquiry-list > .check-inquiry a {
 	float: left;
@@ -187,8 +206,33 @@
 </style>
 
 <script>
-$(function(){
-
+$(document).ready(function(){
+	search_month = function(monthvalue){
+		$.ajax({
+			url : '/service_center/inquiry_search_month',
+			data : {monthval : monthvalue},
+			type : 'POST',
+			success : function(result){
+				console.log("검색");
+				
+				$(".inquiry-list").html(result);
+			}
+		});
+	}
+	
+	$(".month1").click(function(){
+		search_month(1);
+	});
+	$(".month3").click(function(){
+		search_month(3);
+	});
+	$(".month6").click(function(){
+		search_month(6);
+	});
+	$(".month12").click(function(){
+		search_month(12);
+	});
+	
 	//공지사항으로 이동
 	$(".notice-btn").click(function(){
    			location.href = '/service_center/notice';
@@ -210,7 +254,6 @@ $(function(){
 	$(".inquiryGobtn").click(function(){
    			location.href = '/service_center/inquiryRegister';
 	});
-	
 	
 });
 </script>
@@ -258,7 +301,14 @@ $(function(){
 		 				<input type="hidden" name="inquiry_no" value="${inquiryList.inquiry_no}">
 		 				<input type="hidden" name="user_num" value="${inquiryList.user_id}">
 		 				<input type="hidden" name="user_num" value="${inquiryList.inquiry_regDate}">
-		 				<div class="row1"><strong>답변대기</strong></div>
+		 				<c:choose>
+							<c:when test="${ inquiryList.reply_no == 0}">
+									<div class="offReply"><strong>답변대기</strong></div>
+							</c:when>
+							<c:otherwise>
+									<div class="onReply"><strong>답변완료</strong></div>
+							</c:otherwise>
+							</c:choose>
 		 				<div class="row2"><a href="/service_center/inquiryDetail?inquiry_no=${inquiryList.inquiry_no}"><c:out value="${inquiryList.inquiry_title}" /></a></div>
 		 			</li>
 		 			</c:forEach>

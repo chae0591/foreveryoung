@@ -86,7 +86,7 @@ $(document).ready(function(){
 	<div class="container">
 		<div class="row">
 			<jsp:include page="mypagetemplate/mypagemenu.jsp"></jsp:include>
-			<div class="col-md-10 col-lg-6">
+			<div class="col-md-8">
 				<div class="contentbox">
 					<h2>결제 목록</h2>
 					<div class="outbox">
@@ -110,8 +110,8 @@ $(document).ready(function(){
 									<th>날짜</th>
 									<th></th>
 									<th>상품정보</th>
+									<th>배송지</th>
 									<th>상태</th>
-									<th>확인신청</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -146,9 +146,12 @@ $(document).ready(function(){
 												</span>
 											</td>
 											<td>
-												<span><c:out value="${order_product.order_status}"></c:out></span>
+												<c:out value="${order_product.address_jibun}"/>
+												<c:if test="${!empty order_product.address_detail}">
+												,<c:out value="${order_product.address_detail}"/>
+												</c:if>
 											</td>
-											<td><button>확인신청</button></td>
+											<td><span><c:out value="${order_product.order_status}"></c:out></span></td>
 											</tr>
 										</c:forEach>
 									</c:otherwise>
