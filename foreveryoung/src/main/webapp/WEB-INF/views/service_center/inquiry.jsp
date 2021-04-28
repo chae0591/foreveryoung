@@ -306,7 +306,7 @@ $(document).ready(function(){
 									<div class="offReply"><strong>답변대기</strong></div>
 							</c:when>
 							<c:otherwise>
-									<div class="onReply"><strong>답변완료1</strong></div>
+									<div class="onReply"><strong>답변완료</strong></div>
 							</c:otherwise>
 							</c:choose>
 		 				<div class="row2"><a href="/service_center/inquiryDetail?inquiry_no=${inquiryList.inquiry_no}"><c:out value="${inquiryList.inquiry_title}" /></a></div>
