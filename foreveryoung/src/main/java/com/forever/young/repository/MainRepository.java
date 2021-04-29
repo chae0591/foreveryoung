@@ -8,11 +8,11 @@ import com.forever.young.entity.Product;
 
 public interface MainRepository {
 	
-	public List<Product> mainList() throws Exception;
-	
 	public List<Product> randomList() throws Exception;
-	public List<Product> bestList() throws Exception;
+	public List<Product> bestList(String lankval) throws Exception;
 	public List<Product> newList() throws Exception;
 	
 	public List<Product> searchList(String keyword) throws Exception;
+
+
 }

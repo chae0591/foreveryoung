@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,13 +38,32 @@ public class MainController {
 	
 	//메인화면(상품리스트 불러오기)
 	@GetMapping("main")
-	public void mainList(Model model) throws Exception{
-		log.info("mainList()");
-			
+	public String productList(Model model) throws Exception {
+
 		List<Product> randomList = service.randomList();
+		List<Product> bestList = service.bestList("skincare");
+		List<Product> newList = service.newList();
 		
-		model.addAttribute("randomList", service.randomList());
+		model.addAttribute("randomList", randomList);
+		model.addAttribute("newList", newList);
+		model.addAttribute("bestList", bestList);
+		
+		return "main";
+	}
+	
+	//메인화면(베스트 카테고리별 불러오기)
+	@PostMapping("mainBest")
+	public String bestLankList(Model model, @RequestParam String lankval) throws Exception {
+
+			List<Product> randomList = service.randomList();
+			List<Product> bestList = service.bestList(lankval);
+			List<Product> newList = service.newList();
 			
+			model.addAttribute("randomList", randomList);
+			model.addAttribute("newList", newList);
+			model.addAttribute("bestList", bestList);
+			
+			return "mainBest";
 		}
 	
 	//메인화면(검색 후 페이지 이동)
