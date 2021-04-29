@@ -278,7 +278,7 @@ h3 {
 	$(document).ready(function(){
 		var user_num = $("input[name='user_num']").val();
 		if(user_num != "") {
-			voteCheck();
+			voteCheck(); 
 		}
 		
 		function voteCheck() {

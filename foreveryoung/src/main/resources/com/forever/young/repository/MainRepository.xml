@@ -15,53 +15,40 @@
         	inner join brand b on p.product_brand = b.brand_num
 		where
 			image_type = 'N'
-		order by
-			product_regdate desc
+		order by dbms_random.value
 	</select>
 	
 	<!-- 베스트 상품조회 -->
 	<select id="bestList" resultType="Product">
 		select
 			rn, 
-	        p.*,
-	        I.image_save_name,
-	        I.image_type,
-	        I.image_name
-		from(
-		    select
-		        rownum rn,
-		        순위,
-		        order_product
+	        p.*, I.image_save_name, I.image_type, I.image_name
+		from(select rownum rn, 순위, order_product
 		    from(
-		        select
-		            order_product,
-		            sum(order_amount)total,
+		        select order_product, sum(order_amount)total,
 		            dense_rank() over(order by sum(order_amount) desc) 순위
-		        from
-		            order_table
-		        group by
-		            order_product
+		        from order_table
+		        group by order_product
 		        )
 		    where
-		        순위 between 1 and 3
+		        순위 between 1 and 8
 		    )tmp
 			    inner join product_table p on tmp.order_product = p.product_no
 			    inner join product_img I on p.product_no = I.product_no
 			where
-			    I.image_type='N'
+			    I.image_type='N' and p.product_category=#{lankval}
 	</select>
 	
 	<!-- 신제품 상품조회 -->
 	<select id="newList" resultType="Product">
 		select
-			p.*, i.image_save_name, i.image_type, i.image_name
+			p.*, i.image_save_name, i.image_type, i.image_name, b.brand_name
 		from
-        	product_table P
-        	inner join product_img i on p.product_no = i.product_no
+        	product_table P inner join product_img i on p.product_no = i.product_no
+        	inner join brand b on p.product_brand = b.brand_num
 		where
 			image_type = 'N'
-		order by
-			product_regdate desc
+		order by product_regdate desc
 	</select>
 	
 	<select id="searchList" resultType="Product">

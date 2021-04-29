@@ -23,27 +23,27 @@ public class MainServiceImpl implements MainService {
 	
 	@Autowired
 	private MainRepository repository;
-	
-	@Override
-	public List<Product> mainList() throws Exception {
-		return repository.mainList();
-	}
-
-	public List<Product> randomList() throws Exception {
-		return repository.randomList();
-	}
-	
-	public List<Product> bestList() throws Exception {
-		return repository.bestList();
-	}
-	
-	public List<Product> newList() throws Exception {
-		return repository.newList();
-	}
 
 	//목록 (검색 기능을 포함)
 	@Override
 	public List<Product> searchList(String keyword) throws Exception {
 		return repository.searchList(keyword);
 	}
+
+	@Override
+	public List<Product> randomList() throws Exception {
+		return repository.randomList();
+	}
+
+	@Override
+	public List<Product> bestList(String lankval) throws Exception {
+		return repository.bestList(lankval);
+	}
+
+	@Override
+	public List<Product> newList() throws Exception {
+		return repository.newList();
+	}
+
+	
 }
