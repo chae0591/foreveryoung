@@ -50,17 +50,18 @@ var randomScalingFactor = function(){ return Math.round(Math.random()*1000)};
 
 	var pieData = [
 			{
-				value: 4,
+				value: 300,
 				color:"#30a5ff",
 				highlight: "#62b9fb",
-				label: "Male"
+				label: "남자"
 			},
 			{
-				value: 5,
+				value: 50,
 				color: "#ffb53e",
 				highlight: "#fac878",
-				label: "Female"
+				label: "여자"
 			}
+
 		];
 			
 	var doughnutData = [
@@ -68,43 +69,43 @@ var randomScalingFactor = function(){ return Math.round(Math.random()*1000)};
 					value: 30,
 					color:"#30a5ff",
 					highlight: "#62b9fb",
-					label: "Blue"
+					label: "스킨케어"
 				},
 				{
-					value: 5,
+					value: 50,
 					color: "#ffb53e",
 					highlight: "#fac878",
-					label: "Orange"
+					label: "메이크업"
 				},
 				{
-					value: 10,
+					value: 100,
 					color: "#1ebfae",
 					highlight: "#3cdfce",
-					label: "Teal"
+					label: "바디케어"
 				},
 				{
-					value: 20,
+					value: 120,
 					color: "#f9243f",
 					highlight: "#f6495f",
-					label: "Red"
-				}
+					label: "헤어케어"
+				},
 				{
-					value: 11,
-					color: "#a814e7",
-					highlight: "#ce69e7",
-					label: "purple"
-				}
+					value: 120,
+					color:"#30a5ff",
+					highlight: "#62b9fb",
+					label: "향수/디퓨저"
+				},
 				{
-					value: 15,
-					color: "#8b5927",
-					highlight: "#b98e69",
-					label: "brown"
+					value: 120,
+					color: "#1ebfae",
+					highlight: "#3cdfce",
+					label: "맨스케어"
 				}
 
 			];
 			
 	var radarData = {
-	    labels: ["makeup", "manscare", "bodycare", "haircare", "perfume", "skincare"],
+	    labels: ["스킨케어",  "메이크업", "바디케어", "헤어케어", "향수/디퓨저",  "맨스케어"],
 	    datasets: [
 	        {
 	            label: "My First dataset",

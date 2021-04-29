@@ -87,7 +87,7 @@
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Line Chart
+						월별 접속자 수
 					</div>
 					<div class="panel-body">
 						<div class="canvas-wrapper">
@@ -144,7 +144,7 @@
 			<div class="col-md-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						카테고리별 상품 구배비율
+						카테고리별 상품 구매그래프
 					</div>
 					<div class="panel-body">
 						<div class="canvas-wrapper">
