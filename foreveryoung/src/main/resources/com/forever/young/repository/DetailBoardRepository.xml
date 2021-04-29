@@ -97,4 +97,8 @@
 		detail_reply_no.nextval,#{detail_qna_no},#{user_num},#{reply_context},sysdate)
 	</insert>
 	
+	<!-- 답변 대기 /완료 -->
+	<update id="qnaReplyState" parameterType="int">
+		update detail_qna set qna_state ='답변완료' where detail_qna_no=#{detail_qna_no}
+	</update>
 </mapper>

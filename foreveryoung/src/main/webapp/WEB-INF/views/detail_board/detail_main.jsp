@@ -472,16 +472,17 @@ $(function(){
 	
 //qna 답변쓰기
 	$(function(){
-		var id = "${check}";
-		var auth = "${auth}";
-		
 		$(".btn_qnaReply").click(function(){
-			if(id = ''){
+			
+		var id = "${check}";
+		var product_no= $("input[name=product_no]").val();
+			alert(id);
+			if(id == ''){
 		        	 alert("로그인 후 리뷰작성이 가능합니다.");
 		        	 location.href = '/member/login';    	  
 		      }else{
-	   			 var product_no_val = $("input[name=product_no]").val();
-	   			 location.href = '/detail_board/qnaReply?product_no=' + product_no_val;
+	   			 var qna_no = $("input[name=qna_no]").val();
+	   			 location.href = '/detail_board/qnaReply?qna_no=' + $(this).next().val()+"&product_no="+product_no;
 		      }
 		});
 	});
@@ -492,7 +493,6 @@ $(function(){
 <jsp:include page="../template/header.jsp"></jsp:include>
 <div class="detail-all">
    <input type="hidden" name="user_num" value="${check}">
-   <input type="hidden" name="auth" value="${auth}">
    <input type="hidden" name="product_no" value="${getDetail.product_no}">
       <form:form modelAttribute="getDetail">
       
@@ -776,6 +776,7 @@ $(function(){
       				</div>
       			</div>
       			<input type="button" value="답변하기" class="btn_qnaReply">
+      			<input type="hidden" name="qna_no" value="${lists.detail_qna_no}">
       		</c:forEach>
       		
       		<c:forEach var ="replylists" items="${qnaReplyList}">
