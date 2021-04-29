@@ -92,7 +92,7 @@
                         
                         <input type="button" value="로그인" class="login-btn btn btn-md btn-primary">
 				        <c:if test="${not empty param.error}">
-				        	<div style="color:red;">입력한 정보가 맞지 않습니다.</div>
+				        	<div><span style="color:red;">입력한 정보가 맞지 않습니다.</span></div>
 				        </c:if>
 				        <hr>
 				        <input type="button" value="구매회원가입" class="join-btn btn btn-outline-secondary" id="join_btn">

@@ -119,7 +119,7 @@ $(document).ready(function () {
 	                </div>
 	                <div class="row">
 	                    <label>Password</label>
-	                    <input type="button" id="eidtPw-btn" class="input input-inline" value="비밀번호 변경">
+	                    <input type="button" id="editPw-btn" class="input input-inline" value="비밀번호 변경">
 	                    <span>&nbsp;</span>
 	                </div>
 	                <div class="row">

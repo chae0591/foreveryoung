@@ -189,8 +189,8 @@ $(document).ready(function(){
 		</div>
 		<br>
 		<hr>
-		<div class="row"><input id="test" type="button" value="test"></div>
-		<input type="submit" value="입력">
+		<div class="row"><input id="test" type="button" value="결제하기"></div>
+		<!-- <input type="submit" value="입력"> -->
 	</form>
 	</div>
 <footer>
