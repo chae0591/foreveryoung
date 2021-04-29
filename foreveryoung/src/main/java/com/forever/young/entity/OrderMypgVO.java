@@ -19,6 +19,9 @@ public class OrderMypgVO {
 	private String image_type;
 	private String image_name;
 	
+	private String address_jibun;
+	private String address_detail;
+	
 	public int getOrder_no() {
 		return order_no;
 	}
@@ -106,6 +109,20 @@ public class OrderMypgVO {
 		this.image_name = image_name;
 	}
 	
+	
+	
+	public String getAddress_jibun() {
+		return address_jibun;
+	}
+	public void setAddress_jibun(String address_jibun) {
+		this.address_jibun = address_jibun;
+	}
+	public String getAddress_detail() {
+		return address_detail;
+	}
+	public void setAddress_detail(String address_detail) {
+		this.address_detail = address_detail;
+	}
 	@Override
 	public String toString() {
 		return "OrderMypgVO [order_no=" + order_no + ", order_customer=" + order_customer + ", order_brand="
@@ -113,8 +130,10 @@ public class OrderMypgVO {
 				+ ", order_status=" + order_status + ", order_totalPrice=" + order_totalPrice + ", order_time="
 				+ order_time + ", product_name=" + product_name + ", product_price=" + product_price + ", brand_name="
 				+ brand_name + ", image_save_name=" + image_save_name + ", image_type=" + image_type + ", image_name="
-				+ image_name + "]";
+				+ image_name + ", address_jibun=" + address_jibun + ", address_detail=" + address_detail + "]";
 	}
+	
+	
 	
 	
 }

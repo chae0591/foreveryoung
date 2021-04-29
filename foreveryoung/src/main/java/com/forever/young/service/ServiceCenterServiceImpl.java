@@ -15,6 +15,7 @@ import com.forever.young.repository.ServiceCenterRepository;
 import com.forever.young.entity.Inquiry;
 import com.forever.young.entity.InquiryVO;
 import com.forever.young.entity.Notice;
+import com.forever.young.entity.Paging;
 
 @Service
 public class ServiceCenterServiceImpl implements ServiceCenterService{
@@ -31,8 +32,8 @@ public class ServiceCenterServiceImpl implements ServiceCenterService{
 	}
 	
 	@Override
-	 public List<Inquiry> inquiryList(Integer user_num) throws Exception {
-	      return repository.inquiryList(user_num);
+	 public List<Inquiry> inquiryList(Integer user_num, int monthval) throws Exception {
+	      return repository.inquiryList(user_num, monthval);
 	 }
 	
 	@Override
@@ -62,9 +63,11 @@ public class ServiceCenterServiceImpl implements ServiceCenterService{
 	
 	//목록 (페이지 나누기, 검색 기능을 포함)
     //매개변수는 시작 레코드 번호, 끝번호, 옵션과 키워드가 들어간다.
+	
 	@Override
-	public List<Notice> listAll(String keyword, int start, int end) throws Exception {
-		return repository.listAll(keyword, start, end);
+	public List<Notice> listAll(String keyword, String typeval) throws Exception {
+		return repository.listAll(keyword, typeval);
 	}
+
 
 }
