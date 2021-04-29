@@ -125,7 +125,7 @@ public class DetailBoardContorller {
    public List<Review> reviewHigh(Review review, Model model, HttpSession session, @RequestParam int product_no) throws Exception{
 	   return service.reviewHigh(product_no);
    }
-   
+   //평점 낮은순
    @ResponseBody
    @PostMapping("lowReview")
    public List<Review> reviewLow(Review review, Model model, HttpSession session, @RequestParam int product_no) throws Exception{
