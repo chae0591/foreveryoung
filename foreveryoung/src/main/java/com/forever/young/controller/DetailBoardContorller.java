@@ -149,32 +149,30 @@ public class DetailBoardContorller {
 
         service.qnaRegister(qna);
 
-         model.addAttribute("qnaRegister", "리뷰가 성공적으로 완료되었습니다.");
+         model.addAttribute("qnaRegister", "댓글이 성공적으로 작성되었습니다.");
          RedirectView rv = new RedirectView("detail_main");
          rv.addStaticAttribute("product_no", qna.getProduct_no());
           return rv;
    }
-   
-   //qnaReply 작성Get
+   //qnaReply 작성Get-------------------------------------------------ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
    @GetMapping("/qnaReply")
-   public String getqnaReply(QnaReply qnaReply, Model model, HttpSession session, @RequestParam int product_no) throws Exception {
+   public String getqnaReply(Qna qna,Model model, HttpSession session, @RequestParam int qna_no,@RequestParam int product_no) throws Exception {
 	   
-	   model.addAttribute("getDetail", service.getDetail(product_no));
-	   qnaReply.setUser_num((int)session.getAttribute("check"));
+	   model.addAttribute("product_no",product_no);
+	   model.addAttribute("qna_no", qna_no);
 	   
 	   return "detail_board/qnaReply";
    }
    //qnaReply 작성 POST
    @PostMapping("/qnaReply")
-   public  RedirectView postqnaReply(@ModelAttribute QnaReply qnaReply, Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
-	   log.info("postqnaReply()");
+   public  RedirectView postqnaReply(@ModelAttribute QnaReply qnaReply, @RequestParam int qna_no, @RequestParam int product_no,Model model, HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
 	   qnaReply.setUser_num((int)session.getAttribute("check"));
+	   qnaReply.setDetail_qna_no(qna_no);
+	   service.qnaReply(qnaReply,qna_no);
 	   
-	   service.qnaReply(qnaReply);
-	   
-	   model.addAttribute("qnaReply", "댓글이 성공적으로 완료되었습니다.");
+	   model.addAttribute("qnaReply", "댓글이 성공적으로 작성되었습니다.");
 	   RedirectView rv = new RedirectView("detail_main");
-	   rv.addStaticAttribute("product_no", qnaReply.getUser_num());
+	   rv.addStaticAttribute("product_no", product_no);
 	   return rv;
    }
 }

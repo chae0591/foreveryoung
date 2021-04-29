@@ -99,7 +99,10 @@ public class DetailBoardServiceImpl implements DetailBoardService{
 	}
 
 	@Override
-	public void qnaReply(QnaReply qnaReply) throws Exception {
+	public void qnaReply(QnaReply qnaReply,int detail_qna_no) throws Exception {
 		repository.qnaReply(qnaReply);
+		repository.qnaReplyState(detail_qna_no);
 	}
+	
+	
 }

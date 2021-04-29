@@ -3,7 +3,7 @@ package com.forever.young.entity;
 import java.util.Date;
 
 public class Qna {
-	private int qna_no;
+	private int detail_qna_no;
 	private int product_no;
 	private int user_num;
 	private String write_title;
@@ -13,11 +13,11 @@ public class Qna {
 	public Qna() {
 		super();
 	}
-	public int getQna_no() {
-		return qna_no;
+	public int getDetail_qna_no() {
+		return detail_qna_no;
 	}
-	public void setQna_no(int qna_no) {
-		this.qna_no = qna_no;
+	public void setDetail_qna_no(int detail_qna_no) {
+		this.detail_qna_no = detail_qna_no;
 	}
 	public int getProduct_no() {
 		return product_no;
@@ -57,9 +57,9 @@ public class Qna {
 	}
 	@Override
 	public String toString() {
-		return "Qna [qna_no=" + qna_no + ", product_no=" + product_no + ", user_num=" + user_num + ", write_title="
-				+ write_title + ", write_context=" + write_context + ", qna_state=" + qna_state + ", write_date="
-				+ write_date + "]";
+		return "Qna [detail_qna_no=" + detail_qna_no + ", product_no=" + product_no + ", user_num=" + user_num
+				+ ", write_title=" + write_title + ", write_context=" + write_context + ", qna_state=" + qna_state
+				+ ", write_date=" + write_date + "]";
 	}
-	
+
 }

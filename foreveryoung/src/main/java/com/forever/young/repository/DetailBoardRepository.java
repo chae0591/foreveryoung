@@ -23,5 +23,6 @@ public interface DetailBoardRepository {
 	public List<QnaReply> qnaReplyList(int product_no) throws Exception;
 	public void qnaRegister(Qna qna)throws Exception;
 	public void qnaReply(QnaReply qnaReply)throws Exception;
+	public void qnaReplyState(int detail_qna_no) throws Exception;
 	public int reviewRegisterAfter()throws Exception;	
 }

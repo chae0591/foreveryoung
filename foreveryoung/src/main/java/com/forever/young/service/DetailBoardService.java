@@ -22,6 +22,6 @@ public interface DetailBoardService {
 	public List<Qna> qnaList(int product_no)throws Exception;
 	public List<QnaReply> qnaReplyList(int product_no) throws Exception;
 	public void qnaRegister(Qna qna)throws Exception;
-	public void qnaReply(QnaReply qnaReply)throws Exception;
+	public void qnaReply(QnaReply qnaReply, int detial_qna_no)throws Exception;
 	public int reviewRegisterAfter()throws Exception;
 }

@@ -26,7 +26,8 @@ $(function(){
 <jsp:include page="../template/header.jsp"></jsp:include>
 	<form action ="qnaReply" method="post" id="qnaReply">
     <input type="hidden" name="user_num" value="${check}">
-    <input type="hidden" name="product_no" value="${getDetail.product_no}">
+    <input type="hidden" name="qna_no" value="${qna_no}">
+    <input type="hidden" name="product_no" value="${product_no}">
       <div>
            <h1>QnA 답변 작성</h1>
       </div>      
