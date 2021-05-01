@@ -458,7 +458,7 @@ $(document).ready(function(){
 				<c:forEach var="randomList" items="${randomList}" begin="1" end="8" step="1" >
 					<li>
 						<input type="hidden" name="product_no" value="${randomList.product_no}">
-						<a class="detail" href="#">
+						<a class="detail" href="${pageContext.request.contextPath}/detail_board/detail_main?product_no=${randomList.product_no}">
  							<img class="img-responsive" src="/viewImg?fileName=${randomList.image_save_name}&imageType=${randomList.image_type}">
  							<label class="brand"><c:out value="${randomList.brand_name}"/></label>
 							<label><c:out value="${randomList.product_name}" /></label>

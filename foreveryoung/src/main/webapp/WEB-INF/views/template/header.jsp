@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="javatime" uri="http://sargue.net/jsptags/time" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -287,9 +290,9 @@ $(function(){
 </div>
 <div class="top-box">
 	<div class="logo-box">logo</div>
-	<form class="form-inline" action="<%=request.getContextPath()%>/search/search_results" method="post">
+	<form class="form-inline" action="searchResults" method="post">
 		<div class="search-box">
-    		<input type="text" class="search-input"  placeholder="Search">
+    		<input type="text" name="keyword" class="search-input"  placeholder="Search" value="${map.keyword}">
     	 	<input type="submit" class="into-btn">
     	</div>
     </form>
