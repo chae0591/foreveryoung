@@ -72,6 +72,10 @@
 	border-bottom: 2px solid #666;
 	position: relative;
 }
+.inquiryTitle {
+	font-size: 16px;
+	font-weight: 600;
+}
 .detailTitle-box {
 	width: 100%;
 	height: 70px;
@@ -106,6 +110,16 @@
     font-size: 18px;
     line-height: 30px;
     background-color: #555;
+}
+.detailServebtns  button:hover {
+	width: 33%;
+	height: 50px;
+	color: #fff;
+    font-weight: 700;
+    border-radius: 5px;
+    font-size: 18px;
+    line-height: 30px;
+    background-color:  #00C8F5;
 }
 .last-box {
 	width: 1020px;
@@ -199,8 +213,8 @@ $(document).ready(function() {
 		<form:form modelAttribute="inquiryDetail">
 			<form:hidden path="inquiry_no"/>
 			<div class="detailTitle-box">
-				<p>${inquiryDetail.inquiry_title}</td></p>
 				<p>${inquiryDetail.user_id}</p>
+				<p class="inquiryTitle">${inquiryDetail.inquiry_title}</p>
 				<p class="regdate">${inquiryDetail.inquiry_regDate}</p>
 			</div>
 	

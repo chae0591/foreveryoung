@@ -111,12 +111,16 @@ hr {
     position: relative;
     background-color: #ffc948;
 }
+.slide ul li {
+	text-align: center;
+	margin: 0 auto;
+}
    .slide{height:300px;overflow:hidden;position:relative;}
     .slide li{position:absolute;left:0;right:0;top:0;bottom:0;opacity:0;transition:1s;}
-    .slide li:nth-child(1){background:#ffa;}
-    .slide li:nth-child(2){background:#faa;}
-    .slide li:nth-child(3){background:#afa;}
-    .slide li:nth-child(4){background:#aaf;}
+    .slide li:nth-child(1){background:#E3ECE9;}
+    .slide li:nth-child(2){background:#D1E3DF;}
+    .slide li:nth-child(3){background:#E2E3D1;}
+    .slide li:nth-child(4){background:#E4BECC;}
     .slide input{display:none;}
     .slide .bullet{position:absolute;bottom:20px;left:0;right:0;text-align:center;z-index:10;}
     .slide .bullet label{
@@ -137,6 +141,34 @@ hr {
     #pos2:checked ~ .bullet label:nth-child(2),
     #pos3:checked ~ .bullet label:nth-child(3),
     #pos4:checked ~ .bullet label:nth-child(4){background:#666;}
+   
+.banner-title {
+	position: absolute;
+    left: 270px;
+    top: 55%;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+}  
+.slide_titile {
+	width: 170px;
+    font-size: 26px;
+    line-height: 28px;
+    letter-spacing: 0;
+    color: #333;
+    font-weight: bold;
+    word-break: keep-all;
+    white-space: pre-line;
+}   
+
+.slide_titile2 {
+	width: 170px;
+    margin-top: 18px;
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: 0;
+    color: #555;
+} 
     
 /* 상품 리스트 */
 .pList1, .pList2, .pList3 {
@@ -434,10 +466,30 @@ $(document).ready(function(){
     <input type="radio" name="pos" id="pos3">
     <input type="radio" name="pos" id="pos4">
     <ul>
-      <li></li>
-      <li></li>
-      <li></li>
-      <li></li>
+      <li><a href="${pageContext.request.contextPath}/product/categoryList?category=makeup">
+      		<img src="/resources/img/cleanging.jpg" width="800" height="300">
+      		<div class="banner-title"><p class="slide_titile">강력한 순삭 딥클렌징</p>
+      		<p class="slide_titile2">화해 어플 1위</p></div>
+      		</a>		
+      </li>
+      <li><a href="${pageContext.request.contextPath}/product/categoryList?category=skincare">
+      		<img src="/resources/img/laneige.jpg" width="800" height="300">
+      		<div class="banner-title"><p class="slide_titile">한율X라네즈</p>
+      		<p class="slide_titile2">베스트 콜라보</p></div>
+      		</a>			
+      </li>
+      <li><a href="${pageContext.request.contextPath}/product/categoryList?category=bodycare">
+      		<img src="/resources/img/happy.jpg" width="800" height="300">
+      		<div class="banner-title"><p class="slide_titile">일리윤&해피바스</p>
+      		<p class="slide_titile2">역대급 할인 찬스!</p></div>
+      		</a>	
+      </li>
+      <li><a href="${pageContext.request.contextPath}/product/categoryList?category=makeup">
+      		<img src="/resources/img/banilaco.jpg" width="800" height="300">
+      		<div class="banner-title"><p class="slide_titile">실패NO 꿀조합</p>
+      		<p class="slide_titile2">봄에는 이 조합!</p></div>
+      		</a>
+      </li>
     </ul>
     <p class="bullet">
       <label for="pos1">1</label>
@@ -458,7 +510,7 @@ $(document).ready(function(){
 				<c:forEach var="randomList" items="${randomList}" begin="1" end="8" step="1" >
 					<li>
 						<input type="hidden" name="product_no" value="${randomList.product_no}">
-						<a class="detail" href="#">
+						<a class="detail" href="${pageContext.request.contextPath}/detail_board/detail_main?product_no=${randomList.product_no}">
  							<img class="img-responsive" src="/viewImg?fileName=${randomList.image_save_name}&imageType=${randomList.image_type}">
  							<label class="brand"><c:out value="${randomList.brand_name}"/></label>
 							<label><c:out value="${randomList.product_name}" /></label>

@@ -67,8 +67,8 @@ public class MainController {
 		}
 	
 	//메인화면(검색 후 페이지 이동)
-	@RequestMapping("search/searchResults")
-    public ModelAndView searchList( @RequestParam(defaultValue="") String keyword) throws Exception{
+	@PostMapping("searchResults")
+    public ModelAndView searchList(@RequestParam(defaultValue="") String keyword) throws Exception{
 		log.info("searchList()");
 		
         //map에 저장하기 위해 list를 만들어서 검색옵션과 키워드를 저장한다.
@@ -81,7 +81,7 @@ public class MainController {
         map.put("keyword", keyword);
         mav.addObject("map", map);                           //modelandview에 map를 저장
         
-        mav.setViewName("search/searchResults");    //자료를 넘길 뷰의 이름
+        mav.setViewName("/search/searchResults");    //자료를 넘길 뷰의 이름
         
         return mav;    //게시판 페이지로 이동
     }

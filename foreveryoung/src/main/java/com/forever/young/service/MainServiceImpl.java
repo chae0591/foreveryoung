@@ -24,12 +24,7 @@ public class MainServiceImpl implements MainService {
 	@Autowired
 	private MainRepository repository;
 
-	//목록 (검색 기능을 포함)
-	@Override
-	public List<Product> searchList(String keyword) throws Exception {
-		return repository.searchList(keyword);
-	}
-
+	//메인페이지(랜덤, 베스트, 최신순 리스트 출력)
 	@Override
 	public List<Product> randomList() throws Exception {
 		return repository.randomList();
@@ -45,5 +40,10 @@ public class MainServiceImpl implements MainService {
 		return repository.newList();
 	}
 
+	//목록 (검색 기능을 포함)
+	@Override
+	public List<Product> searchList(String keyword) throws Exception {
+		return repository.searchList(keyword);
+	}
 	
 }
