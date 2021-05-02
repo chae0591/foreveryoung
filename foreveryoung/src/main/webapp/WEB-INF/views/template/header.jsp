@@ -82,6 +82,7 @@ input[type="submit"], button {
 .logo-box {
 	float: left;
 	width: 100px;
+	height: auto;
 	margin: 0;
 	margin-top: 20px;
 }
@@ -97,6 +98,7 @@ input[type="submit"], button {
 	border: 2px solid #e5e5e5;
 	background-color: #fff;
     border-radius: 20px;
+    margin-left: 250px;
 }
 .search-box > input {
 	display: inline-block;
@@ -252,12 +254,12 @@ $(function(){
 </script>
 </head>
 <body>
-  <h3>로그인 확인 여부 :
+<%--   <h3>로그인 확인 여부 :
   		<c:forEach var="name" items="${pageContext.session.attributeNames}">
     		Name: ${name}
     		Value: ${sessionScope[name]}
 		</c:forEach>
-	</h3>
+	</h3> --%>
 <div class="login-box">
 
  	<c:choose>
@@ -289,7 +291,9 @@ $(function(){
 	</c:choose>
 </div>
 <div class="top-box">
-	<div class="logo-box">logo</div>
+	<div class="logo-box">
+		<a href="${pageContext.request.contextPath}/main" class="logo"><img src="/resources/img/logo.png" width="300" height="34"></a>
+	</div>
 	<form class="form-inline" action="searchResults" method="post">
 		<div class="search-box">
     		<input type="text" name="keyword" class="search-input"  placeholder="Search" value="${map.keyword}">
@@ -299,7 +303,7 @@ $(function(){
    
    	 <div class="icons">
 		   <input type="button" class="func-my" >
-		    <input type="button"  class="func-cart">
+		   <input type="button"  class="func-cart">
 	 </div>
   
 </div>

@@ -72,6 +72,10 @@
 	border-bottom: 2px solid #666;
 	position: relative;
 }
+.inquiryTitle {
+	font-size: 16px;
+	font-weight: 600;
+}
 .detailTitle-box {
 	width: 100%;
 	height: 70px;
@@ -210,7 +214,7 @@ $(document).ready(function() {
 			<form:hidden path="inquiry_no"/>
 			<div class="detailTitle-box">
 				<p>${inquiryDetail.user_id}</p>
-				<p>${inquiryDetail.inquiry_title}</td></p>
+				<p class="inquiryTitle">${inquiryDetail.inquiry_title}</p>
 				<p class="regdate">${inquiryDetail.inquiry_regDate}</p>
 			</div>
 	

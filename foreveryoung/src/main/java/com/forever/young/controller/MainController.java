@@ -81,7 +81,7 @@ public class MainController {
         map.put("keyword", keyword);
         mav.addObject("map", map);                           //modelandview에 map를 저장
         
-        mav.setViewName("search/searchResults");    //자료를 넘길 뷰의 이름
+        mav.setViewName("/search/searchResults");    //자료를 넘길 뷰의 이름
         
         return mav;    //게시판 페이지로 이동
     }
